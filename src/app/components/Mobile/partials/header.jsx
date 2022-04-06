@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import Navbar from "../Navbar";
 
 
@@ -7,31 +8,42 @@ const Header = (props) => {
 
 	const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
 
-	const drawerToggleClickHandler = () => {
 
-		console.log('HAMBURGER');
-		setSideDrawerOpen(true);
+	useEffect(() => {
 		if (sideDrawerOpen) {
+			openNav();
 
-			let ele = document.getElementById('mySidenav');
-			ele.style.width = '250px';
-
-			let ele2 = document.getElementsByClassName('sidenav');
-			console.log(ele2)
 		}
+	})
 
-		if (sideDrawerOpen === false) {
-			document.getElementById("mySidenav").style.width = "0";
-		}
+	const drawerToggleClickHandler = () => {
+		setSideDrawerOpen(true);
 	};
+
+
+
+	const closenNav = () => {
+		setSideDrawerOpen(false);
+		let sidenav = document.getElementById('mySidenav');
+		sidenav.style.width = "0";
+		let overlay = document.getElementById('overlayId');
+		overlay.classList.remove("show")
+	}
+
+	const openNav = () => {
+		let sidenav = document.getElementById('mySidenav');
+		sidenav.style.width = "250px";
+
+		let overlay = document.getElementById('overlayId');
+		overlay.classList.add("show");
+	}
 
 	return (<>
 		<div id="main">
 			<div class="top-header"><img src="images/flash.svg" alt="" />Flash Deal : 30% off in girl dreses</div>
-
 			<header>
 				<img src="images/menu-icon.svg" id="mynav-bar" className="nav-bar hamburger" onClick={drawerToggleClickHandler} />
-				<a href="#" className="logo">
+				<a href="/" className="logo">
 					<img src="images/logo.svg" className="img-fluid" alt="" />
 				</a>
 				<div className="header-option">
@@ -48,9 +60,10 @@ const Header = (props) => {
 					</ul>
 				</div>
 			</header>
+			<div className="overlay-sidebar" id="overlayId" onClick={closenNav}></div>
+			<Navbar sideDrawerOpen={sideDrawerOpen} />
 		</div>
-		<a href="javascript:void(0)" class="overlay-sidebar" onclick="closeNav()"></a>
-		<Navbar />
+
 	</>)
 }
 

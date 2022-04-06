@@ -1,6 +1,23 @@
+:root {
+    --background: #E5E5E5;
+    --text-primary: #131313;
+    --text-secondary: #8E8E8E;
+    --accent: black;
+
+}
+
+
+[data-theme='dark'] {
+    --background: black;
+    --text-primary: white;
+    --text-secondary: grey;
+    --accent: darkred;
+}
+
+
 body {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
 }
 
 body::-webkit-scrollbar {
@@ -484,8 +501,8 @@ nav ul li i {
     border: 0 !important;
     -webkit-box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
     box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
-    border-radius: 16px;
-    background: #131313;
+    border-radius: 16px !important;
+    background: #131313 !important;
     box-shadow: 0px 0px 20px rgb(34 50 99 / 8%);
 }
 

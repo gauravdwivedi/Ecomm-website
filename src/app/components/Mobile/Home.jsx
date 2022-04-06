@@ -1,15 +1,17 @@
 import React, { PureComponent, Fragment, Component, useEffect, useState, useContext } from 'react';
 import Loader from "./../Common/Loader"
 import ErrorBoundary from "./../../helpers/ErrorBoundry";
-import Header from '../Mobile/partials/header';
-import Footer from '../Mobile/partials/footer';
+import Header from '../Mobile/partials/Header';
+import Footer from '../Mobile/partials/Footer';
+import HomeSlider from './HomeSlider';
+import Slider from 'react-slick';
+
 
 const Home = React.memo(function Home(props) {
 
-
-
 	return (
-		<>  <Header />
+		<>
+			<Header />
 			<TopStories />
 			<HomeSlider />
 			<CategorySection />
@@ -69,50 +71,13 @@ const TopStories = () => {
 }
 
 
-const HomeSlider = () => {
-
-	return (<>
-		<section className="pt-0 home-section ratio_55">
-			<div className="home-slider slick-default theme-dots">
-				<div>
-					<div className="slider-box">
-						<img src="images/banner.png" className="img-fluid bg-img" alt="" />
-						{/* <div class="slider-content">
-				<div>
-				  <h2>Welcome To Multikart</h2>
-				  <h1>Flat 50% OFF</h1>
-				  <h6>Free Shipping Till Mid Night</h6>
-				  <a href="#" class="btn btn-solid">SHOP NOW</a>
-				</div>
-			  </div> */}
-					</div>
-				</div>
-				<div>
-					<div className="slider-box">
-						<img src="images/banner.png" className="img-fluid bg-img" alt="" />
-						{/* <div class="slider-content">
-				<div>
-				  <h2>Welcome To Multikart</h2>
-				  <h1>Flat 50% OFF</h1>
-				  <h6>Free Shipping Till Mid Night</h6>
-				  <a href="#" class="btn btn-solid">SHOP NOW</a>
-				</div>
-			  </div> */}
-					</div>
-				</div>
-			</div>
-		</section>
-
-	</>)
-}
-
 
 const CategorySection = () => {
 
 	return (<>
 		<section className="category-section px-15 pt-0">
 			<div className="title-part">
-				<h2>Category</h2>
+				<h4>Category</h4>
 				<a href="#">View All</a>
 			</div>
 			<div className="product-section">
@@ -208,7 +173,6 @@ const CategorySection = () => {
 				</div>
 			</div>
 		</section>
-
 	</>)
 }
 
@@ -336,36 +300,19 @@ const PopularProducts = () => {
 }
 
 const SpotLight = () => {
+
+
 	return <section className="category-section spotlight-sec pt-4">
 		<div className="title-part px-15">
 			<h2>Spotlight</h2>
 		</div>
 		<div className="home-slider slick-default theme-dots">
 			<div>
-				<div className="slider-box">
-					<img src="images/spotlight-banner/bannr1.png" className="img-fluid bg-img" alt="" />
-					{/*<div class="slider-content">
-					  <div>
-						<h2>Welcome To Multikart</h2>
-						<h1>Flat 50% OFF</h1>
-						<h6>Free Shipping Till Mid Night</h6>
-						<a href="#" class="btn btn-solid">SHOP NOW</a>
-					  </div>
-					</div> */}
-				</div>
-			</div>
-			<div>
-				<div className="slider-box">
-					<img src="images/banner-3.png" className="img-fluid bg-img" alt="" />
-					{/* <div class="slider-content">
-					  <div>
-						<h2>Welcome To Multikart</h2>
-						<h1>Flat 50% OFF</h1>
-						<h6>Free Shipping Till Mid Night</h6>
-						<a href="#" class="btn btn-solid">SHOP NOW</a>
-					  </div>
-					</div> */}
-				</div>
+				<Slider>
+					<div className="slider-box">
+						<img src="images/spotlight-banner/bannr1.png" className="img-fluid bg-img" alt="" />
+					</div>
+				</Slider>
 			</div>
 		</div>
 		<div className="bottom-title px-15">

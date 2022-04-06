@@ -1,6 +1,10 @@
 import React from "react";
 
 const Footer = (props) => {
+
+	const clickhandle = () => {
+		console.log('Cliked')
+	}
 	return <>
 
 		<div class="bottom-panel">
