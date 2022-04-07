@@ -49,9 +49,9 @@ a {
 
 header {
     padding: 15px 20px;
-    position: sticky !important;
+    position: sticky;
     position: -webkit-sticky;
-    top: 1;
+    top: 0;
     background: #131313;
     border-radius: 0px 0px 16px 16px;
     display: -webkit-box;
