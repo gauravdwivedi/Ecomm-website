@@ -22,3 +22,7 @@ export const Cart = loadable(()=> import ('../app/containers/Cart'),{
 export const Checkout = loadable(()=> import ('../app/containers/Checkout'),{
 	fallback: <div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
 })
+
+export const Confirm = loadable(()=> import ('../app/containers/Confirm'),{
+	fallback: <div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
+})
