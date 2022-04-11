@@ -6,8 +6,8 @@ import AuthContext from "../helpers/authContext";
 import HeaderDesktop from "../components/desktop/partials/header";
 import FooterDesktop from "../components/desktop/partials/footer";
 import GlobalDesktop from "../components/desktop/partials/global";
-import HeaderMobile from "../components/mobile/partials/header";
-import FooterMobile from "../components/mobile/partials/footer";
+import HeaderMobile from "../components/Mobile/partials/Header";
+import FooterMobile from "../components/Mobile/partials/Footer";
 import GlobalMobile from "../components/mobile/partials/global";
 import Metadata from '../helpers/metadata';
 

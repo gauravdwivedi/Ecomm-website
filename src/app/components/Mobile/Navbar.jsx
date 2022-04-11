@@ -6,7 +6,7 @@ const Navbar = (props) => {
     let { sideDrawerOpen } = props;
     return (<>
         <div id="mySidenav" className="sidenav">
-            <a href="#" class="user-panel">
+            <a href="#" className="user-panel">
                 <img src="images/favourite-1.png" className="img-fluid user-img" alt="" />
                 <span>App name</span>
             </a>

@@ -14,3 +14,11 @@ export const SignIn = loadable(()=> import ('../app/containers/SignIn'),{
 export const SignUp = loadable(()=> import ('../app/containers/SignUp'),{
 	fallback: <div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
 })
+
+export const Cart = loadable(()=> import ('../app/containers/Cart'),{
+	fallback: <div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
+})
+
+export const Checkout = loadable(()=> import ('../app/containers/Checkout'),{
+	fallback: <div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
+})
