@@ -13,3 +13,18 @@ export function loadBigStory(id, type) {
         ]
     }
 }
+
+
+export function getAllProducts(){
+    return {
+        CALL_API:[
+            {
+                type:types.FETCH_PRODUCTS,
+                meta:{
+                    path:"/v1/product/list",
+                    method:"GET",
+                }
+            }
+        ]
+    }
+}

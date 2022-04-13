@@ -4,7 +4,7 @@ import config from "../../config/index";
 import HomeDesktop from "../components/Desktop/Home"
 import HomeMobile from "../components/Mobile/Home"
 import AuthContext from "../helpers/authContext";
-import { loadBigStory } from "../data/ducks/home/actions";
+import { loadBigStory, getAllProducts } from "../data/ducks/home/actions";
 
 class HomeContainer extends PureComponent {
 	static contextType = AuthContext;
@@ -12,6 +12,8 @@ class HomeContainer extends PureComponent {
 		let storeData = ssr.getState();
 		return [
 			//ssr.dispatch(loadBigStory()), //SSR rendering here
+
+			ssr.dispatch(getAllProducts())
 
 		];
 	}
@@ -23,7 +25,23 @@ class HomeContainer extends PureComponent {
 		}
 	}
 
-	componentDidMount() { }
+	componentDidMount() {
+		this.getProductList();
+	}
+
+
+
+	getProductList() {
+		this.setState({
+			loading: true
+		}, () => {
+			this.props.getAllProducts().then((res) => {
+				this.setState({
+					loading: false
+				})
+			})
+		})
+	}
 
 	render() {
 		return (
@@ -37,15 +55,15 @@ class HomeContainer extends PureComponent {
 			</Fragment>
 		)
 	}
-
 };
 
 const mapStateToProps = (state) => ({
-	home: state.home
+	productList: state.home.productList
 });
 
 const mapDispatchToProps = {
 	//loadBigStory
+	getAllProducts
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
