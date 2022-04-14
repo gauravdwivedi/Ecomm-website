@@ -5,18 +5,23 @@ import Header from '../Mobile/partials/Header';
 import Footer from '../Mobile/partials/Footer';
 import HomeSlider from './HomeSlider';
 import Slider from 'react-slick';
+import PopularProducts from './Home/Popularproducts';
+import ProductsOnSale from './Home/ProductsOnSale';
 
 
 const Home = React.memo(function Home(props) {
 
+
+	console.log(props.productList)
 	return (
 		<>
 			<Header />
 			<TopStories />
 			<HomeSlider />
 			<CategorySection />
-			<PopularProducts />
+			<PopularProducts items={props.productList} />
 			<SpotLight />
+			<ProductsOnSale items={props.productList} />
 			<Footer />
 		</>
 	)
@@ -97,7 +102,7 @@ const CategorySection = () => {
 						<div class="card catagory-card">
 							<div class="card-body">
 								<a href="#">
-									<img class="categry-icon" class="categry-icon"
+									<img class="categry-icon"
 										src="images/category-icon/categ2.svg" />
 									<span><img class="categry-play" src="images/category-icon/cat-play.svg" /></span>
 								</a>
@@ -179,127 +184,6 @@ const CategorySection = () => {
 }
 
 
-const PopularProducts = () => {
-	return <section className="category-section popular-product px-15 pt-4">
-		<div className="title-part">
-			<h2>Popular</h2>
-			<a href="#">View All</a>
-		</div>
-		<div className="product-section">
-			<div className="row gy-3 gx-3">
-				<div className="col-md-4 col-6">
-					<div className="product-box ratio_square">
-						<div className="img-part">
-							<a href="#" className="bg-size"><img src="images/product/product1.png" alt="" className="img-fluid bg-img" /></a>
-							<div className="hrs-btn">
-								<span><img src="images/hr-icon.svg" alt="" />
-									<h6>3 Hrs</h6>
-								</span>
-							</div>
-							<div className="wishlist-btn">
-								<ul>
-									<li><img src="images/product-icon/play-icon.svg" alt="" /></li>
-									<li><img src="images/product-icon/notify-icon.svg" alt="" /></li>
-									<li><img src="images/product-icon/bag-icon.svg" alt="" /></li>
-								</ul>
-							</div>
-						</div>
-						<div className="product-content">
-							<a href="#">
-								<h4>Top Lacoste SPORT...</h4>
-							</a>
-							<div className="price">
-								<h4>$49</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="col-md-4 col-6">
-					<div className="product-box ratio_square">
-						<div className="img-part">
-							<a href="#" className="bg-size"><img src="images/product/product2.png" alt="" className="img-fluid bg-img" /></a>
-							<div className="hrs-btn">
-								<span><img src="images/hr-icon.svg" alt="" />
-									<h6>3 Hrs</h6>
-								</span>
-							</div>
-							<div className="wishlist-btn">
-								<ul>
-									<li><img src="images/product-icon/play-icon.svg" alt="" /></li>
-									<li><img src="images/product-icon/notify-icon.svg" alt="" /></li>
-									<li><img src="images/product-icon/bag-icon.svg" alt="" /></li>
-								</ul>
-							</div>
-						</div>
-						<div className="product-content">
-							<a href="#">
-								<h4>Top Lacoste SPORT...</h4>
-							</a>
-							<div className="price">
-								<h4>$49</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="col-md-4 col-6">
-					<div className="product-box ratio_square">
-						<div className="img-part">
-							<a href="#" className="bg-size"><img src="images/product/product3.png" alt="" className="img-fluid bg-img" /></a>
-							<div className="hrs-btn">
-								<span><img src="images/hr-icon.svg" alt="" />
-									<h6>3 Hrs</h6>
-								</span>
-							</div>
-							<div className="wishlist-btn">
-								<ul>
-									<li><img src="images/product-icon/play-icon.svg" alt="" /></li>
-									<li><img src="images/product-icon/notify-icon.svg" alt="" /></li>
-									<li><img src="images/product-icon/bag-icon.svg" alt="" /></li>
-								</ul>
-							</div>
-						</div>
-						<div className="product-content">
-							<a href="#">
-								<h4>Top Lacoste SPORT...</h4>
-							</a>
-							<div className="price">
-								<h4>$49</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="col-md-4 col-6">
-					<div className="product-box ratio_square">
-						<div className="img-part">
-							<a href="#" className="bg-size"><img src="images/product/product4.png" alt="" className="img-fluid bg-img" /></a>
-							<div className="hrs-btn">
-								<span><img src="images/hr-icon.svg" alt="" />
-									<h6>3 Hrs</h6>
-								</span>
-							</div>
-							<div className="wishlist-btn">
-								<ul>
-									<li><img src="images/product-icon/play-icon.svg" alt="" /></li>
-									<li><img src="images/product-icon/notify-icon.svg" alt="" /></li>
-									<li><img src="images/product-icon/bag-icon.svg" alt="" /></li>
-								</ul>
-							</div>
-						</div>
-						<div className="product-content">
-							<a href="#">
-								<h4>Top Lacoste SPORT...</h4>
-							</a>
-							<div className="price">
-								<h4>$49</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-}
 
 const SpotLight = () => {
 

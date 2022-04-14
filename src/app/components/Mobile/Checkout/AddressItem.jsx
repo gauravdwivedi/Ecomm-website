@@ -4,9 +4,7 @@ function AddressItem(props) {
     const { id, Name, City, Lane, State, Zip } = props.item;
     console.log('CUrrent Index ', props.isCurrent)
     const { handleOnClick, isCurrent } = props;
-    const handleOnChange = () => {
-        props.handleOnClick
-    }
+
 
     return (
         <>
@@ -28,7 +26,7 @@ function AddressItem(props) {
                             name="flexRadioDefault"
                             id="flexRadioDefault1"
                             checked={isCurrent === id}
-                            onChange={() => handleOnClick(id)}
+                            onChange={(e) => handleOnClick(e, id)}
                         />
                         <label className="form-check-label" htmlFor="flexRadioDefault1">
                         </label>

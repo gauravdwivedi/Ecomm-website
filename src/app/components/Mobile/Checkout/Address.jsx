@@ -2,16 +2,15 @@ import React, { useState } from 'react'
 import { DumyAddressDat } from './DumyAddressData'
 import AddressItem from './AddressItem'
 function Address() {
-
     const [isCurrent, setIsCurrent] = useState(1);
 
-
-
-    const handleOnClick = (id) => {
+    const handleOnClick = (e, id) => {
+        e.stopPropagation();
         console.log('Cliked', id)
         setIsCurrent(id)
-
     }
+
+
     return (
         <div id="main">
             {/* Header */}
