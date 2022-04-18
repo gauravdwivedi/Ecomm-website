@@ -34,7 +34,6 @@ class SignInContainer extends PureComponent {
 
 
 const mapStateToProps = (state) => ({
-    home: state.home
 })
 
 const mapDispatchToProps = {

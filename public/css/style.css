@@ -1647,15 +1647,17 @@ header.none-bg {
 
 /* -----signin-page------- */
 .sign-back {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    color: #FFFFFF;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 17px !important;
+    color: #FFFFFF !important;
     text-transform: capitalize;
     position: absolute;
     top: 10px;
     left: 0px;
+    width: 0 !important;
 }
+
 
 .sign-back img {
     margin-right: 12px;

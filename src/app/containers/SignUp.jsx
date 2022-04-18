@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux';
 import SignUp from '../components/Mobile/SignUp';
 import AuthContext from "../helpers/authContext"
-
+import { signup } from "../data/ducks/auth/actions"
 
 class SignUpContainer extends PureComponent {
 
@@ -33,11 +33,10 @@ class SignUpContainer extends PureComponent {
 
 
 const mapStateToProps = (state) => ({
-    home: state.home
 })
 
 const mapDispatchToProps = {
-
+    signup
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpContainer);

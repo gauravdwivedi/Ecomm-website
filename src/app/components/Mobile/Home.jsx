@@ -12,17 +12,17 @@ import ProductsOnSale from './Home/ProductsOnSale';
 const Home = React.memo(function Home(props) {
 
 
-	console.log(props.productList)
+	console.log('PROPS', props.productList)
 	return (
 		<>
-			<Header />
+			{/* <Header /> */}
 			<TopStories />
 			<HomeSlider />
 			<CategorySection />
 			<PopularProducts items={props.productList} />
 			<SpotLight />
 			<ProductsOnSale items={props.productList} />
-			<Footer />
+			{/* <Footer /> */}
 		</>
 	)
 })

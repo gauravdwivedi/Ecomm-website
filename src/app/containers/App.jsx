@@ -11,6 +11,11 @@ import FooterMobile from "../components/Mobile/partials/Footer";
 import GlobalMobile from "../components/mobile/partials/global";
 import Metadata from '../helpers/metadata';
 
+
+import { login, verifytoken } from "../data/ducks/auth/actions"
+import { processResponse } from '../helpers/helpers';
+
+
 class App extends Component {
 	static fetching(ssr) {
 		return [
@@ -25,11 +30,14 @@ class App extends Component {
 			serverRequest: props.serverRequest,
 			mobile: {
 				isMobile: props.isMobile,
-			}
+			},
+			isAuthenticated: false
 		}
 	}
 
-	componentDidMount() { }
+	componentDidMount() {
+
+	}
 
 	componentWillReceiveProps(nextProps) { }
 
@@ -49,9 +57,44 @@ class App extends Component {
 		return seometa;
 	}
 
+	checkLoggedIn() {
+		let token = Util.getCookie('hoppedin_token');
+		if (token) {
+			this.setState({
+				isAuthenticated: true,
+				userData: Util.getCookie('userData')
+			})
+		}
+	}
+
+
+	doLogin(data) {
+
+		console.log(data)
+
+		this.props.login(data).then((res) => {
+
+			if (res.code == 200) {
+				Util.setCookie('hoppedin_token', res.data.token, 7);
+				Util.setCookie('userData', res.data, 7);
+
+				this.setState({
+					isAuthenticated: true,
+					userData: res.data
+				}, () => {
+					console.log('Here')
+					this.props.history.push('/')
+				})
+			}
+		})
+
+	}
+
+
 	render() {
 		const Routes = this.props.route.routes;
-
+		let noheaderUrl = ['/login', '/signup']
+		let nofooterUrl = ['/login', '/signup']
 		let header = <HeaderDesktop {...this.props} />
 		let global = <GlobalDesktop {...this.props} />
 		let footer = <FooterDesktop {...this.props} />
@@ -62,19 +105,31 @@ class App extends Component {
 			footer = <FooterMobile {...this.props} />
 		}
 
+		if (noheaderUrl.indexOf(this.props.location.pathname) > -1) {
+			header = null;
+			global = null;
+			footer = null;
+		}
+
+		if (nofooterUrl.indexOf(this.props.location.pathname) > -1) {
+			footer = null;
+		}
+
 		return (
 			<Fragment>
 				<Metadata seo={this.getSEOData()} />
 				<AuthContext.Provider value={{
 					scrollTop: this.scrollTop.bind(this),
 					serverRequest: this.state.serverRequest,
+					doLogin: this.doLogin.bind(this),
+
 				}}>
 					<Fragment>
 						<div>
-							{/* {header} */}
+							{header}
 							{renderRoutes(Routes, { mobile: this.state.mobile, serverRequest: this.state.serverRequest, changeServerStatus: this.changeServerStatus.bind(this) })}
 							{global}
-							{/* {footer} */}
+							{footer}
 						</div>
 					</Fragment>
 				</AuthContext.Provider>
@@ -84,11 +139,12 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
+	auth: state.auth
 });
 
 const mapDispatchToProps = {
-
+	login,
+	verifytoken
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
