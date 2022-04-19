@@ -85,7 +85,7 @@ class App extends Component {
 					userData: res.data
 				}, () => {
 					console.log('Here')
-					// this.props.history.push('/')
+					this.props.history.push('/')
 				})
 			}
 		})

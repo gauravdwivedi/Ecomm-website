@@ -7,7 +7,7 @@ const SignUp = React.memo(function SignUp(props) {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [mobile, setMobile] = useState('');
+    const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -137,25 +137,26 @@ const SignUp = React.memo(function SignUp(props) {
                 password,
                 firstName,
                 lastName,
-                mobile
+                phone
             }).then((res) => {
                 console.log('RES', res)
 
                 if (res[0].registration == true) {
-
                     let token = res[0].token
-
                     props.signup({
                         email,
                         password,
                         firstName,
                         lastName,
-                        mobile,
+                        phone,
                         token
                     }).then((res) => {
                         console.log('Resgistration result', res)
+                        context.doLogin({
+                            email,
+                            password
+                        })
                     })
-
                 }
             })
 
@@ -207,7 +208,7 @@ const SignUp = React.memo(function SignUp(props) {
                                         <label htmlFor="floatingInput">Email</label>
                                     </div>
                                     <div className="form-floating mb-3">
-                                        <input type="number" name='mobile' className="form-control" id="floatingInput" placeholder="mobile-no" value={mobile} onChange={(e) => setMobile(e.target.value)} />
+                                        <input type="number" name='mobile' className="form-control" id="floatingInput" placeholder="mobile-no" value={phone} onChange={(e) => setPhone(e.target.value)} />
                                         <label htmlFor="floatingPassword">Mobile No.</label>
                                     </div>
                                     <div className="form-floating mb-3">
