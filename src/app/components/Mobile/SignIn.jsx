@@ -103,7 +103,7 @@ const SignIn = React.memo(
                                         <a href="#" className="forgot mb-3">Forgot Password ?</a>
                                     </section>
                                     {/* <a href="#" className="btn sign-in-btn mt-5" type="submit">Sign In</a> */}
-                                    <input type='submit' value='SignIn' className='btn sign-in-btn mt-5' />
+                                    <input type='submit' value='Sign In' className='btn sign-in-btn mt-5' />
                                     <span className="account-link d-block text-center">Don't have an account then? <a href="#" className="underline">Sign up </a></span>
                                 </form>
                             </div>

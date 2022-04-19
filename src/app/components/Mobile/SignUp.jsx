@@ -1,10 +1,6 @@
 import React, { useContext, useState } from 'react'
 import authContext from '../../helpers/authContext'
 
-
-
-
-
 const SignUp = React.memo(function SignUp(props) {
 
     const context = useContext(authContext)
@@ -136,27 +132,54 @@ const SignUp = React.memo(function SignUp(props) {
                 lastName = '';
             }
 
-            props.signup({
+            props.login({
+                email,
+                password,
                 firstName,
                 lastName,
-                password,
-                email,
                 mobile
             }).then((res) => {
-                if (res.errors && res.errors.erros && res.errors.errors.code == 'ER_DUP_ENTRY') {
-                    let email = form.elements['email'];
-                    email.parentNode.classList.add('error');
-                    email.parentNode.insertAdjacentHTML(
-                        'beforeend',
-                        '<div class="help-block alert alert-danger">Email already registered with us, please choose different email.</div>'
-                    );
-                } else {
-                    context.doLogin({
+                console.log('RES', res)
+
+                if (res[0].registration == true) {
+
+                    let token = res[0].token
+
+                    props.signup({
                         email,
-                        password
+                        password,
+                        firstName,
+                        lastName,
+                        mobile,
+                        token
+                    }).then((res) => {
+                        console.log('Resgistration result', res)
                     })
+
                 }
             })
+
+            // props.signup({
+            //     email,
+            //     password,
+            //     firstName,
+            //     lastName,
+            //     mobile
+            // }).then((res) => {
+            //     if (res.errors && res.errors.erros && res.errors.errors.code == 'ER_DUP_ENTRY') {
+            //         let email = form.elements['email'];
+            //         email.parentNode.classList.add('error');
+            //         email.parentNode.insertAdjacentHTML(
+            //             'beforeend',
+            //             '<div class="help-block alert alert-danger">Email already registered with us, please choose different email.</div>'
+            //         );
+            //     } else {
+            //         context.doLogin({
+            //             email,
+            //             password
+            //         })
+            //     }
+            // })
         }
     }
 

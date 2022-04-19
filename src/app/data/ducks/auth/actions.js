@@ -8,7 +8,7 @@ export function login(data){
             {
                 type:types.LOGIN,
                 meta:{
-                    path:"/v1/auth/login",
+                    path:"/v1/auth/user/verify",
                     method:"POST",
                     body:data,
                 },
@@ -18,7 +18,7 @@ export function login(data){
 }
 
 export function signup(data){
-
+console.log(data)
     return{
         CALL_API:[
             {
@@ -26,6 +26,10 @@ export function signup(data){
                 meta:{
                     path:"/v1/auth/register",
                     method:"POST",
+                    isHeader:true,
+                    headers:{
+                        "x-signup-token":data.token
+                    },
                     body:data
                 },
             },

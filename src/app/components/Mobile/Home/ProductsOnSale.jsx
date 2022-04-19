@@ -3,6 +3,7 @@ import PopularProductItem from './PopularProductItem'
 
 
 function ProductsOnSale({ items }) {
+    console.log(items)
     return <><section className="category-section popular-product px-15 pt-4">
         <div className="title-part">
             <h2>Products on Sale</h2>

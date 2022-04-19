@@ -80,7 +80,8 @@ function getFooter(extractor, lang, reduxState, extraprops, isMobile, request){
         <script src="/js/bootstrap.bundle.min.js"></script>
         <script src="/js/slick.js"></script
         <script src="/js/script.js"></script>
-        ${serviceWorker(extractor, lang, isMobile, request)} 
+        ${extractor.getScriptTags()}
+       
      </body>
     </html>`;
 }

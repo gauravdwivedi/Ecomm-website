@@ -74,16 +74,18 @@ class App extends Component {
 
 		this.props.login(data).then((res) => {
 
-			if (res.code == 200) {
-				Util.setCookie('hoppedin_token', res.data.token, 7);
-				Util.setCookie('userData', res.data, 7);
+			console.log('Response', res[0])
+
+			if (res[0].registration == false) {
+				Util.setCookie('hoppedin_token', res[0].token, 7);
+				Util.setCookie('userData', res[0].user, 7);
 
 				this.setState({
 					isAuthenticated: true,
 					userData: res.data
 				}, () => {
 					console.log('Here')
-					this.props.history.push('/')
+					// this.props.history.push('/')
 				})
 			}
 		})

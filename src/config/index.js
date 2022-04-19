@@ -8,21 +8,21 @@ let SERVICE_WORKER = process.env.SERVICE_WORKER;
 switch(process.env.NODE_APP){
 	case 'stg':
 		BASE_URL = 'http://localhost:3003';
-		API_BASE_URL = 'http://localhost:3003';
+		API_BASE_URL = 'http://localhost:4000/api';
 		IMG_END_POINT= '';	
 		PORT = 3003
 		PRODUCTION = false;
 	break;
 	case 'production':
 		BASE_URL = 'http://localhost:3003';
-		API_BASE_URL = 'http://localhost:3003';
+		API_BASE_URL = 'http://localhost:4000/api';
 		IMG_END_POINT= '';	
 		PORT = 5001
 		PRODUCTION = true;
 	break;
 	default:
 		BASE_URL = 'http://localhost:3003';
-		API_BASE_URL = 'http://localhost:3003';
+		API_BASE_URL = 'http://localhost:4000/api';
 		IMG_END_POINT= '';	
 		PORT = 3003
 		PRODUCTION = false;
@@ -35,6 +35,7 @@ let config = {
 	PORT: PORT,
 	IMG_END_POINT: IMG_END_POINT,
 	API_BASE_URL:API_BASE_URL,
+	SITE_ID:"xsandlriehwmqpdhk"
 }
 
 export default config;

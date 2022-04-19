@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { connect } from 'react-redux';
 
 import AuthContext from "../helpers/authContext"
@@ -27,7 +27,15 @@ class SignInContainer extends PureComponent {
 
     render() {
         return (
-            <SignIn {...this.props} loading={this.state.loading} />
+            <Fragment>
+                {
+                    this.props.mobile.isMobile ?
+                        <SignIn {...this.props} loading={this.state.loading} />
+                        :
+                        <div>This is website SignIn</div>
+                }
+            </Fragment>
+
         )
     }
 }
