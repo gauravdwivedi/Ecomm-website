@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import authContext from '../../helpers/authContext'
 
 
@@ -8,6 +8,15 @@ const SignIn = React.memo(
         const context = useContext(authContext)
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
+
+
+
+        useEffect(() => {
+            if (context.isAuthenticated) {
+                console.log('LOggedIn')
+                props.history.replace('/')
+            }
+        })
 
         //Form Validation 
         const loginvalidation = (form) => {
@@ -62,7 +71,6 @@ const SignIn = React.memo(
             return return_type;
         }
 
-
         const doSubmit = (event) => {
             event.preventDefault();
             let form = document.forms['login'];
@@ -113,7 +121,6 @@ const SignIn = React.memo(
             </div>
         )
     }
-
 
 
 

@@ -26,7 +26,7 @@ class HomeContainer extends PureComponent {
 	}
 
 	componentDidMount() {
-		this.getProductList();
+		// this.getProductList();
 	}
 
 

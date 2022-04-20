@@ -14,7 +14,6 @@ export default ( url, method, body, isHeader, nocacache ) => {
     }
 
     options.headers = requestHeaders();
-    console.log('IshEader',body.token)
     if(isHeader){
         options.headers={
             Accept: "application/json",

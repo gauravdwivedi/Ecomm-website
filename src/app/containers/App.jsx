@@ -12,7 +12,7 @@ import GlobalMobile from "../components/mobile/partials/global";
 import Metadata from '../helpers/metadata';
 
 
-import { login, verifytoken } from "../data/ducks/auth/actions"
+import { login, verifytoken, logout } from "../data/ducks/auth/actions"
 import { processResponse } from '../helpers/helpers';
 
 
@@ -36,7 +36,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-
+		this.checkLoggedIn();
 	}
 
 	componentWillReceiveProps(nextProps) { }
@@ -89,7 +89,20 @@ class App extends Component {
 				})
 			}
 		})
+	}
 
+	doLogout() {
+
+		//TODO:: with redux
+		console.log('LOGOUT APP')
+		Util.clearCookie('hoppedin_token');
+		Util.clearCookie('userData');
+		this.setState({
+			isAuthenticated: false,
+			userData: {}
+		}, () => {
+			this.props.history.replace('/login')
+		})
 	}
 
 
@@ -123,7 +136,10 @@ class App extends Component {
 				<AuthContext.Provider value={{
 					scrollTop: this.scrollTop.bind(this),
 					serverRequest: this.state.serverRequest,
+					isAuthenticated: this.state.isAuthenticated,
 					doLogin: this.doLogin.bind(this),
+					doLogout: this.doLogout.bind(this),
+					history: this.props.history
 
 				}}>
 					<Fragment>
@@ -146,7 +162,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
 	login,
-	verifytoken
+	verifytoken,
+	logout
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

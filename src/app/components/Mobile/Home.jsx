@@ -12,16 +12,15 @@ import ProductsOnSale from './Home/ProductsOnSale';
 const Home = React.memo(function Home(props) {
 
 
-	console.log('PROPS', props.productList)
 	return (
 		<>
 			{/* <Header /> */}
 			<TopStories />
 			<HomeSlider />
 			<CategorySection />
-			<PopularProducts items={props.productList} />
+			{/* <PopularProducts items={props.productList} /> */}
 			<SpotLight />
-			<ProductsOnSale items={props.productList} />
+			{/* <ProductsOnSale items={props.productList} /> */}
 			{/* <Footer /> */}
 		</>
 	)
@@ -71,10 +70,8 @@ const TopStories = () => {
 				</li>
 			</ul>
 		</section>
-
 	</>
 }
-
 
 
 const CategorySection = () => {
@@ -183,10 +180,7 @@ const CategorySection = () => {
 	</>)
 }
 
-
-
 const SpotLight = () => {
-
 
 	return <section className="category-section spotlight-sec pt-4">
 		<div className="title-part px-15">

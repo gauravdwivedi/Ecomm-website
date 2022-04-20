@@ -37,6 +37,17 @@ console.log(data)
     };
 }
 
+export function logout(){
+    return {
+        CALL_API:[
+            {
+                type:types.LOGOUT,
+                
+            }
+        ]
+    }
+}
+
 export function setToken(token){
     return {
         type: types.TOKEN,

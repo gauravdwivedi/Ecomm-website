@@ -15,14 +15,18 @@ const token = createReducer([])({
     [types.TOKEN] :(state,action) => action.meta.payload,
 })
 
-
 const verifytoken = createReducer([])({
     [types.VERIFYTOKEN]:(state,action) => action.payload
+})
+
+const logout = createReducer([])({
+    [types.LOGOUT]:(state,action) => action.payload
 })
 
 export default combineReducers({
     login,
     signup,
+    logout,
     token,
     verifytoken
 })

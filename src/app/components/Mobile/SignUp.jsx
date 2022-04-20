@@ -1,15 +1,26 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import authContext from '../../helpers/authContext'
 
 const SignUp = React.memo(function SignUp(props) {
 
     const context = useContext(authContext)
 
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
+
+
+    useEffect(() => {
+        if (context.isAuthenticated) {
+            console.log('LOggedIn')
+            props.history.replace('/')
+        }
+    })
+
 
 
     const signupvalidation = (form) => {
@@ -94,15 +105,6 @@ const SignUp = React.memo(function SignUp(props) {
             return_type = false;
         }
 
-        // if (agree.checked != true) {
-        //     agree.parentNode.classList.add('error');
-        //     agree.parentNode.insertAdjacentHTML(
-        //         'beforeend',
-        //         '<div class="help-block alert alert-danger">Please confirm terms & conditions</div>'
-        //     );
-        //     return_type = false;
-        // }
-
         if (mobile.value == '') {
             mobile.parentNode.classList.add('error');
             mobile.parentNode.insertAdjacentHTML(
@@ -160,27 +162,6 @@ const SignUp = React.memo(function SignUp(props) {
                 }
             })
 
-            // props.signup({
-            //     email,
-            //     password,
-            //     firstName,
-            //     lastName,
-            //     mobile
-            // }).then((res) => {
-            //     if (res.errors && res.errors.erros && res.errors.errors.code == 'ER_DUP_ENTRY') {
-            //         let email = form.elements['email'];
-            //         email.parentNode.classList.add('error');
-            //         email.parentNode.insertAdjacentHTML(
-            //             'beforeend',
-            //             '<div class="help-block alert alert-danger">Email already registered with us, please choose different email.</div>'
-            //         );
-            //     } else {
-            //         context.doLogin({
-            //             email,
-            //             password
-            //         })
-            //     }
-            // })
         }
     }
 
