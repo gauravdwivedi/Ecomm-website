@@ -97,12 +97,12 @@ const Navbar = (props) => {
                     </li>
                     {isAuthenticated &&
                         <li>
-                            <div onClick={(e) => handleClick(e)} >
+                            <a onClick={(e) => handleClick(e)} >
                                 <img src="images/icon/sidenav-icon/logout.svg" className="img-fluid" alt="" />
                                 <div className="content">
                                     <span>Logout</span>
                                 </div>
-                            </div>
+                            </a>
                         </li>}
                     {!isAuthenticated && <li>
                         <a href="/login" >
