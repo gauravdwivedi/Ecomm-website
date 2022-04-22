@@ -4,40 +4,38 @@ import config from "../../config/index";
 import HomeDesktop from "../components/Desktop/Home"
 import HomeMobile from "../components/Mobile/Home"
 import AuthContext from "../helpers/authContext";
-import { loadBigStory} from "../data/ducks/home/actions";
+import { loadBigStory } from "../data/ducks/home/actions";
 
 class HomeContainer extends PureComponent {
 	static contextType = AuthContext;
-	static fetching( ssr ) {
+	static fetching(ssr) {
 		let storeData = ssr.getState();
 		return [
 			//ssr.dispatch(loadBigStory()), //SSR rendering here
-			
+
 		];
 	}
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			loading:false
+			loading: false
 		}
 	}
 
-	componentDidMount() {}
-
-
+	componentDidMount() { }
 
 	render() {
-    return (
-      <Fragment>
-      {
-        this.props.mobile.isMobile ? 
-        <HomeMobile {...this.props} loading={this.state.loading} /> 
-        : 
-        <HomeDesktop {...this.props} loading={this.state.loading} />
-      }
-      </Fragment>
-    )
+		return (
+			<Fragment>
+				{
+					this.props.mobile.isMobile ?
+						<HomeMobile {...this.props} loading={this.state.loading} />
+						:
+						<HomeDesktop {...this.props} loading={this.state.loading} />
+				}
+			</Fragment>
+		)
 	}
 
 };
