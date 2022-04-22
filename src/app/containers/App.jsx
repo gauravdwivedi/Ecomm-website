@@ -69,17 +69,12 @@ class App extends Component {
 
 
 	doLogin(data) {
-
 		console.log(data)
-
 		this.props.login(data).then((res) => {
-
 			console.log('Response', res[0])
-
 			if (res[0].registration == false) {
 				Util.setCookie('hoppedin_token', res[0].token, 7);
 				Util.setCookie('userData', res[0].user, 7);
-
 				this.setState({
 					isAuthenticated: true,
 					userData: res.data
@@ -93,7 +88,6 @@ class App extends Component {
 
 	doLogout() {
 
-		//TODO:: with redux
 		console.log('LOGOUT APP')
 		Util.clearCookie('hoppedin_token');
 		Util.clearCookie('userData');
@@ -104,7 +98,6 @@ class App extends Component {
 			this.props.history.replace('/login')
 		})
 	}
-
 
 	render() {
 		const Routes = this.props.route.routes;
