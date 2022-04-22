@@ -10,7 +10,6 @@ function Address() {
         setIsCurrent(id)
     }
 
-
     return (
         <div id="main">
             {/* Header */}
