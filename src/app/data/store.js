@@ -10,6 +10,7 @@ export function configureStore(preloadedState){
         composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
         preloadedState = window.INITIAL_STATE || {};
     }
+
     const rootReducer = combineReducers( reducers );
     return createStore(
         rootReducer,
@@ -18,7 +19,7 @@ export function configureStore(preloadedState){
             applyMiddleware(
                 apiService,
                 reduxThunk,
-            ),
+            )
         ),
     );
 }

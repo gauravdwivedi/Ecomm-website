@@ -2,6 +2,20 @@ import React, {Fragment} from 'react';
 import config from '../../config'
 import {FormattedMessage} from 'react-intl';
 
+
+
+// export const processResponse = async (resp,cb) =>{
+//     let results = await Promise.all(resp);
+//     if(results[0]){
+//         cb(results[0]);
+//     }else if(typeof results == 'object'){
+//         cb(results)
+//     }
+// }
+
+
+
+
 export function agoFormat(inputDate){
     if(typeof inputDate!="undefined" && inputDate.length>0){
         const timeVal = inputDate[0];

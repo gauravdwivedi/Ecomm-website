@@ -67,12 +67,22 @@ function getHeader(extractor, lang, helmet, isMobile, articleData, request){
     <div id="main_app_id">`;
 }
 
-
-
 function getFooter(extractor, lang, reduxState, extraprops, isMobile, request){
     reduxState = JSON.stringify(reduxState).replace(/</g, '\\u003c');
-    return `</div><script type="text/javascript">window.is_production=${process.env.NODE_APP=='production' ? true: false}; window.INITIAL_STATE=${ reduxState };window.extraprops=${JSON.stringify(extraprops)};window.isMobile=${isMobile};var contentInPage=new Set([${[...contentInPage].join(',')}]);</script>
-    ${serviceWorker(extractor, lang, isMobile, request)}  
-    </body>
+    return `</div><script type="text/javascript">window.is_production=${
+        process.env.NODE_APP=='production' ? true: false
+    }; window.INITIAL_STATE=${ reduxState };window.extraprops=${JSON.stringify(
+        extraprops
+        )};window.isMobile=${isMobile};
+        var contentInPage=new Set([${[...contentInPage].join(',')}]);
+        </script> 
+        <script src="/js/jquery-3.3.1.min.js"></script>
+        <script src="/js/bootstrap.bundle.min.js"></script>
+        <script src="/js/slick.js"></script
+        <script src="/js/script.js"></script>
+        ${extractor.getScriptTags()}
+        ${serviceWorker(extractor, lang, isMobile, request)}  
+
+     </body>
     </html>`;
 }

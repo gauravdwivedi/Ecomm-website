@@ -6,7 +6,15 @@ const homeBigStory = createReducer( [ ] )( {
     [ types.FETCH_HOME_BIG_STORY ]: ( state, action ) => action.payload.data,
 } );
 
+const productList = createReducer( [ ] ) ({
+   [ types.FETCH_PRODUCTS ]: ( state, action ) => {
+    console.log(state,'&&&&&',action)
+    return   action.payload
+    }
+} )
+
 
 export default combineReducers( {
     homeBigStory,
+    productList,
 } );

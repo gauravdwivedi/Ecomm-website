@@ -1,6 +1,6 @@
 import React from 'react';
 import App from "../app/containers/App";
-import {Home} from "./splitComponent"
+import {Home,SignIn,SignUp,Cart,Checkout,Confirm} from "./splitComponent"
 
 
 const routes = [{
@@ -11,6 +11,31 @@ const routes = [{
 			component: Home,
 			exact: true,
 		},
+		{
+			path:"/login",
+			component:SignIn,
+			exact:true
+		},
+		{
+			path:"/signup",
+			component:SignUp,
+			exact:true
+		},
+		{
+			path:"/cart",
+			component:Cart,
+			exact:true
+		},
+		{
+			path:"/checkout",
+			component:Checkout,
+			exact:true
+		},
+		{
+			path:"/confirm",
+			component:Confirm,
+			exact:true
+		}
 	]
 }];
 

@@ -12,7 +12,16 @@ export default ( url, method, body, isHeader, nocacache ) => {
             body: JSON.stringify( body ),
         }
     }
+
     options.headers = requestHeaders();
+    if(isHeader){
+        options.headers={
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "site-id":config.SITE_ID,
+            "x-signup-token":body.token
+        }
+    }
 
     var starttime = new Date().getTime();
     return fetch( url, options )
@@ -43,6 +52,7 @@ function requestHeaders() {
     let headers = {
       Accept: "application/json",
       "Content-Type": "application/json",
+      "site-id":config.SITE_ID
     }
     return headers;
 }
