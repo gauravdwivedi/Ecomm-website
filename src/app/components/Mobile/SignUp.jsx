@@ -5,14 +5,11 @@ const SignUp = React.memo(function SignUp(props) {
 
     const context = useContext(authContext)
 
-
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
-
 
     useEffect(() => {
         if (context.isAuthenticated) {
@@ -20,8 +17,6 @@ const SignUp = React.memo(function SignUp(props) {
             props.history.replace('/')
         }
     })
-
-
 
     const signupvalidation = (form) => {
 
@@ -142,6 +137,15 @@ const SignUp = React.memo(function SignUp(props) {
                 phone
             }).then((res) => {
                 console.log('RES', res)
+
+                //user already registered
+                if (res[0].registration == false) {
+
+                    Util.setCookie('hoppedin_token', res[0].token, 7);
+                    Util.setCookie('userData', res[0].user, 7);
+                    context.setAuthState(true)
+                }
+
 
                 if (res[0].registration == true) {
                     let token = res[0].token

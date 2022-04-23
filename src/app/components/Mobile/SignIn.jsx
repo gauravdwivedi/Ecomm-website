@@ -9,7 +9,7 @@ const SignIn = React.memo(
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
 
-
+        console.log(props)
 
         useEffect(() => {
             if (context.isAuthenticated) {
@@ -17,6 +17,12 @@ const SignIn = React.memo(
                 props.history.replace('/')
             }
         })
+
+        // useEffect(() => {
+        //     console.log(props.auth.login)
+        // }, [props.auth.login])
+
+
 
         //Form Validation 
         const loginvalidation = (form) => {
@@ -71,14 +77,48 @@ const SignIn = React.memo(
             return return_type;
         }
 
-        const doSubmit = (event) => {
-            event.preventDefault();
+        // const doSubmit = (event) => {
+        //     event.preventDefault();
+        //     let form = document.forms['login'];
+        //     if (loginvalidation(form)) {
+        //         context.doLogin({
+        //             email,
+        //             password
+        //         })
+        //     }
+        // }
+
+
+        const doSubmit = (e) => {
+            e.preventDefault();
+
             let form = document.forms['login'];
+
             if (loginvalidation(form)) {
-                context.doLogin({
-                    email,
-                    password
+                console.log('Login')
+                props.login({
+                    email, password
+                }).then((res) => {
+                    console.log('Response', res[0])
+
+                    if (res[0].registration == false) {
+                        Util.setCookie('hoppedin_token', res[0].token, 7);
+                        Util.setCookie('userData', res[0].user, 7);
+                        context.setAuthState(true)
+                    }
+
+                    if (res[0].code || res[0].message == 'Not Found') {
+
+                        console.log('Error')
+                        let password = form.elements['password'];
+
+                        password.parentNode.classList.add('error');
+                        password.parentNode.insertAdjacentHTML('beforeend',
+                            '<div class="help-block alert alert-danger">Email or Password is incorrect!</div>'
+                        )
+                    }
                 })
+
             }
         }
 

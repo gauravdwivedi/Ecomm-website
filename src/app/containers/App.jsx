@@ -32,6 +32,7 @@ class App extends Component {
 				isMobile: props.isMobile,
 			},
 			isAuthenticated: false
+
 		}
 	}
 
@@ -67,11 +68,11 @@ class App extends Component {
 		}
 	}
 
-
 	doLogin(data) {
 		console.log(data)
 		this.props.login(data).then((res) => {
 			console.log('Response', res[0])
+
 			if (res[0].registration == false) {
 				Util.setCookie('hoppedin_token', res[0].token, 7);
 				Util.setCookie('userData', res[0].user, 7);
@@ -85,6 +86,17 @@ class App extends Component {
 			}
 		})
 	}
+
+
+	setAuthState(val) {
+		this.setState({
+			isAuthenticated: val
+		}, () => {
+			this.props.history.push('/')
+		})
+	}
+
+
 
 	doLogout() {
 
@@ -132,7 +144,8 @@ class App extends Component {
 					isAuthenticated: this.state.isAuthenticated,
 					doLogin: this.doLogin.bind(this),
 					doLogout: this.doLogout.bind(this),
-					history: this.props.history
+					history: this.props.history,
+					setAuthState: this.setAuthState.bind(this)
 
 				}}>
 					<Fragment>
