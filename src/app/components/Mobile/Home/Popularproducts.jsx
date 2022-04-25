@@ -10,8 +10,8 @@ const PopularProducts = ({ items }) => {
         </div>
         <div className="product-section">
             <div className="row gy-3 gx-3">
-                {items.map((item) => (
-                    <PopularProductItem item={item} />
+                {items.map((item, index) => (
+                    <PopularProductItem item={item} key={index}/>
                 ))}
             </div>
         </div>

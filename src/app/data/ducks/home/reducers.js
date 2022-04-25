@@ -8,13 +8,20 @@ const homeBigStory = createReducer( [ ] )( {
 
 const productList = createReducer( [ ] ) ({
    [ types.FETCH_PRODUCTS ]: ( state, action ) => {
-    console.log(state,'&&&&&',action)
-    return   action.payload
+     console.log(state,'&&&&&',action)
+    return   action.payload.result
     }
 } )
+
+const categoryList = createReducer( [ ] ) ({
+    [ types.FETCH_CATEGORY ]: ( state, action ) => {
+        return   action.payload
+     }
+ } )
 
 
 export default combineReducers( {
     homeBigStory,
     productList,
+    categoryList
 } );
