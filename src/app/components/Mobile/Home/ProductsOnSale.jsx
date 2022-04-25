@@ -17,7 +17,7 @@ function ProductsOnSale({ items }) {
             </div>
         </div>
     </section>
-        <section class="panel-space"></section>
+        <section className="panel-space"></section>
 
     </>
 }

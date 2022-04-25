@@ -7,44 +7,44 @@ const Footer = (props) => {
 	}
 	return <>
 
-		<div class="bottom-panel">
+		<div className="bottom-panel">
 			<ul>
-				<li class="active">
+				<li className="active">
 					<a href="#">
-						<div class="icon">
-							<img src="images/icon/footer-icon/home-2.svg" class="img-fluid bg-img" alt="" />
+						<div className="icon">
+							<img src="images/icon/footer-icon/home-2.svg" className="img-fluid bg-img" alt="" />
 						</div>
 						<span>home</span>
 					</a>
 				</li>
 				<li>
 					<a href="#">
-						<div class="icon">
-							<img src="images/icon/footer-icon/category.svg" class="img-fluid bg-img" alt="" />
+						<div className="icon">
+							<img src="images/icon/footer-icon/category.svg" className="img-fluid bg-img" alt="" />
 						</div>
 						<span>category</span>
 					</a>
 				</li>
 				<li>
 					<a href="#">
-						<div class="icon">
-							<img src="images/icon/footer-icon/shopping-cart.svg" class="img-fluid bg-img" alt="" />
+						<div className="icon">
+							<img src="images/icon/footer-icon/shopping-cart.svg" className="img-fluid bg-img" alt="" />
 						</div>
 						<span>cart</span>
 					</a>
 				</li>
 				<li>
 					<a href="#">
-						<div class="icon">
-							<img src="images/icon/footer-icon/favourite.svg" class="img-fluid bg-img" alt="" />
+						<div className="icon">
+							<img src="images/icon/footer-icon/favourite.svg" className="img-fluid bg-img" alt="" />
 						</div>
 						<span>wishlist</span>
 					</a>
 				</li>
 				<li>
 					<a href="#">
-						<div class="icon">
-							<img src="images/icon/footer-icon/user.svg" class="img-fluid bg-img" alt="" />
+						<div className="icon">
+							<img src="images/icon/footer-icon/user.svg" className="img-fluid bg-img" alt="" />
 						</div>
 						<span>Account</span>
 					</a>

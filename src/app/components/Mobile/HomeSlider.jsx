@@ -9,7 +9,7 @@ function HomeSlider() {
     }
     return (
         <section className="pt-0 home-section ratio_55">
-            <div class="home-slider slick-default theme-dots">
+            <div className="home-slider slick-default theme-dots">
                 <div>
                     <Slider {...settings}>
                         <div className='slider-box'>

@@ -17,8 +17,8 @@ const Home = React.memo(function Home(props) {
 			{/* <Header /> */}
 			<TopStories />
 			<HomeSlider />
-			<CategorySection />
-			{/* <PopularProducts items={props.productList} /> */}
+			<CategorySection  items={props.categoryList}/>
+			<PopularProducts items={props.productList} />
 			<SpotLight />
 			{/* <ProductsOnSale items={props.productList} /> */}
 			{/* <Footer /> */}
@@ -74,106 +74,31 @@ const TopStories = () => {
 }
 
 
-const CategorySection = () => {
+const CategorySection = ({ items }) => {
 
 	return (<>
-		<section class="category-section px-15 pt-0">
-			<div class="title-part">
+		<section className="category-section px-15 pt-0">
+			<div className="title-part">
 				<h2>Category</h2>
 				<a href="#">View All</a>
 			</div>
-			<div class="product-section">
-				<div class="row gy-3">
-					<div class="col-3">
-						<div class="card catagory-card">
-							<div class="card-body">
-								<a href="#">
-									<img class="categry-icon" src="images/category-icon/categ1.svg" />
-									<span><img class="categry-play" src="images/category-icon/cat-play.svg" /></span>
-								</a>
-							</div>
-						</div>
-						<h4><a href="#">dresses</a></h4>
-					</div>
-					<div class="col-3">
-						<div class="card catagory-card">
-							<div class="card-body">
-								<a href="#">
-									<img class="categry-icon"
-										src="images/category-icon/categ2.svg" />
-									<span><img class="categry-play" src="images/category-icon/cat-play.svg" /></span>
-								</a>
-							</div>
-						</div>
-						<h4><a href="#">Lages</a></h4>
-					</div>
-					<div class="col-3">
-						<div class="card catagory-card">
-							<div class="card-body">
-								<a href="#">
-									<img class="categry-icon" src="images/category-icon/categ3.svg" />
-									<span><img class="categry-play" src="images/category-icon/cat-play.svg" /></span>
-								</a>
-							</div>
-						</div>
-						<h4><a href="#">Shorts</a></h4>
-					</div>
-					<div class="col-3">
-						<div class="card catagory-card">
-							<div class="card-body">
-								<a href="#">
-									<img class="categry-icon" src="images/category-icon/categ4.svg" />
-									<span><img class="categry-play" src="images/category-icon/cat-play.svg" /></span>
-								</a>
-							</div>
-						</div>
-						<h4><a href="#">Jeans</a></h4>
-					</div>
-					<div class="col-3">
-						<div class="card catagory-card">
-							<div class="card-body">
-								<a href="#">
-									<img class="categry-icon" src="images/category-icon/categ5.svg" />
-									<span><img class="categry-play" src="images/category-icon/cat-play.svg" /></span>
-								</a>
-							</div>
-						</div>
-						<h4><a href="#">Tshirts</a></h4>
-					</div>
-					<div class="col-3">
-						<div class="card catagory-card">
-							<div class="card-body">
-								<a href="#">
-									<img class="categry-icon" src="images/category-icon/categ6.svg" />
-									<span><img class="categry-play" src="images/category-icon/cat-play.svg" /></span>
-								</a>
-							</div>
-						</div>
-						<h4><a href="#">Underwear</a></h4>
-					</div>
-					<div class="col-3">
-						<div class="card catagory-card">
-							<div class="card-body">
-								<a href="#">
-									<img class="categry-icon" src="images/category-icon/categ7.svg" />
-									<span><img class="categry-play" src="images/category-icon/cat-play.svg" /></span>
-								</a>
-							</div>
-						</div>
-						<h4><a href="#">Bags</a></h4>
-					</div>
-					<div class="col-3">
-						<div class="card catagory-card">
-							<div class="card-body">
-								<a href="#">
-									<img class="categry-icon" src="images/category-icon/categ8.svg" />
-									<span><img class="categry-play" src="images/category-icon/cat-play.svg" /></span>
-								</a>
-							</div>
-						</div>
-						<h4><a href="#">shoes</a></h4>
-					</div>
+			<div className="product-section">
+				<div className="row gy-3">
 
+					{items.map((item, index) => (
+						<div className="col-3" key={index}>
+							<div className="card catagory-card">
+								<div className="card-body">
+									<a href="#">
+										<img className="categry-icon" src={item.icon} />
+										<span><img className="categry-play" src="images/category-icon/cat-play.svg" /></span>
+									</a>
+								</div>
+							</div>
+							<h4><a href="#">{item.title}</a></h4>
+						</div>
+					))}
+					
 				</div>
 			</div>
 		</section>

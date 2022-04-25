@@ -37,7 +37,7 @@ const Header = (props) => {
 	}
 
 	return (<>
-		<div class="top-header"><img src="images/flash.svg" alt="" />Flash Deal : 30% off in girl dreses</div>
+		<div className="top-header"><img src="images/flash.svg" alt="" />Flash Deal : 30% off in girl dreses</div>
 		<header>
 			<img src="images/menu-icon.svg" id="mynav-bar" className="nav-bar hamburger" onClick={drawerToggleClickHandler} />
 			<a href="/" className="logo">
