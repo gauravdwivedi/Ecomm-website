@@ -26,3 +26,15 @@ export const Checkout = loadable(()=> import ('../app/containers/Checkout'),{
 export const Confirm = loadable(()=> import ('../app/containers/Confirm'),{
 	fallback: <div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
 })
+
+export const Detail = loadable(()=> import ('../app/containers/Detail'),{
+	fallback: <div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
+})
+
+export const Account = loadable(()=> import ('../app/containers/Account'),{
+	fallback: <div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
+})
+
+export const Order = loadable(()=> import ('../app/containers/Order'),{
+	fallback: <div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
+})

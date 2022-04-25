@@ -1,0 +1,4 @@
+const FETCH_PRODUCT_DETAILS = "detail/FETCH_PRODUCT_DETAILS";
+export default {
+	FETCH_PRODUCT_DETAILS
+};
