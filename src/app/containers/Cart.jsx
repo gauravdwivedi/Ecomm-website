@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { connect } from 'react-redux'
 
 import AuthContext from '../helpers/authContext'
@@ -31,7 +31,16 @@ export class CartContainer extends PureComponent {
 
     render() {
         return (
-            <Cart {...this.props} loading={this.state.loading} />
+            <Fragment>
+                {
+                    this.props.mobile.isMobile ?
+                        <Cart />
+                        :
+                        <div>This is website Cart</div>
+                }
+
+            </Fragment>
+
         )
     }
 }

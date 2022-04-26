@@ -5,7 +5,7 @@ function Order() {
         <div id="main">
             <header>
                 <div className="back-links">
-                    <a href="index.html">
+                    <a href="/">
                         <img src="/images/back.svg" className="img-fluid" alt="" />
                     </a>
                 </div>

@@ -53,6 +53,7 @@ const Navbar = (props) => {
                             </a>
                         </li>
                     }
+
                     <li>
                         <a href="/category" >
                             <img src="images/icon/sidenav-icon/category.svg" className="img-fluid" alt="" />
@@ -61,6 +62,7 @@ const Navbar = (props) => {
                             </div>
                         </a>
                     </li>
+
                     <li>
                         <a href="/new-arrivals" >
                             <img src="images/icon/sidenav-icon/new-arrivals.svg" className="img-fluid" alt="" />
@@ -69,6 +71,7 @@ const Navbar = (props) => {
                             </div>
                         </a>
                     </li>
+
                     {isAuthenticated &&
                         <li>
                             <a href="/favourites" >
@@ -87,6 +90,7 @@ const Navbar = (props) => {
                             </div>
                         </a>
                     </li>
+
                     <li>
                         <a href="/faq" >
                             <img src="images/icon/sidenav-icon/faq.svg" className="img-fluid" alt="" />
@@ -95,6 +99,7 @@ const Navbar = (props) => {
                             </div>
                         </a>
                     </li>
+
                     {isAuthenticated &&
                         <li>
                             <a onClick={(e) => handleClick(e)} >
@@ -104,14 +109,16 @@ const Navbar = (props) => {
                                 </div>
                             </a>
                         </li>}
+
                     {!isAuthenticated && <li>
                         <a href="/login" >
-                            <img src="images/icon/sidenav-icon/logout.svg" className="img-fluid" alt="" />
+                            <img src="images/icon/sidenav-icon/account.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>Login</span>
                             </div>
                         </a>
                     </li>}
+
                 </ul>
             </div>
 

@@ -126,7 +126,7 @@ const SignIn = React.memo(
             <div id="main">
                 <div style={{ backgroundColor: '#000' }}>
                     <div className="d-flex align-items-end login-sec vertical-form">
-                        <a href="#" className="btn btn-lg mt-2 sign-back" type="submit"><img src="images/back.svg" className="img-fluid" alt="" />Back</a>
+                        <a href="/" className="btn btn-lg mt-2 sign-back" type="submit"><img src="images/back.svg" className="img-fluid" alt="" />Back</a>
                         <div className="sign-in-section">
                             <div className="inboard-info px-15">
                                 <h3 className="text-white">Log into with<br /> your Hoppedin Account</h3>
@@ -152,7 +152,7 @@ const SignIn = React.memo(
                                     </section>
                                     {/* <a href="#" className="btn sign-in-btn mt-5" type="submit">Sign In</a> */}
                                     <input type='submit' value='Sign In' className='btn sign-in-btn mt-5' />
-                                    <span className="account-link d-block text-center">Don't have an account then? <a href="#" className="underline">Sign up </a></span>
+                                    <span className="account-link d-block text-center">Don't have an account then? <a href="/signup" className="underline">Sign up </a></span>
                                 </form>
                             </div>
                         </div>
