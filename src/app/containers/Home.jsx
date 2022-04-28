@@ -4,7 +4,7 @@ import config from "../../config/index";
 import HomeDesktop from "../components/Desktop/Home"
 import HomeMobile from "../components/Mobile/Home"
 import AuthContext from "../helpers/authContext";
-import { loadBigStory, getAllProducts,getAllCategory } from "../data/ducks/home/actions";
+import { loadBigStory, getAllProducts, getAllCategory } from "../data/ducks/home/actions";
 
 class HomeContainer extends PureComponent {
 	static contextType = AuthContext;
@@ -12,7 +12,7 @@ class HomeContainer extends PureComponent {
 		let storeData = ssr.getState();
 		return [
 			//ssr.dispatch(loadBigStory()), //SSR rendering here
-			ssr.dispatch(getAllProducts(1)),
+			// ssr.dispatch(getAllProducts(1)),
 			ssr.dispatch(getAllCategory())
 
 		];

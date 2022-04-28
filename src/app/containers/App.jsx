@@ -113,8 +113,8 @@ class App extends Component {
 
 	render() {
 		const Routes = this.props.route.routes;
-		let noheaderUrl = ['/login', '/signup', '/cart', '/account', '/detail', '/confirm', '/order']
-		let nofooterUrl = ['/login', '/signup', '/cart', '/account', '/detail', '/confirm', '/order']
+		let noheaderUrl = ['/login', '/signup', '/cart', '/account', '/detail', '/confirm', '/order', '/forgetpassword']
+		let nofooterUrl = ['/login', '/signup', '/cart', '/account', '/detail', '/confirm', '/order', '/forgetpassword']
 		let header = <HeaderDesktop {...this.props} />
 		let global = <GlobalDesktop {...this.props} />
 		let footer = <FooterDesktop {...this.props} />

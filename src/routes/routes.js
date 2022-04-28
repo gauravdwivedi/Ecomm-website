@@ -1,6 +1,6 @@
 import React from 'react';
 import App from "../app/containers/App";
-import {Home,SignIn,SignUp,Cart,Checkout,Confirm,Detail,Order,Account} from "./splitComponent"
+import {Home,SignIn,SignUp,Cart,Checkout,Confirm,Detail,Order,Account,ForgetPassword} from "./splitComponent"
 
 
 const routes = [{
@@ -50,6 +50,11 @@ const routes = [{
 			path: "/order",
 			component: Order,
 			exact: true,
+		},
+		{
+			path:"/forgetpassword",
+			component:ForgetPassword,
+			exact:true
 		}
 	]
 }];

@@ -37,6 +37,22 @@ console.log(data)
     };
 }
 
+
+
+export function forgetpassword(data){
+    return {
+        CALL_API:[
+            {
+                type:types.FORGETPASSWORD,
+                meta:{
+                    path:"/v1/auth/forget",
+                    
+                }
+            }
+        ]
+    }
+}
+
 export function logout(){
     return {
         CALL_API:[
