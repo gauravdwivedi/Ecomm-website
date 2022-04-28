@@ -148,7 +148,7 @@ const SignIn = React.memo(
                                             <input type="password" name='password' className="form-control" id="floatingPassword" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                                             <label htmlFor="floatingPassword">Password</label>
                                         </div>
-                                        <a href="#" className="forgot mb-3">Forgot Password ?</a>
+                                        <a href="/forgetpassword" className="forgot mb-3">Forgot Password ?</a>
                                     </section>
                                     {/* <a href="#" className="btn sign-in-btn mt-5" type="submit">Sign In</a> */}
                                     <input type='submit' value='Sign In' className='btn sign-in-btn mt-5' />

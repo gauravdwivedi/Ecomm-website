@@ -12,7 +12,7 @@ import GlobalMobile from "../components/mobile/partials/global";
 import Metadata from '../helpers/metadata';
 
 
-import { login, verifytoken, logout } from "../data/ducks/auth/actions"
+import { login, verifytoken, logout, forgetpassword } from "../data/ducks/auth/actions"
 import { processResponse } from '../helpers/helpers';
 
 
@@ -86,6 +86,9 @@ class App extends Component {
 			}
 		})
 	}
+
+
+
 
 
 	setAuthState(val) {
@@ -169,7 +172,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
 	login,
 	verifytoken,
-	logout
+	logout,
+	forgetpassword
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

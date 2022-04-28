@@ -50,51 +50,27 @@ const ForgetPassword = React.memo(function SignUp(props) {
         return return_type;
     }
 
-
     const doSubmit = (e) => {
         e.preventDefault();
 
         let form = document.forms["forgetpassword"];
-
         if (forgetpasswordvalidation(form)) {
+            props.forgetpassword({ email }).then(res => {
+                console.log(res, res[0])
+                if (res[0].code || res[0].message == 'Not Found') {
 
+                    console.log('Error')
+                    let password = form.elements['email'];
 
-            console.log(email)
-            // props.forgetpassword({
-            //     email
-            // }).then((res) => {
-            //     console.log('RES', res)
+                    password.parentNode.classList.add('error');
+                    password.parentNode.insertAdjacentHTML('beforeend',
+                        '<div class="help-block alert alert-danger">Email is incorrect!</div>'
+                    )
+                }
 
-            //     //user already registered
-            //     if (res[0].registration == false) {
-
-            //         Util.setCookie('hoppedin_token', res[0].token, 7);
-            //         Util.setCookie('userData', res[0].user, 7);
-            //         context.setAuthState(true)
-            //     }
-
-            //     if (res[0].registration == true) {
-            //         let token = res[0].token
-            //         props.signup({
-            //             email,
-            //             password,
-            //             firstName,
-            //             lastName,
-            //             phone,
-            //             token
-            //         }).then((res) => {
-            //             console.log('Resgistration result', res)
-            //             context.doLogin({
-            //                 email,
-            //                 password
-            //             })
-            //         })
-            //     }
-            // })
-
+            })
         }
     }
-
 
     return (
 
