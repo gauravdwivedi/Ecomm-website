@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import AuthContext from "../helpers/authContext"
 import ResetPassword from '../components/Mobile/ResetPassword';
-import { forgetpassword } from '../data/ducks/auth/actions'
+import { resetpasswordverification } from '../data/ducks/auth/actions'
 
 
 class ResetPasswordContainer extends PureComponent {
@@ -30,6 +30,7 @@ class ResetPasswordContainer extends PureComponent {
     }
 
     render() {
+        console.log('RESET PASSWORDDDDDD')
         return (
             <Fragment>
                 {
@@ -49,7 +50,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    forgetpassword
+    resetpasswordverification
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResetPasswordContainer);

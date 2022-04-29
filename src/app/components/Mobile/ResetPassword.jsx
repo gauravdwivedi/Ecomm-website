@@ -9,7 +9,7 @@ const ResetPassword = React.memo(
         const [password, setPassword] = useState('');
         const [confirmPassword, setConfirmPassword] = useState('');
 
-        console.log(props)
+        // console.log(props)
 
         useEffect(() => {
             if (context.isAuthenticated) {
@@ -17,6 +17,7 @@ const ResetPassword = React.memo(
                 props.history.replace('/')
             }
         })
+
         const resetpasswordvalidation = (form) => {
             let return_type = true;
             let password = form.elements['password'];
@@ -56,26 +57,32 @@ const ResetPassword = React.memo(
                 );
                 return_type = false;
             }
+            return return_type
+        }
+
+        const doSubmit = (e) => {
+            e.preventDefault();
+
+            console.log(props.match.params.token)
+            const token = props.match.params.token;
+            let form = document.forms['resetpassword'];
+            console.log('RESET PASS', form)
+            if (resetpasswordvalidation(form)) {
 
 
-            const doSubmit = (e) => {
-                e.preventDefault();
-
-                let form = document.forms['resetpassword'];
-
-                if (resetpasswordvalidation(form)) {
-
-                    props.resetpasswordverification({
-                        token, password
-                    }).then((res) => {
-                        console.log('Response', res)
+                props.resetpasswordverification({
+                    token, password
+                }).then((res) => {
+                    console.log('Response', res)
 
 
-                    })
+                })
 
-                }
             }
-            return (
+        }
+        return (
+            <>
+
                 <div id="main">
                     <div style={{ backgroundColor: '#000' }}>
                         <div className="d-flex align-items-end login-sec vertical-form">
@@ -105,7 +112,7 @@ const ResetPassword = React.memo(
 
                                         </section>
                                         {/* <a href="#" className="btn sign-in-btn mt-5" type="submit">Sign In</a> */}
-                                        <input type='submit' value='Sign In' className='btn sign-in-btn mt-5' />
+                                        <input type='submit' value='Save' className='btn sign-in-btn mt-5' />
                                         <span className="account-link d-block text-center">Don't have an account then? <a href="/signup" className="underline">Sign up </a></span>
                                     </form>
                                 </div>
@@ -113,10 +120,9 @@ const ResetPassword = React.memo(
                         </div>
                     </div>
                 </div>
-            )
-        }
+            </>
+        )
+    })
 
-    }
-)
 
 export default ResetPassword

@@ -87,10 +87,6 @@ class App extends Component {
 		})
 	}
 
-
-
-
-
 	setAuthState(val) {
 		this.setState({
 			isAuthenticated: val
@@ -98,8 +94,6 @@ class App extends Component {
 			this.props.history.push('/')
 		})
 	}
-
-
 
 	doLogout() {
 
@@ -116,8 +110,8 @@ class App extends Component {
 
 	render() {
 		const Routes = this.props.route.routes;
-		let noheaderUrl = ['/login', '/signup', '/cart', '/account', '/detail', '/confirm', '/order', '/forgetpassword']
-		let nofooterUrl = ['/login', '/signup', '/cart', '/account', '/detail', '/confirm', '/order', '/forgetpassword']
+		let noheaderUrl = ['/login', '/signup', '/cart', '/account', '/detail', '/confirm', '/order', '/forgetpassword', '/reset-password/:token']
+		let nofooterUrl = ['/login', '/signup', '/cart', '/account', '/detail', '/confirm', '/order', '/forgetpassword', '/reset-password/:token']
 		let header = <HeaderDesktop {...this.props} />
 		let global = <GlobalDesktop {...this.props} />
 		let footer = <FooterDesktop {...this.props} />

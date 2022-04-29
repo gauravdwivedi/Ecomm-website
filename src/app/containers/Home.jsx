@@ -12,7 +12,7 @@ class HomeContainer extends PureComponent {
 		let storeData = ssr.getState();
 		return [
 			//ssr.dispatch(loadBigStory()), //SSR rendering here
-			// ssr.dispatch(getAllProducts(1)),
+			ssr.dispatch(getAllProducts(1)),
 			ssr.dispatch(getAllCategory())
 
 		];

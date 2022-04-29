@@ -72,7 +72,7 @@ const ForgetPassword = React.memo(function SignUp(props) {
         }
     }
 
-    return (
+    return <>
 
         <div id="main">
             <div style={{ backgroundColor: '#000' }}>
@@ -102,7 +102,7 @@ const ForgetPassword = React.memo(function SignUp(props) {
             </div>
         </div>
 
-    )
+    </>
 })
 
 export default ForgetPassword

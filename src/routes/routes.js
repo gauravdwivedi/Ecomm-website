@@ -57,7 +57,7 @@ const routes = [{
 			exact:true
 		},
 		{
-			path:"/resetpassword",
+			path:"/reset-password/:token",
 			component:ResetPassword,
 			exact:true
 		}
