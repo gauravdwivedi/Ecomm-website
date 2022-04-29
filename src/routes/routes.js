@@ -37,7 +37,7 @@ const routes = [{
 			exact:true
 		},
 		{
-			path: "/detail",
+			path: "/detail/:slug",
 			component: Detail,
 			exact: true,
 		},

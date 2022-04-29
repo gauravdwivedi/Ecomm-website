@@ -6,7 +6,7 @@ export function fetchProductDetails(slug) {
             {
                 type: types.FETCH_PRODUCT_DETAILS,
                 meta: {
-                    path: "/v1/product/detailwithVideo?slug=" + slug,
+                    path: "/v1/product/detail?slug=" + slug,
                     method: "GET",
                 }
             }

@@ -6,17 +6,17 @@ function PopularProductItem({ item }) {
             <div className="col-md-4 col-6">
                 <div className="product-box ratio_square">
                     <div className="img-part">
-                        <a href="#" className="bg-size"><img src={item.images} alt="" className="img-fluid bg-img" /></a>
+                        <a href={"/detail/"+item.slug} className="bg-size"><img src={item.images[0]} alt="" className="img-fluid bg-img" /></a>
                         <div className="hrs-btn">
-                            <span><img src="images/hr-icon.svg" alt="" />
+                            <span><img src="/images/hr-icon.svg" alt="" />
                                 <h6>3 Hrs</h6>
                             </span>
                         </div>
                         <div className="wishlist-btn">
                             <ul>
-                                <li><img src="images/product-icon/play-icon.svg" alt="" /></li>
-                                <li><img src="images/product-icon/notify-icon.svg" alt="" /></li>
-                                <li><img src="images/product-icon/bag-icon.svg" alt="" /></li>
+                                <li><img src="/images/product-icon/play-icon.svg" alt="" /></li>
+                                <li><img src="/images/product-icon/notify-icon.svg" alt="" /></li>
+                                <li><img src="/images/product-icon/bag-icon.svg" alt="" /></li>
                             </ul>
                         </div>
                     </div>
