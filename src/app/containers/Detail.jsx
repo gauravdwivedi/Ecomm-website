@@ -9,7 +9,7 @@ class DetailContainer extends PureComponent {
 	static fetching( ssr ) {
 		let storeData = ssr.getState();
 		return [
-			ssr.dispatch(fetchProductDetails()), //SSR rendering here
+			//ssr.dispatch(fetchProductDetails()), //SSR rendering here
 			
 		];
 	}
@@ -22,7 +22,11 @@ class DetailContainer extends PureComponent {
 	}
 
 	componentDidMount() {
-        console.log('Called!');
+        if(this.props?.match?.params?.slug){
+			this.props.fetchProductDetails(this.props.match.params.slug).then((res) => {
+			})
+		}
+		
     }
 
 
@@ -43,6 +47,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+	fetchProductDetails
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailContainer);

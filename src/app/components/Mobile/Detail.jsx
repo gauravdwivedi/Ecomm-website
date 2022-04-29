@@ -4,7 +4,7 @@ const Detail = React.memo(function Detail(props) {
   return (
     <div id="main">
 		<div className="detail-header">		
-			<a href="index.html">
+			<a href="/">
 			  <img src="/images/back.svg" className="img-fluid" alt="" />
 			</a>
 			<div className="header-option" style={{marginLeft:"auto"}}>
@@ -22,7 +22,7 @@ const Detail = React.memo(function Detail(props) {
 				autoPlay 
 				muted 
 				loop
-				poster="images/detail-bg.png" 
+				poster="/images/detail-bg.png" 
 				src={props.detail.video_url} />
 		  </div>
 		
@@ -43,7 +43,7 @@ const Detail = React.memo(function Detail(props) {
 					  <div className="detail-gallery">
 						<ul>
 							
-							{props.detail.Images.map((img, i) => <li><img src={img} alt="" key={i}/></li>)}
+							{props.detail.images && props.detail.images.map((img, i) => <li  key={i}><img src={img} alt=""/></li>)}
 						</ul>
 					  </div>
 					  <div className="hrs-btn">

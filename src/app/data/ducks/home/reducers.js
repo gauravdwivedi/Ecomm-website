@@ -8,7 +8,12 @@ const homeBigStory = createReducer( [ ] )( {
 
 const productList = createReducer( [ ] ) ({
    [ types.FETCH_PRODUCTS ]: ( state, action ) => {
-     console.log(state,'&&&&&',action)
+     //console.log(state,'&&&&&',action)
+     if(action?.payload?.result){
+        action.payload.result.forEach(item => {
+            item.images =  JSON.parse(item.images)
+        }) 
+     }
     return   action.payload.result
     }
 } )
