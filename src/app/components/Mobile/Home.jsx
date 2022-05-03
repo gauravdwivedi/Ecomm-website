@@ -34,37 +34,37 @@ const TopStories = () => {
 			<ul className="category-slide">
 				<li>
 					<a href="#" className="category-box">
-						<img src="images/men.png" className="img-fluid" alt="" />
+						<img src="/images/men.png" className="img-fluid" alt="" />
 						<h4>Kids</h4>
 					</a>
 				</li>
 				<li>
 					<a href="#" className="category-box">
-						<img src="images/men.png" className="img-fluid" alt="" />
+						<img src="/images/men.png" className="img-fluid" alt="" />
 						<h4>beauty</h4>
 					</a>
 				</li>
 				<li>
 					<a href="#" className="category-box">
-						<img src="images/men.png" className="img-fluid" alt="" />
+						<img src="/images/men.png" className="img-fluid" alt="" />
 						<h4>footwear</h4>
 					</a>
 				</li>
 				<li>
 					<a href="#" className="category-box">
-						<img src="images/men.png" className="img-fluid" alt="" />
+						<img src="/images/men.png" className="img-fluid" alt="" />
 						<h4>jewelry</h4>
 					</a>
 				</li>
 				<li>
 					<a href="#" className="category-box">
-						<img src="images/men.png" className="img-fluid" alt="" />
+						<img src="/images/men.png" className="img-fluid" alt="" />
 						<h4>Women</h4>
 					</a>
 				</li>
 				<li>
 					<a href="#" className="category-box">
-						<img src="images/men.png" className="img-fluid" alt="" />
+						<img src="/images/men.png" className="img-fluid" alt="" />
 						<h4>men</h4>
 					</a>
 				</li>
@@ -91,7 +91,7 @@ const CategorySection = ({ items }) => {
 								<div className="card-body">
 									<a href="#">
 										<img className="categry-icon" src={item.icon} />
-										<span><img className="categry-play" src="images/category-icon/cat-play.svg" /></span>
+										<span><img className="categry-play" src="/images/category-icon/cat-play.svg" /></span>
 									</a>
 								</div>
 							</div>
@@ -115,7 +115,7 @@ const SpotLight = () => {
 			<div>
 				<Slider>
 					<div className="slider-box">
-						<img src="images/spotlight-banner/bannr1.png" className="img-fluid bg-img" alt="" />
+						<img src="/images/spotlight-banner/bannr1.png" className="img-fluid bg-img" alt="" />
 					</div>
 				</Slider>
 			</div>

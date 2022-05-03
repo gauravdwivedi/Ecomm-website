@@ -9,7 +9,7 @@ function Cart() {
                 <header>
                     <div className="back-links">
                         <a href="/">
-                            <img src="images/back.svg" className="img-fluid" alt="" />
+                            <img src="/images/back.svg" className="img-fluid" alt="" />
                         </a>
                     </div>
                     <div className="inner-header">
@@ -20,7 +20,7 @@ function Cart() {
                     <div className="cart mb-4">
                         <div className="cart-box">
                             <a href="#" className="cart-img">
-                                <img src="images/cart-img.png" className="img-fluid" alt="" />
+                                <img src="/images/cart-img.png" className="img-fluid" alt="" />
                             </a>
                             <div className="cart-content">
                                 <a href="product.html">
@@ -28,7 +28,7 @@ function Cart() {
                                 </a>
                             </div>
                             <div className="delete-icon">
-                                <img src="images/icon/delete.svg" className="img-fluid" alt="" />
+                                <img src="/images/icon/delete.svg" className="img-fluid" alt="" />
                             </div>
                         </div>
                         <div className="cart-option">

@@ -17,7 +17,7 @@ const Navbar = (props) => {
     return (<>
         <div id="mySidenav" className="sidenav">
             <a href="/" className="user-panel">
-                <img src="images/favourite-1.png" className="img-fluid user-img" alt="" />
+                <img src="/images/favourite-1.png" className="img-fluid user-img" alt="" />
                 <span>App name</span>
             </a>
 
@@ -29,7 +29,7 @@ const Navbar = (props) => {
 
                     {isAuthenticated && <li>
                         <a href="#">
-                            <img src="images/icon/sidenav-icon/bag.svg" className="img-fluid" alt="" />
+                            <img src="/images/icon/sidenav-icon/bag.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>My Orders</span>
                             </div>
@@ -37,7 +37,7 @@ const Navbar = (props) => {
                     </li>}
                     <li>
                         <a href="/cart" >
-                            <img src="images/icon/sidenav-icon/Cart.svg" className="img-fluid" alt="" />
+                            <img src="/images/icon/sidenav-icon/Cart.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>Cart</span>
                             </div>
@@ -46,7 +46,7 @@ const Navbar = (props) => {
                     {isAuthenticated &&
                         <li>
                             <a href="/myaccount" >
-                                <img src="images/icon/sidenav-icon/account.svg" className="img-fluid" alt="" />
+                                <img src="/images/icon/sidenav-icon/account.svg" className="img-fluid" alt="" />
                                 <div className="content">
                                     <span>My Account</span>
                                 </div>
@@ -56,7 +56,7 @@ const Navbar = (props) => {
 
                     <li>
                         <a href="/category" >
-                            <img src="images/icon/sidenav-icon/category.svg" className="img-fluid" alt="" />
+                            <img src="/images/icon/sidenav-icon/category.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>Category</span>
                             </div>
@@ -65,7 +65,7 @@ const Navbar = (props) => {
 
                     <li>
                         <a href="/new-arrivals" >
-                            <img src="images/icon/sidenav-icon/new-arrivals.svg" className="img-fluid" alt="" />
+                            <img src="/images/icon/sidenav-icon/new-arrivals.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>New Arrivals</span>
                             </div>
@@ -75,7 +75,7 @@ const Navbar = (props) => {
                     {isAuthenticated &&
                         <li>
                             <a href="/favourites" >
-                                <img src="images/icon/sidenav-icon/favourite.svg" className="img-fluid" alt="" />
+                                <img src="/images/icon/sidenav-icon/favourite.svg" className="img-fluid" alt="" />
                                 <div className="content">
                                     <span>My Favourite</span>
                                 </div>
@@ -84,7 +84,7 @@ const Navbar = (props) => {
 
                     <li>
                         <a href="/contact" >
-                            <img src="images/icon/sidenav-icon/contact.svg" className="img-fluid" alt="" />
+                            <img src="/images/icon/sidenav-icon/contact.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>Contact</span>
                             </div>
@@ -93,7 +93,7 @@ const Navbar = (props) => {
 
                     <li>
                         <a href="/faq" >
-                            <img src="images/icon/sidenav-icon/faq.svg" className="img-fluid" alt="" />
+                            <img src="/images/icon/sidenav-icon/faq.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>FAQ</span>
                             </div>
@@ -103,7 +103,7 @@ const Navbar = (props) => {
                     {isAuthenticated &&
                         <li>
                             <a onClick={(e) => handleClick(e)} >
-                                <img src="images/icon/sidenav-icon/logout.svg" className="img-fluid" alt="" />
+                                <img src="/images/icon/sidenav-icon/logout.svg" className="img-fluid" alt="" />
                                 <div className="content">
                                     <span>Logout</span>
                                 </div>
@@ -112,7 +112,7 @@ const Navbar = (props) => {
 
                     {!isAuthenticated && <li>
                         <a href="/login" >
-                            <img src="images/icon/sidenav-icon/account.svg" className="img-fluid" alt="" />
+                            <img src="/images/icon/sidenav-icon/account.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>Login</span>
                             </div>

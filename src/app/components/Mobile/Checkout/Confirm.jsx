@@ -8,7 +8,7 @@ function Confirm() {
                 <header className="none-bg">
                     <div className="back-links">
                         <a href="index.html">
-                            <img src="images/back-black.svg" className="img-fluid" alt="" />
+                            <img src="/images/back-black.svg" className="img-fluid" alt="" />
                         </a>
                     </div>
                     <div className="inner-header confirm-bar">
@@ -23,7 +23,7 @@ function Confirm() {
                 <section className="confirm-product text-center px-15">
                     <div className="product-inline">
                         <a href="#">
-                            <img src="images/product/product3.png" className="img-fluid" alt="" />
+                            <img src="/images/product/product3.png" className="img-fluid" alt="" />
                         </a>
                         <div className="product-inline-content">
                             <div>

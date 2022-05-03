@@ -22,9 +22,8 @@ class DetailContainer extends PureComponent {
 	}
 
 	componentDidMount() {
-        const params = new URL(window.location.href).searchParams;
-        if(params.get('slug')){
-			this.props.fetchProductDetails(params.get('slug')).then((res) => {
+		if(this.props?.match?.params?.slug){
+			this.props.fetchProductDetails(this.props.match.params.slug).then((res) => {
 			})
 		}
     }
