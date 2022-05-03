@@ -100,6 +100,7 @@ header .inner-header {
     margin-left: 35px;
     text-align: center;
     width: 75%;
+    color: white !important;
 }
 
 .inner-header h3 {
@@ -1007,7 +1008,7 @@ nav ul li i {
     font-weight: 500;
     font-size: 14px;
     line-height: 21px;
-    color: rgb(19 19 19 / 40%);
+    color: rgba(19, 19, 19, 0.4);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1136,7 +1137,7 @@ nav ul li i {
 /* -----cart-page------- */
 .cart-section .cart {
     background: #FFFFFF;
-    box-shadow: 0px 0px 20px rgb(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
     border-radius: 16px;
     padding: 20px;
 }
@@ -1661,6 +1662,7 @@ header.none-bg {
 
 .sign-back img {
     margin-right: 12px;
+    color: white;
 }
 
 .login-sec.vertical-form {
@@ -1689,13 +1691,13 @@ header.none-bg {
 }
 
 .sign-in-btn {
-    background: #131313;
+    background: #131313 !important;
     border-radius: 10px;
     padding: 11px 16px;
     font-weight: 500;
     font-size: 18px;
     line-height: 140.3%;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
     width: 100%;
     text-transform: capitalize;
 }

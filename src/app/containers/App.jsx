@@ -12,7 +12,7 @@ import GlobalMobile from "../components/mobile/partials/global";
 import Metadata from '../helpers/metadata';
 
 
-import { login, verifytoken, logout } from "../data/ducks/auth/actions"
+import { login, verifytoken, logout, forgetpassword } from "../data/ducks/auth/actions"
 import { processResponse } from '../helpers/helpers';
 
 
@@ -87,7 +87,6 @@ class App extends Component {
 		})
 	}
 
-
 	setAuthState(val) {
 		this.setState({
 			isAuthenticated: val
@@ -95,8 +94,6 @@ class App extends Component {
 			this.props.history.push('/')
 		})
 	}
-
-
 
 	doLogout() {
 
@@ -113,8 +110,8 @@ class App extends Component {
 
 	render() {
 		const Routes = this.props.route.routes;
-		let noheaderUrl = ['/login', '/signup']
-		let nofooterUrl = ['/login', '/signup']
+		let noheaderUrl = ['/login', '/signup', '/cart', '/account', '/detail', '/confirm', '/order', '/forgetpassword', '/reset-password/:token']
+		let nofooterUrl = ['/login', '/signup', '/cart', '/account', '/detail', '/confirm', '/order', '/forgetpassword', '/reset-password/:token']
 		let header = <HeaderDesktop {...this.props} />
 		let global = <GlobalDesktop {...this.props} />
 		let footer = <FooterDesktop {...this.props} />
@@ -169,7 +166,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
 	login,
 	verifytoken,
-	logout
+	logout,
+	forgetpassword
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

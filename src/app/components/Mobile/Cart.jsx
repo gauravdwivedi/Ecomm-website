@@ -1,14 +1,14 @@
 import React from 'react'
 
 function Cart() {
-    console.log('Called')
+
     return (
         <>
             <div id="main">
                 {/* Header */}
                 <header>
                     <div className="back-links">
-                        <a href="index.html">
+                        <a href="/">
                             <img src="images/back.svg" className="img-fluid" alt="" />
                         </a>
                     </div>
@@ -74,8 +74,6 @@ function Cart() {
                 </div>
             </section>
         </>
-
-
     )
 }
 

@@ -2,15 +2,12 @@ import React from "react";
 
 const Footer = (props) => {
 
-	const clickhandle = () => {
-		console.log('Cliked')
-	}
 	return <>
 
 		<div className="bottom-panel">
 			<ul>
 				<li className="active">
-					<a href="#">
+					<a href="/">
 						<div className="icon">
 							<img src="images/icon/footer-icon/home-2.svg" className="img-fluid bg-img" alt="" />
 						</div>
@@ -18,7 +15,7 @@ const Footer = (props) => {
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="/category">
 						<div className="icon">
 							<img src="images/icon/footer-icon/category.svg" className="img-fluid bg-img" alt="" />
 						</div>
@@ -26,7 +23,7 @@ const Footer = (props) => {
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="/cart">
 						<div className="icon">
 							<img src="images/icon/footer-icon/shopping-cart.svg" className="img-fluid bg-img" alt="" />
 						</div>
@@ -42,7 +39,7 @@ const Footer = (props) => {
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="/account">
 						<div className="icon">
 							<img src="images/icon/footer-icon/user.svg" className="img-fluid bg-img" alt="" />
 						</div>
@@ -51,7 +48,6 @@ const Footer = (props) => {
 				</li>
 			</ul>
 		</div>
-
 	</>
 
 }
