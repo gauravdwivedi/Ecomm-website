@@ -17,7 +17,7 @@ const Home = React.memo(function Home(props) {
 			{/* <Header /> */}
 			<TopStories />
 			<HomeSlider />
-			<CategorySection  items={props.categoryList}/>
+			<CategorySection items={props.categoryList} />
 			<PopularProducts items={props.productList} />
 			<SpotLight />
 			{/* <ProductsOnSale items={props.productList} /> */}
@@ -98,7 +98,7 @@ const CategorySection = ({ items }) => {
 							<h4><a href="#">{item.title}</a></h4>
 						</div>
 					))}
-					
+
 				</div>
 			</div>
 		</section>

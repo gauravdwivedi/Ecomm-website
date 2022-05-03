@@ -7,6 +7,7 @@ export default ( url, method, body, isHeader, nocacache ) => {
             method    
         }
     }else{
+        
         options = {
             method,
             body: JSON.stringify( body ),
@@ -14,6 +15,7 @@ export default ( url, method, body, isHeader, nocacache ) => {
     }
 
     options.headers = requestHeaders();
+
     if(isHeader){
         options.headers={
             Accept: "application/json",
@@ -21,11 +23,15 @@ export default ( url, method, body, isHeader, nocacache ) => {
             "site-id":config.SITE_ID,
             "x-signup-token":body.token
         }
+
     }
 
     var starttime = new Date().getTime();
     return fetch( url, options )
         .then( res => {
+            console.log('Response FETCH',res)
+
+
             var endDate = new Date();
             var endtime = endDate.getTime();
             var timeDiff = endtime - starttime;

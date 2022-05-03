@@ -37,6 +37,22 @@ console.log(data)
     };
 }
 
+export function forgetpassword(data){
+    console.log('EMAIL',data)
+    return {
+        CALL_API:[
+            {
+                type:types.FORGETPASSWORD,
+                meta:{
+                    path:"/v1/auth/resetPassword/trigger",
+                    method:'PATCH',
+                    body:data
+                }
+            }
+        ]
+    }
+}
+
 export function logout(){
     return {
         CALL_API:[
@@ -56,6 +72,24 @@ export function setToken(token){
         },
     };
 }
+
+export function resetpasswordverification(data){
+
+    return {
+        CALL_API:[
+            {
+                type:types.RESETPASSWORDVERIFICATION,
+                meta:{
+                    path:`/v1/auth/resetPassword/verify`,
+                    method:'PATCH',
+                    body:data
+                }
+            }
+        ]
+    }
+
+}
+
 
 export function verifytoken(token){
 

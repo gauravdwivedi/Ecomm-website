@@ -38,3 +38,11 @@ export const Account = loadable(()=> import ('../app/containers/Account'),{
 export const Order = loadable(()=> import ('../app/containers/Order'),{
 	fallback: <div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
 })
+
+export const ForgetPassword = loadable(()=> import ('../app/containers/ForgetPassword'),{
+	fallback: <div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
+})
+
+export const ResetPassword = loadable(()=> import ('../app/containers/ResetPassword'),{
+	fallback: <div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
+})

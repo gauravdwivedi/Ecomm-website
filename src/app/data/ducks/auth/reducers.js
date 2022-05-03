@@ -23,10 +23,20 @@ const logout = createReducer([])({
     [types.LOGOUT]:(state,action) => action.payload
 })
 
+const forgetpassword = createReducer([])({
+    [types.FORGETPASSWORD]:(state,action) => action.payload
+})
+
+const resetpasswordverification = createReducer([])({
+    [types.RESETPASSWORDVERIFICATION]:(state,action) => action.payload
+})
+
 export default combineReducers({
     login,
     signup,
     logout,
     token,
-    verifytoken
+    verifytoken,
+    forgetpassword,
+    resetpasswordverification
 })

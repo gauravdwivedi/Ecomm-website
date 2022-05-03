@@ -1,20 +1,19 @@
 import React, { Fragment, PureComponent } from 'react'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
-import AuthContext from '../helpers/authContext'
-import Cart from '../components/Mobile/Cart'
+import AuthContext from "../helpers/authContext"
+import ForgetPassword from '../components/Mobile/ForgetPassword';
+import { forgetpassword } from '../data/ducks/auth/actions'
 
 
-
-export class CartContainer extends PureComponent {
+class ForgetpasswordContainer extends PureComponent {
 
     static contextType = AuthContext;
-
     static fetching(ssr) {
-        let soreData = ssr.getState();
-
+        let storeData = ssr.getState();
         return [
             //ssr.dispatch(loadBigStory()), //SSR rendering here
+
         ];
     }
 
@@ -25,32 +24,30 @@ export class CartContainer extends PureComponent {
         }
     }
 
-    componentDidMount() {
-        console.log('Component DID Mount!')
-    }
+    componentDidMount() { }
 
     render() {
         return (
             <Fragment>
                 {
                     this.props.mobile.isMobile ?
-                        <Cart />
+                        <ForgetPassword {...this.props} loading={this.state.loading} />
                         :
-                        <div>This is website Cart</div>
+                        <div>This is website SignIn</div>
                 }
-
             </Fragment>
 
         )
     }
 }
 
+
 const mapStateToProps = (state) => ({
-    home: state.home
+    auth: state.auth
 })
 
 const mapDispatchToProps = {
-
+    forgetpassword
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ForgetpasswordContainer);
