@@ -13,11 +13,11 @@ function HomeSlider() {
                 <div>
                     <Slider {...settings}>
                         <div className='slider-box'>
-                            <img src="images/banner.png" className="img-fluid bg-img" alt="" />
+                            <img src="/images/banner.png" className="img-fluid bg-img" alt="" />
 
                         </div>
                         <div className='slider-box'>
-                            <img src="images/banner.png" className="img-fluid bg-img" alt="" />
+                            <img src="/images/banner.png" className="img-fluid bg-img" alt="" />
 
                         </div>
                     </Slider>

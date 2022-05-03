@@ -16,7 +16,7 @@ function Address() {
             <header className="none-bg">
                 <div className="back-links">
                     <a href="index.html">
-                        <img src="images/back-black.svg" className="img-fluid" alt="" />
+                        <img src="/images/back-black.svg" className="img-fluid" alt="" />
                     </a>
                 </div>
                 <div className="inner-header">
