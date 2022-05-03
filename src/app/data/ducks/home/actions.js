@@ -21,7 +21,7 @@ export function getAllProducts(id){
             {
                 type:types.FETCH_PRODUCTS,
                 meta:{
-                    path:"/v1/product/list?category_id="+id+"&sort_by=category",
+                    path:"/v1/product/list",
                     method:"GET",
                 }
             }

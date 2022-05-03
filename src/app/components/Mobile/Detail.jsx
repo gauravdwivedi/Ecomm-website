@@ -15,16 +15,9 @@ const Detail = React.memo(function Detail(props) {
 			  </ul>
 			</div>
 		 </div>
-		  <div id="videoWrapper">
-
-			  <video
-			  	playsInline
-				autoPlay 
-				muted 
-				loop
-				poster="/images/detail-bg.png" 
-				src={props.detail.video_url} />
-		  </div>
+		 { (props.detail.video_url) ? 
+			 <VedioPlayer url={props.detail.video_url} />
+		 : ""}
 		
 		<div className="video-content">
 			<div className="caption">
@@ -32,8 +25,10 @@ const Detail = React.memo(function Detail(props) {
 					<div className="contents">
 					  <h2>{props.detail.title}</h2>
 					  <div className="price">
-						<h4>{'$'+props.detail.discounted_price} <del>{'$'+props.detail.price}</del></h4>
-					  </div>
+						  {(props.detail.attributes && props.detail?.attributes.length > 0) ? 
+								<h4>{'$'+props.detail.attributes[0].discounted_price} <del>{'$'+props.detail.attributes[0].price}</del></h4>
+							:""}
+						</div>
 					  <ul className="ratings">
 						 {new Array(5).fill("", 0, 5).map((p, i) => (i < props.detail.rating) ? 
 						<li  key={i}><i className="iconly-Star icbo"></i></li> : 
@@ -43,7 +38,7 @@ const Detail = React.memo(function Detail(props) {
 					  <div className="detail-gallery">
 						<ul>
 							
-							{props.detail.images && props.detail.images.map((img, i) => <li  key={i}><img src={img} alt=""/></li>)}
+							{props.detail.images && props.detail.images.map(({url}, i) => <li  key={i}><img src={url} alt=""/></li>)}
 						</ul>
 					  </div>
 					  <div className="hrs-btn">
@@ -68,4 +63,18 @@ const Detail = React.memo(function Detail(props) {
   )
 })
 
+const VedioPlayer = ({ url }) => {
+
+	return (
+		<div id="videoWrapper">
+			<video
+				playsInline
+				autoPlay
+				muted
+				loop
+				poster="/images/detail-bg.png"
+				src={url} />
+		</div>
+	)
+}
 export default Detail
