@@ -56,15 +56,16 @@ const ForgetPassword = React.memo(function SignUp(props) {
         let form = document.forms["forgetpassword"];
         if (forgetpasswordvalidation(form)) {
             props.forgetpassword({ email }).then(res => {
-                console.log(res, res[0])
-                if (res[0].code || res[0].message == 'Not Found') {
+
+                console.log('RESPONSE SUCCESS', res)
+                if (res[0].code || res[0].message) {
 
                     console.log('Error')
                     let password = form.elements['email'];
 
                     password.parentNode.classList.add('error');
                     password.parentNode.insertAdjacentHTML('beforeend',
-                        '<div class="help-block alert alert-danger">Email is incorrect!</div>'
+                        `<div class="help-block alert alert-danger">${res[0].message}</div>`
                     )
                 }
 
