@@ -47,9 +47,17 @@ export default ( url, method, body, isHeader, nocacache ) => {
 function parseStatus( status, res ) {
     return new Promise( ( resolve, reject ) => {
         if ( status >= 200 && status < 300 ) {
-            res.json().then( response => resolve( response ) );
+            res.json().then( (response) => {
+                console.log('RESPONSE SUCCESS',response)
+                resolve( response )
+            });
         } else {
-            resolve({success:0, error:status, response:[]});
+            res.json().then( (response) => {
+                // resolve( response )
+                console.log(response,'RESponseee')
+                resolve({success:0, error:status, response:response});
+            });
+            
         }
     } );
 }

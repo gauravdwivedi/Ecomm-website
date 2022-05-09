@@ -73,7 +73,22 @@ const ResetPassword = React.memo(
                 props.resetpasswordverification({
                     token, password
                 }).then((res) => {
-                    console.log('Response', res)
+                    console.log('RESET PASSSS Response', res)
+
+                    if (res[0].code && res[0].message) {
+
+                        let password = form.elements['confirmpassword'];
+
+                        password.parentNode.classList.add('error');
+                        password.parentNode.insertAdjacentHTML('beforeend',
+                            `<div class="help-block alert alert-danger">${res[0].message}</div>`
+                        )
+
+                    }
+
+                    if (res[0].message == 'success') {
+                        props.history.replace('/login')
+                    }
 
 
                 })

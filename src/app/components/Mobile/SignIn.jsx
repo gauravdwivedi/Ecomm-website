@@ -99,7 +99,7 @@ const SignIn = React.memo(
                 props.login({
                     email, password
                 }).then((res) => {
-                    console.log('Response', res[0])
+                    console.log('Response ===>', res)
 
                     if (res[0].registration == false) {
                         Util.setCookie('hoppedin_token', res[0].token, 7);
@@ -107,14 +107,14 @@ const SignIn = React.memo(
                         context.setAuthState(true)
                     }
 
-                    if (res[0].code || res[0].message == 'Not Found') {
+                    if (res[0].code || res[0].message == 'Incorrect Password') {
 
                         console.log('Error')
                         let password = form.elements['password'];
 
                         password.parentNode.classList.add('error');
                         password.parentNode.insertAdjacentHTML('beforeend',
-                            '<div class="help-block alert alert-danger">Email or Password is incorrect!</div>'
+                            `<div class="help-block alert alert-danger">${res[0].message}</div>`
                         )
                     }
                 })

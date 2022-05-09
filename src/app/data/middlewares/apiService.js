@@ -18,6 +18,7 @@ const apiService = ( {getState } ) => ( next ) => ( action ) => {
             const { method = "GET", body, isHeader } = action.meta;
             url = handleUrl(action, getStateData)
             allCalls.push( fetch( url, method, body, isHeader, getStateData.home.nocache ).then(
+
               res => handleResponse( res, action, next ),
               err => handleResponse( err, action, next ))
             );
@@ -80,9 +81,12 @@ const apiService = ( {getState } ) => ( next ) => ( action ) => {
 };
 
 function handleResponse( res, action, next ) {
+    console.log('handleResponse',res)
     try{
         if(res.error && res.error < 500 && res.error >= 400){
-            res = { code: res.error, message: 'Not Found', data: { records: [ ] }, critical: action.meta.critical ? action.meta.critical : 0 };
+            console.log('res.error',res.error)
+            console.log('res',res.response)
+            res = { code: res.error, message: res.response.error.message, data: { records: [ ] }, critical: action.meta.critical ? action.meta.critical : 0 };
         }else if(res.error && res.error >= 500){
             res = { code: res.error, message: 'Internal server error', data: { records: [ ] }, critical: action.meta.critical ? action.meta.critical : 0 };
         }else if(res.code && res.code < 500 && res.code >= 400){
