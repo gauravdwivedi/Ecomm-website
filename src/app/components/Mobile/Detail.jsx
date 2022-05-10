@@ -20,12 +20,12 @@ const Detail = React.memo(function Detail(props) {
 				</div>
 			</div>
 			{(props.detail.videos) ?
-				<VedioPlayer url={props.detail.videos[0].url} />
+				<VedioPlayer url={props.detail?.videos[0]?.url} />
 				: ""}
 
 			<div className="video-content">
 				<div className="caption">
-					<div className="contnt">
+					<div className="content">
 						<div className="contents">
 							<h2>{props.detail.title}</h2>
 							<div className="price">

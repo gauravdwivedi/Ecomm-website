@@ -111,8 +111,8 @@ class App extends Component {
 	render() {
 		const Routes = this.props.route.routes;
 
-		let noheaderUrl = ['/login', '/signup',  '/cart', '/account', '/product', '/confirm', '/order', '/forgetpassword', '/reset-password/:token']
-		let nofooterUrl = ['/login', '/signup',  '/cart', '/account', '/product', '/confirm', '/order', '/forgetpassword', '/reset-password/:token']
+		let noheaderUrl = ['/login', '/signup', '/cart', '/account', '/product', '/confirm', '/order', '/forgetpassword', '/reset-password/:token']
+		let nofooterUrl = ['/login', '/signup', '/cart', '/account', '/product', '/confirm', '/order', '/forgetpassword', '/reset-password/:token']
 
 		let header = <HeaderDesktop {...this.props} />
 		let global = <GlobalDesktop {...this.props} />
@@ -122,6 +122,11 @@ class App extends Component {
 			header = <HeaderMobile {...this.props} />
 			global = <GlobalMobile {...this.props} />
 			footer = <FooterMobile {...this.props} />
+		}
+		if (this.props.location.pathname.includes("/product")) {
+			header = null;
+			global = null;
+			footer = null;
 		}
 
 		if (noheaderUrl.indexOf(this.props.location.pathname) > -1) {
