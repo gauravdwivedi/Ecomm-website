@@ -9,21 +9,21 @@ switch(process.env.NODE_APP){
 	case 'stg':
 		BASE_URL = 'http://localhost:3003';
 		API_BASE_URL = 'http://localhost:4000/api';
-		IMG_END_POINT= '';	
+		IMG_END_POINT= 'http://localhost:4000';	
 		PORT = 3003
 		PRODUCTION = false;
 	break;
 	case 'production':
 		BASE_URL = 'http://localhost:3003';
 		API_BASE_URL = 'http://localhost:4000/api';
-		IMG_END_POINT= '';	
+		IMG_END_POINT= 'http://localhost:4000';	
 		PORT = 5001
 		PRODUCTION = true;
 	break;
 	default:
 		BASE_URL = 'http://localhost:3003';
 		API_BASE_URL = 'http://localhost:4000/api';
-		IMG_END_POINT= '';	
+		IMG_END_POINT= 'http://localhost:4000';	
 		PORT = 3003
 		PRODUCTION = false;
 }

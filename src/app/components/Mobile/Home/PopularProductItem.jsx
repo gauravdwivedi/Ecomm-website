@@ -1,12 +1,15 @@
-import React from 'react'
+import React from 'react';
+import config from '../../../../config';
 
 function PopularProductItem({ item }) {
+
+    console.log('Popular Product Items', item)
     return (
         <>
             <div className="col-md-4 col-6">
                 <div className="product-box ratio_square">
                     <div className="img-part">
-                        <a href={"/product/"+item.slug} className="bg-size"><img src={item?.images[0].url} alt="" className="img-fluid bg-img" /></a>
+                        <a href={"/product/" + item.slug} className="bg-size"><img src={config.IMG_END_POINT + item?.images[0]?.url} alt="" className="img-fluid bg-img" /></a>
                         <div className="hrs-btn">
                             <span><img src="/images/hr-icon.svg" alt="" />
                                 <h6>3 Hrs</h6>
