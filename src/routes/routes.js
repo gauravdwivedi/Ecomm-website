@@ -39,7 +39,7 @@ const routes = [{
 		{
 			path: "/product/:slug",
 			component: Detail,
-			exact: true,
+			exact:false
 		},
 		{
 			path: "/account",

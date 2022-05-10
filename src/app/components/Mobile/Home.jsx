@@ -7,6 +7,8 @@ import HomeSlider from './HomeSlider';
 import Slider from 'react-slick';
 import PopularProducts from './Home/Popularproducts';
 import ProductsOnSale from './Home/ProductsOnSale';
+import config from '../../../config';
+
 
 
 const Home = React.memo(function Home(props) {
@@ -20,7 +22,7 @@ const Home = React.memo(function Home(props) {
 			<CategorySection items={props.categoryList} />
 			<PopularProducts items={props.productList} />
 			<SpotLight />
-			{/* <ProductsOnSale items={props.productList} /> */}
+			<ProductsOnSale items={props.productList} />
 			{/* <Footer /> */}
 		</>
 	)
@@ -90,7 +92,7 @@ const CategorySection = ({ items }) => {
 							<div className="card catagory-card">
 								<div className="card-body">
 									<a href="#">
-										<img className="categry-icon" src={item.icon} />
+										<img className="categry-icon" src={config.IMG_END_POINT + item.icon} />
 										<span><img className="categry-play" src="/images/category-icon/cat-play.svg" /></span>
 									</a>
 								</div>
