@@ -128,6 +128,11 @@ class App extends Component {
 			global = null;
 			footer = null;
 		}
+		if (this.props.location.pathname.includes("/reset-password")) {
+			header = null;
+			global = null;
+			footer = null;
+		}
 
 		if (noheaderUrl.indexOf(this.props.location.pathname) > -1) {
 			header = null;
