@@ -17,21 +17,28 @@ export default ( url, method, body, isHeader, nocacache ) => {
     options.headers = requestHeaders();
 
     if(isHeader){
-        options.headers={
+        if(body.token){
+            options.headers={
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "site-id":config.SITE_ID,
+                "x-signup-token":body.token
+            }
+        }else{
+            console.log('HERE')
+           options.headers={ 
             Accept: "application/json",
             "Content-Type": "application/json",
             "site-id":config.SITE_ID,
-            "x-signup-token":body.token
+               "x-sso-token":Util.getCookie('hoppedin_token')
+            }
         }
-
     }
 
     var starttime = new Date().getTime();
     return fetch( url, options )
         .then( res => {
             console.log('Response FETCH',res)
-
-
             var endDate = new Date();
             var endtime = endDate.getTime();
             var timeDiff = endtime - starttime;
@@ -66,7 +73,23 @@ function requestHeaders() {
     let headers = {
       Accept: "application/json",
       "Content-Type": "application/json",
-      "site-id":config.SITE_ID
+      "site-id":config.SITE_ID,
     }
     return headers;
 }
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }

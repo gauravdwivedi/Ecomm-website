@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Detail from "../components/Mobile/Detail"
 import AuthContext from "../helpers/authContext";
-import { fetchProductDetails } from "../data/ducks/detail/actions";
+import { fetchProductDetails, likeProduct, unlikeProduct } from "../data/ducks/detail/actions";
 
 class DetailContainer extends PureComponent {
 	static contextType = AuthContext;
@@ -31,8 +31,6 @@ class DetailContainer extends PureComponent {
 		}
 	}
 
-
-
 	render() {
 		return (
 
@@ -49,7 +47,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-	fetchProductDetails
+	fetchProductDetails,
+	likeProduct,
+	unlikeProduct
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailContainer);
