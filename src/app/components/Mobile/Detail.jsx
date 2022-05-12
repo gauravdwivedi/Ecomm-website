@@ -7,10 +7,9 @@ const Detail = React.memo(function Detail(props) {
 	const [like, setLike] = useState(false);
 
 	let images = [];
-
+	console.log('WWWWWW', props.detail.liked)
 	useEffect(() => {
-
-		console.log('POST LIKED VALUE', props.detail.liked, props.detail.id)
+		console.log('POST LIKED VALUE', props.detail)
 		if (props.detail.liked) {
 			console.log('SETTING LIKE VALUE ')
 			setLike(props.detail.liked)
@@ -19,15 +18,30 @@ const Detail = React.memo(function Detail(props) {
 
 	const handleLikeClick = () => {
 		if (like) {
-			props.unlikeProduct({ productId: props.detail.id })
-			setLike(false)
+			props.unlikeProduct({ productId: props.detail.id }).then(res => {
+
+				setLike(false)
+				props.fetchProductDetails(props.detail.slug).then(res => {
+					console.log('FETCH PRODUCT RES DETI', res)
+
+				})
+
+			})
+
 		}
+
 		if (!like) {
-			props.likeProduct({ productId: props.detail.id })
-			setLike(true)
+
+			props.likeProduct({ productId: props.detail.id }).then(res => {
+				setLike(true)
+				props.fetchProductDetails(props.detail.slug).then((res => {
+					console.log('FETCH PRODUCT RES DETI', res)
+
+				}))
+
+			})
 		}
 	}
-
 
 	if (props.detail.images) {
 		props.detail.images.map((item) => {
@@ -91,7 +105,7 @@ const Detail = React.memo(function Detail(props) {
 					<div className="contents right-sec  " style={{ marginRight: '20%' }} >
 						<ul className='d-flex flex-column justify-content-around flex-fill h-100 '>
 							<li><img src="/images/detail-video/icon/notify.svg" alt="" /></li>
-							<li>{like ? <img src="/images/detail-video/icon/like.svg" alt="" className='bg-danger' onClick={handleLikeClick} /> :
+							<li>{props.detail.liked ? <img src="/images/detail-video/icon/like.svg" alt="" className='bg-danger' onClick={handleLikeClick} /> :
 								<img src="/images/detail-video/icon/like.svg" alt="" onClick={handleLikeClick} />}</li>
 							<li><img src="/images/detail-video/icon/message.svg" alt="" /></li>
 							<li><img src="/images/detail-video/icon/share.svg" alt="" /></li>
