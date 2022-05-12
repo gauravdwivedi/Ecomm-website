@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Detail from "../components/Mobile/Detail"
 import AuthContext from "../helpers/authContext";
-import { fetchProductDetails, likeProduct, unlikeProduct } from "../data/ducks/detail/actions";
+import { fetchProductDetails, likeProduct, unlikeProduct, addToCart } from "../data/ducks/detail/actions";
 
 class DetailContainer extends PureComponent {
 	static contextType = AuthContext;
@@ -10,6 +10,7 @@ class DetailContainer extends PureComponent {
 		let storeData = ssr.getState();
 		return [
 			//ssr.dispatch(fetchProductDetails()), //SSR rendering here
+
 
 		];
 	}
@@ -23,7 +24,6 @@ class DetailContainer extends PureComponent {
 
 	componentDidMount() {
 
-		console.log('PROPS DETAIL CONTAINER', this.props)
 		if (this.props.match.params.slug) {
 			this.props.fetchProductDetails(this.props.match.params.slug).then((res) => {
 				console.log(res)
@@ -33,10 +33,7 @@ class DetailContainer extends PureComponent {
 
 	render() {
 		return (
-
 			<Detail {...this.props} loading={this.state.loading} />
-
-
 		)
 	}
 
@@ -49,7 +46,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
 	fetchProductDetails,
 	likeProduct,
-	unlikeProduct
+	unlikeProduct,
+	addToCart
 
 };
 

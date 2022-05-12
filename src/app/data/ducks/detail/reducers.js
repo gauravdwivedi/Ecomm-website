@@ -4,13 +4,12 @@ import createReducer from "../../utils/createReducer";
 
 const productDetails = createReducer( [ ] ) ({
     [ types.FETCH_PRODUCT_DETAILS ]: ( state, action ) => {
-       
+        console.log('REDUCER',action)
         return   action.payload.result
      }
  } )
 
-
- const likeProduct = createReducer([])({
+ const likeProduct = createReducer([ ])({
      [ types.LIKE_PRODUCT ]:(state,action) =>{
          return action.payload
      }
@@ -22,8 +21,15 @@ const productDetails = createReducer( [ ] ) ({
      }
  })
 
+ const addToCart = createReducer([])({
+     [ types.ADD_TO_CART]:(state,action) =>{
+         return action.payload
+     }
+ })
+
 export default combineReducers( {
     productDetails,
     likeProduct,
-    unlikeProduct
+    unlikeProduct,
+    addToCart
 } );

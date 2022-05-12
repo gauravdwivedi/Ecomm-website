@@ -8,12 +8,13 @@ export function fetchProductDetails(slug) {
                 meta: {
                     path: "/v1/product/detail?slug=" + slug,
                     method: "GET",
+                    isHeader:true,
+                    body:slug
                 }
             }
         ]
     }
 }
-
 
 export function likeProduct(data){
     return {
@@ -41,6 +42,22 @@ export function unlikeProduct(data){
                     method:"POST",
                     body:data,
                    isHeader:true
+                }
+            }
+        ]
+    }
+}
+
+export function addToCart(data){
+    return {
+        CALL_API:[
+            {
+                type:types.ADD_TO_CART,
+                meta:{
+                    path:"/v1/cart/add",
+                    method:"POST",
+                    body:data,
+                    isHeader:true
                 }
             }
         ]

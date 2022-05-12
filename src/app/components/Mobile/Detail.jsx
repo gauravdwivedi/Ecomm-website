@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import config from '../../../config'
+
 
 
 const Detail = React.memo(function Detail(props) {
@@ -17,6 +20,7 @@ const Detail = React.memo(function Detail(props) {
 	}, [props.detail.liked])
 
 	const handleLikeClick = () => {
+
 		if (like) {
 			props.unlikeProduct({ productId: props.detail.id }).then(res => {
 
@@ -25,22 +29,28 @@ const Detail = React.memo(function Detail(props) {
 					console.log('FETCH PRODUCT RES DETI', res)
 
 				})
-
 			})
-
 		}
 
 		if (!like) {
-
 			props.likeProduct({ productId: props.detail.id }).then(res => {
 				setLike(true)
 				props.fetchProductDetails(props.detail.slug).then((res => {
 					console.log('FETCH PRODUCT RES DETI', res)
-
 				}))
-
 			})
 		}
+	}
+
+	const handleAddCart = () => {
+
+		let productId = props.detail.id;
+		let variantId = props.detail.attributes[0].id;
+		let quantity = 1;
+
+		props.addToCart({ productId, variantId, quantity }).then(res => {
+			toast.success('Added to cart!')
+		})
 	}
 
 	if (props.detail.images) {
@@ -112,7 +122,8 @@ const Detail = React.memo(function Detail(props) {
 						</ul>
 					</div>
 				</div>
-				<div className="detail-add flex-fill"><a href="#" className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</a></div>
+				<Toaster />
+				<div className="detail-add flex-fill">{props.detail.productInCart ? <Link to={{ pathname: "/cart", state: { fromProductPage: true } }} className="btn btn-solid flex-fill" >Go to cart</Link> : <button onClick={handleAddCart} className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</button>}</div>
 			</div>
 		</div>
 	)
