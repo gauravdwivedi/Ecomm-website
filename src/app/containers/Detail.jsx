@@ -26,7 +26,7 @@ class DetailContainer extends PureComponent {
 		console.log('PROPS DETAIL CONTAINER', this.props)
 		if (this.props.match.params.slug) {
 			this.props.fetchProductDetails(this.props.match.params.slug).then((res) => {
-				console.log(res)
+				console.log("res",res)
 			})
 		}
 	}
