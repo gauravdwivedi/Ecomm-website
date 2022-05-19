@@ -8,9 +8,11 @@ import PopUp from './PopUp'
 
 const Detail = React.memo(function Detail(props) {
 
-	const [like, setLike] = useState(false);
+	const [like, setLike] = useState(false)
 	const [inCart, setInCart] = useState(false)
 	const [addToCart, setAddToCart] = useState(false)
+	const [fav, setFav] = useState(false)
+	const [noOfLikes, setNoOfLikes] = useState(0)
 	const [variantId, setVariantId] = useState(0)
 	const [productId, setProductId] = useState(0)
 	const [quantity, setQuantity] = useState(0)
@@ -22,7 +24,18 @@ const Detail = React.memo(function Detail(props) {
 			setLike(props.detail.liked)
 		}
 		setInCart(props.detail.productInCart)
+
+
+		setFav(props.detail.saved);
+
+
+		if (props.detail.likes) {
+			setNoOfLikes(props.detail.likes)
+		}
+
+
 	}, [props.detail])
+
 
 	const handleLikeClick = () => {
 
@@ -39,6 +52,26 @@ const Detail = React.memo(function Detail(props) {
 		if (!like) {
 			props.likeProduct({ productId: props.detail.id }).then(res => {
 				setLike(true)
+				props.fetchProductDetails(props.detail.slug).then((res => {
+				}))
+			})
+		}
+	}
+
+	const handleFavClick = () => {
+		console.log(fav)
+		if (fav) {
+			props.unfavProduct({ productId: props.detail.id }).then(res => {
+				setFav(false)
+				props.fetchProductDetails(props.detail.slug).then(res => {
+
+				})
+			})
+		}
+
+		if (!fav) {
+			props.favProduct({ productId: props.detail.id }).then(res => {
+				setFav(true)
 				props.fetchProductDetails(props.detail.slug).then((res => {
 				}))
 			})
@@ -85,6 +118,7 @@ const Detail = React.memo(function Detail(props) {
 					</ul>
 				</div>
 			</div>
+
 			{(props.detail.videos) ?
 				<VedioPlayer url={props.detail?.videos[0]?.url} />
 				: ""}
@@ -120,9 +154,19 @@ const Detail = React.memo(function Detail(props) {
 					</div>
 					<div className="contents right-sec " >
 						<ul className='d-flex flex-column justify-content-around flex-fill h-100 '>
-							<li><img src="/images/detail-video/icon/notify.svg" alt="" /></li>
-							<li>{like ? <img src="/images/detail-video/icon/like.svg" alt="" className='bg-danger' onClick={handleLikeClick} /> :
-								<img src="/images/detail-video/icon/like.svg" alt="" onClick={handleLikeClick} />}</li>
+							<li>
+								{fav ? <img src="/images/detail-video/icon/notify.svg" alt="" className='bg-danger' onClick={handleFavClick} /> : <img src="/images/detail-video/icon/notify.svg" alt="" onClick={handleFavClick} />}
+							</li>
+							<li className='liked'>
+								{like ? <>
+									<img src="/images/detail-video/icon/like.svg" alt="" className='bg-danger' onClick={handleLikeClick} />
+									<span style={{ color: 'white', fontSize: '16px', alignItems: 'center', margin: 'auto' }}>{noOfLikes}</span>
+								</> :
+									<>
+										<img src="/images/detail-video/icon/like.svg" alt="" onClick={handleLikeClick} />
+										<span style={{ color: 'white', fontSize: '16px', margin: 'auto' }}>{noOfLikes}</span>
+									</>}
+							</li>
 							<li><img src="/images/detail-video/icon/message.svg" alt="" /></li>
 							<li><img src="/images/detail-video/icon/share.svg" alt="" /></li>
 						</ul>

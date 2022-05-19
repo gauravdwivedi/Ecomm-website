@@ -2098,3 +2098,9 @@ header.none-bg {
     height: 30px;
     border-radius: 50%;
 }
+
+.liked {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

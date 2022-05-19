@@ -48,6 +48,39 @@ export function unlikeProduct(data){
     }
 }
 
+export function favProduct(data){
+    return {
+        CALL_API:[
+            {
+                type:types.ADD_TO_FAV,
+                meta:{
+                    path:"/v1/product/save",
+                    method:"POST",
+                    body:data,
+                   isHeader:true
+                }
+            }
+        ]
+    }
+}
+
+export function unfavProduct(data){
+    return {
+        CALL_API:[
+            {
+                type:types.REMOVE_FROM_FAV,
+                meta:{
+                    path:"/v1/product/delete",
+                    method:"POST",
+                    body:data,
+                   isHeader:true
+                }
+            }
+        ]
+    }
+}
+
+
 export function addToCart(data){
     return {
         CALL_API:[

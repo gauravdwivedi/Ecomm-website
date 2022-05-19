@@ -27,9 +27,22 @@ const productDetails = createReducer( [ ] ) ({
      }
  })
 
+ const unFavProduct = createReducer([])({
+     [ types.REMOVE_FROM_FAV]:(state,action) =>{
+         return action.payload
+     }
+ })
+ const favProduct = createReducer([])({
+    [ types.ADD_TO_FAV]:(state,action) =>{
+        return action.payload
+    }
+})
+
 export default combineReducers( {
     productDetails,
     likeProduct,
     unlikeProduct,
-    addToCart
+    addToCart,
+    unFavProduct,
+    favProduct
 } );
