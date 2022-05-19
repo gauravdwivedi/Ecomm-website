@@ -2,22 +2,27 @@ import React, { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import config from '../../../config'
+import PopUp from './PopUp'
 
 
 
 const Detail = React.memo(function Detail(props) {
 
 	const [like, setLike] = useState(false);
+	const [inCart, setInCart] = useState(false)
+	const [addToCart, setAddToCart] = useState(false)
+	const [variantId, setVariantId] = useState(0)
+	const [productId, setProductId] = useState(0)
+	const [quantity, setQuantity] = useState(0)
 
 	let images = [];
-	console.log('WWWWWW', props.detail.liked)
+
 	useEffect(() => {
-		console.log('POST LIKED VALUE', props.detail)
 		if (props.detail.liked) {
-			console.log('SETTING LIKE VALUE ')
 			setLike(props.detail.liked)
 		}
-	}, [props.detail.liked])
+		setInCart(props.detail.productInCart)
+	}, [props.detail])
 
 	const handleLikeClick = () => {
 
@@ -26,7 +31,6 @@ const Detail = React.memo(function Detail(props) {
 
 				setLike(false)
 				props.fetchProductDetails(props.detail.slug).then(res => {
-					console.log('FETCH PRODUCT RES DETI', res)
 
 				})
 			})
@@ -36,20 +40,22 @@ const Detail = React.memo(function Detail(props) {
 			props.likeProduct({ productId: props.detail.id }).then(res => {
 				setLike(true)
 				props.fetchProductDetails(props.detail.slug).then((res => {
-					console.log('FETCH PRODUCT RES DETI', res)
 				}))
 			})
 		}
 	}
 
 	const handleAddCart = () => {
+		setAddToCart(true)
+	}
 
+	const handleInsertInCart = (id) => {
 		let productId = props.detail.id;
 		let variantId = props.detail.attributes[0].id;
 		let quantity = 1;
-
 		props.addToCart({ productId, variantId, quantity }).then(res => {
 			toast.success('Added to cart!')
+			setInCart(true)
 		})
 	}
 
@@ -83,10 +89,10 @@ const Detail = React.memo(function Detail(props) {
 				<VedioPlayer url={props.detail?.videos[0]?.url} />
 				: ""}
 
-			<div className="video-content d-flex flex-column w-100 mw-100 overflow-hidden">
+			<div className="video-content d-flex flex-column w-100 mw-100 overflow-hidden" style={{ padding: '20px' }}>
 				<div className='d-flex  justify-content-between mw-90'>
 					<div className="caption" >
-						<div className="contents d-flex justify-content-between" style={{ maxWidth: '100%' }}>
+						<div className="contents d-flex justify-content-between" >
 							<div style={{ maxWidth: '70%' }}>
 								<h2>{props.detail.title}</h2>
 								<div className="price">
@@ -112,20 +118,37 @@ const Detail = React.memo(function Detail(props) {
 							</div>
 						</div>
 					</div>
-					<div className="contents right-sec  " style={{ marginRight: '20%' }} >
+					<div className="contents right-sec " >
 						<ul className='d-flex flex-column justify-content-around flex-fill h-100 '>
 							<li><img src="/images/detail-video/icon/notify.svg" alt="" /></li>
-							<li>{props.detail.liked ? <img src="/images/detail-video/icon/like.svg" alt="" className='bg-danger' onClick={handleLikeClick} /> :
+							<li>{like ? <img src="/images/detail-video/icon/like.svg" alt="" className='bg-danger' onClick={handleLikeClick} /> :
 								<img src="/images/detail-video/icon/like.svg" alt="" onClick={handleLikeClick} />}</li>
 							<li><img src="/images/detail-video/icon/message.svg" alt="" /></li>
 							<li><img src="/images/detail-video/icon/share.svg" alt="" /></li>
 						</ul>
 					</div>
-				</div>
+				</div >
+
 				<Toaster />
-				<div className="detail-add flex-fill">{props.detail.productInCart ? <Link to={{ pathname: "/cart", state: { fromProductPage: true } }} className="btn btn-solid flex-fill" >Go to cart</Link> : <button onClick={handleAddCart} className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</button>}</div>
-			</div>
-		</div>
+
+				<div className="detail-add flex-fill" style={{ borderRadius: '20px' }}>{inCart == true ?
+					<div>
+
+						<Link to={{ pathname: "/cart", state: { fromProductPage: true } }} className="btn btn-solid flex-fill" >Go to cart</Link>
+					</div>
+					: <>{
+						addToCart ? <> <h4 className='text-white'>Select Size</h4>
+							<div>
+								{props.detail.attributes.map((item, index) => (
+									<PopUp item={item} key={index} />
+								))}
+							</div> <button onClick={handleInsertInCart} className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</button></>
+							: <button onClick={handleAddCart} className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</button>
+					}
+					</>}
+				</div>
+			</div >
+		</div >
 	)
 })
 

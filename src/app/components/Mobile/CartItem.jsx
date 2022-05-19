@@ -1,7 +1,9 @@
 import React from 'react';
 import config from '../../../config';
 
-function CartItem({ item }) {
+function CartItem({ item, handleDeleteItem }) {
+
+
 
     return (
         <>
@@ -17,7 +19,7 @@ function CartItem({ item }) {
                             </a>
                         </div>
                         <div className="delete-icon">
-                            <img src="/images/icon/delete.svg" className="img-fluid" alt="" />
+                            <img src="/images/icon/delete.svg" className="img-fluid" alt="" onClick={() => handleDeleteItem(item.id)} />
                         </div>
                     </div>
                     <div className="cart-option">

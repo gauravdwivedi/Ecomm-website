@@ -1,8 +1,50 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import CartItem from './CartItem'
 
 function Cart(props) {
-    console.log('PROPS CART ITEM', props.cartListItems)
+    const [deleteItem, setDeleteItem] = useState(false)
+    const [itemList, setItemList] = useState([])
+    const [total, setTotal] = useState(0)
+
+
+    useEffect(() => {
+        setItemList(props.cartListItems)
+    }, [props.cartListItems])
+
+    useEffect(() => {
+
+        calculateTotal(props?.cartListItems)
+
+    })
+
+    console.log(itemList)
+
+    const handleDeleteItem = (id) => {
+
+        props.deleteCartItem({ id }).then((res) => {
+            console.log('RESPONSE', res)
+            let newItemList = itemList.filter(item => item.id != id)
+            props.cartList().then(res => {
+
+            })
+            // console.log('ITEM LIST =>', newItemList)
+            // setItemList(newItemList)
+            // calculateTotal(newItemList)
+        })
+    }
+
+
+
+    const calculateTotal = (list) => {
+        let sum = 0;
+
+        list?.forEach((value, index, array) => {
+            sum += value.price;
+        })
+
+        console.log('Total Price', sum)
+        setTotal(sum)
+    }
 
     return (
         <>
@@ -18,8 +60,8 @@ function Cart(props) {
                         <h3>Shopping Cart</h3>
                     </div>
                 </header>
-                {props.cartListItems && props.cartListItems.map((item, index) => (
-                    <CartItem item={item} key={index} />
+                {itemList && itemList.map((item, index) => (
+                    <CartItem item={item} key={index} handleDeleteItem={handleDeleteItem} />
                 ))}
             </div>
             <section className="panel-space" />
@@ -27,7 +69,7 @@ function Cart(props) {
                 <div className="order-details">
                     <div className="total-amount">
                         <h4>
-                            Subtotal (VAT included) <span>$34</span>
+                            Subtotal (VAT included) <span>${total}</span>
                         </h4>
                     </div>
                     <a
