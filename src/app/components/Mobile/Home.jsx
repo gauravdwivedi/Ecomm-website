@@ -87,7 +87,7 @@ const CategorySection = ({ items }) => {
 			<div className="product-section">
 				<div className="row gy-3">
 
-					{items.map((item, index) => (
+					{items && items.map((item, index) => (
 						<div className="col-3" key={index}>
 							<div className="card catagory-card">
 								<div className="card-body">

@@ -30,7 +30,7 @@ function Address() {
                 <div className="delivery-option-section">
                     <h4 className="para-heading">Select or add a shipping address</h4>
                     <ul>
-                        {DumyAddressDat.map((item) => (
+                        {DumyAddressDat  && DumyAddressDat.map((item) => (
                             <AddressItem item={item} key={item.id} isCurrent={isCurrent} handleOnClick={handleOnClick} />
                         ))}
 

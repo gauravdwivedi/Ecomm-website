@@ -8,7 +8,6 @@ const homeBigStory = createReducer( [ ] )( {
 
 const productList = createReducer( [ ] ) ({
    [ types.FETCH_PRODUCTS ]: ( state, action ) => {
-       console.log('Action ProductList',action)
      return   action.payload.result.list
     }
 } )
