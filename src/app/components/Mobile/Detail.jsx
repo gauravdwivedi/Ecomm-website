@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
+import { Modal, Container, Row, Col, Button } from 'react-bootstrap'
+
 import { Link } from 'react-router-dom';
 import config from '../../../config'
 import PopUp from './PopUp'
@@ -16,6 +18,10 @@ const Detail = React.memo(function Detail(props) {
 	const [variantId, setVariantId] = useState(0)
 	const [productId, setProductId] = useState(0)
 	const [quantity, setQuantity] = useState(0)
+
+
+	const [modalShow, setModalShow] = useState(false);
+
 
 	let images = [];
 
@@ -79,7 +85,9 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	const handleAddCart = () => {
-		setAddToCart(true)
+		console.log('Setting Modal True')
+		// setAddToCart(true)
+		setModalShow(true)
 	}
 
 	const handleInsertInCart = (id) => {
@@ -155,7 +163,7 @@ const Detail = React.memo(function Detail(props) {
 					<div className="contents right-sec " >
 						<ul className='d-flex flex-column justify-content-around flex-fill h-100 '>
 							<li>
-								{fav ? <img src="/images/detail-video/icon/notify.svg" alt="" className='bg-danger' onClick={handleFavClick} /> : <img src="/images/detail-video/icon/notify.svg" alt="" onClick={handleFavClick} />}
+								{fav ? <img src="/images/icon/fav-icon.svg" alt="" onClick={handleFavClick} /> : <img src="/images/detail-video/icon/notify.svg" alt="" onClick={handleFavClick} />}
 							</li>
 							<li className='liked'>
 								{like ? <>
@@ -181,11 +189,8 @@ const Detail = React.memo(function Detail(props) {
 						<Link to={{ pathname: "/cart", state: { fromProductPage: true } }} className="btn btn-solid flex-fill" >Go to cart</Link>
 					</div>
 					: <>{
-						addToCart ? <> <h4 className='text-white'>Select Size</h4>
+						modalShow ? <> <h4 className='text-white'>Select Size</h4>
 							<div>
-								{props.detail.attributes.map((item, index) => (
-									<PopUp item={item} key={index} />
-								))}
 							</div> <button onClick={handleInsertInCart} className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</button></>
 							: <button onClick={handleAddCart} className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</button>
 					}

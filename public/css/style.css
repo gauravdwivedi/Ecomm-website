@@ -104,10 +104,10 @@ header .inner-header {
 }
 
 .inner-header h3 {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #FFFFFF;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+    line-height: 22px !important;
+    color: #FFFFFF !important;
 }
 
 h1 {
@@ -1905,7 +1905,7 @@ header.none-bg {
 
 @media (min-width: 767px) {
     body {
-        max-width: 500px;
+        max-width: 420px;
         margin: 0 auto !important;
     }
 }
@@ -2103,4 +2103,25 @@ header.none-bg {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.video-overlay {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    margin: 10px;
+    padding: 5px 5px;
+    font-size: 20px;
+    font-family: Helvetica;
+    color: #FFF;
+    background-color: rgba(50, 50, 50, 0.3);
+}
+
+.pop-gallery {
+    display: block;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border: 5px solid black;
+    border-radius: 15px;
+    text-align: right;
 }

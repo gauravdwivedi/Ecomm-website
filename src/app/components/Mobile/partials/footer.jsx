@@ -16,7 +16,7 @@ const Footer = (props) => {
 					</Link>
 				</li>
 				<li>
-					<Link href="/category">
+					<Link to="/category">
 						<div className="icon">
 							<img src="/images/icon/footer-icon/category.svg" className="img-fluid bg-img" alt="" />
 						</div>
@@ -32,7 +32,7 @@ const Footer = (props) => {
 					</Link>
 				</li>
 				<li>
-					<Link href="#">
+					<Link to='/favourites'>
 						<div className="icon">
 							<img src="/images/icon/footer-icon/favourite.svg" className="img-fluid bg-img" alt="" />
 						</div>

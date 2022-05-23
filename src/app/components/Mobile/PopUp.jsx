@@ -1,34 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Modal, Container, Row, Col, Button } from 'react-bootstrap'
 
-function PopUp({ item }) {
 
+function PopUp(props) {
 
+    console.log('PROPS', props)
 
     return (
-        <div style={{ backgroundColor: 'white', padding: '20px' }}>
+        <Modal {...props} aria-labelledby="contained-modal-title-vcenter" style={{ zIndex: '3' }}>
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    Using Grid in Modal
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="show-grid">
+                <Container>
+                    <Row>
+                        <Col xs={12} md={8}>
+                            .col-xs-12 .col-md-8
+                        </Col>
+                        <Col xs={6} md={4}>
+                            .col-xs-6 .col-md-4
+                        </Col>
+                    </Row>
 
-            {item &&
-                <table style={{ width: '100%' }} >
-                    <thead>
-                        <tr style={{ display: 'flex', justifyContent: 'space-around' }}>
-                            <th>size</th>
-                            <th>color</th>
-                            <th>price</th>
-                            <th></th>
-                        </tr>
-
-                    </thead>
-                    <tbody>
-                        <tr style={{ display: 'flex', justifyContent: 'space-around' }}>
-                            <td>{item.size}</td>
-                            <td><div className="color-circle" style={{ backgroundColor: `${item.color}` }}></div></td>
-                            <td>${item.price}</td>
-                            <td><input type="checkbox" /></td>
-                        </tr>
-                    </tbody>
-                </table>
-            }
-        </div>
+                    <Row>
+                        <Col xs={6} md={4}>
+                            .col-xs-6 .col-md-4
+                        </Col>
+                        <Col xs={6} md={4}>
+                            .col-xs-6 .col-md-4
+                        </Col>
+                        <Col xs={6} md={4}>
+                            .col-xs-6 .col-md-4
+                        </Col>
+                    </Row>
+                </Container>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button >Close</Button>
+            </Modal.Footer>
+        </Modal>
     )
 }
 

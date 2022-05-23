@@ -1,6 +1,6 @@
 import React from 'react';
 import App from "../app/containers/App";
-import {Home,SignIn,SignUp,Cart,Checkout,Confirm,Detail,Order,Account,ForgetPassword,ResetPassword} from "./splitComponent"
+import {Home,SignIn,SignUp,Cart,Checkout,Confirm,Detail,Order,Account,ForgetPassword,ResetPassword, Favourite} from "./splitComponent"
 
 
 const routes = [{
@@ -59,6 +59,11 @@ const routes = [{
 		{
 			path:"/reset-password/:token",
 			component:ResetPassword,
+			exact:true
+		},
+		{
+			path:"/favourites",
+			component:Favourite,
 			exact:true
 		}
 	]

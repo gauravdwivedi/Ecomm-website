@@ -111,8 +111,8 @@ class App extends Component {
 	render() {
 		const Routes = this.props.route.routes;
 
-		let noheaderUrl = ['/login', '/signup', '/cart', '/account', '/product', '/confirm', '/order', '/forgetpassword', '/reset-password/:token']
-		let nofooterUrl = ['/login', '/signup', '/cart', '/account', '/product', '/confirm', '/order', '/forgetpassword', '/reset-password/:token']
+		let noheaderUrl = ['/login', '/signup', '/cart', '/account', '/product', '/confirm', '/order', '/forgetpassword', '/reset-password/:token', '/favourites']
+		let nofooterUrl = ['/login', '/signup', '/cart', '/account', '/product', '/confirm', '/order', '/forgetpassword', '/reset-password/:token', '/favourites']
 
 		let header = <HeaderDesktop {...this.props} />
 		let global = <GlobalDesktop {...this.props} />

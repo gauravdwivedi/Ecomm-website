@@ -96,3 +96,19 @@ export function addToCart(data){
         ]
     }
 }
+
+export function favouriteProducts(){
+    return {
+        CALL_API:[
+            {   
+                type:types.FAVOURITE_PRODUCTS,
+                meta:{
+                    path:"/v1/product/favourites",
+                    method:"GET",
+                    body:'fav products',
+                    isHeader:true
+                }
+            }
+        ]
+    }
+}
