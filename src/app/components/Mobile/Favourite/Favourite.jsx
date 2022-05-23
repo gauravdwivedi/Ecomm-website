@@ -6,11 +6,11 @@ const Favourite = React.memo(function Favourite(props) {
 
     useEffect(() => {
         if (props?.ProductList) {
-            setAllProducts(props.ProductList)
+            setAllProducts([...filterFavProduct()])
         }
     }, [props.ProductList])
 
-    const favList = filterFavProduct()
+    // const favList = filterFavProduct()
 
     function filterFavProduct() {
         let favList = props?.Favlist?.map((item) => {
@@ -20,8 +20,12 @@ const Favourite = React.memo(function Favourite(props) {
     }
 
     function handleClick(id) {
+        let newList
         props.unfavProduct({ productId: id }).then((res) => {
-            props.getAllProducts().then(res => console.log(res))
+            // props.getAllProducts().then(res => setAllProducts([...res[0].result.list]))
+            newList = allProducts.filter((item) => item[0].id !== id)
+            console.log('NEW LIST ', newList)
+            setAllProducts(newList)
         })
     }
 
@@ -39,7 +43,7 @@ const Favourite = React.memo(function Favourite(props) {
                         <h3>My Favourite</h3>
                     </div>
                 </header>
-                {favList.length > 0 && favList.map((item, index) => (
+                {allProducts.length > 0 && allProducts.map((item, index) => (
 
                     <FavouriteItem item={item} key={index} handleClick={handleClick} />)
                 )}
