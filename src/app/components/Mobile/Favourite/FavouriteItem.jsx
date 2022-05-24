@@ -1,4 +1,5 @@
 import React from 'react'
+import config from '../../../../config/index'
 
 function FavouriteItem(props) {
     console.log(props)
@@ -9,7 +10,7 @@ function FavouriteItem(props) {
                     <div className="col-12">
                         <div className="product-inline">
                             <a href="#">
-                                <img src="images/favourite-1.png" className="fav-img img-fluid" alt="" />
+                                <img src={config.IMG_END_POINT + props?.item[0]?.images[0].url} className="fav-img img-fluid" alt="" />
                             </a>
                             <div className="product-inline-content">
                                 <div>
