@@ -51,3 +51,8 @@ export const ResetPassword = loadable(()=> import ('../app/containers/ResetPassw
 export const Favourite = loadable(() => import ('../app/containers/Favourite'),{
 	fallback:<div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
 })
+
+
+export const Address = loadable(() => import ('../app/containers/Address'),{
+	fallback:<div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
+})

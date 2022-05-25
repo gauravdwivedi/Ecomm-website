@@ -112,3 +112,36 @@ export function favouriteProducts(){
         ]
     }
 }
+
+export function addAddress(data){
+    return {
+        CALL_API:[
+            {
+                type:types.ADD_ADDRESS,
+                meta:{
+                    path:"/v1/users/add-address",
+                    method:"POST",
+                    body:data,
+                    isHeader:true
+                }
+            }
+        ]
+    }
+}
+export function fetchAddressList(){
+    return {
+        CALL_API:[
+            {
+                type:types.ADD_ADDRESS,
+                meta:{
+                    path:"/v1/users/list-address",
+                    method:"GET",
+                    body:'address list',
+                    isHeader:true
+                }
+            }
+        ]
+    }
+}
+
+

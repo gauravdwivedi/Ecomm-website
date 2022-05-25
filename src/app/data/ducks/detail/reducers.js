@@ -44,6 +44,18 @@ const favProductsList = createReducer([])({
     }
 })
 
+const addAddress = createReducer([])({
+    [ types.ADD_ADDRESS]:(state,action) =>{
+        return action.payload
+    }
+})
+
+const addressList = createReducer([])({
+    [ types.FETCH_ADDRESS_LIST]:(state,action) =>{
+        return action.payload
+    }
+})
+
 export default combineReducers( {
     productDetails,
     likeProduct,
@@ -51,5 +63,7 @@ export default combineReducers( {
     addToCart,
     unFavProduct,
     favProduct,
-    favProductsList
+    favProductsList,
+    addAddress,
+    addressList
 } );

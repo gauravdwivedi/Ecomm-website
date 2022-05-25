@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { DumyAddressDat } from './DumyAddressData'
 import AddressItem from './AddressItem'
-function Address() {
+function Address(props) {
     const [isCurrent, setIsCurrent] = useState(1);
+
+    console.log(props, 'ADDress props')
 
     const handleOnClick = (e, id) => {
         e.stopPropagation();
@@ -30,7 +32,7 @@ function Address() {
                 <div className="delivery-option-section">
                     <h4 className="para-heading">Select or add a shipping address</h4>
                     <ul>
-                        {DumyAddressDat  && DumyAddressDat.map((item) => (
+                        {DumyAddressDat && DumyAddressDat.map((item) => (
                             <AddressItem item={item} key={item.id} isCurrent={isCurrent} handleOnClick={handleOnClick} />
                         ))}
 

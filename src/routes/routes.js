@@ -1,6 +1,6 @@
 import React from 'react';
 import App from "../app/containers/App";
-import {Home,SignIn,SignUp,Cart,Checkout,Confirm,Detail,Order,Account,ForgetPassword,ResetPassword, Favourite} from "./splitComponent"
+import {Home,SignIn,SignUp,Cart,Checkout,Confirm,Detail,Order,Account,ForgetPassword,ResetPassword, Favourite,Address} from "./splitComponent"
 
 
 const routes = [{
@@ -64,6 +64,11 @@ const routes = [{
 		{
 			path:"/favourites",
 			component:Favourite,
+			exact:true
+		},
+		{
+			path:"/address",
+			component:Address,
 			exact:true
 		}
 	]
