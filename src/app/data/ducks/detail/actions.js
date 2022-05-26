@@ -132,7 +132,7 @@ export function fetchAddressList(){
     return {
         CALL_API:[
             {
-                type:types.ADD_ADDRESS,
+                type:types.FETCH_ADDRESS_LIST,
                 meta:{
                     path:"/v1/users/list-address",
                     method:"GET",

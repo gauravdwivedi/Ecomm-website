@@ -17,10 +17,7 @@ function Cart(props) {
 
     })
 
-    console.log(itemList)
-
     const handleDeleteItem = (id) => {
-
         props.deleteCartItem({ id }).then((res) => {
             console.log('RESPONSE', res)
             let newItemList = itemList.filter(item => item.id != id)
@@ -32,8 +29,6 @@ function Cart(props) {
             // calculateTotal(newItemList)
         })
     }
-
-
 
     const calculateTotal = (list) => {
         let sum = 0;

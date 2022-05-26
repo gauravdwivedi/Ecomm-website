@@ -38,7 +38,7 @@ class AddressContainer extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-    list: state.detail.addressList
+    list: state.detail.addressList.result
 })
 
 const mapDispatchToProps = {

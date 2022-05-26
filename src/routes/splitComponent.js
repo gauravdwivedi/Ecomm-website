@@ -56,3 +56,8 @@ export const Favourite = loadable(() => import ('../app/containers/Favourite'),{
 export const Address = loadable(() => import ('../app/containers/Address'),{
 	fallback:<div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
 })
+
+
+export const AddAddress = loadable(() => import ('../app/containers/AddAddress'),{
+	fallback:<div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
+})

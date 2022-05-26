@@ -3,8 +3,6 @@ import config from '../../../config';
 
 function CartItem({ item, handleDeleteItem }) {
 
-
-
     return (
         <>
             <section className="cart-section pt-4 px-15">

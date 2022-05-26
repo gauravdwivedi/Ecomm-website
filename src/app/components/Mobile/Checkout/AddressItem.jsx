@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 function AddressItem(props) {
-    const { id, Name, City, Lane, State, Zip } = props.item;
+    const { id, first_name, last_name, address_1, address_2, city, country, postcode, primary, state, user_id } = props.item;
     console.log('CUrrent Index ', props.isCurrent)
     const { handleOnClick, isCurrent } = props;
 
@@ -12,11 +12,12 @@ function AddressItem(props) {
                 <div className={`check-box ${isCurrent === id ? 'active' : ''}`}>
                     <div className="form-check d-flex ps-0">
                         <div>
-                            <h4 className="name">{Name}</h4>
+                            <h4 className="name">{first_name}{last_name}</h4>
                             <div className="addess">
-                                <h4>{Lane}, </h4>
-                                <h4>{City}, {State}</h4>
-                                <h4>Zip Code -{Zip}</h4>
+                                <h4>{address_1}, </h4>
+                                {address_2 && <h4>{address_2}</h4>}
+                                <h4>{city}, {state}</h4>
+                                <h4>Zip Code -{postcode}</h4>
                             </div>
                             <h4>Arrival est: Apr 15 $0 Shipping</h4>
                         </div>
