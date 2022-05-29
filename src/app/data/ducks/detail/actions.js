@@ -80,7 +80,6 @@ export function unfavProduct(data){
     }
 }
 
-
 export function addToCart(data){
     return {
         CALL_API:[
@@ -128,6 +127,7 @@ export function addAddress(data){
         ]
     }
 }
+
 export function fetchAddressList(){
     return {
         CALL_API:[
@@ -137,6 +137,22 @@ export function fetchAddressList(){
                     path:"/v1/users/list-address",
                     method:"GET",
                     body:'address list',
+                    isHeader:true
+                }
+            }
+        ]
+    }
+}
+
+export function editAddress(data){
+    return {
+        CALL_API:[
+            {
+                type:types.ADD_ADDRESS,
+                meta:{
+                    path:"/v1/users/edit-address",
+                    method:"POST",
+                    body:data,
                     isHeader:true
                 }
             }

@@ -4,8 +4,6 @@ import { Link } from "react-router-dom"
 function Address(props) {
     const [isCurrent, setIsCurrent] = useState(1);
 
-    console.log(' Address', props.list)
-
     const handleOnClick = (e, id) => {
         e.stopPropagation();
         console.log('Cliked', id)

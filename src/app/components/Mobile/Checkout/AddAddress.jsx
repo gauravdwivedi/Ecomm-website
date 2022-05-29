@@ -1,10 +1,11 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import authContext from "../../../helpers/authContext";
+import toast, { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 function AddAddress(props) {
 
     const context = useContext(authContext)
-
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -13,14 +14,31 @@ function AddAddress(props) {
     const [state, setState] = useState('');
     const [zipCode, setZipCode] = useState('');
     const [primary, setPrimary] = useState(0);
+    const [isEdit, setIsEdit] = useState(false);
+    const [id, setId] = useState('')
 
     useEffect(() => {
         if (!context.isAuthenticated) {
             console.log('Logged In')
             props.history.replace('/login')
         }
+
     })
 
+
+    useEffect(() => {
+        if (props?.history?.location?.query?.data) {
+            console.log(props?.history?.location?.query?.data)
+            setIsEdit(true)
+            setFirstName(props?.history?.location?.query?.data.first_name)
+            setLastName(props?.history?.location?.query?.data.last_name);
+            setAddress(props?.history?.location?.query?.data.address_1);
+            setCity(props?.history?.location?.query?.data.city);
+            setZipCode(props?.history?.location?.query?.data.postcode);
+            setState(props?.history?.location?.query?.data.state);
+            setId(props?.history?.location?.query?.data.id);
+        }
+    }, [isEdit])
 
     const addAddressValidation = (form) => {
 
@@ -32,13 +50,11 @@ function AddAddress(props) {
         let state = form.elements['state'];
         let zipCode = form.elements['zipCode'];
 
-
         var elems = document.querySelectorAll('.help-block');
         [].forEach.call(elems, function (el) {
             el.parentNode.classList.remove('error');
             el.parentNode.removeChild(el);
         });
-
 
         //First Name
         if (firstName.value == '') {
@@ -80,7 +96,6 @@ function AddAddress(props) {
             }
         }
 
-
         if (address.value == '') {
             address.parentNode.classList.add('error');
             address.parentNodeinsertAdjacentHTML(
@@ -116,42 +131,52 @@ function AddAddress(props) {
             );
             return_type = false;
         }
-
         return return_type;
-
     }
 
     const doSubmit = (e) => {
         e.preventDefault();
 
         let form = document.forms["add-address"];
-
         if (addAddressValidation(form)) {
-
-
             props.addAddress({
-
                 firstName, lastName, address, city, state, zipcode: zipCode, primary
-
             }).then(res => {
                 console.log('ADD ADDRESS Response', res)
-                props.history.push('/')
+                toast.success("Address added")
+                props.history.push('/address')
             })
         }
     }
+
+    const doEditSubmit = (e) => {
+        e.preventDefault();
+
+        let form = document.forms['edit-address'];
+        if (addAddressValidation(form)) {
+            props.editAddress({
+                id, firstName, lastName, address, city, state, zipcode: zipCode, primary
+            }).then(res => {
+                console.log('Edit Address', res);
+                toast.success("Address updated successfuly!");
+                props.history.push('/address');
+            })
+        }
+    }
+
     return <>
         <div>
             <header>
                 <div className="back-links">
-                    <a href="index.html">
+                    <Link to="/address">
                         <img src="images/back.svg" className="img-fluid" alt="" />
-                    </a>
+                    </Link>
                 </div>
                 <div className="inner-header">
                     <h3>Add Address</h3>
                 </div>
             </header>
-            <form name="add-address" onSubmit={doSubmit}>
+            {!isEdit && <form name="add-address" onSubmit={doSubmit}>
                 <section className="add-address pt-4 px-15">
                     <div className="form-floating mb-3">
                         <input type="text" className="form-control" name="firstName" id="floatingInput" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
@@ -181,9 +206,41 @@ function AddAddress(props) {
 
                 <div className="add-address-btn px-15"><input type="submit" className="btn btn-outline add-btn text-capitalize w-100 mt-3" value="Add Address" /></div>
             </form>
+            }
+            {isEdit &&
+                <form name="edit-address" onSubmit={doEditSubmit}>
+                    <section className="add-address pt-4 px-15">
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" name="firstName" id="floatingInput" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                            <label htmlFor="floatingInput">First name</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" name="lastName" id="floatingPassword" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                            <label htmlFor="floatingPassword">Last name</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="address" className="form-control" name="address" id="floatingaddress" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
+                            <label htmlFor="floatingPassword">Address</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="city" className="form-control" id="floatingcity" name="city" placeholder="city" value={city} onChange={(e) => setCity(e.target.value)} />
+                            <label htmlFor="floatingPassword">City</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="state" className="form-control" id="floatingstate" name="state" placeholder="state" value={state} onChange={(e) => setState(e.target.value)} />
+                            <label htmlFor="floatingPassword">State</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="zip-code" className="form-control" id="floatingzip" name="zipCode" placeholder="zip" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
+                            <label htmlFor="floatingPassword">Zip code</label>
+                        </div>
+                    </section>
+
+                    <div className="add-address-btn px-15"><input type="submit" className="btn btn-outline add-btn text-capitalize w-100 mt-3" value="Update Address" /></div>
+                </form>
+            }
+            <Toaster />
         </div><section className="panel-space"></section></>
-
-
 }
 
 

@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
+import AddAddress from './AddAddress';
 
 function AddressItem(props) {
     const { id, first_name, last_name, address_1, address_2, city, country, postcode, primary, state, user_id } = props.item;
     console.log('CUrrent Index ', props.isCurrent)
     const { handleOnClick, isCurrent } = props;
+
 
 
     return (
@@ -12,7 +15,7 @@ function AddressItem(props) {
                 <div className={`check-box ${isCurrent === id ? 'active' : ''}`}>
                     <div className="form-check d-flex ps-0">
                         <div>
-                            <h4 className="name">{first_name}{last_name}</h4>
+                            <h4 className="name">{first_name}{' '}{last_name}</h4>
                             <div className="addess">
                                 <h4>{address_1}, </h4>
                                 {address_2 && <h4>{address_2}</h4>}
@@ -34,7 +37,10 @@ function AddressItem(props) {
                     </div>
                 </div>
                 {isCurrent === id && <div className="buttons">
-                    <a href="#">edit</a>
+                    <Link to={{
+                        pathname: `/add-address`,
+                        query: { data: props.item }
+                    }}>edit</Link>
                 </div>}
             </li>
         </>

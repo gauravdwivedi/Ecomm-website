@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from 'react-redux';
 import AddAddress from "../components/Mobile/Checkout/AddAddress";
 import AuthContext from "../helpers/authContext";
-import { addAddress } from "../data/ducks/detail/actions";
+import { addAddress, editAddress } from "../data/ducks/detail/actions";
 
 class AddAddressContainer extends PureComponent {
 
@@ -34,7 +34,8 @@ class AddAddressContainer extends PureComponent {
 
 
 const mapDispatchToProps = {
-    addAddress
+    addAddress,
+    editAddress
 }
 
 export default connect(null, mapDispatchToProps)(AddAddressContainer)
