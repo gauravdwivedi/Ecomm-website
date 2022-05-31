@@ -1515,6 +1515,14 @@ header.none-bg {
     color: #272728 !important;
 }
 
+.total-amount h4 {
+    font-weight: 400 !important;
+    font-size: 20px !important;
+    line-height: 30px !important;
+    color: #272728 !important;
+    margin-left: 10px;
+}
+
 .order-payment .order-details .total-amount h4 span {
     font-weight: 600;
     font-size: 20px;
@@ -1536,6 +1544,8 @@ header.none-bg {
     letter-spacing: 0.02em !important;
     color: #FFFFFF !important;
 }
+
+
 
 /* -----confirm-payment-page------- */
 

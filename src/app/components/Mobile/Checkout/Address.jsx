@@ -19,7 +19,7 @@ function Address(props) {
                         <img src="/images/back-black.svg" className="img-fluid" alt="" />
                     </Link>
                 </div>
-                <div className="inner-header">
+                <div className="inner-header confirm-bar">
                     <div className="progress orange">
                         <div className="progress-bar">
                         </div>

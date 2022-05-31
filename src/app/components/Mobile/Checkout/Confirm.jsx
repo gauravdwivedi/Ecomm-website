@@ -1,15 +1,33 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import ConfirmItem from './ConfirmItem'
 
-function Confirm() {
+function Confirm(props) {
+    const [total, setTotal] = useState(0)
+
+    useEffect(() => {
+        calculateTotal(props?.cartListItems)
+    })
+
+    const calculateTotal = (list) => {
+        let sum = 0;
+
+        list?.forEach((value, index, array) => {
+            sum += value.price;
+        })
+
+        console.log('Total Price', sum)
+        setTotal(sum)
+    }
     return (
         <>
             <div id="main">
                 {/* Header */}
                 <header className="none-bg">
                     <div className="back-links">
-                        <a href="index.html">
+                        <Link to="/cart">
                             <img src="/images/back-black.svg" className="img-fluid" alt="" />
-                        </a>
+                        </Link>
                     </div>
                     <div className="inner-header confirm-bar">
                         <div className="progress orange">
@@ -20,67 +38,23 @@ function Confirm() {
                         </div>
                     </div>
                 </header>
-                <section className="confirm-product text-center px-15">
-                    <div className="product-inline">
-                        <a href="#">
-                            <img src="/images/product/product3.png" className="img-fluid" alt="" />
-                        </a>
-                        <div className="product-inline-content">
-                            <div>
-                                <a href="#">
-                                    <h4>Bershka Mom Jeans</h4>
-                                </a>
-                                <div className="cart-option">
-                                    <h5 data-bs-toggle="offcanvas" data-bs-target="#removecart">
-                                        {" "}
-                                        S - 26
-                                    </h5>
-                                    <span className="divider-cls">|</span>
-                                    <h5 data-bs-toggle="offcanvas" data-bs-target="#removecart">
-                                        Blue
-                                    </h5>
-                                    <span className="divider-cls">|</span>
-                                    <h5 data-bs-toggle="offcanvas" data-bs-target="#removecart">
-                                        ID:0706502
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section className="order-payment px-15 mt-4">
-                    <div className="order-details">
-                        <ul>
-                            <li>
-                                <h4>
-                                    Bershka Mom Jeans <span>$35</span>
-                                </h4>
-                            </li>
-                            <li>
-                                <h4>
-                                    Taxes <span className="text-green">$8</span>
-                                </h4>
-                            </li>
-                            <li>
-                                <h4 className="fw-bold" >
-                                    Shipping <span>$5</span>
-                                </h4>
-                            </li>
-                        </ul>
-                        <div className="total-amount">
-                            <h4>
-                                Total <span>$48</span>
-                            </h4>
-                        </div>
-                        <a href="#" className="btn confirm-btn w-100 mt-4">
-                            Confirm and pay
-                        </a>
-                    </div>
-                </section>
+
+                {props?.cartListItems?.map((item, index) => (
+                    <ConfirmItem item={item} key={index} />
+                ))}
+
+
+                <div className="total-amount" style={{ margin: '4%' }}>
+                    <h4 style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        Total <span>${total}</span>
+                    </h4>
+                </div>
+                <button className="btn confirm-btn mt-4 flex-fill  " style={{ width: '90%', margin: '0', position: 'fixed', top: '90%', left: '50%', transform: 'translate(-50%,-50%)' }}>
+                    Confirm and Pay
+                </button>
             </div >
             <section className="panel-space" />
         </>
-
     )
 }
 
