@@ -1470,12 +1470,12 @@ header.none-bg {
 }
 
 .confirm-product .cart-option h5 {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 24px;
-    text-align: center;
-    letter-spacing: 0.04em;
-    color: #6E6E70;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    line-height: 24px !important;
+    text-align: center !important;
+    letter-spacing: 0.04em !important;
+    color: #6E6E70 !important;
 }
 
 .confirm-product .product-inline-content {
@@ -1494,7 +1494,7 @@ header.none-bg {
     -ms-flex-align: center;
     align-items: center;
     width: 100% !important;
-    font-weight: 400 !important;
+    font-weight: 400;
     font-size: 16px !important;
     line-height: 26px !important;
     letter-spacing: 0.02em !important;
