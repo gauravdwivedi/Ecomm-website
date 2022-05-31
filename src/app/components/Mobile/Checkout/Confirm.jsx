@@ -15,7 +15,7 @@ function Confirm() {
                         <div className="progress orange">
                             <div
                                 className="progress-bar"
-                                style={{ width: "100%", background: "#000000" }}
+                            // style={{ width: "100%", background: "#000000" }}
                             ></div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@ function Confirm() {
                                 </h4>
                             </li>
                             <li>
-                                <h4 className="fw-bold">
+                                <h4 className="fw-bold" >
                                     Shipping <span>$5</span>
                                 </h4>
                             </li>
@@ -77,7 +77,7 @@ function Confirm() {
                         </a>
                     </div>
                 </section>
-            </div>
+            </div >
             <section className="panel-space" />
         </>
 

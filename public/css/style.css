@@ -1441,23 +1441,23 @@ header.none-bg {
 }
 
 .confirm-product .product-inline-content h4 {
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 30px;
-    text-align: center;
-    color: #272728;
+    font-weight: 400 !important;
+    font-size: 20px !important;
+    line-height: 30px !important;
+    text-align: center !important;
+    color: #272728 !important;
 }
 
 .confirm-product .cart-option {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
-    margin-top: 10px;
-    justify-content: center;
+    display: flex !important;
+    margin-top: 10px !important;
+    justify-content: center !important;
 }
 
 .confirm-product .cart-option .divider-cls {
-    margin: 0 7px 0 7px;
+    margin: 0 7px 0 7px !important;
 }
 
 .confirm-product .product-inline img {
@@ -1487,20 +1487,19 @@ header.none-bg {
 }
 
 .order-payment .order-details li h4 {
-    color: #777777;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    width: 100%;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 26px;
-    letter-spacing: 0.02em;
-    color: #272728;
-    margin: 8px 0;
+    width: 100% !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 26px !important;
+    letter-spacing: 0.02em !important;
+    color: #272728 !important;
+    margin: 8px 0 !important;
 }
 
 .order-payment .order-details li h4 span,
@@ -1510,10 +1509,10 @@ header.none-bg {
 }
 
 .order-payment .order-details .total-amount h4 {
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 30px;
-    color: #272728;
+    font-weight: 400 !important;
+    font-size: 20px !important;
+    line-height: 30px !important;
+    color: #272728 !important;
 }
 
 .order-payment .order-details .total-amount h4 span {
@@ -1929,13 +1928,25 @@ header.none-bg {
     margin: 0 0 25px;
 }
 
+/*
+*Progress outer side and background color (Confirm Page)
+*/
 .progress {
-    height: 6px;
-    background: #e9e9ea;
-    border-radius: 15px;
-    margin-bottom: 0px;
-    overflow: visible;
-    position: relative;
+    height: 6px !important;
+    background: #fefeff !important;
+    border-radius: 15px !important;
+    margin-bottom: 0px !important;
+    overflow: visible !important;
+    position: relative !important;
+}
+
+/*This is progress bar of confirm page */
+.progress-bar {
+    width: 100%;
+    background: rgb(0, 0, 0) !important;
+    height: .3rem;
+    top: 25%;
+    bottom: 50%;
 }
 
 .progress:before,
@@ -1946,7 +1957,7 @@ header.none-bg {
     border-radius: 50%;
     background: #fff;
     position: absolute;
-    top: -7px;
+    top: -5px;
     left: -2px;
     z-index: 1;
 }
@@ -1969,6 +1980,7 @@ header.none-bg {
     border: 6px solid #000000;
     background: #000;
 }
+
 
 .progress .progress-bar {
     box-shadow: none;
