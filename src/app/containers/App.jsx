@@ -32,7 +32,6 @@ class App extends Component {
 				isMobile: props.isMobile,
 			},
 			isAuthenticated: false
-
 		}
 	}
 
@@ -111,8 +110,8 @@ class App extends Component {
 	render() {
 		const Routes = this.props.route.routes;
 
-		let noheaderUrl = ['/login', '/signup', '/cart', '/account', '/product', '/confirm', '/order', '/forgetpassword', '/reset-password/:token']
-		let nofooterUrl = ['/login', '/signup', '/cart', '/account', '/product', '/confirm', '/order', '/forgetpassword', '/reset-password/:token']
+		let noheaderUrl = ['/login', '/signup', '/cart', '/account', '/product', '/confirm', '/order', '/forgetpassword', '/reset-password/:token', '/checkout', '/favourites', '/address', '/add-address']
+		let nofooterUrl = ['/login', '/signup', '/cart', '/account', '/product', '/confirm', '/order', '/forgetpassword', '/reset-password/:token', '/checkout']
 
 		let header = <HeaderDesktop {...this.props} />
 		let global = <GlobalDesktop {...this.props} />

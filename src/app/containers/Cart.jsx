@@ -1,12 +1,16 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { Fragment, PureComponent, useState } from 'react'
 import { connect } from 'react-redux'
 
 import AuthContext from '../helpers/authContext'
 import Cart from '../components/Mobile/Cart'
 
+import { cartList, deleteCartItem } from "../data/ducks/cart/actions"
+
 
 
 export class CartContainer extends PureComponent {
+
+
 
     static contextType = AuthContext;
 
@@ -26,7 +30,9 @@ export class CartContainer extends PureComponent {
     }
 
     componentDidMount() {
-        console.log('Component DID Mount!')
+        this.props.cartList().then(res => {
+            console.log(res)
+        })
     }
 
     render() {
@@ -34,23 +40,22 @@ export class CartContainer extends PureComponent {
             <Fragment>
                 {
                     this.props.mobile.isMobile ?
-                        <Cart />
+                        <Cart {...this.props} loading={this.state.loading} />
                         :
                         <div>This is website Cart</div>
                 }
-
             </Fragment>
-
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    home: state.home
+    cartListItems: state.cart.fetchCartList.result
 })
 
 const mapDispatchToProps = {
-
+    cartList,
+    deleteCartItem
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartContainer);

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import config from "../../config/index";
 import Confirm from "../components/Mobile/Checkout/Confirm";
 import AuthContext from "../helpers/authContext";
-import { loadBigStory } from "../data/ducks/home/actions";
+import { cartList } from "../data/ducks/cart/actions";
 
 class ConfirmContainer extends PureComponent {
     static contextType = AuthContext;
@@ -22,7 +22,9 @@ class ConfirmContainer extends PureComponent {
         }
     }
 
-    componentDidMount() { }
+    componentDidMount() {
+        this.props.cartList().then(res => console.log('CART RES', res))
+    }
 
     render() {
         return (
@@ -39,11 +41,12 @@ class ConfirmContainer extends PureComponent {
 };
 
 const mapStateToProps = (state) => ({
-    home: state.home
+    cartListItems: state.cart.fetchCartList.result
 });
 
 const mapDispatchToProps = {
     //loadBigStory
+    cartList
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConfirmContainer);

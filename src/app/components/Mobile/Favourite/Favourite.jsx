@@ -1,52 +1,54 @@
-import React, { useContext, useEffect } from 'react'
-import Footer from '../Mobile/partials/Footer';
+import React, { useState, useEffect } from 'react';
+import FavouriteItem from './FavouriteItem';
 import { Link } from 'react-router-dom';
-import authContext from '../../helpers/authContext';
+const Favourite = React.memo(function Favourite(props) {
 
-function Account(props) {
-
-    const context = useContext(authContext);
-
+    const [allProducts, setAllProducts] = useState([])
 
     useEffect(() => {
-        if (!context.isAuthenticated) {
-            console.log('Not Logged In');
-
-            props.history.replace('/login')
-
+        if (props?.ProductList) {
+            setAllProducts([...filterFavProduct()])
         }
-    })
+    }, [props.ProductList])
+
+    // const favList = filterFavProduct()
+
+    function filterFavProduct() {
+        let favList = props?.Favlist?.map((item) => {
+            return props.ProductList.filter(product => product.id === item.product_id)
+        })
+        return favList
+    }
+
+    function handleClick(id) {
+        let newList
+        props.unfavProduct({ productId: id }).then((res) => {
+            // props.getAllProducts().then(res => setAllProducts([...res[0].result.list]))
+            newList = allProducts.filter((item) => item[0].id !== id)
+            console.log('NEW LIST ', newList)
+            setAllProducts(newList)
+        })
+    }
 
     return (
         <>
             <div id="main">
-
-
+                {/* Header */}
                 <header>
                     <div className="back-links">
-                        <a href="/">
+                        <Link to="/">
                             <img src="/images/back.svg" className="img-fluid" alt="" />
-                        </a>
+                        </Link>
                     </div>
                     <div className="inner-header">
-                        <h3>Account</h3>
+                        <h3>My Favourite</h3>
                     </div>
                 </header>
+                {allProducts.length > 0 && allProducts.map((item, index) => (
 
-                <section className="account-section pt-4 px-15">
-                    <div className="element-menu">
-                        <ul>
-                            <li><img src="/images/icon/sidenav-icon/account.svg" className="img-fluid" alt="" /><a href="#">My Account</a></li>
-                            <li><Link to="/address" ><img src="/images/icon/sidenav-icon/address.svg" className="img-fluid" alt="" />Address</Link></li>
-                            <li><img src="/images/icon/sidenav-icon/payment.svg" className="img-fluid" alt="" /><a href="#">Payments</a></li>
-                            <li><img src="/images/icon/sidenav-icon/logout.svg" className="img-fluid" alt="" /><a href="#">Log out</a></li>
-                        </ul>
-                    </div>
-                </section>
-
-
+                    <FavouriteItem item={item} key={index} handleClick={handleClick} />)
+                )}
             </div>
-
             <section className="panel-space"></section>
 
             <div className="bottom-panel">
@@ -75,16 +77,16 @@ function Account(props) {
                             <span>cart</span>
                         </Link>
                     </li>
-                    <li>
+                    <li className="active">
                         <Link to="/favourites" >
                             <div className="icon">
                                 <img src="/images/icon/footer-icon/favourite.svg" className="img-fluid bg-img" alt="" />
                             </div>
-                            <span >wishlist</span>
+                            <span style={{ color: 'white' }}>wishlist</span>
                         </Link>
                     </li>
-                    <li className='active'>
-                        <Link to="/account" >
+                    <li >
+                        <Link to="/account">
                             <div className="icon">
                                 <img src="/images/icon/footer-icon/user-2.svg" className="img-fluid bg-img" alt="" />
                             </div>
@@ -95,6 +97,6 @@ function Account(props) {
             </div>
         </>
     )
-}
+})
 
-export default Account
+export default Favourite

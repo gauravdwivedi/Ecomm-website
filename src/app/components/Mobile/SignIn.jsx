@@ -105,6 +105,7 @@ const SignIn = React.memo(
                         Util.setCookie('hoppedin_token', res[0].token, 7);
                         Util.setCookie('userData', res[0].user, 7);
                         context.setAuthState(true)
+                        props.history.push('/')
                     }
 
                     if (res[0].code || res[0].message == 'Incorrect Password') {

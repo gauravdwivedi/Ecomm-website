@@ -1,6 +1,44 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import CartItem from './CartItem'
 
-function Cart() {
+function Cart(props) {
+    const [deleteItem, setDeleteItem] = useState(false)
+    const [itemList, setItemList] = useState([])
+    const [total, setTotal] = useState(0)
+
+
+    useEffect(() => {
+        setItemList(props.cartListItems)
+    }, [props.cartListItems])
+
+    useEffect(() => {
+        calculateTotal(props?.cartListItems)
+    })
+
+    const handleDeleteItem = (id) => {
+        props.deleteCartItem({ id }).then((res) => {
+            console.log('RESPONSE', res)
+            let newItemList = itemList.filter(item => item.id != id)
+            props.cartList().then(res => {
+
+            })
+            // console.log('ITEM LIST =>', newItemList)
+            // setItemList(newItemList)
+            // calculateTotal(newItemList)
+        })
+    }
+
+    const calculateTotal = (list) => {
+        let sum = 0;
+
+        list?.forEach((value, index, array) => {
+            sum += value.price;
+        })
+
+        console.log('Total Price', sum)
+        setTotal(sum)
+    }
 
     return (
         <>
@@ -16,61 +54,24 @@ function Cart() {
                         <h3>Shopping Cart</h3>
                     </div>
                 </header>
-                <section className="cart-section pt-4 px-15">
-                    <div className="cart mb-4">
-                        <div className="cart-box">
-                            <a href="#" className="cart-img">
-                                <img src="/images/cart-img.png" className="img-fluid" alt="" />
-                            </a>
-                            <div className="cart-content">
-                                <a href="product.html">
-                                    <h4>Perry Blue Dress</h4>
-                                </a>
-                            </div>
-                            <div className="delete-icon">
-                                <img src="/images/icon/delete.svg" className="img-fluid" alt="" />
-                            </div>
-                        </div>
-                        <div className="cart-option">
-                            <h5 data-bs-toggle="offcanvas" data-bs-target="#removecart">
-                                {" "}
-                                S - 26
-                            </h5>
-                            <span className="divider-cls">|</span>
-                            <h5 data-bs-toggle="offcanvas" data-bs-target="#removecart">
-                                Blue
-                            </h5>
-                            <span className="divider-cls">|</span>
-                            <h5 data-bs-toggle="offcanvas" data-bs-target="#removecart">
-                                x1
-                            </h5>
-                            <div className="price">
-                                <h4>$34</h4>
-                            </div>
-                        </div>
-                        <a
-                            href="#"
-                            className="btn btn-outline edit-btn text-capitalize w-100 mt-3"
-                        >
-                            Edit
-                        </a>
-                    </div>
-                </section>
+                {itemList && itemList.map((item, index) => (
+                    <CartItem item={item} key={index} handleDeleteItem={handleDeleteItem} />
+                ))}
             </div>
             <section className="panel-space" />
             <section id="order-details" className="px-15 pt-0">
                 <div className="order-details">
                     <div className="total-amount">
                         <h4>
-                            Subtotal (VAT included) <span>$34</span>
+                            Subtotal (VAT included) <span>${total}</span>
                         </h4>
                     </div>
-                    <a
-                        href="#"
+                    <Link
+                        to="/confirm"
                         className="btn btn-outline checkout-btn text-capitalize w-100 mt-3"
                     >
                         Continue to checkout
-                    </a>
+                    </Link>
                 </div>
             </section>
         </>

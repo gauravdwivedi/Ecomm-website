@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { DumyAddressDat } from './DumyAddressData'
 import AddressItem from './AddressItem'
-function Address() {
+import { Link } from "react-router-dom"
+function Address(props) {
     const [isCurrent, setIsCurrent] = useState(1);
 
     const handleOnClick = (e, id) => {
@@ -15,11 +15,11 @@ function Address() {
             {/* Header */}
             <header className="none-bg">
                 <div className="back-links">
-                    <a href="index.html">
+                    <Link to="/account" >
                         <img src="/images/back-black.svg" className="img-fluid" alt="" />
-                    </a>
+                    </Link>
                 </div>
-                <div className="inner-header">
+                <div className="inner-header confirm-bar">
                     <div className="progress orange">
                         <div className="progress-bar">
                         </div>
@@ -30,17 +30,17 @@ function Address() {
                 <div className="delivery-option-section">
                     <h4 className="para-heading">Select or add a shipping address</h4>
                     <ul>
-                        {DumyAddressDat  && DumyAddressDat.map((item) => (
+                        {props.list && props.list.map((item) => (
                             <AddressItem item={item} key={item.id} isCurrent={isCurrent} handleOnClick={handleOnClick} />
                         ))}
 
                     </ul>
-                    <a
-                        href="#"
+                    <Link
+                        to="/add-address"
                         className="btn new-address-btn btn-outline text-capitalize w-100 mt-3 mb-4"
                     >
                         add address
-                    </a>
+                    </Link>
                 </div>
             </section>
             <section className="panel-space" />
@@ -51,11 +51,7 @@ function Address() {
                             Subtotal (VAT included) <span>$43</span>
                         </h4>
                     </div>
-                    <a
-                        href="#"
-
-                        className="btn btn-outline checkout-btn text-capitalize w-100 mt-3"
-                    >
+                    <a href="#" className="btn btn-outline checkout-btn text-capitalize w-100 mt-3">
                         Continue
                     </a>
                 </div>

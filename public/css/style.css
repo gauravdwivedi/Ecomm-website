@@ -104,10 +104,10 @@ header .inner-header {
 }
 
 .inner-header h3 {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #FFFFFF;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+    line-height: 22px !important;
+    color: #FFFFFF !important;
 }
 
 h1 {
@@ -505,7 +505,9 @@ nav ul li i {
 }
 
 .card .card-body {
-    padding: 2.5rem;
+    padding: 1.5rem;
+    min-height: 70px;
+    min-width: 70px;
 }
 
 .card-body img.categry-icon {
@@ -545,6 +547,8 @@ nav ul li i {
 
 .product-box .img-part .bg-size img {
     width: 100%;
+    height: 175px;
+    border-radius: 10%;
 }
 
 .wishlist-btn {
@@ -766,7 +770,6 @@ nav ul li i {
     display: flex;
     justify-content: end;
     align-items: end;
-    height: 100%;
 }
 
 .video-content .caption .contents {
@@ -778,11 +781,12 @@ nav ul li i {
     display: table-caption;
 }
 
+
 .video-content .contents h2 {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 24px !important;
     line-height: 30px;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
 
 .video-content .contents p {
@@ -795,14 +799,14 @@ nav ul li i {
 
 .video-content .contents .price h4 {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 20px !important;
     line-height: 40px;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
 
 .video-content .contents .price h4 del {
     font-weight: normal;
-    font-size: 14px;
+    font-size: 14px !important;
     line-height: 17px;
     text-decoration-line: line-through;
     color: #FFFFFF;
@@ -815,11 +819,11 @@ nav ul li i {
 
 .video-content .contents .hrs-btn {
     position: inherit;
-    padding-top: 15px;
+    /* padding-top: 15px; */
 }
 
 .video-content .contents .hrs-btn span {
-    padding: 8px 8px;
+    /* padding: 8px 8px; */
 }
 
 .video-content .contents .hrs-btn h6 {
@@ -1075,12 +1079,12 @@ nav ul li i {
 }
 
 .add-btn {
-    background: #131313;
+    background: #131313 !important;
     border-radius: 10px;
     padding: 11px 16px;
     font-weight: 500;
     font-size: 14px;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
 
 .add-btn:hover {
@@ -1437,23 +1441,23 @@ header.none-bg {
 }
 
 .confirm-product .product-inline-content h4 {
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 30px;
-    text-align: center;
-    color: #272728;
+    font-weight: 400 !important;
+    font-size: 20px !important;
+    line-height: 30px !important;
+    text-align: center !important;
+    color: #272728 !important;
 }
 
 .confirm-product .cart-option {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
-    margin-top: 10px;
-    justify-content: center;
+    display: flex !important;
+    margin-top: 10px !important;
+    justify-content: center !important;
 }
 
 .confirm-product .cart-option .divider-cls {
-    margin: 0 7px 0 7px;
+    margin: 0 7px 0 7px !important;
 }
 
 .confirm-product .product-inline img {
@@ -1466,12 +1470,12 @@ header.none-bg {
 }
 
 .confirm-product .cart-option h5 {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 24px;
-    text-align: center;
-    letter-spacing: 0.04em;
-    color: #6E6E70;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    line-height: 24px !important;
+    text-align: center !important;
+    letter-spacing: 0.04em !important;
+    color: #6E6E70 !important;
 }
 
 .confirm-product .product-inline-content {
@@ -1483,20 +1487,19 @@ header.none-bg {
 }
 
 .order-payment .order-details li h4 {
-    color: #777777;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    width: 100%;
+    width: 100% !important;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 26px;
-    letter-spacing: 0.02em;
-    color: #272728;
-    margin: 8px 0;
+    font-size: 16px !important;
+    line-height: 26px !important;
+    letter-spacing: 0.02em !important;
+    color: #272728 !important;
+    margin: 8px 0 !important;
 }
 
 .order-payment .order-details li h4 span,
@@ -1506,10 +1509,18 @@ header.none-bg {
 }
 
 .order-payment .order-details .total-amount h4 {
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 30px;
-    color: #272728;
+    font-weight: 400 !important;
+    font-size: 20px !important;
+    line-height: 30px !important;
+    color: #272728 !important;
+}
+
+.total-amount h4 {
+    font-weight: 400 !important;
+    font-size: 20px !important;
+    line-height: 30px !important;
+    color: #272728 !important;
+    margin-left: 10px;
 }
 
 .order-payment .order-details .total-amount h4 span {
@@ -1533,6 +1544,8 @@ header.none-bg {
     letter-spacing: 0.02em !important;
     color: #FFFFFF !important;
 }
+
+
 
 /* -----confirm-payment-page------- */
 
@@ -1905,7 +1918,7 @@ header.none-bg {
 
 @media (min-width: 767px) {
     body {
-        max-width: 500px;
+        max-width: 420px;
         margin: 0 auto !important;
     }
 }
@@ -1925,13 +1938,25 @@ header.none-bg {
     margin: 0 0 25px;
 }
 
+/*
+*Progress outer side and background color (Confirm Page)
+*/
 .progress {
-    height: 6px;
-    background: #e9e9ea;
-    border-radius: 15px;
-    margin-bottom: 0px;
-    overflow: visible;
-    position: relative;
+    height: 6px !important;
+    background: #fefeff !important;
+    border-radius: 15px !important;
+    margin-bottom: 0px !important;
+    overflow: visible !important;
+    position: relative !important;
+}
+
+/*This is progress bar of confirm page */
+.progress-bar {
+    width: 100%;
+    background: rgb(0, 0, 0) !important;
+    height: .3rem;
+    top: 25%;
+    bottom: 50%;
 }
 
 .progress:before,
@@ -1942,7 +1967,7 @@ header.none-bg {
     border-radius: 50%;
     background: #fff;
     position: absolute;
-    top: -7px;
+    top: -5px;
     left: -2px;
     z-index: 1;
 }
@@ -1965,6 +1990,7 @@ header.none-bg {
     border: 6px solid #000000;
     background: #000;
 }
+
 
 .progress .progress-bar {
     box-shadow: none;
@@ -2037,8 +2063,6 @@ header.none-bg {
     }
 }
 
-
-
 /*
     Backdrop
 */
@@ -2051,4 +2075,79 @@ header.none-bg {
     z-index: 100;
     top: 0;
     left: 0;
+}
+
+
+.detail__gallary-img {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    padding: 2px;
+    border-radius: 10%;
+}
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.modal-content {
+    width: 500px;
+    background-color: #fff;
+}
+
+.modal-header,
+.modal-footer {
+    padding: 10px;
+}
+
+.modal-title {
+    margin: 0;
+}
+
+.modal-body {
+    padding: 10px;
+    border-top: 1ps solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.color-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.liked {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.video-overlay {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    margin: 10px;
+    padding: 5px 5px;
+    font-size: 20px;
+    font-family: Helvetica;
+    color: #FFF;
+    background-color: rgba(50, 50, 50, 0.3);
+}
+
+.pop-gallery {
+    display: block;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border: 5px solid black;
+    border-radius: 15px;
+    text-align: right;
 }

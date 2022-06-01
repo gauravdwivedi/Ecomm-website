@@ -15,7 +15,7 @@ export function loadBigStory(id, type) {
 }
 
 
-export function getAllProducts(id){
+export function getAllProducts(){
     return {
         CALL_API:[
             {

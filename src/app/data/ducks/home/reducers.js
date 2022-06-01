@@ -18,7 +18,6 @@ const categoryList = createReducer( [ ] ) ({
      }
  } )
 
-
 export default combineReducers( {
     homeBigStory,
     productList,
