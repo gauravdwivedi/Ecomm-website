@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import CartItem from './CartItem'
 
 function Cart(props) {
@@ -12,9 +13,7 @@ function Cart(props) {
     }, [props.cartListItems])
 
     useEffect(() => {
-
         calculateTotal(props?.cartListItems)
-
     })
 
     const handleDeleteItem = (id) => {
@@ -67,12 +66,12 @@ function Cart(props) {
                             Subtotal (VAT included) <span>${total}</span>
                         </h4>
                     </div>
-                    <a
-                        href="#"
+                    <Link
+                        to="/confirm"
                         className="btn btn-outline checkout-btn text-capitalize w-100 mt-3"
                     >
                         Continue to checkout
-                    </a>
+                    </Link>
                 </div>
             </section>
         </>
