@@ -61,7 +61,8 @@ const Detail = React.memo(function Detail(props) {
 						</div>
 					</div>
 				</div>
-				<div className="detail-add"><a href="#" className="btn btn-solid" tabIndex="0">Add To Cart</a></div>
+				{( (props?.detail?.attributes) && (props.show)) ? <ModelPopup attributes={props.detail.attributes} /> : ""}
+				<div className="detail-add"><a onClick={(e) => { e.preventDefault();props.handleShow()}} className="btn btn-solid" tabIndex="0">Add To Cart</a></div>
 			</div>
 		</div>
 	)
@@ -78,6 +79,61 @@ const VedioPlayer = ({ url }) => {
 				loop
 				poster="/images/detail-bg.png"
 				src={config.IMG_END_POINT + url} />
+		</div>
+	)
+}
+
+const ModelPopup = ({attributes})=>{
+	let color = [...new Set(attributes.map(item => item.color))];
+	
+	const changeProductColor = (e)=>{
+		if(e.target.value !==""){
+			let sizes = attributes.map(item => {
+				if(item.color !== e.target.value){
+					return `<option value="${item.size}" data-stock="${item.qty_in_stock}">${item.size}</option>`
+				}  
+			});
+			document.getElementById("exampleFormControlSelect2").innerHTML = '<option value="" >Select One</option>'+sizes.join(" ") ;
+		}else{
+			document.getElementById("exampleFormControlSelect2").innerHTML ='<option value="" >Select One</option>';
+		}
+		
+	}
+
+	const changeProductSize = (e)=>{
+		let stock = e.target[e.target.selectedIndex].getAttribute('data-stock');
+		if(e.target.value !==""){
+			document.getElementById("qty_in_stock").innerHTML = `<input type="number" class="form-control"  max="${stock}" min="1" name="qty_in_stock" />` ;
+		}else{
+			document.getElementById("qty_in_stock").innerHTML = `<input type="number" class="form-control"  max="0" min="0" name="qty_in_stock" />` ;
+		}
+		
+	}
+	return(
+		<div>
+			<div className="form-group">
+				<label htmlFor="exampleFormControlSelect1">Color</label>
+				<select className="form-control" id="exampleFormControlSelect1" onChange={(e) => changeProductColor(e)}> 
+					<option value="" >Select One</option>
+					{color.map((color, index) => (
+      					<option key={index} value={color} >{color}</option>
+    				))}
+				</select>
+			</div>
+			<div className="form-group">
+				<label htmlFor="exampleFormControlSelect2">Size</label>
+				<select className="form-control" id="exampleFormControlSelect2" onChange={(e) => changeProductSize(e)}>
+					<option value="" >Select One</option>
+					
+				</select>
+			</div>
+			<div className="form-group">
+				<label htmlFor="qty_in_stock">Quantity</label>
+				<div id="qty_in_stock">
+				<input type="number" className="form-control"  max="5" min="1" name="qty_in_stock" />
+				</div>
+				
+			</div>
 		</div>
 	)
 }

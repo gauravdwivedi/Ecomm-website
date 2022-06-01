@@ -17,7 +17,8 @@ class DetailContainer extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loading: false
+			loading: false,
+			show: false,
 		}
 	}
 
@@ -31,12 +32,27 @@ class DetailContainer extends PureComponent {
 		}
 	}
 
+	handleClose () {
+		this.setState({
+			show: false
+		})
+	}
 
+	handleShow  () {
+		this.setState({
+			show: true
+		})
+	}
 
 	render() {
 		return (
 
-			<Detail {...this.props} loading={this.state.loading} />
+			<Detail {...this.props} 
+			loading={this.state.loading} 
+			show={this.state.show} 
+			handleClose={ this.handleClose.bind(this)}
+			handleShow={ this.handleShow.bind(this)}
+			/>
 
 
 		)
