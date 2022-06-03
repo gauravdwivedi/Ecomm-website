@@ -61,3 +61,7 @@ export const Address = loadable(() => import ('../app/containers/Address'),{
 export const AddAddress = loadable(() => import ('../app/containers/AddAddress'),{
 	fallback:<div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
 })
+
+export const CategoryListing = loadable(() => import ('../app/containers/CategoryListing'),{
+	fallback:<div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
+})

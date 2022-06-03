@@ -31,7 +31,8 @@ class App extends Component {
 			mobile: {
 				isMobile: props.isMobile,
 			},
-			isAuthenticated: false
+			isAuthenticated: false,
+			isActive: ''
 		}
 	}
 
@@ -107,6 +108,13 @@ class App extends Component {
 
 	}
 
+	doActivePage(page) {
+		console.log('Active page')
+		this.setState({
+			isActive: page
+		})
+	}
+
 	render() {
 		const Routes = this.props.route.routes;
 
@@ -153,7 +161,9 @@ class App extends Component {
 					doLogin: this.doLogin.bind(this),
 					doLogout: this.doLogout.bind(this),
 					history: this.props.history,
-					setAuthState: this.setAuthState.bind(this)
+					setAuthState: this.setAuthState.bind(this),
+					isActive: this.state.isActive,
+					doActivePage: this.doActivePage.bind(this)
 
 				}}>
 					<Fragment>

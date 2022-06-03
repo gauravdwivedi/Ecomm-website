@@ -8,10 +8,21 @@ import Slider from 'react-slick';
 import PopularProducts from './Home/Popularproducts';
 import ProductsOnSale from './Home/ProductsOnSale';
 import config from '../../../config';
+import { Link } from 'react-router-dom';
+import authContext from '../../helpers/authContext';
+
 
 
 
 const Home = React.memo(function Home(props) {
+
+	const context = useContext(authContext)
+
+	useEffect(() => {
+		context.doActivePage('home');
+
+	}, [context.isActive])
+
 	return (
 		<>
 			{/* <Header /> */}
@@ -79,7 +90,7 @@ const CategorySection = ({ items }) => {
 		<section className="category-section px-15 pt-0">
 			<div className="title-part">
 				<h2>Category</h2>
-				<a href="#">View All</a>
+				<Link to="/categories">View All</Link>
 			</div>
 			<div className="product-section">
 				<div className="row gy-3">

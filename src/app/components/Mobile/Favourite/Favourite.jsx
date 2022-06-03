@@ -68,7 +68,7 @@ const Favourite = React.memo(function Favourite(props) {
                         </Link>
                     </li>
                     <li>
-                        <Link to="#">
+                        <Link to="/categories">
                             <div className="icon">
                                 <img src="/images/icon/footer-icon/category.svg" className="img-fluid bg-img" alt="" />
                             </div>
