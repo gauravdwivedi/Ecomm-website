@@ -15,22 +15,22 @@ const PopularProducts = (props) => {
 
     }, [props.cartList])
 
-    const deleteCart = (id) => {
-        console.log('Delete CART PRODUCT ID', id)
-        props.deleteCartItem({ id }).then(res => {
-            console.log('Deleted Cart Item', res)
-            props.getAllProducts().then(res => console.log(res))
-            props.cartList().then(res => setCartlist(res))
-            console.log('CART LIST FER DELETE', cartlist)
-        })
-    }
+    // const deleteCart = (id) => {
+    //     console.log('Delete CART PRODUCT ID', id)
+    //     props.deleteCartItem({ id }).then(res => {
+    //         console.log('Deleted Cart Item', res)
+    //         props.getAllProducts().then(res => console.log(res))
+    //         props.cartList().then(res => setCartlist(res))
+    //         console.log('CART LIST FER DELETE', cartlist)
+    //     })
+    // }
 
-    const addCart = (productId, variantId) => {
-        let quantity = 1;
-        props.addToCart({ productId, variantId, quantity }).then(res => {
-            props.getAllProducts().then(res => console.log(res))
-        })
-    }
+    // const addCart = (productId, variantId) => {
+    //     let quantity = 1;
+    //     props.addToCart({ productId, variantId, quantity }).then(res => {
+    //         props.getAllProducts().then(res => console.log(res))
+    //     })
+    // }
 
     return <section className="category-section popular-product px-15 pt-4">
         <div className="title-part">
@@ -43,11 +43,12 @@ const PopularProducts = (props) => {
                     <PopularProductItem
                         item={item}
                         key={index}
-                        deleteCart={deleteCart}
-                        addCart={addCart}
                         cartlist={props.cartlist}
                         favProduct={props.favProduct}
                         unfavProduct={props.unfavProduct}
+                        deleteCart={props.deleteCartItem}
+                        addCart={props.addToCart}
+
 
                     />
                 ))}

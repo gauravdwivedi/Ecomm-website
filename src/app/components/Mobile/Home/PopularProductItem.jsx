@@ -17,6 +17,29 @@ function PopularProductItem({ item, addCart, deleteCart, cartlist, favProduct, u
         setFav(item.favourite)
     }, [item.favourite])
 
+    useEffect(() => {
+        setInCart(item.productInCart)
+    }, [item.productInCart])
+
+
+    const handleCartClick = (...args) => {
+
+        console.log('Arguments', args)
+
+        if (inCart) {
+            deleteCart({ id: args[0] }).then(res => {
+                setInCart(false)
+            })
+        }
+
+        if (!inCart) {
+            addCart({ productId: args[0], variantId: args[1], quantity: 1 }).then(res => {
+                setInCart(true)
+            })
+        }
+
+    }
+
 
 
     const handleFavClick = (id) => {
@@ -51,7 +74,7 @@ function PopularProductItem({ item, addCart, deleteCart, cartlist, favProduct, u
                             <ul>
                                 <li><img src="/images/product-icon/play-icon.svg" alt="" /></li>
                                 {fav ? <li onClick={() => handleFavClick(item?.id)}><img src="/images/product-icon/notify-icon-red.svg" alt="favourite image" /></li> : <li onClick={() => handleFavClick(item?.id)}><img src="/images/product-icon/notify-icon.svg" alt="" /></li>}
-                                {item.productInCart && cartItemId ? < li onClick={() => deleteCart(cartItemId[0]?.id)} > <img src="/images/product-icon/bag-icon-red.svg" alt="" /></li> : <li onClick={() => addCart(item.id, item.attributes[0]?.id)}> <img src="/images/product-icon/bag-icon.svg" alt="" /></li>}
+                                {inCart && cartItemId ? < li onClick={() => handleCartClick(cartItemId[0]?.id)} > <img src="/images/product-icon/bag-icon-red.svg" alt="" /></li> : <li onClick={() => handleCartClick(item.id, item.attributes[0]?.id)}> <img src="/images/product-icon/bag-icon.svg" alt="" /></li>}
                             </ul>
                         </div>
                     </div>
