@@ -115,9 +115,9 @@ const Detail = React.memo(function Detail(props) {
 	return (
 		<div id="main">
 			<div className="detail-header">
-				<a href="/">
+				<Link to="/">
 					<img src="/images/back.svg" className="img-fluid" alt="" />
-				</a>
+				</Link>
 				<div className="header-option" style={{ marginLeft: "auto" }}>
 					<ul>
 						<li><a href="#"><img src="/images/detail-video/icon/sort.svg" alt="" /></a></li>
@@ -167,7 +167,7 @@ const Detail = React.memo(function Detail(props) {
 							</li>
 							<li className='liked'>
 								{like ? <>
-									<img src="/images/detail-video/icon/like.svg" alt="" className='bg-danger' onClick={handleLikeClick} />
+									<img src="/images/detail-video/icon/unlike.svg" alt="" onClick={handleLikeClick} />
 									<span style={{ color: 'white', fontSize: '16px', alignItems: 'center', margin: 'auto' }}>{noOfLikes}</span>
 								</> :
 									<>
@@ -218,56 +218,56 @@ const VedioPlayer = ({ url }) => {
 	)
 }
 
-const ModelPopup = ({attributes})=>{
+const ModelPopup = ({ attributes }) => {
 	let color = [...new Set(attributes.map(item => item.color))];
-	
-	const changeProductColor = (e)=>{
-		if(e.target.value !==""){
+
+	const changeProductColor = (e) => {
+		if (e.target.value !== "") {
 			let sizes = attributes.map(item => {
-				if(item.color !== e.target.value){
+				if (item.color !== e.target.value) {
 					return `<option value="${item.size}" data-stock="${item.qty_in_stock}">${item.size}</option>`
-				}  
+				}
 			});
-			document.getElementById("exampleFormControlSelect2").innerHTML = '<option value="" >Select One</option>'+sizes.join(" ") ;
-		}else{
-			document.getElementById("exampleFormControlSelect2").innerHTML ='<option value="" >Select One</option>';
+			document.getElementById("exampleFormControlSelect2").innerHTML = '<option value="" >Select One</option>' + sizes.join(" ");
+		} else {
+			document.getElementById("exampleFormControlSelect2").innerHTML = '<option value="" >Select One</option>';
 		}
-		
+
 	}
 
-	const changeProductSize = (e)=>{
+	const changeProductSize = (e) => {
 		let stock = e.target[e.target.selectedIndex].getAttribute('data-stock');
-		if(e.target.value !==""){
-			document.getElementById("qty_in_stock").innerHTML = `<input type="number" class="form-control"  max="${stock}" min="1" name="qty_in_stock" />` ;
-		}else{
-			document.getElementById("qty_in_stock").innerHTML = `<input type="number" class="form-control"  max="0" min="0" name="qty_in_stock" />` ;
+		if (e.target.value !== "") {
+			document.getElementById("qty_in_stock").innerHTML = `<input type="number" class="form-control"  max="${stock}" min="1" name="qty_in_stock" />`;
+		} else {
+			document.getElementById("qty_in_stock").innerHTML = `<input type="number" class="form-control"  max="0" min="0" name="qty_in_stock" />`;
 		}
-		
+
 	}
-	return(
+	return (
 		<div>
 			<div className="form-group">
 				<label htmlFor="exampleFormControlSelect1">Color</label>
-				<select className="form-control" id="exampleFormControlSelect1" onChange={(e) => changeProductColor(e)}> 
+				<select className="form-control" id="exampleFormControlSelect1" onChange={(e) => changeProductColor(e)}>
 					<option value="" >Select One</option>
 					{color.map((color, index) => (
-      					<option key={index} value={color} >{color}</option>
-    				))}
+						<option key={index} value={color} >{color}</option>
+					))}
 				</select>
 			</div>
 			<div className="form-group">
 				<label htmlFor="exampleFormControlSelect2">Size</label>
 				<select className="form-control" id="exampleFormControlSelect2" onChange={(e) => changeProductSize(e)}>
 					<option value="" >Select One</option>
-					
+
 				</select>
 			</div>
 			<div className="form-group">
 				<label htmlFor="qty_in_stock">Quantity</label>
 				<div id="qty_in_stock">
-				<input type="number" className="form-control"  max="5" min="1" name="qty_in_stock" />
+					<input type="number" className="form-control" max="5" min="1" name="qty_in_stock" />
 				</div>
-				
+
 			</div>
 		</div>
 	)

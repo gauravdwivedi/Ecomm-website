@@ -23,6 +23,8 @@ export function getAllProducts(){
                 meta:{
                     path:"/v1/product/list",
                     method:"GET",
+                    isHeader:true,
+                    body:'all-products'
                 }
             }
         ]
@@ -37,6 +39,8 @@ export function getAllCategory(){
                 meta:{
                     path:"/v1/category/list",
                     method:"GET",
+                    isHeader:true,
+                    body:'all-category'
                 }
             }
         ]

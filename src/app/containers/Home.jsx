@@ -5,6 +5,8 @@ import HomeDesktop from "../components/Desktop/Home"
 import HomeMobile from "../components/Mobile/Home"
 import AuthContext from "../helpers/authContext";
 import { loadBigStory, getAllProducts, getAllCategory } from "../data/ducks/home/actions";
+import { likeProduct, unlikeProduct, addToCart, favProduct, unfavProduct } from "../data/ducks/detail/actions";
+import { cartList, deleteCartItem } from "../data/ducks/cart/actions";
 
 class HomeContainer extends PureComponent {
 	static contextType = AuthContext;
@@ -12,8 +14,8 @@ class HomeContainer extends PureComponent {
 		let storeData = ssr.getState();
 		return [
 			//ssr.dispatch(loadBigStory()), //SSR rendering here
-			ssr.dispatch(getAllProducts()),
-			ssr.dispatch(getAllCategory())
+			// ssr.dispatch(getAllProducts()),
+			// ssr.dispatch(getAllCategory())
 
 		];
 	}
@@ -26,7 +28,9 @@ class HomeContainer extends PureComponent {
 	}
 
 	componentDidMount() {
-		// this.getProductList();
+		this.getProductList();
+		this.getCategoryList();
+		this.props.cartList().then()
 	}
 
 
@@ -71,13 +75,21 @@ class HomeContainer extends PureComponent {
 
 const mapStateToProps = (state) => ({
 	productList: state.home.productList,
-	categoryList: state.home.categoryList
+	categoryList: state.home.categoryList,
+	cartlist: state.cart.fetchCartList.result
 });
 
 const mapDispatchToProps = {
 	//loadBigStory
 	getAllProducts,
-	getAllCategory
+	getAllCategory,
+	likeProduct,
+	unlikeProduct,
+	addToCart,
+	deleteCartItem,
+	cartList,
+	favProduct,
+	unfavProduct
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

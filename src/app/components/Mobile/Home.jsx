@@ -12,17 +12,15 @@ import config from '../../../config';
 
 
 const Home = React.memo(function Home(props) {
-
-
 	return (
 		<>
 			{/* <Header /> */}
 			<TopStories />
 			<HomeSlider />
-			<CategorySection items={props.categoryList} />
-			<PopularProducts items={props.productList} />
+			<CategorySection items={props.categoryList} {...props} />
+			<PopularProducts items={props.productList}  {...props} />
 			<SpotLight />
-			<ProductsOnSale items={props.productList} />
+			<ProductsOnSale items={props.productList}  {...props} />
 			{/* <Footer /> */}
 		</>
 	)
@@ -74,7 +72,6 @@ const TopStories = () => {
 		</section>
 	</>
 }
-
 
 const CategorySection = ({ items }) => {
 

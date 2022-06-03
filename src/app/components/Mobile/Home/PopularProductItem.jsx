@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+
 import config from '../../../../config';
 
-function PopularProductItem({ item }) {
+function PopularProductItem({ item, addCart, deleteCart, cartlist }) {
 
-    console.log('Popular Product Items', item)
+    const [inCart, setInCart] = useState(false);
+    const [fav, setFav] = useState(false);
+    const [cartItemId, useCartItemId] = useState(0)
+
+    console.log('PROPS Product ITEM ', cartlist)
+
+    useEffect(() => {
+        let cartItemId = cartlist?.filter(item => item.productId === item.id)
+        console.log('CARTID ID', cartItemId)
+    })
+
     return (
         <>
             <div className="col-md-4 col-6">
@@ -18,11 +30,12 @@ function PopularProductItem({ item }) {
                         <div className="wishlist-btn">
                             <ul>
                                 <li><img src="/images/product-icon/play-icon.svg" alt="" /></li>
-                                <li><img src="/images/product-icon/notify-icon.svg" alt="" /></li>
-                                <li><img src="/images/product-icon/bag-icon.svg" alt="" /></li>
+                                {item.favourite ? <li ><img src="/images/product-icon/notify-icon-red.svg" alt="favourite image" /></li> : <li><img src="/images/product-icon/notify-icon.svg" alt="" /></li>}
+                                {item.productInCart ? < li onClick={() => deleteCart(cartlist[0]?.id)} > <img src="/images/product-icon/bag-icon-red.svg" alt="" /></li> : <li onClick={() => addCart(item.id, item.attributes[0]?.id)}> <img src="/images/product-icon/bag-icon.svg" alt="" /></li>}
                             </ul>
                         </div>
                     </div>
+                    <Toaster />
                     <div className="product-content">
                         <a href="#">
                             <h4>{item.title}</h4>

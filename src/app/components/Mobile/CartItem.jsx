@@ -1,16 +1,18 @@
 import React from 'react';
 import config from '../../../config';
+import { Link } from 'react-router-dom';
 
 function CartItem({ item, handleDeleteItem }) {
 
+    console.log('ITEM', item)
     return (
         <>
             <section className="cart-section pt-4 px-15">
                 <div className="cart mb-4">
                     <div className="cart-box">
-                        <a href="#" className="cart-img">
+                        <Link to={`/product/${item?.slug}`} className="cart-img">
                             <img src={config.IMG_END_POINT + item.thumbnail} className="img-fluid" alt="" />
-                        </a>
+                        </Link>
                         <div className="cart-content">
                             <a href="product.html">
                                 <h4>{item.title}</h4>

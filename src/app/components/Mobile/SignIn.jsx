@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import authContext from '../../helpers/authContext'
 
 
@@ -8,6 +9,7 @@ const SignIn = React.memo(
         const context = useContext(authContext)
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
+        let history = useHistory(this);
 
         console.log(props)
 
@@ -95,24 +97,20 @@ const SignIn = React.memo(
             let form = document.forms['login'];
 
             if (loginvalidation(form)) {
-                console.log('Login')
+
                 props.login({
                     email, password
                 }).then((res) => {
-                    console.log('Response ===>', res)
-
                     if (res[0].registration == false) {
                         Util.setCookie('hoppedin_token', res[0].token, 7);
                         Util.setCookie('userData', res[0].user, 7);
                         context.setAuthState(true)
-                        props.history.push('/')
+                        // props.history.replace('/')
+                        history.push('/')
                     }
 
                     if (res[0].code || res[0].message == 'Incorrect Password') {
-
-                        console.log('Error')
                         let password = form.elements['password'];
-
                         password.parentNode.classList.add('error');
                         password.parentNode.insertAdjacentHTML('beforeend',
                             `<div class="help-block alert alert-danger">${res[0].message}</div>`

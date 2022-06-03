@@ -102,9 +102,9 @@ class App extends Component {
 		this.setState({
 			isAuthenticated: false,
 			userData: {}
-		}, () => {
-			this.props.history.replace('/login')
-		})
+		});
+		this.props.history.replace('/login')
+
 	}
 
 	render() {

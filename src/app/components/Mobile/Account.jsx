@@ -11,16 +11,13 @@ function Account(props) {
     useEffect(() => {
         if (!context.isAuthenticated) {
             console.log('Not Logged In');
-
             props.history.replace('/login')
-
         }
     })
 
     return (
         <>
             <div id="main">
-
 
                 <header>
                     <div className="back-links">
@@ -36,15 +33,13 @@ function Account(props) {
                 <section className="account-section pt-4 px-15">
                     <div className="element-menu">
                         <ul>
-                            <li><img src="/images/icon/sidenav-icon/account.svg" className="img-fluid" alt="" /><a href="#">My Account</a></li>
-                            <li><Link to="/address" ><img src="/images/icon/sidenav-icon/address.svg" className="img-fluid" alt="" />Address</Link></li>
-                            <li><img src="/images/icon/sidenav-icon/payment.svg" className="img-fluid" alt="" /><a href="#">Payments</a></li>
-                            <li><img src="/images/icon/sidenav-icon/logout.svg" className="img-fluid" alt="" /><a href="#">Log out</a></li>
+                            <Link><li><img src="/images/icon/sidenav-icon/account.svg" className="img-fluid" alt="" /><a href="#">My Account</a></li></Link>
+                            <Link to="/address" ><li><img src="/images/icon/sidenav-icon/address.svg" className="img-fluid" alt="" />Address</li></Link>
+                            <Link><li><img src="/images/icon/sidenav-icon/payment.svg" className="img-fluid" alt="" /><a href="#">Payments</a></li></Link>
+                            <Link><li><img src="/images/icon/sidenav-icon/logout.svg" className="img-fluid" alt="" /><a href="#">Log out</a></li></Link>
                         </ul>
                     </div>
                 </section>
-
-
             </div>
 
             <section className="panel-space"></section>

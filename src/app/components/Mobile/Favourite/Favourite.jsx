@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import FavouriteItem from './FavouriteItem';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 const Favourite = React.memo(function Favourite(props) {
+    const history = useHistory();
 
     const [allProducts, setAllProducts] = useState([])
 
@@ -29,6 +31,10 @@ const Favourite = React.memo(function Favourite(props) {
             setAllProducts(newList)
         })
     }
+    function FavItemClickHandler(slug) {
+        console.log('CLiked ', slug)
+        history.push(`/product/${slug}`)
+    }
 
     return (
         <>
@@ -46,7 +52,7 @@ const Favourite = React.memo(function Favourite(props) {
                 </header>
                 {allProducts.length > 0 && allProducts.map((item, index) => (
 
-                    <FavouriteItem item={item} key={index} handleClick={handleClick} />)
+                    <FavouriteItem item={item} key={index} handleClick={handleClick} onItemClickHandler={FavItemClickHandler} />)
                 )}
             </div>
             <section className="panel-space"></section>

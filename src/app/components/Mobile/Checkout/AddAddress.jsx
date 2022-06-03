@@ -173,7 +173,7 @@ function AddAddress(props) {
                     </Link>
                 </div>
                 <div className="inner-header">
-                    <h3>Add Address</h3>
+                    {isEdit ? <h3>Edit Address</h3> : <h3>Add Address</h3>}
                 </div>
             </header>
             {!isEdit && <form name="add-address" onSubmit={doSubmit}>
