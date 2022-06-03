@@ -14,7 +14,7 @@ function CategoryListing(props) {
     return (<>
         <section className="category-section px-15 pt-0">
             <div className="title-part">
-                <h2>Category</h2>
+                <h2>Categories</h2>
 
             </div>
             <div className="product-section">

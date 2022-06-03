@@ -14,9 +14,9 @@ function CartItem({ item, handleDeleteItem }) {
                             <img src={config.IMG_END_POINT + item.thumbnail} className="img-fluid" alt="" />
                         </Link>
                         <div className="cart-content">
-                            <a href="product.html">
+                            <Link to="/product">
                                 <h4>{item.title}</h4>
-                            </a>
+                            </Link>
                         </div>
                         <div className="delete-icon">
                             <img src="/images/icon/delete.svg" className="img-fluid" alt="" onClick={() => handleDeleteItem(item.id)} />

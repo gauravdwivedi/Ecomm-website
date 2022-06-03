@@ -2151,3 +2151,9 @@ header.none-bg {
     border-radius: 15px;
     text-align: right;
 }
+
+
+
+.footer-span {
+    margin-left: 0 !important;
+}
