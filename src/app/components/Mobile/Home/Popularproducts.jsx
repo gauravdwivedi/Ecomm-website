@@ -1,17 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import PopularProductItem from './PopularProductItem'
 const PopularProducts = (props) => {
 
     console.log('PROPS PopularProducts  ', props)
 
+    const [cartlist, setCartlist] = useState([]);
+
     let items = props.items
+
+    useEffect(() => {
+
+        setCartlist(props.cartlist)
+
+    }, [props.cartList])
 
     const deleteCart = (id) => {
         console.log('Delete CART PRODUCT ID', id)
         props.deleteCartItem({ id }).then(res => {
             console.log('Deleted Cart Item', res)
             props.getAllProducts().then(res => console.log(res))
+            props.cartList().then(res => setCartlist(res))
+            console.log('CART LIST FER DELETE', cartlist)
         })
     }
 
@@ -35,6 +45,9 @@ const PopularProducts = (props) => {
                         key={index}
                         deleteCart={deleteCart}
                         addCart={addCart}
+                        cartlist={props.cartlist}
+                        favProduct={props.favProduct}
+                        unfavProduct={props.unfavProduct}
 
                     />
                 ))}

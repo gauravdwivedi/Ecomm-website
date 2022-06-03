@@ -14,6 +14,9 @@ function Account(props) {
             props.history.replace('/login')
         }
     })
+    const handleLogout = (e) => {
+        context.doLogout();
+    }
 
     return (
         <>
@@ -36,7 +39,7 @@ function Account(props) {
                             <Link><li><img src="/images/icon/sidenav-icon/account.svg" className="img-fluid" alt="" /><a href="#">My Account</a></li></Link>
                             <Link to="/address" ><li><img src="/images/icon/sidenav-icon/address.svg" className="img-fluid" alt="" />Address</li></Link>
                             <Link><li><img src="/images/icon/sidenav-icon/payment.svg" className="img-fluid" alt="" /><a href="#">Payments</a></li></Link>
-                            <Link><li><img src="/images/icon/sidenav-icon/logout.svg" className="img-fluid" alt="" /><a href="#">Log out</a></li></Link>
+                            <Link><li onClick={handleLogout}><img src="/images/icon/sidenav-icon/logout.svg" className="img-fluid" alt="" /><a href="#">Log out</a></li></Link>
                         </ul>
                     </div>
                 </section>
