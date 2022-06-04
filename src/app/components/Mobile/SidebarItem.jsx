@@ -1,7 +1,7 @@
 import React from "react";
 
 const SidebarItem = (props) => {
-    console.log('Called')
+    // console.log('Called')
     return (
 
         <li>

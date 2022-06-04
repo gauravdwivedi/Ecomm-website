@@ -31,7 +31,7 @@ export class CartContainer extends PureComponent {
 
     componentDidMount() {
         this.props.cartList().then(res => {
-            console.log(res)
+            // console.log(res)
         })
     }
 

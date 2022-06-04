@@ -6,7 +6,7 @@ function Address(props) {
 
     const handleOnClick = (e, id) => {
         e.stopPropagation();
-        console.log('Cliked', id)
+        // console.log('Cliked', id)
         setIsCurrent(id)
     }
 

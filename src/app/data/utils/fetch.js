@@ -25,7 +25,7 @@ export default ( url, method, body, isHeader, nocacache ) => {
                 "x-signup-token":body.token
             }
         }else{
-            console.log('HERE')
+            // console.log('HERE')
            options.headers={ 
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -38,15 +38,15 @@ export default ( url, method, body, isHeader, nocacache ) => {
     var starttime = new Date().getTime();
     return fetch( url, options )
         .then( res => {
-            console.log('Response FETCH',res)
+            // console.log('Response FETCH',res)
             var endDate = new Date();
             var endtime = endDate.getTime();
             var timeDiff = endtime - starttime;
             if(timeDiff > 500 || !config.PRODUCTION)
-                console.log(url," (",timeDiff,"ms)")
+                // console.log(url," (",timeDiff,"ms)")
             return parseStatus( res.status, res)
         } ).catch((e) => {
-            console.log('API FETCHING ERROR: ', e, url, options);
+            // console.log('API FETCHING ERROR: ', e, url, options);
             return parseStatus( 500, [])
         })
 }
@@ -55,13 +55,13 @@ function parseStatus( status, res ) {
     return new Promise( ( resolve, reject ) => {
         if ( status >= 200 && status < 300 ) {
             res.json().then( (response) => {
-                console.log('RESPONSE SUCCESS',response)
+                // console.log('RESPONSE SUCCESS',response)
                 resolve( response )
             });
         } else {
             res.json().then( (response) => {
                 // resolve( response )
-                console.log(response,'RESponseee')
+                // console.log(response,'RESponseee')
                 resolve({success:0, error:status, response:response});
             });
             

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function CartItem({ item, handleDeleteItem }) {
 
-    console.log('ITEM', item)
+    // console.log('ITEM', item)
     return (
         <>
             <section className="cart-section pt-4 px-15">

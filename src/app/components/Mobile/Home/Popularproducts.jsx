@@ -3,7 +3,7 @@ import toast from 'react-hot-toast'
 import PopularProductItem from './PopularProductItem'
 const PopularProducts = (props) => {
 
-    console.log('PROPS PopularProducts  ', props)
+    // console.log('PROPS PopularProducts  ', props)
 
     const [cartlist, setCartlist] = useState([]);
 

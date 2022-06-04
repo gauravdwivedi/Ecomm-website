@@ -2,7 +2,7 @@ import React from "react";
 import config from "../../../../config";
 
 function ConfirmItem(props) {
-    console.log('ITEM', props.item)
+    // console.log('ITEM', props.item)
 
     return (
         <>

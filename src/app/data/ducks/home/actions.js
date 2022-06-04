@@ -15,13 +15,14 @@ export function loadBigStory(id, type) {
 }
 
 
-export function getAllProducts(){
+export function getAllProducts(params=''){
+    console.log('PRODUCTLIST',params)
     return {
         CALL_API:[
             {
                 type:types.FETCH_PRODUCTS,
                 meta:{
-                    path:"/v1/product/list",
+                    path:`/v1/product/list?${params}`,
                     method:"GET",
                     isHeader:true,
                     body:'all-products'

@@ -10,7 +10,7 @@ function Account(props) {
 
     useEffect(() => {
         if (!context.isAuthenticated) {
-            console.log('Not Logged In');
+            // console.log('Not Logged In');
             props.history.replace('/login')
         }
     })

@@ -9,7 +9,7 @@ const ForgetPassword = React.memo(function SignUp(props) {
 
     useEffect(() => {
         if (context.isAuthenticated) {
-            console.log('LOggedIn')
+            // console.log('LOggedIn')
             props.history.replace('/')
         }
     })
@@ -57,7 +57,7 @@ const ForgetPassword = React.memo(function SignUp(props) {
         if (forgetpasswordvalidation(form)) {
             props.forgetpassword({ email }).then(res => {
 
-                console.log('RESPONSE SUCCESS', res)
+                // console.log('RESPONSE SUCCESS', res)
                 if (res[0].code || res[0].message) {
 
                     console.log('Error')

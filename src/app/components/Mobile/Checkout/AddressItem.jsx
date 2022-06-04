@@ -4,10 +4,8 @@ import AddAddress from './AddAddress';
 
 function AddressItem(props) {
     const { id, first_name, last_name, address_1, address_2, city, country, postcode, primary, state, user_id } = props.item;
-    console.log('CUrrent Index ', props.isCurrent)
+    // console.log('CUrrent Index ', props.isCurrent)
     const { handleOnClick, isCurrent } = props;
-
-
 
     return (
         <>

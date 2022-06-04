@@ -4,7 +4,7 @@ import { Modal, Container, Row, Col, Button } from 'react-bootstrap'
 
 function PopUp(props) {
 
-    console.log('PROPS', props)
+    // console.log('PROPS', props)
 
     return (
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter" style={{ zIndex: '3' }}>

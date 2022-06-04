@@ -24,7 +24,7 @@ function PopularProductItem({ item, addCart, deleteCart, cartlist, favProduct, u
 
     const handleCartClick = (...args) => {
 
-        console.log('Arguments', args)
+        // console.log('Arguments', args)
 
         if (inCart) {
             deleteCart({ id: args[0] }).then(res => {
@@ -43,7 +43,7 @@ function PopularProductItem({ item, addCart, deleteCart, cartlist, favProduct, u
 
 
     const handleFavClick = (id) => {
-        console.log(fav)
+        // console.log(fav)
         if (fav) {
             unfavProduct({ productId: id }).then(res => {
                 setFav(false)

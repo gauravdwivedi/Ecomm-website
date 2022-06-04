@@ -18,7 +18,7 @@ function Cart(props) {
 
     const handleDeleteItem = (id) => {
         props.deleteCartItem({ id }).then((res) => {
-            console.log('RESPONSE', res)
+            // console.log('RESPONSE', res)
             let newItemList = itemList.filter(item => item.id != id)
             props.cartList().then(res => {
 
@@ -36,7 +36,7 @@ function Cart(props) {
             sum += value.price;
         })
 
-        console.log('Total Price', sum)
+        // console.log('Total Price', sum)
         setTotal(sum)
     }
 

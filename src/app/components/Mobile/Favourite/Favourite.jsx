@@ -27,12 +27,12 @@ const Favourite = React.memo(function Favourite(props) {
         props.unfavProduct({ productId: id }).then((res) => {
             // props.getAllProducts().then(res => setAllProducts([...res[0].result.list]))
             newList = allProducts.filter((item) => item[0].id !== id)
-            console.log('NEW LIST ', newList)
+            // console.log('NEW LIST ', newList)
             setAllProducts(newList)
         })
     }
     function FavItemClickHandler(slug) {
-        console.log('CLiked ', slug)
+        // console.log('CLiked ', slug)
         history.push(`/product/${slug}`)
     }
 

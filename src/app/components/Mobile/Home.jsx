@@ -10,9 +10,7 @@ import ProductsOnSale from './Home/ProductsOnSale';
 import config from '../../../config';
 import { Link } from 'react-router-dom';
 import authContext from '../../helpers/authContext';
-
-
-
+import { useHistory } from 'react-router';
 
 const Home = React.memo(function Home(props) {
 
@@ -22,6 +20,8 @@ const Home = React.memo(function Home(props) {
 		context.doActivePage('home');
 
 	}, [context.isActive])
+
+
 
 	return (
 		<>
@@ -84,7 +84,16 @@ const TopStories = () => {
 	</>
 }
 
-const CategorySection = ({ items }) => {
+const CategorySection = (props) => {
+	const items = props.items
+	const history = useHistory();
+
+
+	const handleCategoryClick = (params) => {
+
+		history.push(`/productlist/${params}`);
+
+	}
 
 	return (<>
 		<section className="category-section px-15 pt-0">
@@ -96,16 +105,16 @@ const CategorySection = ({ items }) => {
 				<div className="row gy-3">
 
 					{items && items.map((item, index) => (
-						<div className="col-3" key={index}>
+						<div className="col-3" key={index} onClick={() => handleCategoryClick(item.id)}>
 							<div className="card catagory-card">
 								<div className="card-body">
-									<a href="#">
+									<Link to="#">
 										<img className="categry-icon" src={config.IMG_END_POINT + item.icon} />
 										<span><img className="categry-play" src="/images/category-icon/cat-play.svg" /></span>
-									</a>
+									</Link>
 								</div>
 							</div>
-							<h4><a href="#">{item.title}</a></h4>
+							<h4><Link to="#">{item.title}</Link></h4>
 						</div>
 					))}
 

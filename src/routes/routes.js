@@ -1,6 +1,6 @@
 import React from 'react';
 import App from "../app/containers/App";
-import {Home,SignIn,SignUp,Cart,Checkout,Confirm,Detail,Order,Account,ForgetPassword,ResetPassword, Favourite,Address,AddAddress, CategoryListing} from "./splitComponent"
+import {Home,SignIn,SignUp,Cart,Checkout,Confirm,Detail,Order,Account,ForgetPassword,ResetPassword, Favourite,Address,AddAddress, CategoryListing, ProductList} from "./splitComponent"
 
 
 const routes = [{
@@ -79,6 +79,10 @@ const routes = [{
 		{
 			path:"/categories",
 			component:CategoryListing,
+			exact:true
+		},{
+			path:"/productlist/:id",
+			component:ProductList,
 			exact:true
 		}
 	]

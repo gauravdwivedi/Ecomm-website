@@ -10,7 +10,7 @@ function CategoryListing(props) {
         context.doActivePage('category')
     }, [context.isActive])
 
-    console.log('PROPS', props)
+    // console.log('PROPS', props)
     return (<>
         <section className="category-section px-15 pt-0">
             <div className="title-part">

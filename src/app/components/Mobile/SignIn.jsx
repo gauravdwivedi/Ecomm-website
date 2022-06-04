@@ -11,11 +11,11 @@ const SignIn = React.memo(
         const [password, setPassword] = useState('');
         let history = useHistory(this);
 
-        console.log(props)
+        // console.log(props)
 
         useEffect(() => {
             if (context.isAuthenticated) {
-                console.log('LOggedIn')
+                // console.log('LOggedIn')
                 props.history.replace('/')
             }
         })

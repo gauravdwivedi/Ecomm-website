@@ -16,9 +16,10 @@ function Confirm(props) {
             sum += value.price;
         })
 
-        console.log('Total Price', sum)
+        // console.log('Total Price', sum)
         setTotal(sum)
     }
+
     return (
         <>
             <div id="main">

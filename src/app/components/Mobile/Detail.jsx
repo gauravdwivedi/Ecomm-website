@@ -22,7 +22,6 @@ const Detail = React.memo(function Detail(props) {
 
 	const [modalShow, setModalShow] = useState(false);
 
-
 	let images = [];
 
 	useEffect(() => {
@@ -30,15 +29,10 @@ const Detail = React.memo(function Detail(props) {
 			setLike(props.detail.liked)
 		}
 		setInCart(props.detail.productInCart)
-
-
 		setFav(props.detail.saved);
-
-
 		if (props.detail.likes) {
 			setNoOfLikes(props.detail.likes)
 		}
-
 
 	}, [props.detail])
 
@@ -65,7 +59,7 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	const handleFavClick = () => {
-		console.log(fav)
+		// console.log(fav)
 		if (fav) {
 			props.unfavProduct({ productId: props.detail.id }).then(res => {
 				setFav(false)
@@ -85,7 +79,7 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	const handleAddCart = () => {
-		console.log('Setting Modal True')
+		// console.log('Setting Modal True')
 		// setAddToCart(true)
 		setModalShow(true)
 	}
@@ -204,9 +198,9 @@ const Detail = React.memo(function Detail(props) {
 })
 
 const VedioPlayer = ({ url }) => {
-	console.log('Video URL', url)
+	// console.log('Video URL', url)
 	return (
-		<div id="videoWrapper">
+		<div id="videoWrapper"  >
 			<video
 				playsInline
 				autoPlay
@@ -218,58 +212,58 @@ const VedioPlayer = ({ url }) => {
 	)
 }
 
-const ModelPopup = ({ attributes }) => {
-	let color = [...new Set(attributes.map(item => item.color))];
+// const ModelPopup = ({ attributes }) => {
+// 	let color = [...new Set(attributes.map(item => item.color))];
 
-	const changeProductColor = (e) => {
-		if (e.target.value !== "") {
-			let sizes = attributes.map(item => {
-				if (item.color !== e.target.value) {
-					return `<option value="${item.size}" data-stock="${item.qty_in_stock}">${item.size}</option>`
-				}
-			});
-			document.getElementById("exampleFormControlSelect2").innerHTML = '<option value="" >Select One</option>' + sizes.join(" ");
-		} else {
-			document.getElementById("exampleFormControlSelect2").innerHTML = '<option value="" >Select One</option>';
-		}
+// 	const changeProductColor = (e) => {
+// 		if (e.target.value !== "") {
+// 			let sizes = attributes.map(item => {
+// 				if (item.color !== e.target.value) {
+// 					return `<option value="${item.size}" data-stock="${item.qty_in_stock}">${item.size}</option>`
+// 				}
+// 			});
+// 			document.getElementById("exampleFormControlSelect2").innerHTML = '<option value="" >Select One</option>' + sizes.join(" ");
+// 		} else {
+// 			document.getElementById("exampleFormControlSelect2").innerHTML = '<option value="" >Select One</option>';
+// 		}
 
-	}
+// 	}
 
-	const changeProductSize = (e) => {
-		let stock = e.target[e.target.selectedIndex].getAttribute('data-stock');
-		if (e.target.value !== "") {
-			document.getElementById("qty_in_stock").innerHTML = `<input type="number" class="form-control"  max="${stock}" min="1" name="qty_in_stock" />`;
-		} else {
-			document.getElementById("qty_in_stock").innerHTML = `<input type="number" class="form-control"  max="0" min="0" name="qty_in_stock" />`;
-		}
+// 	const changeProductSize = (e) => {
+// 		let stock = e.target[e.target.selectedIndex].getAttribute('data-stock');
+// 		if (e.target.value !== "") {
+// 			document.getElementById("qty_in_stock").innerHTML = `<input type="number" class="form-control"  max="${stock}" min="1" name="qty_in_stock" />`;
+// 		} else {
+// 			document.getElementById("qty_in_stock").innerHTML = `<input type="number" class="form-control"  max="0" min="0" name="qty_in_stock" />`;
+// 		}
 
-	}
-	return (
-		<div>
-			<div className="form-group">
-				<label htmlFor="exampleFormControlSelect1">Color</label>
-				<select className="form-control" id="exampleFormControlSelect1" onChange={(e) => changeProductColor(e)}>
-					<option value="" >Select One</option>
-					{color.map((color, index) => (
-						<option key={index} value={color} >{color}</option>
-					))}
-				</select>
-			</div>
-			<div className="form-group">
-				<label htmlFor="exampleFormControlSelect2">Size</label>
-				<select className="form-control" id="exampleFormControlSelect2" onChange={(e) => changeProductSize(e)}>
-					<option value="" >Select One</option>
+// 	}
+// 	return (
+// 		<div>
+// 			<div className="form-group">
+// 				<label htmlFor="exampleFormControlSelect1">Color</label>
+// 				<select className="form-control" id="exampleFormControlSelect1" onChange={(e) => changeProductColor(e)}>
+// 					<option value="" >Select One</option>
+// 					{color.map((color, index) => (
+// 						<option key={index} value={color} >{color}</option>
+// 					))}
+// 				</select>
+// 			</div>
+// 			<div className="form-group">
+// 				<label htmlFor="exampleFormControlSelect2">Size</label>
+// 				<select className="form-control" id="exampleFormControlSelect2" onChange={(e) => changeProductSize(e)}>
+// 					<option value="" >Select One</option>
 
-				</select>
-			</div>
-			<div className="form-group">
-				<label htmlFor="qty_in_stock">Quantity</label>
-				<div id="qty_in_stock">
-					<input type="number" className="form-control" max="5" min="1" name="qty_in_stock" />
-				</div>
+// 				</select>
+// 			</div>
+// 			<div className="form-group">
+// 				<label htmlFor="qty_in_stock">Quantity</label>
+// 				<div id="qty_in_stock">
+// 					<input type="number" className="form-control" max="5" min="1" name="qty_in_stock" />
+// 				</div>
 
-			</div>
-		</div>
-	)
-}
+// 			</div>
+// 		</div>
+// 	)
+// }
 export default Detail
