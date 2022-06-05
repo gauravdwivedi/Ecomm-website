@@ -778,7 +778,7 @@ nav ul li i {
 
 .video-content .caption .contents {
     color: #fff;
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 .contents.right-sec {
@@ -827,7 +827,8 @@ nav ul li i {
 }
 
 .video-content .contents .hrs-btn span {
-    /* padding: 8px 8px; */
+    padding: 8px 8px;
+
 }
 
 .video-content .contents .hrs-btn h6 {
@@ -2171,4 +2172,12 @@ header.none-bg {
 .video__player {
     position: relative;
     scroll-snap-align: start;
+}
+
+.hrs-text {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    width: 30vh;
+
 }

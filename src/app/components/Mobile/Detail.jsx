@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { Modal, Container, Row, Col, Button } from 'react-bootstrap'
-
 import { Link } from 'react-router-dom';
 import config from '../../../config'
 import PopUp from './PopUp'
+
 
 
 
@@ -19,20 +19,16 @@ const Detail = React.memo(function Detail(props) {
 	const [productId, setProductId] = useState(0)
 	const [quantity, setQuantity] = useState(0)
 
-
 	const [modalShow, setModalShow] = useState(false);
 
 	let images = [];
 
 	useEffect(() => {
-		if (props.detail.liked) {
-			setLike(props.detail.liked)
-		}
+
+		setLike(props.detail.liked)
 		setInCart(props.detail.productInCart)
 		setFav(props.detail.saved);
-		if (props.detail.likes) {
-			setNoOfLikes(props.detail.likes)
-		}
+		setNoOfLikes(props.detail.likes)
 
 	}, [props.detail])
 
@@ -43,6 +39,7 @@ const Detail = React.memo(function Detail(props) {
 			props.unlikeProduct({ productId: props.detail.id }).then(res => {
 
 				setLike(false)
+				setNoOfLikes(noOfLikes - 1)
 				props.fetchProductDetails(props.detail.slug).then(res => {
 
 				})
@@ -52,6 +49,7 @@ const Detail = React.memo(function Detail(props) {
 		if (!like) {
 			props.likeProduct({ productId: props.detail.id }).then(res => {
 				setLike(true)
+				setNoOfLikes(noOfLikes + 1)
 				props.fetchProductDetails(props.detail.slug).then((res => {
 				}))
 			})
@@ -149,7 +147,7 @@ const Detail = React.memo(function Detail(props) {
 									</ul>
 								</div>
 								<div className="hrs-btn">
-									<span><img src="/images/hr-icon.svg" alt="" /><h6>Delivery : With in 3 Hrs</h6></span>
+									<span className='hrs-text'><img src="/images/hr-icon.svg" alt="" /><h6>Delivery : With in 3 Hrs</h6></span>
 								</div>
 							</div>
 						</div>
