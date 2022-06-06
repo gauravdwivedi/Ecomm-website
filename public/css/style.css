@@ -2174,6 +2174,15 @@ header.none-bg {
     scroll-snap-align: start;
 }
 
+.videoCard::-webkit-scrollbar {
+    display: none;
+}
+
+.video__player::-webkit-scrollbar {
+    display: none;
+}
+
+
 .hrs-text {
     display: flex;
     flex-direction: row;

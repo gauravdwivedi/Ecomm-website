@@ -81,7 +81,7 @@ const routes = [{
 			component:CategoryListing,
 			exact:true
 		},{
-			path:"/productlist/:id",
+			path:"/products/list/:params",
 			component:ProductList,
 			exact:true
 		}

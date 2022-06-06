@@ -21,8 +21,6 @@ const Home = React.memo(function Home(props) {
 
 	}, [context.isActive])
 
-
-
 	return (
 		<>
 			{/* <Header /> */}
@@ -90,9 +88,7 @@ const CategorySection = (props) => {
 
 
 	const handleCategoryClick = (params) => {
-
-		history.push(`/productlist/${params}`);
-
+		history.push(`/products/list/${params}`);
 	}
 
 	return (<>

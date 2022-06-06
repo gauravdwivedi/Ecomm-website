@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { Modal, Container, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import config from '../../../config'
+import authContext from '../../helpers/authContext';
+import { useHistory } from 'react-router';
 import PopUp from './PopUp'
 
-
-
-
 const Detail = React.memo(function Detail(props) {
+	const context = useContext(authContext)
+	const history = useHistory();
 
 	const [like, setLike] = useState(false)
 	const [inCart, setInCart] = useState(false)
@@ -34,6 +35,8 @@ const Detail = React.memo(function Detail(props) {
 
 
 	const handleLikeClick = () => {
+
+
 
 		if (like) {
 			props.unlikeProduct({ productId: props.detail.id }).then(res => {
@@ -79,7 +82,12 @@ const Detail = React.memo(function Detail(props) {
 	const handleAddCart = () => {
 		// console.log('Setting Modal True')
 		// setAddToCart(true)
-		setModalShow(true)
+		if (!context.isAuthenticated) {
+			history.push('/login')
+		}
+
+		setModalShow(true);
+
 	}
 
 	const handleInsertInCart = (id) => {
@@ -155,7 +163,7 @@ const Detail = React.memo(function Detail(props) {
 					<div className="contents right-sec " >
 						<ul className='d-flex flex-column justify-content-around flex-fill h-100 '>
 							<li>
-								{fav ? <img src="/images/icon/fav-icon.svg" alt="" onClick={handleFavClick} /> : <img src="/images/detail-video/icon/notify.svg" alt="" onClick={handleFavClick} />}
+								{fav ? <img src="/images/detail-video/icon/notify-red.svg" alt="" onClick={handleFavClick} /> : <img src="/images/detail-video/icon/notify.svg" alt="" onClick={handleFavClick} />}
 							</li>
 							<li className='liked'>
 								{like ? <>
@@ -175,7 +183,7 @@ const Detail = React.memo(function Detail(props) {
 
 				<Toaster />
 
-				<div className="detail-add flex-fill" style={{ borderRadius: '20px' }}>{inCart == true ?
+				<div className="detail-add flex-fill" style={{ borderRadius: '20px' }}>{context.isAuthenticated ? <>{inCart == true ?
 					<div>
 
 						<Link to={{ pathname: "/cart", state: { fromProductPage: true } }} className="btn btn-solid flex-fill" >Go to cart</Link>
@@ -186,7 +194,7 @@ const Detail = React.memo(function Detail(props) {
 							</div> <button onClick={handleInsertInCart} className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</button></>
 							: <button onClick={handleAddCart} className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</button>
 					}
-					</>}
+					</>}</> : <button onClick={handleAddCart} className="btn btn-solid flex-fill" tabIndex="0">Login</button>}
 				</div>
 
 			</div >
