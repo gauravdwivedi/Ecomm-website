@@ -2,13 +2,11 @@ import React, { Fragment, PureComponent, useState } from 'react'
 import { connect } from 'react-redux'
 
 import AuthContext from '../helpers/authContext'
-import Cart from '../components/Mobile/Cart'
-
-import { cartList, deleteCartItem } from "../data/ducks/cart/actions"
-
+import CategoryListing from '../components/Mobile/CategoryListing'
+import { getAllCategory } from '../data/ducks/home/actions'
 
 
-export class CartContainer extends PureComponent {
+export class CategoryListingContainer extends PureComponent {
 
 
 
@@ -30,9 +28,7 @@ export class CartContainer extends PureComponent {
     }
 
     componentDidMount() {
-        this.props.cartList().then(res => {
-            // console.log(res)
-        })
+        this.props.getAllCategory().then()
     }
 
     render() {
@@ -40,9 +36,9 @@ export class CartContainer extends PureComponent {
             <Fragment>
                 {
                     this.props.mobile.isMobile ?
-                        <Cart {...this.props} loading={this.state.loading} />
+                        <CategoryListing {...this.props} loading={this.state.loading} />
                         :
-                        <div>This is website Cart</div>
+                        <div>This is website Category</div>
                 }
             </Fragment>
         )
@@ -50,12 +46,11 @@ export class CartContainer extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-    cartListItems: state.cart.fetchCartList.result
+    categoryList: state.home.categoryList
 })
 
 const mapDispatchToProps = {
-    cartList,
-    deleteCartItem
+    getAllCategory
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryListingContainer);

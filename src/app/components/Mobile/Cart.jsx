@@ -18,7 +18,7 @@ function Cart(props) {
 
     const handleDeleteItem = (id) => {
         props.deleteCartItem({ id }).then((res) => {
-            console.log('RESPONSE', res)
+            // console.log('RESPONSE', res)
             let newItemList = itemList.filter(item => item.id != id)
             props.cartList().then(res => {
 
@@ -36,7 +36,7 @@ function Cart(props) {
             sum += value.price;
         })
 
-        console.log('Total Price', sum)
+        // console.log('Total Price', sum)
         setTotal(sum)
     }
 
@@ -46,9 +46,9 @@ function Cart(props) {
                 {/* Header */}
                 <header>
                     <div className="back-links">
-                        <a href="/">
+                        <Link to="/">
                             <img src="/images/back.svg" className="img-fluid" alt="" />
-                        </a>
+                        </Link>
                     </div>
                     <div className="inner-header">
                         <h3>Shopping Cart</h3>
@@ -66,12 +66,19 @@ function Cart(props) {
                             Subtotal (VAT included) <span>${total}</span>
                         </h4>
                     </div>
-                    <Link
-                        to="/confirm"
-                        className="btn btn-outline checkout-btn text-capitalize w-100 mt-3"
-                    >
-                        Continue to checkout
-                    </Link>
+                    {
+                        itemList?.length <= 0 ? <Link
+                            to="/"
+                            className="btn btn-outline checkout-btn text-capitalize w-100 mt-3"
+                        >
+                            Add items from wishlist
+                        </Link> : <Link
+                            to="/confirm"
+                            className="btn btn-outline checkout-btn text-capitalize w-100 mt-3"
+                        >
+                            Continue to checkout
+                        </Link>
+                    }
                 </div>
             </section>
         </>

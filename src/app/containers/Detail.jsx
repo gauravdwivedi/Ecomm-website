@@ -53,8 +53,6 @@ const mapDispatchToProps = {
 	addToCart,
 	favProduct,
 	unfavProduct
-
-
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailContainer);

@@ -19,7 +19,7 @@ function AddAddress(props) {
 
     useEffect(() => {
         if (!context.isAuthenticated) {
-            console.log('Logged In')
+            // console.log('Logged In')
             props.history.replace('/login')
         }
 
@@ -28,7 +28,7 @@ function AddAddress(props) {
 
     useEffect(() => {
         if (props?.history?.location?.query?.data) {
-            console.log(props?.history?.location?.query?.data)
+            // console.log(props?.history?.location?.query?.data)
             setIsEdit(true)
             setFirstName(props?.history?.location?.query?.data.first_name)
             setLastName(props?.history?.location?.query?.data.last_name);
@@ -142,7 +142,7 @@ function AddAddress(props) {
             props.addAddress({
                 firstName, lastName, address, city, state, zipcode: zipCode, primary
             }).then(res => {
-                console.log('ADD ADDRESS Response', res)
+                // console.log('ADD ADDRESS Response', res)
                 toast.success("Address added")
                 props.history.push('/address')
             })
@@ -157,7 +157,7 @@ function AddAddress(props) {
             props.editAddress({
                 id, firstName, lastName, address, city, state, zipcode: zipCode, primary
             }).then(res => {
-                console.log('Edit Address', res);
+                // console.log('Edit Address', res);
                 toast.success("Address updated successfuly!");
                 props.history.push('/address');
             })
@@ -173,7 +173,7 @@ function AddAddress(props) {
                     </Link>
                 </div>
                 <div className="inner-header">
-                    <h3>Add Address</h3>
+                    {isEdit ? <h3>Edit Address</h3> : <h3>Add Address</h3>}
                 </div>
             </header>
             {!isEdit && <form name="add-address" onSubmit={doSubmit}>

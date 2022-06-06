@@ -31,7 +31,8 @@ class App extends Component {
 			mobile: {
 				isMobile: props.isMobile,
 			},
-			isAuthenticated: false
+			isAuthenticated: false,
+			isActive: ''
 		}
 	}
 
@@ -39,7 +40,7 @@ class App extends Component {
 		this.checkLoggedIn();
 	}
 
-	componentWillReceiveProps(nextProps) { }
+	// componentWillReceiveProps(nextProps) { }
 
 	changeServerStatus() {
 		this.setState({ serverRequest: false })
@@ -68,9 +69,9 @@ class App extends Component {
 	}
 
 	doLogin(data) {
-		console.log(data)
+		// console.log(data)
 		this.props.login(data).then((res) => {
-			console.log('Response', res[0])
+			// console.log('Response', res[0])
 
 			if (res[0].registration == false) {
 				Util.setCookie('hoppedin_token', res[0].token, 7);
@@ -79,7 +80,7 @@ class App extends Component {
 					isAuthenticated: true,
 					userData: res.data
 				}, () => {
-					console.log('Here')
+					// console.log('Here')
 					this.props.history.push('/')
 				})
 			}
@@ -96,14 +97,21 @@ class App extends Component {
 
 	doLogout() {
 
-		console.log('LOGOUT APP')
+		// console.log('LOGOUT APP')
 		Util.clearCookie('hoppedin_token');
 		Util.clearCookie('userData');
 		this.setState({
 			isAuthenticated: false,
 			userData: {}
-		}, () => {
-			this.props.history.replace('/login')
+		});
+		this.props.history.replace('/login')
+
+	}
+
+	doActivePage(page) {
+		// console.log('Active page')
+		this.setState({
+			isActive: page
 		})
 	}
 
@@ -153,7 +161,9 @@ class App extends Component {
 					doLogin: this.doLogin.bind(this),
 					doLogout: this.doLogout.bind(this),
 					history: this.props.history,
-					setAuthState: this.setAuthState.bind(this)
+					setAuthState: this.setAuthState.bind(this),
+					isActive: this.state.isActive,
+					doActivePage: this.doActivePage.bind(this)
 
 				}}>
 					<Fragment>

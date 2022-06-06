@@ -13,7 +13,7 @@ const ResetPassword = React.memo(
 
         useEffect(() => {
             if (context.isAuthenticated) {
-                console.log('LOggedIn')
+                // console.log('LOggedIn')
                 props.history.replace('/')
             }
         })
@@ -63,17 +63,17 @@ const ResetPassword = React.memo(
         const doSubmit = (e) => {
             e.preventDefault();
 
-            console.log(props.match.params.token)
+            // console.log(props.match.params.token)
             const token = props.match.params.token;
             let form = document.forms['resetpassword'];
-            console.log('RESET PASS', form)
+            // console.log('RESET PASS', form)
             if (resetpasswordvalidation(form)) {
 
 
                 props.resetpasswordverification({
                     token, password
                 }).then((res) => {
-                    console.log('RESET PASSSS Response', res)
+                    // console.log('RESET PASSSS Response', res)
 
                     if (res[0].code && res[0].message) {
 

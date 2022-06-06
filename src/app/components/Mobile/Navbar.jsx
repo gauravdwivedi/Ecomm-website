@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import authContext from "../../helpers/authContext";
 import { SidebarData } from "./SidebarData";
 import SidebarItem from "./SidebarItem";
+import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
     let { sideDrawerOpen } = props;
@@ -16,10 +17,10 @@ const Navbar = (props) => {
 
     return (<>
         <div id="mySidenav" className="sidenav">
-            <a href="/" className="user-panel">
+            <Link to="/" className="user-panel">
                 <img src="/images/favourite-1.png" className="img-fluid user-img" alt="" />
                 <span>App name</span>
-            </a>
+            </Link>
 
             <div className="sidebar-content">
                 <ul className="link-section">
@@ -28,95 +29,95 @@ const Navbar = (props) => {
                     })} */}
 
                     {isAuthenticated && <li>
-                        <a href="#">
+                        <Link to="#">
                             <img src="/images/icon/sidenav-icon/bag.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>My Orders</span>
                             </div>
-                        </a>
+                        </Link>
                     </li>}
                     <li>
-                        <a href="/cart" >
+                        <Link to="/cart" >
                             <img src="/images/icon/sidenav-icon/Cart.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>Cart</span>
                             </div>
-                        </a>
+                        </Link>
                     </li>
                     {isAuthenticated &&
                         <li>
-                            <a href="/myaccount" >
+                            <Link to="/myaccount" >
                                 <img src="/images/icon/sidenav-icon/account.svg" className="img-fluid" alt="" />
                                 <div className="content">
                                     <span>My Account</span>
                                 </div>
-                            </a>
+                            </Link>
                         </li>
                     }
 
                     <li>
-                        <a href="/category" >
+                        <Link to="/category" >
                             <img src="/images/icon/sidenav-icon/category.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>Category</span>
                             </div>
-                        </a>
+                        </Link>
                     </li>
 
                     <li>
-                        <a href="/new-arrivals" >
+                        <Link to="/new-arrivals" >
                             <img src="/images/icon/sidenav-icon/new-arrivals.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>New Arrivals</span>
                             </div>
-                        </a>
+                        </Link>
                     </li>
 
                     {isAuthenticated &&
                         <li>
-                            <a href="/favourites" >
+                            <Link to="/favourites" >
                                 <img src="/images/icon/sidenav-icon/favourite.svg" className="img-fluid" alt="" />
                                 <div className="content">
                                     <span>My Favourite</span>
                                 </div>
-                            </a>
+                            </Link>
                         </li>}
 
                     <li>
-                        <a href="/contact" >
+                        <Link to="/contact" >
                             <img src="/images/icon/sidenav-icon/contact.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>Contact</span>
                             </div>
-                        </a>
+                        </Link>
                     </li>
 
                     <li>
-                        <a href="/faq" >
+                        <Link to="/faq" >
                             <img src="/images/icon/sidenav-icon/faq.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>FAQ</span>
                             </div>
-                        </a>
+                        </Link>
                     </li>
 
                     {isAuthenticated &&
                         <li>
-                            <a onClick={(e) => handleClick(e)} >
+                            <Link onClick={(e) => handleClick(e)} >
                                 <img src="/images/icon/sidenav-icon/logout.svg" className="img-fluid" alt="" />
                                 <div className="content">
                                     <span>Logout</span>
                                 </div>
-                            </a>
+                            </Link>
                         </li>}
 
                     {!isAuthenticated && <li>
-                        <a href="/login" >
+                        <Link to="/login" >
                             <img src="/images/icon/sidenav-icon/account.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>Login</span>
                             </div>
-                        </a>
+                        </Link>
                     </li>}
 
                 </ul>

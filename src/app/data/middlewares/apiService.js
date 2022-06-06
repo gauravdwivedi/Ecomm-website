@@ -81,11 +81,11 @@ const apiService = ( {getState } ) => ( next ) => ( action ) => {
 };
 
 function handleResponse( res, action, next ) {
-    console.log('handleResponse',res)
+    // console.log('handleResponse',res)
     try{
         if(res.error && res.error < 500 && res.error >= 400){
-            console.log('res.error',res.error)
-            console.log('res',res.response)
+            // console.log('res.error',res.error)
+            // console.log('res',res.response)
             res = { code: res.error, message: res.response.error.message, data: { records: [ ] }, critical: action.meta.critical ? action.meta.critical : 0 };
         }else if(res.error && res.error >= 500){
             res = { code: res.error, message: 'Internal server error', data: { records: [ ] }, critical: action.meta.critical ? action.meta.critical : 0 };

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import FavouriteItem from './FavouriteItem';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 const Favourite = React.memo(function Favourite(props) {
+    const history = useHistory();
 
     const [allProducts, setAllProducts] = useState([])
 
@@ -25,9 +27,13 @@ const Favourite = React.memo(function Favourite(props) {
         props.unfavProduct({ productId: id }).then((res) => {
             // props.getAllProducts().then(res => setAllProducts([...res[0].result.list]))
             newList = allProducts.filter((item) => item[0].id !== id)
-            console.log('NEW LIST ', newList)
+            // console.log('NEW LIST ', newList)
             setAllProducts(newList)
         })
+    }
+    function FavItemClickHandler(slug) {
+        // console.log('CLiked ', slug)
+        history.push(`/product/${slug}`)
     }
 
     return (
@@ -46,51 +52,51 @@ const Favourite = React.memo(function Favourite(props) {
                 </header>
                 {allProducts.length > 0 && allProducts.map((item, index) => (
 
-                    <FavouriteItem item={item} key={index} handleClick={handleClick} />)
+                    <FavouriteItem item={item} key={index} handleClick={handleClick} onItemClickHandler={FavItemClickHandler} />)
                 )}
             </div>
             <section className="panel-space"></section>
 
             <div className="bottom-panel">
                 <ul>
-                    <li>
+                    <li >
                         <Link to="/">
                             <div className="icon">
                                 <img src="/images/icon/footer-icon/home.svg" className="img-fluid bg-img" alt="" />
                             </div>
-                            <span>home</span>
+                            <span className="footer-span">home</span>
                         </Link>
                     </li>
-                    <li>
-                        <Link to="#">
+                    <li >
+                        <Link to="/categories">
                             <div className="icon">
                                 <img src="/images/icon/footer-icon/category.svg" className="img-fluid bg-img" alt="" />
                             </div>
-                            <span>category</span>
+                            <span className="footer-span">category</span>
                         </Link>
                     </li>
-                    <li>
+                    <li >
                         <Link to="/cart">
                             <div className="icon">
                                 <img src="/images/icon/footer-icon/shopping-cart.svg" className="img-fluid bg-img" alt="" />
                             </div>
-                            <span>cart</span>
+                            <span className="footer-span">cart</span>
                         </Link>
                     </li>
-                    <li className="active">
-                        <Link to="/favourites" >
+                    <li className='active'>
+                        <Link to='/favourites'>
                             <div className="icon">
-                                <img src="/images/icon/footer-icon/favourite.svg" className="img-fluid bg-img" alt="" />
+                                <img src="/images/icon/footer-icon/favourite-2.svg" className="img-fluid bg-img" alt="" />
                             </div>
-                            <span style={{ color: 'white' }}>wishlist</span>
+                            <span className="footer-span">wishlist</span>
                         </Link>
                     </li>
                     <li >
                         <Link to="/account">
                             <div className="icon">
-                                <img src="/images/icon/footer-icon/user-2.svg" className="img-fluid bg-img" alt="" />
+                                <img src="/images/icon/footer-icon/user.svg" className="img-fluid bg-img" alt="" />
                             </div>
-                            <span>Account</span>
+                            <span className="footer-span">Account</span>
                         </Link>
                     </li>
                 </ul>

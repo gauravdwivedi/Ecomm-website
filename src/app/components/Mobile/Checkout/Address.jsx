@@ -6,7 +6,7 @@ function Address(props) {
 
     const handleOnClick = (e, id) => {
         e.stopPropagation();
-        console.log('Cliked', id)
+        // console.log('Cliked', id)
         setIsCurrent(id)
     }
 
@@ -37,14 +37,13 @@ function Address(props) {
                     </ul>
                     <Link
                         to="/add-address"
-                        className="btn new-address-btn btn-outline text-capitalize w-100 mt-3 mb-4"
-                    >
+                        className="btn new-address-btn btn-outline text-capitalize w-100 mt-3 mb-4">
                         add address
                     </Link>
                 </div>
             </section>
             <section className="panel-space" />
-            <section id="order-details" className="px-15 pt-0 b-top">
+            {/* <section id="order-details" className="px-15 pt-0 b-top">
                 <div className="order-details">
                     <div className="total-amount">
                         <h4>
@@ -55,7 +54,7 @@ function Address(props) {
                         Continue
                     </a>
                 </div>
-            </section>
+            </section> */}
         </div>
 
 

@@ -13,7 +13,7 @@ const SignUp = React.memo(function SignUp(props) {
 
     useEffect(() => {
         if (context.isAuthenticated) {
-            console.log('LOggedIn')
+            // console.log('LOggedIn')
             props.history.replace('/')
         }
     })
@@ -136,7 +136,7 @@ const SignUp = React.memo(function SignUp(props) {
                 lastName,
                 phone
             }).then((res) => {
-                console.log('RES', res)
+                // console.log('RES', res)
 
                 //user already registered
                 if (res[0].registration == false) {
@@ -145,7 +145,6 @@ const SignUp = React.memo(function SignUp(props) {
                     Util.setCookie('userData', res[0].user, 7);
                     context.setAuthState(true)
                 }
-
 
                 if (res[0].registration == true) {
                     let token = res[0].token

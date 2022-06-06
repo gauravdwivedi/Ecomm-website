@@ -746,6 +746,7 @@ nav ul li i {
     height: 100vh;
     overflow: hidden;
     position: relative;
+    scroll-snap-align: start;
 }
 
 #videoWrapper video {
@@ -759,6 +760,9 @@ nav ul li i {
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
+
+
+
 }
 
 .video-content {
@@ -774,7 +778,7 @@ nav ul li i {
 
 .video-content .caption .contents {
     color: #fff;
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 .contents.right-sec {
@@ -823,7 +827,8 @@ nav ul li i {
 }
 
 .video-content .contents .hrs-btn span {
-    /* padding: 8px 8px; */
+    padding: 8px 8px;
+
 }
 
 .video-content .contents .hrs-btn h6 {
@@ -2150,4 +2155,29 @@ header.none-bg {
     border: 5px solid black;
     border-radius: 15px;
     text-align: right;
+}
+
+.footer-span {
+    margin-left: 0 !important;
+}
+
+.videoCard {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    scroll-snap-type: y mandatory;
+}
+
+.video__player {
+    position: relative;
+    scroll-snap-align: start;
+}
+
+.hrs-text {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    width: 30vh;
+
 }
