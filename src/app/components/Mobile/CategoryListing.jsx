@@ -13,10 +13,12 @@ function CategoryListing(props) {
     // console.log('PROPS', props)
     return (<>
         <section className="category-section px-15 pt-0">
+
             <div className="title-part">
                 <h2>Categories</h2>
 
             </div>
+
             <div className="product-section">
                 <div className="row gy-3">
 

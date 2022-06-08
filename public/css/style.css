@@ -613,7 +613,7 @@ nav ul li i {
     width: fit-content;
     position: absolute;
     top: 0px;
-    background: #FFF7F7;
+    background: #fff;
     border-radius: 8px;
     margin-top: 8px;
     height: 32px;
@@ -668,7 +668,7 @@ nav ul li i {
     height: 32px;
     /* position: absolute; */
     top: 0px;
-    background-color: white;
+    background-color: #FFF7F7;
     border-radius: 8px;
 
 }
