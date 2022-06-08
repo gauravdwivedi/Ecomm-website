@@ -13,8 +13,8 @@ const Modal = props => {
                 <Slider {...settings}>
                     {props.content.map((item) => (
 
-                        <div className="slider-box">
-                            < img src={config.IMG_END_POINT + item.url} className="img-fluid bg-img" />
+                        <div className="slider-box" style={{ display: 'flex', justifyContent: 'space-around' }}>
+                            < img src={config.IMG_END_POINT + item.url} className="modal-img" />
                         </div>
 
                     ))}

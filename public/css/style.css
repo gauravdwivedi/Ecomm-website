@@ -2366,13 +2366,18 @@ header.none-bg {
     /* Could be more or less, depending on screen size */
 }
 
-.modal-image {
+.modal-img {
     /* overflow: auto; */
+    height: 300px !important;
+    align-items: center;
+    align-content: center;
 }
 
 .slick-dots li.slick-active button:before {
     color: #dee2e6 !important;
     opacity: 1;
+    overflow: hidden;
+    align-items: center;
 }
 
 .slick-dots li button:before {
