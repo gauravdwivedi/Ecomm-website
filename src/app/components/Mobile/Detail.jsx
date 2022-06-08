@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
-import { Modal, Container, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import config from '../../../config'
 import authContext from '../../helpers/authContext';
 import { useHistory } from 'react-router';
-import PopUp from './PopUp'
-
+import Modal from './Modal';
 const Detail = React.memo(function Detail(props) {
 	const context = useContext(authContext)
 	const history = useHistory();
@@ -21,8 +19,11 @@ const Detail = React.memo(function Detail(props) {
 	const [quantity, setQuantity] = useState(0)
 
 	const [modalShow, setModalShow] = useState(false);
+	const [ModalTwo, setModalTwo] = useState(false);
 
 	let images = [];
+	let content = ''
+	let isContent;
 
 	useEffect(() => {
 
@@ -101,15 +102,30 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	if (props.detail.images) {
+
 		props.detail.images.map((item) => {
-			images.push(item.url)
+			images.push(item)
 		})
 	}
 
-	if (props.detail.videos) {
-		props.detail.videos.map((item) => {
-			images.push(item.thumbnail)
-		})
+	// if (props.detail.videos) {
+	// 	props.detail.videos.map((item) => {
+	// 		images.push(item.thumbnail)
+	// 	})
+	// }
+
+	const modalContent = (item) => {
+		console.log('ITEM', item)
+		if (!ModalTwo) {
+			setModalTwo(true)
+		} else {
+			setModalTwo(false)
+		}
+
+		content = ` < div className="modal-content" >
+			< img src=${config.IMG_END_POINT + item.url} className="modal-image" />
+		</div >`
+		isContent = true;
 	}
 
 	return (
@@ -134,6 +150,7 @@ const Detail = React.memo(function Detail(props) {
 				<VedioPlayer url={props.detail?.videos[0]?.url} />
 				: ""}
 
+			{ModalTwo && <Modal content={images} />}
 			{/* <div className="video-content d-flex flex-column w-100 mw-100 overflow-hidden" style={{ padding: '20px' }}> */}
 			<div className="video-content" >
 				{/* <div className='d-flex  justify-content-between mw-90'> */}
@@ -155,7 +172,7 @@ const Detail = React.memo(function Detail(props) {
 
 							<div className="detail-gallary">
 								<ul className='detail__gallary'>
-									{props.detail.images && images.map((item, i) => <li key={i}><img src={config.IMG_END_POINT + item} alt="" className='detail__gallary-img' /></li>)}
+									{props.detail.images && images.map((item, i) => <li key={i}><img src={config.IMG_END_POINT + item.url} alt="" className='detail__gallary-img' onClick={() => modalContent(item)} /></li>)}
 								</ul>
 							</div>
 							<div className="hrs-btn">
