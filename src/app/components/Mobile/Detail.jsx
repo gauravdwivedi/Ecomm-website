@@ -150,7 +150,7 @@ const Detail = React.memo(function Detail(props) {
 				<VedioPlayer url={props.detail?.videos[0]?.url} />
 				: ""}
 
-			{ModalTwo && <Modal content={images} />}
+			{ModalTwo && <Modal content={images} isVisible={setModalTwo} />}
 			{/* <div className="video-content d-flex flex-column w-100 mw-100 overflow-hidden" style={{ padding: '20px' }}> */}
 			<div className="video-content" >
 				{/* <div className='d-flex  justify-content-between mw-90'> */}

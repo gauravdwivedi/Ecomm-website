@@ -1256,6 +1256,8 @@ nav ul li i {
 
 .cart-section .cart-box .cart-img {
     margin-right: 20px;
+    width: 116px;
+    height: 123px;
 }
 
 .cart-section .cart-box .cart-img img {
@@ -2311,6 +2313,11 @@ header.none-bg {
     overflow: scroll;
 }
 
+.detail__gallary::-webkit-scrollbar {
+    display: none;
+}
+
+
 .detail__gallary-img {
     width: 50px;
     height: 50px;
@@ -2343,7 +2350,7 @@ header.none-bg {
     top: 6%;
     width: 100%;
     /* Full width */
-    height: 60%;
+    height: 100%;
     /* Full height */
     overflow: hidden;
     /* Enable scroll if needed */
@@ -2368,9 +2375,14 @@ header.none-bg {
 
 .modal-img {
     /* overflow: auto; */
+    width: 390px !important;
     height: 437px !important;
     align-items: center;
     align-content: center;
+}
+
+.close-img {
+    float: right;
 }
 
 .slick-dots li.slick-active button:before {

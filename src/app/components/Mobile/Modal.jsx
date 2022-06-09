@@ -8,17 +8,16 @@ const Modal = props => {
     }
     console.log('MODAL', props)
     return ReactDOM.createPortal(
-        <div className="app-modal">
+        <div className="app-modal" onClick={() => props.isVisible(false)}>
             < div className=" slick-default theme-dots" >
                 <Slider {...settings}>
                     {props.content.map((item) => (
 
                         <div className="slider-box" style={{ display: 'flex', justifyContent: 'space-around' }}>
+                            <button type="button" class="btn-close close-img " aria-label="Close" />
                             < img src={config.IMG_END_POINT + item.url} className="modal-img" />
                         </div>
-
                     ))}
-
                 </Slider>
             </div >
         </div>, document.getElementById('modal')
