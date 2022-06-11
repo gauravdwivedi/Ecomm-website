@@ -5,6 +5,8 @@ import config from '../../../config'
 import authContext from '../../helpers/authContext';
 import { useHistory } from 'react-router';
 import Modal from './Modal';
+import Slider from "react-slick";
+import LazyLoadVideo from './LazyLoadVideo';
 const Detail = React.memo(function Detail(props) {
 	const context = useContext(authContext)
 	const history = useHistory();
@@ -20,10 +22,15 @@ const Detail = React.memo(function Detail(props) {
 
 	const [modalShow, setModalShow] = useState(false);
 	const [ModalTwo, setModalTwo] = useState(false);
+	const [isFilter, setIsFilter] = useState(false)
 
 	let images = [];
 	let content = ''
 	let isContent;
+
+	let settings = {
+		dots: true
+	}
 
 	useEffect(() => {
 
@@ -36,8 +43,6 @@ const Detail = React.memo(function Detail(props) {
 
 
 	const handleLikeClick = () => {
-
-
 
 		if (like) {
 			props.unlikeProduct({ productId: props.detail.id }).then(res => {
@@ -122,10 +127,7 @@ const Detail = React.memo(function Detail(props) {
 			setModalTwo(false)
 		}
 
-		content = ` < div className="modal-content" >
-			< img src=${config.IMG_END_POINT + item.url} className="modal-image" />
-		</div >`
-		isContent = true;
+
 	}
 
 	return (
@@ -140,17 +142,85 @@ const Detail = React.memo(function Detail(props) {
 				<div className="header-option" style={{ marginLeft: "auto" }}>
 					<ul>
 						<li><a href="#"><img src="/images/detail-video/icon/sort.svg" alt="" /></a></li>
-						<li><a href="#"><img src="/images/detail-video/icon/setting.svg" alt="" /></a></li>
+						<li onClick={() => setIsFilter(true)}><a href="#"><img src="/images/detail-video/icon/setting.svg" alt="" /></a></li>
 						<li><a href="#"><img src="/images/detail-video/icon/category.svg" alt="" /></a></li>
 					</ul>
 				</div>
 			</div>
 
 			{(props.detail.videos) ?
-				<VedioPlayer url={props.detail?.videos[0]?.url} />
+				// <VedioPlayer url={props.detail?.videos[0]?.url} />
+				<LazyLoadVideo url={config.IMG_END_POINT + props.detail?.videos[0]?.url} />
 				: ""}
 
-			{ModalTwo && <Modal content={images} isVisible={setModalTwo} />}
+			{ModalTwo && <Modal isVisible={setModalTwo} >
+				< div className=" slick-default theme-dots" >
+					<Slider {...settings}>
+						{images.map((item) => (
+
+							<div className="slider-box" style={{ display: 'flex', justifyContent: 'space-around' }}>
+								<button type="button" class="btn-close close-img " aria-label="Close" />
+								< img src={config.IMG_END_POINT + item.url} className="modal-img" />
+							</div>
+						))}
+					</Slider>
+				</div >
+			</Modal>}
+
+			{isFilter && <Modal isVisible={setIsFilter}>
+				<div className='container-filter'>
+					<div className='filter-body'>
+						<h2 className='filter-title'>Filter</h2>
+						<div className='delivery'>
+							<h2>Delivery</h2>
+							<div className='btn-container'>
+								<div className='fast-delivery'>
+									<img src='/images/hr-icon-white.svg' />
+									<span >
+										Fast Delivery
+									</span>
+								</div>
+								<div className='normal-delivery'>
+									<img src='/images/hr-icon-black.svg' />
+									<span >
+										Normal
+									</span>
+								</div>
+
+							</div>
+						</div>
+						<div className='price-range'>
+							<h2>Price Range</h2>
+							<div className='range-boundary'>
+								<span className='min-range'>$0</span>
+								<span className='max-range'>$100</span>
+							</div>
+							<div className="slider">
+								<div className='slider-progress'></div>
+							</div>
+							<div className="range-input">
+								<input type="range" className='range-min' min="0" max="100" />
+								<input type="range" className='range-max' min="0" max="100" />
+							</div>
+						</div>
+						<div className="sizes">
+							<h2>Sizes</h2>
+							<ul>
+								<li>S</li>
+								<li>M</li>
+								<li>L</li>
+								<li>XL</li>
+								<li>2XL</li>
+							</ul>
+						</div>
+						<div className='action-btns'>
+							<button className='filter-btn'>Reset</button>
+							<button className='filter-btn'>Save</button>
+						</div>
+					</div>
+				</div>
+
+			</Modal>}
 			{/* <div className="video-content d-flex flex-column w-100 mw-100 overflow-hidden" style={{ padding: '20px' }}> */}
 			<div className="video-content" >
 				{/* <div className='d-flex  justify-content-between mw-90'> */}
@@ -249,7 +319,7 @@ const VedioPlayer = ({ url }) => {
 			<video
 				playsInline
 				autoPlay
-				muted
+
 				loop
 				poster="/images/detail-bg.png"
 				src={config.IMG_END_POINT + url} />

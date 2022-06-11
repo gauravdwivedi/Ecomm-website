@@ -2,14 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import config from "../../../config";
 import Slider from "react-slick";
-const Modal = props => {
-    let settings = {
-        dots: true
-    }
+const Modal = (props) => {
+
     console.log('MODAL', props)
     return ReactDOM.createPortal(
         <div className="app-modal" onClick={() => props.isVisible(false)}>
-            < div className=" slick-default theme-dots" >
+            {/* < div className=" slick-default theme-dots" >
                 <Slider {...settings}>
                     {props.content.map((item) => (
 
@@ -19,7 +17,9 @@ const Modal = props => {
                         </div>
                     ))}
                 </Slider>
-            </div >
+            </div > */}
+            {props.children}
+
         </div>, document.getElementById('modal')
     )
 }
