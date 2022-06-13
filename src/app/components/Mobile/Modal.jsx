@@ -4,7 +4,6 @@ import config from "../../../config";
 import Slider from "react-slick";
 const Modal = (props) => {
 
-    console.log('MODAL', props)
     return ReactDOM.createPortal(
         <div className="app-modal" onClick={() => props.isVisible(false)}>
             {/* < div className=" slick-default theme-dots" >

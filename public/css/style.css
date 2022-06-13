@@ -2531,6 +2531,9 @@ header.none-bg {
     line-height: 17px;
 }
 
+.slider-container {
+    margin-top: 10px;
+}
 
 .slider {
     height: 5px;
@@ -2541,8 +2544,8 @@ header.none-bg {
 
 .slider .slider-progress {
     height: 5px;
-    left: 25%;
-    right: 25%;
+    left: 0;
+    right: 0;
     position: absolute;
     border-radius: 5px;
     background: #000000 !important;
@@ -2632,4 +2635,17 @@ input[type="range"]::-webkit-slider-thumb {
 .btn-save {
     background: #000000;
     color: #FFFFFF;
+}
+
+.radio-btn-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-btns {
+    display: flex;
+}
+
+.radio-btns input ::after {
+    background: #FFFFFF;
 }

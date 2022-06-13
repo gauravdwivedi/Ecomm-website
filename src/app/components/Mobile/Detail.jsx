@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import config from '../../../config'
@@ -7,6 +7,7 @@ import { useHistory } from 'react-router';
 import Modal from './Modal';
 import Slider from "react-slick";
 import LazyLoadVideo from './LazyLoadVideo';
+import { InputGroup } from 'react-bootstrap';
 const Detail = React.memo(function Detail(props) {
 	const context = useContext(authContext)
 	const history = useHistory();
@@ -23,6 +24,15 @@ const Detail = React.memo(function Detail(props) {
 	const [modalShow, setModalShow] = useState(false);
 	const [ModalTwo, setModalTwo] = useState(false);
 	const [isFilter, setIsFilter] = useState(false)
+	const [isSort, setIsSort] = useState(false)
+
+	const [maxRange, setMaxRange] = useState(100);
+	const [minRange, setMinRange] = useState(0)
+
+	const progressBarRef = useRef(null)
+	const priceGap = 10;
+
+	const [sizeSelect, setSizeSelect] = useState('');
 
 	let images = [];
 	let content = ''
@@ -33,13 +43,46 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	useEffect(() => {
-
 		setLike(props.detail.liked)
 		setInCart(props.detail.productInCart)
 		setFav(props.detail.saved);
 		setNoOfLikes(props.detail.likes)
 
 	}, [props.detail])
+
+	const hanldeProgressBarChangeMin = (e) => {
+		e.preventDefault();
+
+		setMinRange(e.target.value)
+
+		if (maxRange - minRange < priceGap) {
+			setMinRange(maxRange - priceGap);
+
+		} else {
+			progressBarRef.current.style.left = (minRange / 100) * 100 + "%";
+		}
+
+
+
+	}
+
+	const handleProgressBarChangeMax = (e) => {
+		e.preventDefault();
+
+		setMaxRange(e.target.value)
+
+		if (maxRange - minRange < priceGap) {
+			setMinRange(maxRange - priceGap);
+
+		} else {
+
+			progressBarRef.current.style.right = 100 - (maxRange / 100) * 100 + "%";
+		}
+	}
+
+	const handleSizeSelect = (e) => {
+		e.preventDefault();
+	}
 
 
 	const handleLikeClick = () => {
@@ -91,9 +134,7 @@ const Detail = React.memo(function Detail(props) {
 		if (!context.isAuthenticated) {
 			history.push('/login')
 		}
-
 		setModalShow(true);
-
 	}
 
 	const handleInsertInCart = (id) => {
@@ -107,7 +148,6 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	if (props.detail.images) {
-
 		props.detail.images.map((item) => {
 			images.push(item)
 		})
@@ -119,21 +159,61 @@ const Detail = React.memo(function Detail(props) {
 	// 	})
 	// }
 
-	const modalContent = (item) => {
-		console.log('ITEM', item)
+
+	//Filter click handler 
+	const filterClickHandler = () => {
+
+		if (!isFilter) {
+			setIsSort(false)
+			setModalTwo(false)
+			setIsFilter(true)
+
+		} else {
+			setIsFilter(false)
+		}
+	}
+
+	const isSortHandler = () => {
+		if (!isSort) {
+			setModalTwo(false)
+			setIsFilter(false)
+			setIsSort(true)
+
+		} else {
+			setIsSort(false)
+		}
+	}
+
+
+	const modalContent = () => {
+
 		if (!ModalTwo) {
+			setIsFilter(false)
+			setIsSort(false)
 			setModalTwo(true)
 		} else {
 			setModalTwo(false)
 		}
+	}
 
+	const onSizeHandler = (e, value) => {
+		e.preventDefault();
+		e.stopPropagation();
+		setSizeSelect(value)
+	}
 
+	const OnClickSaveHandler = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		console.log(maxRange, minRange, sizeSelect)
+		console.log(props)
+
+		props.getallproducts(`min_price=${minRange}&max_price=${maxRange}&size=${sizeSelect}`).then()
 	}
 
 	return (
 		<div id="main">
 			<div className='top-shadow'>
-
 			</div>
 			<div className="detail-header">
 				<Link to="/">
@@ -141,8 +221,8 @@ const Detail = React.memo(function Detail(props) {
 				</Link>
 				<div className="header-option" style={{ marginLeft: "auto" }}>
 					<ul>
-						<li><a href="#"><img src="/images/detail-video/icon/sort.svg" alt="" /></a></li>
-						<li onClick={() => setIsFilter(true)}><a href="#"><img src="/images/detail-video/icon/setting.svg" alt="" /></a></li>
+						<li onClick={isSortHandler}><a href="#"><img src="/images/detail-video/icon/sort.svg" alt="" /></a></li>
+						<li onClick={filterClickHandler}><a href="#"><img src="/images/detail-video/icon/setting.svg" alt="" /></a></li>
 						<li><a href="#"><img src="/images/detail-video/icon/category.svg" alt="" /></a></li>
 					</ul>
 				</div>
@@ -157,7 +237,6 @@ const Detail = React.memo(function Detail(props) {
 				< div className=" slick-default theme-dots" >
 					<Slider {...settings}>
 						{images.map((item) => (
-
 							<div className="slider-box" style={{ display: 'flex', justifyContent: 'space-around' }}>
 								<button type="button" class="btn-close close-img " aria-label="Close" />
 								< img src={config.IMG_END_POINT + item.url} className="modal-img" />
@@ -186,40 +265,85 @@ const Detail = React.memo(function Detail(props) {
 										Normal
 									</span>
 								</div>
-
 							</div>
 						</div>
 						<div className='price-range'>
 							<h2>Price Range</h2>
 							<div className='range-boundary'>
-								<span className='min-range'>$0</span>
-								<span className='max-range'>$100</span>
+								<span className='min-range' >${minRange}</span>
+								<span className='max-range' >${maxRange}</span>
 							</div>
-							<div className="slider">
-								<div className='slider-progress'></div>
-							</div>
-							<div className="range-input">
-								<input type="range" className='range-min' min="0" max="100" />
-								<input type="range" className='range-max' min="0" max="100" />
+							<div className='slider-container'>
+								<div className="slider">
+									<div className='slider-progress' ref={progressBarRef}></div>
+								</div>
+								<div className="range-input">
+									<input type="range" className='range-min' min="0" max="100" onChange={(e) => hanldeProgressBarChangeMin(e)} value={minRange} />
+									<input type="range" className='range-max' min="0" max="100" onChange={(e) => handleProgressBarChangeMax(e)} value={maxRange} />
+								</div>
 							</div>
 						</div>
 						<div className="sizes">
 							<h2>Sizes</h2>
 							<ul>
-								<li className='size-box' >S</li>
-								<li className='size-box'>M</li>
-								<li className='size-box'>L</li>
-								<li className='size-box'>XL</li>
-								<li className='size-box'>2XL</li>
+								<li className='size-box' onClick={(e) => onSizeHandler(e, "S")} >S</li>
+								<li className='size-box' onClick={(e) => onSizeHandler(e, "M")}>M</li>
+								<li className='size-box' onClick={(e) => onSizeHandler(e, "L")}>L</li>
+								<li className='size-box' onClick={(e) => onSizeHandler(e, "XL")}>XL</li>
+								<li className='size-box' onClick={(e) => onSizeHandler(e, "2XL")}>2XL</li>
 							</ul>
 						</div>
+						<div className='action-btns'>
+							<button className='filter-btn btn-reset'>Reset</button>
+							<button className='filter-btn btn-save' onClick={(e) => OnClickSaveHandler(e)}>Save</button>
+						</div>
+					</div>
+				</div>
+
+			</Modal>}
+
+			{isSort && <Modal isVisible={setIsSort}>
+				<div className='container-filter'>
+					<div className='filter-body'>
+						<h2 className='filter-title'>Short By</h2>
+						<div className='radio-btn-container'>
+							<div className='radio-btns'>
+								<input type="checkbox" id='best-match' name="sort-item" value="best-match" />
+								<label for="best-match">Best Match</label>
+							</div>
+							<div>
+								<input type="checkbox" id='time-ending-soon' name="sort-item" value="time-ending-soon" />
+								<label for="time-ending-soon">Time: Ending soonest</label>
+							</div>
+							<div>
+								<input type="checkbox" id='newly-listed' name="sort-item" value="newly-listed" />
+								<label for="newly-listed">Time: Newly listed</label>
+							</div>
+
+							<div>
+								<input type="checkbox" id='price-lowest' name="sort-item" value="price-lowest" />
+								<label for="price-lowest">Price + Shopping lowest first</label>
+							</div>
+
+							<div>
+								<input type="checkbox" id='price-higest' name="sort-item" value="price-higest" />
+								<label for="price-higest">Price+Shopping Higest first</label>
+							</div>
+
+							<div>
+								<input type="checkbox" id='nearest' name="sort-item" value="nearest" />
+								<label for="nearest">Distance: Nearest first</label>
+							</div>
+						</div>
+
 						<div className='action-btns'>
 							<button className='filter-btn btn-reset'>Reset</button>
 							<button className='filter-btn btn-save'>Save</button>
 						</div>
 					</div>
-				</div>
 
+
+				</div>
 			</Modal>}
 			{/* <div className="video-content d-flex flex-column w-100 mw-100 overflow-hidden" style={{ padding: '20px' }}> */}
 			<div className="video-content" >
