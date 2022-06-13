@@ -31,13 +31,12 @@ export default function LazyLoadVideo({ url }) {
             <video
                 playsInline
                 autoPlay
-
+                muted
                 loop
                 poster="/images/detail-bg.png"
                 src={url} />
         </div>
     }
-
 
     return <span ref={VideoRef} className="videoWrapper" />
 }

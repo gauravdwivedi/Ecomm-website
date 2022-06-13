@@ -206,16 +206,16 @@ const Detail = React.memo(function Detail(props) {
 						<div className="sizes">
 							<h2>Sizes</h2>
 							<ul>
-								<li>S</li>
-								<li>M</li>
-								<li>L</li>
-								<li>XL</li>
-								<li>2XL</li>
+								<li className='size-box' >S</li>
+								<li className='size-box'>M</li>
+								<li className='size-box'>L</li>
+								<li className='size-box'>XL</li>
+								<li className='size-box'>2XL</li>
 							</ul>
 						</div>
 						<div className='action-btns'>
-							<button className='filter-btn'>Reset</button>
-							<button className='filter-btn'>Save</button>
+							<button className='filter-btn btn-reset'>Reset</button>
+							<button className='filter-btn btn-save'>Save</button>
 						</div>
 					</div>
 				</div>
@@ -319,7 +319,7 @@ const VedioPlayer = ({ url }) => {
 			<video
 				playsInline
 				autoPlay
-
+				muted
 				loop
 				poster="/images/detail-bg.png"
 				src={config.IMG_END_POINT + url} />
