@@ -88,6 +88,7 @@ const CategorySection = (props) => {
 
 
 	const handleCategoryClick = (params) => {
+		console.log(params)
 		history.push(`/products/list/${params}`);
 	}
 

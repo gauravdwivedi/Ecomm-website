@@ -32,7 +32,7 @@ const Detail = React.memo(function Detail(props) {
 	const progressBarRef = useRef(null)
 	const priceGap = 10;
 
-	const [sizeSelect, setSizeSelect] = useState('');
+	const [sizeSelect, setSizeSelect] = useState('M');
 
 	let images = [];
 	let content = ''
@@ -205,10 +205,16 @@ const Detail = React.memo(function Detail(props) {
 	const OnClickSaveHandler = (e) => {
 		e.preventDefault();
 		e.stopPropagation();
-		console.log(maxRange, minRange, sizeSelect)
-		console.log(props)
 
-		props.getallproducts(`min_price=${minRange}&max_price=${maxRange}&size=${sizeSelect}`).then()
+		props.getallproducts(`min_price=${minRange}&max_price=${maxRange}&size=${sizeSelect}`).then(
+			setIsFilter(false)
+		)
+	}
+
+	const oncheckBoxClickHandler = (e) => {
+		e.stopPropagation();
+		console.log('Cliked')
+
 	}
 
 	return (
@@ -286,11 +292,11 @@ const Detail = React.memo(function Detail(props) {
 						<div className="sizes">
 							<h2>Sizes</h2>
 							<ul>
-								<li className='size-box' onClick={(e) => onSizeHandler(e, "S")} >S</li>
-								<li className='size-box' onClick={(e) => onSizeHandler(e, "M")}>M</li>
-								<li className='size-box' onClick={(e) => onSizeHandler(e, "L")}>L</li>
-								<li className='size-box' onClick={(e) => onSizeHandler(e, "XL")}>XL</li>
-								<li className='size-box' onClick={(e) => onSizeHandler(e, "2XL")}>2XL</li>
+								<li className='size-box' id='S' onClick={(e) => onSizeHandler(e, "S")}>S</li>
+								<li className='size-box' id="M" onClick={(e) => onSizeHandler(e, "M")}>M</li>
+								<li className='size-box' id="L" onClick={(e) => onSizeHandler(e, "L")}>L</li>
+								<li className='size-box' id="XL" onClick={(e) => onSizeHandler(e, "XL")}>XL</li>
+								<li className='size-box' id="2XL" onClick={(e) => onSizeHandler(e, "2XL")}>2XL</li>
 							</ul>
 						</div>
 						<div className='action-btns'>
@@ -307,32 +313,34 @@ const Detail = React.memo(function Detail(props) {
 					<div className='filter-body'>
 						<h2 className='filter-title'>Short By</h2>
 						<div className='radio-btn-container'>
-							<div className='radio-btns'>
+							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
 								<input type="checkbox" id='best-match' name="sort-item" value="best-match" />
-								<label for="best-match">Best Match</label>
+								<label className='lbl' for="best-match">Best Match</label>
 							</div>
-							<div>
+
+							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
 								<input type="checkbox" id='time-ending-soon' name="sort-item" value="time-ending-soon" />
-								<label for="time-ending-soon">Time: Ending soonest</label>
+								<label className='lbl' for="time-ending-soon">Time: Ending soonest</label>
 							</div>
-							<div>
+
+							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
 								<input type="checkbox" id='newly-listed' name="sort-item" value="newly-listed" />
-								<label for="newly-listed">Time: Newly listed</label>
+								<label className='lbl' for="newly-listed">Time: Newly listed</label>
 							</div>
 
-							<div>
+							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
 								<input type="checkbox" id='price-lowest' name="sort-item" value="price-lowest" />
-								<label for="price-lowest">Price + Shopping lowest first</label>
+								<label className='lbl' for="price-lowest">Price + Shopping lowest first</label>
 							</div>
 
-							<div>
+							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
 								<input type="checkbox" id='price-higest' name="sort-item" value="price-higest" />
-								<label for="price-higest">Price+Shopping Higest first</label>
+								<label className='lbl' for="price-higest">Price + Shopping Higest first</label>
 							</div>
 
-							<div>
-								<input type="checkbox" id='nearest' name="sort-item" value="nearest" />
-								<label for="nearest">Distance: Nearest first</label>
+							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
+								<input type="checkbox" id='nearest' name="sort-item" value="nearest" onChange={() => console.log('click')} />
+								<label className='lbl' for="nearest">Distance: Nearest first</label>
 							</div>
 						</div>
 
@@ -341,10 +349,9 @@ const Detail = React.memo(function Detail(props) {
 							<button className='filter-btn btn-save'>Save</button>
 						</div>
 					</div>
-
-
 				</div>
 			</Modal>}
+
 			{/* <div className="video-content d-flex flex-column w-100 mw-100 overflow-hidden" style={{ padding: '20px' }}> */}
 			<div className="video-content" >
 				{/* <div className='d-flex  justify-content-between mw-90'> */}

@@ -1,7 +1,6 @@
 import React, { PureComponent, Fragment } from "react";
 import { connect } from 'react-redux';
 import AuthContext from "../helpers/authContext";
-
 import ProductList from "../components/Mobile/ProductList";
 import { getAllProducts, getAllCategory } from "../data/ducks/home/actions"
 import {

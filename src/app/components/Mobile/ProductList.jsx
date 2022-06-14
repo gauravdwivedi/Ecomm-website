@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import Detail from './Detail';
 
-
 function ProductList(props) {
     return (
         <div className='videoCard'>

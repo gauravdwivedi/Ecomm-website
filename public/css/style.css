@@ -2640,12 +2640,61 @@ input[type="range"]::-webkit-slider-thumb {
 .radio-btn-container {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    padding: 5%;
+    margin-left: 10px;
 }
 
-.radio-btns {
-    display: flex;
+.radio-btn-container .radio-btns {
+    margin: 8px;
 }
 
-.radio-btns input ::after {
-    background: #FFFFFF;
+input[type="checkbox"] {
+    display: none;
+}
+
+.lbl {
+    position: relative;
+    height: 19px;
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 19px;
+    color: #000000;
+}
+
+.lbl::before {
+    content: "";
+    background: url("/images/check-circle.svg");
+    background-position: center;
+    background-size: contain;
+
+    border-radius: 50%;
+    width: 18.86px;
+    height: 18.86px;
+    position: absolute;
+    left: -30px;
+    margin: 0;
+    padding: 0;
+    z-index: 10;
+    color: #FFFFFF;
+    transform: scale(0) rotateZ(180deg);
+    transition: all 0.4s cubic-bezier(0.54, 0.01, 0, 1.49);
+}
+
+input[type="checkbox"]:checked+.lbl::before {
+    transform: scale(1.2) rotateZ(0deg);
+
+
+}
+
+.lbl::after {
+    content: "";
+    background: #CECECE;
+    width: 18.86px;
+    height: 18.86px;
+    position: absolute;
+    left: -30px;
+    border-radius: 50%;
+
 }
