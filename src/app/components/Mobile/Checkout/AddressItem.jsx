@@ -7,6 +7,8 @@ function AddressItem(props) {
     // console.log('CUrrent Index ', props.isCurrent)
     const { handleOnClick, isCurrent } = props;
 
+    // console.log('Address props', props, 'item id', id, 'IsCurrent', isCurrent)
+
     return (
         <>
             <li>
@@ -22,7 +24,7 @@ function AddressItem(props) {
                             </div>
                             <h4>Arrival est: Apr 15 $0 Shipping</h4>
                         </div>
-                        <input
+                        <input style={{ display: 'block' }}
                             className="radio_animated"
                             type="radio"
                             name="flexRadioDefault"

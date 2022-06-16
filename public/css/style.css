@@ -2060,6 +2060,14 @@ header.none-bg {
     bottom: 50%;
 }
 
+.address-progress-bar {
+    width: 100%;
+    background: #E6E6E6 !important;
+    height: .3rem;
+    top: 25%;
+    bottom: 50%;
+}
+
 .progress:before,
 .progress:after {
     content: "";

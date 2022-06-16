@@ -31,11 +31,9 @@ function Cart(props) {
 
     const calculateTotal = (list) => {
         let sum = 0;
-
         list?.forEach((value, index, array) => {
             sum += value.price;
         })
-
         // console.log('Total Price', sum)
         setTotal(sum)
     }
@@ -73,7 +71,11 @@ function Cart(props) {
                         >
                             Add items from wishlist
                         </Link> : <Link
-                            to="/confirm"
+                            to={{
+                                pathname: `/address`,
+                                query: { total: total }
+                            }}
+
                             className="btn btn-outline checkout-btn text-capitalize w-100 mt-3"
                         >
                             Continue to checkout

@@ -22,9 +22,7 @@ function AddAddress(props) {
             // console.log('Logged In')
             props.history.replace('/login')
         }
-
     })
-
 
     useEffect(() => {
         if (props?.history?.location?.query?.data) {
