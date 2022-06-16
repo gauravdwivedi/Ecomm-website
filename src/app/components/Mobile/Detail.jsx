@@ -29,6 +29,7 @@ const Detail = React.memo(function Detail(props) {
 	const [maxRange, setMaxRange] = useState(100);
 	const [minRange, setMinRange] = useState(0)
 
+
 	const progressBarRef = useRef(null)
 	const priceGap = 10;
 
@@ -217,6 +218,14 @@ const Detail = React.memo(function Detail(props) {
 
 	}
 
+	const onSaveSortHandler = (e) => {
+		e.stopPropagation();
+
+		console.log('PROPS', props)
+
+		// props.getallproducts(``)
+	}
+
 	return (
 		<div id="main">
 			<div className='top-shadow'>
@@ -311,42 +320,42 @@ const Detail = React.memo(function Detail(props) {
 			{isSort && <Modal isVisible={setIsSort}>
 				<div className='container-filter'>
 					<div className='filter-body'>
-						<h2 className='filter-title'>Short By</h2>
+						<h2 className='filter-title'>Sort By</h2>
 						<div className='radio-btn-container'>
 							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
-								<input type="checkbox" id='best-match' name="sort-item" value="best-match" />
+								<input type="radio" id='best-match' name="sort-item" value="best-match" />
 								<label className='lbl' for="best-match">Best Match</label>
 							</div>
 
 							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
-								<input type="checkbox" id='time-ending-soon' name="sort-item" value="time-ending-soon" />
+								<input type="radio" id='time-ending-soon' name="sort-item" value="time-ending-soon" />
 								<label className='lbl' for="time-ending-soon">Time: Ending soonest</label>
 							</div>
 
 							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
-								<input type="checkbox" id='newly-listed' name="sort-item" value="newly-listed" />
+								<input type="radio" id='newly-listed' name="sort-item" value="newly-listed" />
 								<label className='lbl' for="newly-listed">Time: Newly listed</label>
 							</div>
 
 							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
-								<input type="checkbox" id='price-lowest' name="sort-item" value="price-lowest" />
+								<input type="radio" id='price-lowest' name="sort-item" value="price-lowest" />
 								<label className='lbl' for="price-lowest">Price + Shopping lowest first</label>
 							</div>
 
 							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
-								<input type="checkbox" id='price-higest' name="sort-item" value="price-higest" />
+								<input type="radio" id='price-higest' name="sort-item" value="price-higest" />
 								<label className='lbl' for="price-higest">Price + Shopping Higest first</label>
 							</div>
 
 							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
-								<input type="checkbox" id='nearest' name="sort-item" value="nearest" onChange={() => console.log('click')} />
+								<input type="radio" id='nearest' name="sort-item" value="nearest" onChange={() => console.log('click')} />
 								<label className='lbl' for="nearest">Distance: Nearest first</label>
 							</div>
 						</div>
 
 						<div className='action-btns'>
 							<button className='filter-btn btn-reset'>Reset</button>
-							<button className='filter-btn btn-save'>Save</button>
+							<button className='filter-btn btn-save' onClick={(e) => onSaveSortHandler(e)}>Save</button>
 						</div>
 					</div>
 				</div>
