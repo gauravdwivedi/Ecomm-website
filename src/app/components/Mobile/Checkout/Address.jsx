@@ -18,8 +18,10 @@ function Address(props) {
 
     const handleOnClick = (e, id) => {
         e.stopPropagation();
-        // console.log('Cliked', id)
+        console.log('Cliked', id)
         setIsCurrent(id)
+        let add = props.list.filter((item) => item.id === id)
+        setSelectedAddress(add)
     }
 
     return (
@@ -82,11 +84,9 @@ function Address(props) {
                     <Link
                         to={{
                             pathname: `/confirm`,
-                            query: { total: total }
+                            query: { total: total, selectedAddress }
                         }}
-
-                        className="btn btn-outline checkout-btn text-capitalize w-100 mt-3"
-                    >
+                        className="btn btn-outline checkout-btn text-capitalize w-100 mt-3">
                         Continue
                     </Link>
 
