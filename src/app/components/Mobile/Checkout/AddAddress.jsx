@@ -3,6 +3,7 @@ import authContext from "../../../helpers/authContext";
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import useGeoLocation from "../../useGeoLocation";
+import GoogleMap from "./GoogleMap";
 
 function AddAddress(props) {
 
@@ -19,10 +20,19 @@ function AddAddress(props) {
     const [id, setId] = useState('')
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
+    const [isCartItem, setIsCartItem] = useState(false);
+    const [mapsrc, setMapsrc] = useState('');
+
 
     const location = useGeoLocation()
 
     useEffect(() => {
+        console.log('Add Address History props', props.history)
+
+        if (props.history.location.query?.isCartItem) {
+            setIsCartItem(true)
+        }
+
         if (!context.isAuthenticated) {
             // console.log('Logged In')
             props.history.replace('/login')
@@ -30,8 +40,7 @@ function AddAddress(props) {
     })
 
     useEffect(() => {
-        if (props?.history?.location?.query?.data) {
-            // console.log(props?.history?.location?.query?.data)
+        if (props.history.location.query?.data) {
             setIsEdit(true)
             setFirstName(props?.history?.location?.query?.data.first_name)
             setLastName(props?.history?.location?.query?.data.last_name);
@@ -49,6 +58,9 @@ function AddAddress(props) {
             console.log('LOCATION', location)
             setLongitude(location.coordinates.lng);
             setLatitude(location.coordinates.lat);
+
+            setMapsrc(`https://maps.google.com/maps?q=${latitude},${longitude}&hl=es;z=14&amp;output=embed`)
+
         }
     })
 
@@ -61,6 +73,9 @@ function AddAddress(props) {
         let city = form.elements['city'];
         let state = form.elements['state'];
         let zipCode = form.elements['zipCode'];
+
+
+        console.log('==>', firstName, lastName, city, state, zipCode)
 
         var elems = document.querySelectorAll('.help-block');
         [].forEach.call(elems, function (el) {
@@ -143,6 +158,7 @@ function AddAddress(props) {
             );
             return_type = false;
         }
+        console.log(return_type)
         return return_type;
     }
 
@@ -157,7 +173,10 @@ function AddAddress(props) {
             }).then(res => {
                 // console.log('ADD ADDRESS Response', res)
                 toast.success("Address added")
-                props.history.push('/address')
+                props.history.push({
+                    pathname: '/address',
+                    state: { isCartItem }
+                })
             })
         }
     }
@@ -172,7 +191,10 @@ function AddAddress(props) {
             }).then(res => {
                 // console.log('Edit Address', res);
                 toast.success("Address updated successfuly!");
-                props.history.push('/address');
+                props.history.push({
+                    pathname: '/address',
+                    state: { isCartItem }
+                });
             })
         }
     }
@@ -192,8 +214,8 @@ function AddAddress(props) {
             {!isEdit && <form name="add-address" onSubmit={(e) => doSubmit(e)}>
                 <section className="add-address pt-4 px-15">
                     <div className="form-floating mb-3">
-                        <input type="text" className="form-control" name="firstName" id="floatingInput" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                        <label htmlFor="floatingInput">First name</label>
+                        <input type="text" className="form-control" name="firstName" id="floatingFirstName" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                        <label htmlFor="floatingFirstName">First name</label>
                     </div>
                     <div className="form-floating mb-3">
                         <input type="text" className="form-control" name="lastName" id="floatingPassword" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
@@ -201,19 +223,19 @@ function AddAddress(props) {
                     </div>
                     <div className="form-floating mb-3">
                         <input type="address" className="form-control" name="address" id="floatingaddress" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
-                        <label htmlFor="floatingPassword">Address</label>
+                        <label htmlFor="floatingaddress">Address</label>
                     </div>
                     <div className="form-floating mb-3">
                         <input type="city" className="form-control" id="floatingcity" name="city" placeholder="city" value={city} onChange={(e) => setCity(e.target.value)} />
-                        <label htmlFor="floatingPassword">City</label>
+                        <label htmlFor="floatingcity">City</label>
                     </div>
                     <div className="form-floating mb-3">
                         <input type="state" className="form-control" id="floatingstate" name="state" placeholder="state" value={state} onChange={(e) => setState(e.target.value)} />
-                        <label htmlFor="floatingPassword">State</label>
+                        <label htmlFor="floatingstate">State</label>
                     </div>
                     <div className="form-floating mb-3">
                         <input type="zip-code" className="form-control" id="floatingzip" name="zipCode" placeholder="zip" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
-                        <label htmlFor="floatingPassword">Zip code</label>
+                        <label htmlFor="floatingzip">Zip code</label>
                     </div>
                 </section>
 
@@ -255,6 +277,8 @@ function AddAddress(props) {
                 </form>
             }
             <Toaster />
+            {location.loaded &&
+                <GoogleMap lat={latitude} lng={longitude} />}
         </div><section className="panel-space"></section></>
 }
 

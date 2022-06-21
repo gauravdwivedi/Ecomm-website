@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import AddAddress from './AddAddress';
+import GoogleMap from './GoogleMap';
 
 function AddressItem(props) {
-    const { id, first_name, last_name, address_1, address_2, city, country, postcode, primary, state, user_id } = props.item;
+    console.log(props)
+    const { id, first_name, last_name, address_1, address_2, city, country, postcode, primary, state, user_id, latitude, longitude } = props.item;
     // console.log('CUrrent Index ', props.isCurrent)
-    const { handleOnClick, isCurrent } = props;
+    const { handleOnClick, isCurrent, isCartItem } = props;
+    console.log('IsCatrItem on AddressITEM', isCartItem)
 
     // console.log('Address props', props, 'item id', id, 'IsCurrent', isCurrent)
 
@@ -36,12 +38,20 @@ function AddressItem(props) {
                         </label>
                     </div>
                 </div>
-                {isCurrent === id && <div className="buttons">
-                    <Link to={{
-                        pathname: `/add-address`,
-                        query: { data: props.item }
-                    }}>edit</Link>
-                </div>}
+                {isCurrent === id && <>
+                    <div className="buttons" style={{ backgroundColor: '#F5F5F5' }}>
+                        <Link to={{
+                            pathname: `/add-address`,
+                            query: {
+                                data: props.item,
+                                isCartItem: isCartItem
+                            }
+                        }}>edit</Link>
+                    </div>
+                    <div style={{ margin: '10px' }}>
+                        <GoogleMap lat={latitude} lng={longitude} />
+                    </div>
+                </>}
             </li>
         </>
     )

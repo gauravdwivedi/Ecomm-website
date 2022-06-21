@@ -10,6 +10,10 @@ function Address(props) {
     const [selectedAddress, setSelectedAddress] = useState('');
 
     useEffect(() => {
+        if (props.history.location?.state?.isCartItem) {
+            setIsCartItem(true)
+        }
+
         if (props?.history?.location?.query?.total) {
             setTotal(props?.history?.location?.query?.total)
             setIsCartItem(true);
@@ -47,12 +51,19 @@ function Address(props) {
                     <h4 className="para-heading">Select or add a shipping address</h4>
                     <ul>
                         {props.list && props.list.map((item) => (
-                            <AddressItem item={item} key={item.id} isCurrent={isCurrent} handleOnClick={handleOnClick} />
+                            <AddressItem item={item} key={item.id} isCurrent={isCurrent} handleOnClick={handleOnClick} isCartItem={isCartItem} />
                         ))}
 
                     </ul>
                     <Link
-                        to="/add-address"
+                        to={
+                            {
+                                pathname: '/add-address',
+                                query: {
+                                    isCartItem
+                                }
+                            }
+                        }
                         className="checkout-btn btn new-address-btn btn-outline text-capitalize w-100 mt-3 mb-4">
                         add address
                     </Link>
@@ -75,6 +86,7 @@ function Address(props) {
             </section> */}
 
             {isCartItem && <section id="order-details" className="px-15 pt-0">
+
                 <div className="order-details">
                     <div className="total-amount">
                         <h4>
@@ -92,6 +104,8 @@ function Address(props) {
 
                 </div>
             </section>}
+
+
         </div>
     )
 }
