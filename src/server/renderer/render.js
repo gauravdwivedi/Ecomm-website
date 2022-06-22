@@ -64,12 +64,13 @@ function getHeader(extractor, lang, helmet, isMobile, articleData, request){
     </head>
     <body>
     ${noscriptTag(lang)}
-    <div id="main_app_id">`;
+    <div id="main_app_id"> 
+    `;
 }
 
 function getFooter(extractor, lang, reduxState, extraprops, isMobile, request){
     reduxState = JSON.stringify(reduxState).replace(/</g, '\\u003c');
-    return `</div><script type="text/javascript">window.is_production=${
+    return `</div><div id="modal"></div><script type="text/javascript">window.is_production=${
         process.env.NODE_APP=='production' ? true: false
     }; window.INITIAL_STATE=${ reduxState };window.extraprops=${JSON.stringify(
         extraprops

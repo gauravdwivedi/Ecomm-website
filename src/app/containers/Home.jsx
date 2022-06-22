@@ -40,9 +40,9 @@ class HomeContainer extends PureComponent {
 			loading: true
 		}, () => {
 			this.props.getAllProducts().then((res) => {
-				this.setState({
-					loading: false
-				})
+				// this.setState({
+				// 	loading: false
+				// })
 			})
 		})
 	}
@@ -52,9 +52,9 @@ class HomeContainer extends PureComponent {
 			loading: true
 		}, () => {
 			this.props.getAllCategory().then((res) => {
-				this.setState({
-					loading: false
-				})
+				// this.setState({
+				// 	loading: false
+				// })
 			})
 		})
 	}

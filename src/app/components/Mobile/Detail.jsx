@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
-import { Modal, Container, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import config from '../../../config'
-import PopUp from './PopUp'
-
-
-
-
+import authContext from '../../helpers/authContext';
+import { useHistory } from 'react-router';
+import Modal from './Modal';
+import Slider from "react-slick";
+import LazyLoadVideo from './LazyLoadVideo';
+import { InputGroup } from 'react-bootstrap';
 const Detail = React.memo(function Detail(props) {
+	const context = useContext(authContext)
+	const history = useHistory();
 
 	const [like, setLike] = useState(false)
 	const [inCart, setInCart] = useState(false)
@@ -20,17 +22,68 @@ const Detail = React.memo(function Detail(props) {
 	const [quantity, setQuantity] = useState(0)
 
 	const [modalShow, setModalShow] = useState(false);
+	const [ModalTwo, setModalTwo] = useState(false);
+	const [isFilter, setIsFilter] = useState(false)
+	const [isSort, setIsSort] = useState(false)
+
+	const [maxRange, setMaxRange] = useState(100);
+	const [minRange, setMinRange] = useState(0)
+
+
+	const progressBarRef = useRef(null)
+	const priceGap = 10;
+
+	const [sizeSelect, setSizeSelect] = useState('M');
 
 	let images = [];
+	let content = ''
+	let isContent;
+
+	let settings = {
+		dots: true
+	}
 
 	useEffect(() => {
-
 		setLike(props.detail.liked)
 		setInCart(props.detail.productInCart)
 		setFav(props.detail.saved);
 		setNoOfLikes(props.detail.likes)
 
 	}, [props.detail])
+
+	const hanldeProgressBarChangeMin = (e) => {
+		e.preventDefault();
+
+		setMinRange(e.target.value)
+
+		if (maxRange - minRange < priceGap) {
+			setMinRange(maxRange - priceGap);
+
+		} else {
+			progressBarRef.current.style.left = (minRange / 100) * 100 + "%";
+		}
+
+
+
+	}
+
+	const handleProgressBarChangeMax = (e) => {
+		e.preventDefault();
+
+		setMaxRange(e.target.value)
+
+		if (maxRange - minRange < priceGap) {
+			setMinRange(maxRange - priceGap);
+
+		} else {
+
+			progressBarRef.current.style.right = 100 - (maxRange / 100) * 100 + "%";
+		}
+	}
+
+	const handleSizeSelect = (e) => {
+		e.preventDefault();
+	}
 
 
 	const handleLikeClick = () => {
@@ -79,7 +132,10 @@ const Detail = React.memo(function Detail(props) {
 	const handleAddCart = () => {
 		// console.log('Setting Modal True')
 		// setAddToCart(true)
-		setModalShow(true)
+		if (!context.isAuthenticated) {
+			history.push('/login')
+		}
+		setModalShow(true);
 	}
 
 	const handleInsertInCart = (id) => {
@@ -94,88 +150,290 @@ const Detail = React.memo(function Detail(props) {
 
 	if (props.detail.images) {
 		props.detail.images.map((item) => {
-			images.push(item.url)
+			images.push(item)
 		})
 	}
 
-	if (props.detail.videos) {
-		props.detail.videos.map((item) => {
-			images.push(item.thumbnail)
-		})
+	// if (props.detail.videos) {
+	// 	props.detail.videos.map((item) => {
+	// 		images.push(item.thumbnail)
+	// 	})
+	// }
+
+
+	//Filter click handler 
+	const filterClickHandler = () => {
+
+		if (!isFilter) {
+			setIsSort(false)
+			setModalTwo(false)
+			setIsFilter(true)
+
+		} else {
+			setIsFilter(false)
+		}
+	}
+
+	const isSortHandler = () => {
+		if (!isSort) {
+			setModalTwo(false)
+			setIsFilter(false)
+			setIsSort(true)
+
+		} else {
+			setIsSort(false)
+		}
+	}
+
+
+	const modalContent = () => {
+
+		if (!ModalTwo) {
+			setIsFilter(false)
+			setIsSort(false)
+			setModalTwo(true)
+		} else {
+			setModalTwo(false)
+		}
+	}
+
+	const onSizeHandler = (e, value) => {
+		e.preventDefault();
+		e.stopPropagation();
+		setSizeSelect(value)
+	}
+
+	const OnClickSaveHandler = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+
+		props.getallproducts(`min_price=${minRange}&max_price=${maxRange}&size=${sizeSelect}`).then(
+			setIsFilter(false)
+		)
+	}
+
+	const oncheckBoxClickHandler = (e) => {
+		e.stopPropagation();
+		console.log('Cliked')
+
+	}
+
+	const onSaveSortHandler = (e) => {
+		e.stopPropagation();
+
+		console.log('PROPS', props)
+
+		// props.getallproducts(``)
 	}
 
 	return (
 		<div id="main">
+			<div className='top-shadow'>
+			</div>
 			<div className="detail-header">
 				<Link to="/">
 					<img src="/images/back.svg" className="img-fluid" alt="" />
 				</Link>
 				<div className="header-option" style={{ marginLeft: "auto" }}>
 					<ul>
-						<li><a href="#"><img src="/images/detail-video/icon/sort.svg" alt="" /></a></li>
-						<li><a href="#"><img src="/images/detail-video/icon/setting.svg" alt="" /></a></li>
+						<li onClick={isSortHandler}><a href="#"><img src="/images/detail-video/icon/sort.svg" alt="" /></a></li>
+						<li onClick={filterClickHandler}><a href="#"><img src="/images/detail-video/icon/setting.svg" alt="" /></a></li>
 						<li><a href="#"><img src="/images/detail-video/icon/category.svg" alt="" /></a></li>
 					</ul>
 				</div>
 			</div>
 
 			{(props.detail.videos) ?
-				<VedioPlayer url={props.detail?.videos[0]?.url} />
+				// <VedioPlayer url={props.detail?.videos[0]?.url} />
+				<LazyLoadVideo url={config.IMG_END_POINT + props.detail?.videos[0]?.url} />
 				: ""}
 
-			<div className="video-content d-flex flex-column w-100 mw-100 overflow-hidden" style={{ padding: '20px' }}>
-				<div className='d-flex  justify-content-between mw-90'>
-					<div className="caption" >
-						<div className="contents d-flex justify-content-between" >
-							<div style={{ maxWidth: '70%' }}>
-								<h2>{props.detail.title}</h2>
-								<div className="price">
-									{(props.detail.attributes && props.detail?.attributes.length > 0) ?
-										<h4>{'$' + props.detail.attributes[0].discounted_price} <del>{'$' + props.detail.attributes[0].price}</del></h4>
-										: ""}
-								</div>
-								<ul className="ratings">
-									{new Array(5).fill("", 0, 5).map((p, i) => (i < props.detail.rating) ?
-										<li key={i}><i className="iconly-Star icbo"></i></li> :
-										<li key={i}><i className="iconly-Star icbo empty"></i></li>)}
-								</ul>
-								<p>{props.detail.description}</p>
+			{ModalTwo && <Modal isVisible={setModalTwo} >
+				< div className=" slick-default theme-dots" >
+					<Slider {...settings}>
+						{images.map((item) => (
+							<div className="slider-box" style={{ display: 'flex', justifyContent: 'space-around' }}>
+								<button type="button" class="btn-close close-img " aria-label="Close" />
+								< img src={config.IMG_END_POINT + item.url} className="modal-img" />
+							</div>
+						))}
+					</Slider>
+				</div >
+			</Modal>}
 
-								<div className="detail-gallary" style={{ display: 'inline-block', maxWidth: '60%', overflow: 'auto' }}>
-									<ul className='detail__gallery-li d-flex overflow-scroll'>
-										{props.detail.images && images.map((item, i) => <li key={i}><img src={config.IMG_END_POINT + item} alt="" className='detail__gallary-img' /></li>)}
-									</ul>
+			{isFilter && <Modal isVisible={setIsFilter}>
+				<div className='container-filter'>
+					<div className='filter-body'>
+						<h2 className='filter-title'>Filter</h2>
+						<div className='delivery'>
+							<h2>Delivery</h2>
+							<div className='btn-container'>
+								<div className='fast-delivery'>
+									<img src='/images/hr-icon-white.svg' />
+									<span >
+										Fast Delivery
+									</span>
 								</div>
-								<div className="hrs-btn">
-									<span className='hrs-text'><img src="/images/hr-icon.svg" alt="" /><h6>Delivery : With in 3 Hrs</h6></span>
+								<div className='normal-delivery'>
+									<img src='/images/hr-icon-black.svg' />
+									<span >
+										Normal
+									</span>
 								</div>
 							</div>
 						</div>
+						<div className='price-range'>
+							<h2>Price Range</h2>
+							<div className='range-boundary'>
+								<span className='min-range' >${minRange}</span>
+								<span className='max-range' >${maxRange}</span>
+							</div>
+							<div className='slider-container'>
+								<div className="slider">
+									<div className='slider-progress' ref={progressBarRef}></div>
+								</div>
+								<div className="range-input">
+									<input type="range" className='range-min' min="0" max="100" onChange={(e) => hanldeProgressBarChangeMin(e)} value={minRange} />
+									<input type="range" className='range-max' min="0" max="100" onChange={(e) => handleProgressBarChangeMax(e)} value={maxRange} />
+								</div>
+							</div>
+						</div>
+						<div className="sizes">
+							<h2>Sizes</h2>
+							<ul>
+								<li className='size-box' id='S' onClick={(e) => onSizeHandler(e, "S")}>S</li>
+								<li className='size-box' id="M" onClick={(e) => onSizeHandler(e, "M")}>M</li>
+								<li className='size-box' id="L" onClick={(e) => onSizeHandler(e, "L")}>L</li>
+								<li className='size-box' id="XL" onClick={(e) => onSizeHandler(e, "XL")}>XL</li>
+								<li className='size-box' id="2XL" onClick={(e) => onSizeHandler(e, "2XL")}>2XL</li>
+							</ul>
+						</div>
+						<div className='action-btns'>
+							<button className='filter-btn btn-reset'>Reset</button>
+							<button className='filter-btn btn-save' onClick={(e) => OnClickSaveHandler(e)}>Save</button>
+						</div>
 					</div>
-					<div className="contents right-sec " >
-						<ul className='d-flex flex-column justify-content-around flex-fill h-100 '>
-							<li>
-								{fav ? <img src="/images/icon/fav-icon.svg" alt="" onClick={handleFavClick} /> : <img src="/images/detail-video/icon/notify.svg" alt="" onClick={handleFavClick} />}
-							</li>
-							<li className='liked'>
-								{like ? <>
-									<img src="/images/detail-video/icon/unlike.svg" alt="" onClick={handleLikeClick} />
-									<span style={{ color: 'white', fontSize: '16px', alignItems: 'center', margin: 'auto' }}>{noOfLikes}</span>
-								</> :
-									<>
-										<img src="/images/detail-video/icon/like.svg" alt="" onClick={handleLikeClick} />
-										<span style={{ color: 'white', fontSize: '16px', margin: 'auto' }}>{noOfLikes}</span>
-									</>}
-							</li>
-							<li><img src="/images/detail-video/icon/message.svg" alt="" /></li>
-							<li><img src="/images/detail-video/icon/share.svg" alt="" /></li>
-						</ul>
+				</div>
+
+			</Modal>}
+
+			{isSort && <Modal isVisible={setIsSort}>
+				<div className='container-filter'>
+					<div className='filter-body'>
+						<h2 className='filter-title'>Sort By</h2>
+						<div className='radio-btn-container'>
+							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
+								<input type="radio" id='best-match' name="sort-item" value="best-match" />
+								<label className='lbl' for="best-match">Best Match</label>
+							</div>
+
+							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
+								<input type="radio" id='time-ending-soon' name="sort-item" value="time-ending-soon" />
+								<label className='lbl' for="time-ending-soon">Time: Ending soonest</label>
+							</div>
+
+							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
+								<input type="radio" id='newly-listed' name="sort-item" value="newly-listed" />
+								<label className='lbl' for="newly-listed">Time: Newly listed</label>
+							</div>
+
+							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
+								<input type="radio" id='price-lowest' name="sort-item" value="price-lowest" />
+								<label className='lbl' for="price-lowest">Price + Shopping lowest first</label>
+							</div>
+
+							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
+								<input type="radio" id='price-higest' name="sort-item" value="price-higest" />
+								<label className='lbl' for="price-higest">Price + Shopping Higest first</label>
+							</div>
+
+							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
+								<input type="radio" id='nearest' name="sort-item" value="nearest" onChange={() => console.log('click')} />
+								<label className='lbl' for="nearest">Distance: Nearest first</label>
+							</div>
+						</div>
+
+						<div className='action-btns'>
+							<button className='filter-btn btn-reset'>Reset</button>
+							<button className='filter-btn btn-save' onClick={(e) => onSaveSortHandler(e)}>Save</button>
+						</div>
 					</div>
-				</div >
+				</div>
+			</Modal>}
+
+			{/* <div className="video-content d-flex flex-column w-100 mw-100 overflow-hidden" style={{ padding: '20px' }}> */}
+			<div className="video-content" >
+				{/* <div className='d-flex  justify-content-between mw-90'> */}
+				<div className="caption" >
+					<div className='contnt'>
+						<div className='contents' >
+							<h2>{props.detail.title}</h2>
+							<div className="price">
+								{(props.detail.attributes && props.detail?.attributes.length > 0) ?
+									<h4>{'$' + props.detail.attributes[0].price + '.00'} <del>{'$' + props.detail.attributes[0].discounted_price + '.00'}</del></h4>
+									: ""}
+							</div>
+							<ul className="ratings">
+								{new Array(5).fill("", 0, 5).map((p, i) => (i < props.detail.rating) ?
+									<li key={i}><i className="iconly-Star icbo" ></i></li> :
+									<li key={i}><i className="iconly-Star icbo empty"></i></li>)}
+							</ul>
+							<p>{props.detail.description}</p>
+
+							<div className="detail-gallary">
+								<ul className='detail__gallary'>
+									{props.detail.images && images.map((item, i) => <li key={i}><img src={config.IMG_END_POINT + item.url} alt="" className='detail__gallary-img' onClick={() => modalContent(item)} /></li>)}
+								</ul>
+							</div>
+							<div className="hrs-btn">
+								<span className='hrs-text'><img src="/images/hr-icon.svg" alt="" /><h6>Delivery : With in 3 Hrs</h6></span>
+							</div>
+						</div>
+					</div>
+					<div className="" >
+						<div className='right-sec'>
+							<ul>
+								<li>
+									{fav ? <img src="/images/detail-video/icon/notify-red.svg" alt="" onClick={handleFavClick} /> : <img src="/images/detail-video/icon/notify.svg" alt="" onClick={handleFavClick} />}
+								</li>
+								<li className='liked'>
+									{like ? <>
+										<img src="/images/detail-video/icon/unlike.svg" alt="" onClick={handleLikeClick} />
+										<span className='like-item-1'>{noOfLikes}</span>
+									</> :
+										<>
+											<img src="/images/detail-video/icon/like.svg" alt="" onClick={handleLikeClick} />
+											<span className='like-item'>{noOfLikes}</span>
+										</>}
+								</li>
+								<li><img src="/images/detail-video/icon/message.svg" alt="" /></li>
+								<li><img src="/images/detail-video/icon/share.svg" alt="" /></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
 
 				<Toaster />
+				<div className="detail-add">{context.isAuthenticated ? <>{inCart == true ?
+					<div>
+						<Link to={{ pathname: "/cart", state: { fromProductPage: true } }} className="btn btn-solid flex-fill" >Go to cart</Link>
+					</div>
+					: <>{
+						modalShow ? <> <h4 className='text-white'>Select Size</h4>
+							<div>
+							</div> <button onClick={handleInsertInCart} className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</button></>
+							: <button onClick={handleAddCart} className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</button>
+					}
+					</>}</> : <button onClick={handleAddCart} className="btn btn-solid flex-fill" tabIndex="0">Login</button>}
+				</div>
+				<div className='bottom-shadow'>
+				</div>
+				{/* </div > */}
 
-				<div className="detail-add flex-fill" style={{ borderRadius: '20px' }}>{inCart == true ?
+
+
+				{/* <div className="detail-add flex-fill" style={{ borderRadius: '20px' }}>{context.isAuthenticated ? <>{inCart == true ?
 					<div>
 
 						<Link to={{ pathname: "/cart", state: { fromProductPage: true } }} className="btn btn-solid flex-fill" >Go to cart</Link>
@@ -186,12 +444,11 @@ const Detail = React.memo(function Detail(props) {
 							</div> <button onClick={handleInsertInCart} className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</button></>
 							: <button onClick={handleAddCart} className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</button>
 					}
-					</>}
-				</div>
-
+					</>}</> : <button onClick={handleAddCart} className="btn btn-solid flex-fill" tabIndex="0">Login</button>}
+				</div> */}
 			</div >
-		</div >
 
+		</div >
 	)
 })
 
@@ -264,4 +521,5 @@ const VedioPlayer = ({ url }) => {
 // 		</div>
 // 	)
 // }
+
 export default Detail

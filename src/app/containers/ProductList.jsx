@@ -1,7 +1,6 @@
 import React, { PureComponent, Fragment } from "react";
 import { connect } from 'react-redux';
 import AuthContext from "../helpers/authContext";
-
 import ProductList from "../components/Mobile/ProductList";
 import { getAllProducts, getAllCategory } from "../data/ducks/home/actions"
 import {
@@ -31,9 +30,9 @@ class ProductListContainer extends PureComponent {
     }
 
     componentDidMount() {
-        let param = `category_id=${this.props.match.params.id}`
+        let param = `category_id=${this.props.match.params.params}`
+        console.log(this.props.match.params.params)
         this.props.getAllProducts(param).then()
-
     }
 
     render() {

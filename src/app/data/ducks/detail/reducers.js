@@ -4,7 +4,6 @@ import createReducer from "../../utils/createReducer";
 
 const productDetails = createReducer( [ ] ) ({
     [ types.FETCH_PRODUCT_DETAILS ]: ( state, action ) => {
-        console.log('REDUCER',action)
         return   action.payload.result
      }
  } )
@@ -32,6 +31,7 @@ const productDetails = createReducer( [ ] ) ({
          return action.payload
      }
  })
+ 
  const favProduct = createReducer([])({
     [ types.ADD_TO_FAV]:(state,action) =>{
         return action.payload

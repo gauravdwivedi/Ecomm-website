@@ -2,9 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import Detail from './Detail';
 
-
 function ProductList(props) {
-
     return (
         <div className='videoCard'>
             {props.productList.map((item, index) => (
@@ -17,6 +15,7 @@ function ProductList(props) {
                     addToCart={props.addToCart}
                     favProduct={props.favProduct}
                     unfavProduct={props.unfavProduct}
+                    getallproducts={props.getAllProducts}
                     className="video__player"
                 />
             ))}

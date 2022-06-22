@@ -9,16 +9,14 @@ function HomeSlider() {
     }
     return (
         <section className="pt-0 home-section ratio_55">
-            <div className="home-slider slick-default theme-dots">
+            <div className="home-slider slick-default ">
                 <div>
                     <Slider {...settings}>
                         <div className='slider-box'>
                             <img src="/images/banner.png" className="img-fluid bg-img" alt="" />
-
                         </div>
                         <div className='slider-box'>
                             <img src="/images/banner.png" className="img-fluid bg-img" alt="" />
-
                         </div>
                     </Slider>
                 </div>

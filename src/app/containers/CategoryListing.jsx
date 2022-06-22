@@ -8,8 +8,6 @@ import { getAllCategory } from '../data/ducks/home/actions'
 
 export class CategoryListingContainer extends PureComponent {
 
-
-
     static contextType = AuthContext;
 
     static fetching(ssr) {
