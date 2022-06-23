@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 function CartItem({ item, handleDeleteItem }) {
 
     // console.log('ITEM', item)
+
+
     return (
         <>
             <section className="cart-section pt-4 px-15">
@@ -39,10 +41,8 @@ function CartItem({ item, handleDeleteItem }) {
                             <h4>${item.price}</h4>
                         </div>
                     </div>
-                    <a
-                        href="#"
-                        className="btn btn-outline edit-btn text-capitalize w-100 mt-3"
-                    >
+                    <a href="#"
+                        className="btn btn-outline edit-btn text-capitalize w-100 mt-3">
                         Edit
                     </a>
                 </div>
