@@ -32,7 +32,7 @@ const Detail = React.memo(function Detail(props) {
 
 	const [maxRange, setMaxRange] = useState(100);
 	const [minRange, setMinRange] = useState(0);
-	const [sizeSelect, setSizeSelect] = useState('M');
+	const [sizeSelect, setSizeSelect] = useState(' ');
 	const progressBarRef = useRef(null);
 	const priceGap = 10;
 
@@ -45,7 +45,7 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	useEffect(() => {
-		console.log('Props Detail', props.detail)
+		console.log('Props Detail', props)
 		setLike(props.detail.liked)
 		setInCart(props.detail.productInCart)
 		setFav(props.detail.saved);
@@ -198,6 +198,9 @@ const Detail = React.memo(function Detail(props) {
 	const onSizeHandler = (e, value) => {
 		e.preventDefault();
 		e.stopPropagation();
+		let ele = document.getElementById(value);
+		ele.style.background = "#000000";
+		ele.style.color = "#FFFFFF"
 		setSizeSelect(value)
 	}
 
@@ -205,7 +208,7 @@ const Detail = React.memo(function Detail(props) {
 		e.preventDefault();
 		e.stopPropagation();
 
-		props.getallproducts(`min_price=${minRange}&max_price=${maxRange}&size=${sizeSelect}`).then(
+		props.getAllProducts(`min_price=${minRange}&max_price=${maxRange}&size=${sizeSelect}`).then(
 			setIsFilter(false)
 		)
 	}
@@ -216,12 +219,13 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	const onSaveSortHandler = (e) => {
+		e.preventDefault();
 		e.stopPropagation();
 
 		console.log('Sort Filter', sortFilter, 'Order', order)
 
-		props.getallproducts(`sort_by=${sortFilter}&order=${order}`).then(res => {
-			console.log(res)
+		props.getAllProducts(`sort_by=${sortFilter}&order=${order}`).then(res => {
+			setIsSort(false)
 		})
 		// props.getallproducts(``)
 	}
@@ -349,7 +353,8 @@ const Detail = React.memo(function Detail(props) {
 								<label className='lbl' for="newly-listed">Time: Newly listed</label>
 							</div>
 
-							<div className='radio-btns' onClick={() => {
+							<div className='radio-btns' onClick={(e) => {
+								e.stopPropagation();
 								setSortFilter('price')
 								setOrder('asc')
 							}}>
