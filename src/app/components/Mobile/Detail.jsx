@@ -11,14 +11,14 @@ const Detail = React.memo(function Detail(props) {
 	const context = useContext(authContext)
 	const history = useHistory();
 
-	const [like, setLike] = useState(false)
-	const [inCart, setInCart] = useState(false)
-	const [addToCart, setAddToCart] = useState(false)
-	const [fav, setFav] = useState(false)
-	const [noOfLikes, setNoOfLikes] = useState(0)
-	const [variantId, setVariantId] = useState(0)
-	const [productId, setProductId] = useState(0)
-	const [quantity, setQuantity] = useState(0)
+	const [like, setLike] = useState(false);
+	const [inCart, setInCart] = useState(false);
+	const [addToCart, setAddToCart] = useState(false);
+	const [fav, setFav] = useState(false);
+	const [noOfLikes, setNoOfLikes] = useState(0);
+	const [variantId, setVariantId] = useState(0);
+	const [productId, setProductId] = useState(0);
+	const [quantity, setQuantity] = useState(0);
 
 	const [modalShow, setModalShow] = useState(false);
 	const [ModalTwo, setModalTwo] = useState(false);
@@ -31,13 +31,13 @@ const Detail = React.memo(function Detail(props) {
 	const [order, setOrder] = useState('asc');
 
 	const [maxRange, setMaxRange] = useState(100);
-	const [minRange, setMinRange] = useState(0)
+	const [minRange, setMinRange] = useState(0);
 	const [sizeSelect, setSizeSelect] = useState('M');
-	const progressBarRef = useRef(null)
+	const progressBarRef = useRef(null);
 	const priceGap = 10;
 
 	let images = [];
-	let content = ''
+	let content = '';
 	let isContent;
 
 	let settings = {
@@ -45,6 +45,7 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	useEffect(() => {
+		console.log('Props Detail', props.detail)
 		setLike(props.detail.liked)
 		setInCart(props.detail.productInCart)
 		setFav(props.detail.saved);
@@ -54,9 +55,7 @@ const Detail = React.memo(function Detail(props) {
 
 	const hanldeProgressBarChangeMin = (e) => {
 		e.preventDefault();
-
 		setMinRange(e.target.value)
-
 		if (maxRange - minRange < priceGap) {
 			setMinRange(maxRange - priceGap);
 		} else {
@@ -71,7 +70,6 @@ const Detail = React.memo(function Detail(props) {
 
 		if (maxRange - minRange < priceGap) {
 			setMinRange(maxRange - priceGap);
-
 		} else {
 			progressBarRef.current.style.right = 100 - (maxRange / 100) * 100 + "%";
 		}
@@ -85,21 +83,29 @@ const Detail = React.memo(function Detail(props) {
 
 		if (like) {
 			props.unlikeProduct({ productId: props.detail.id }).then(res => {
+				console.log('Response from DisLike', res)
 
-				setLike(false)
-				setNoOfLikes(noOfLikes - 1)
-				props.fetchProductDetails(props.detail.slug).then(res => {
+				if (res && res[0]) {
+					setLike(false)
+					setNoOfLikes(noOfLikes - 1)
+				}
 
-				})
+				// props.fetchProductDetails(props.detail.slug).then(res => {
+
+				// })
 			})
 		}
 
 		if (!like) {
 			props.likeProduct({ productId: props.detail.id }).then(res => {
-				setLike(true)
-				setNoOfLikes(noOfLikes + 1)
-				props.fetchProductDetails(props.detail.slug).then((res => {
-				}))
+
+				console.log('Response from like', res)
+				if (res && res[0]) {
+					setLike(true)
+					setNoOfLikes(noOfLikes + 1)
+				}
+				// props.fetchProductDetails(props.detail.slug).then((res => {
+				// }))
 			})
 		}
 	}
@@ -108,6 +114,7 @@ const Detail = React.memo(function Detail(props) {
 		// console.log(fav)
 		if (fav) {
 			props.unfavProduct({ productId: props.detail.id }).then(res => {
+				console.log('Favourite/Bookmark Response', res)
 				setFav(false)
 				props.fetchProductDetails(props.detail.slug).then(res => {
 				})
@@ -463,7 +470,6 @@ const Detail = React.memo(function Detail(props) {
 					</>}</> : <button onClick={handleAddCart} className="btn btn-solid flex-fill" tabIndex="0">Login</button>}
 				</div> */}
 			</div >
-
 		</div >
 	)
 })
