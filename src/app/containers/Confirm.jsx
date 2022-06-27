@@ -4,6 +4,8 @@ import config from "../../config/index";
 import Confirm from "../components/Mobile/Checkout/Confirm";
 import AuthContext from "../helpers/authContext";
 import { cartList } from "../data/ducks/cart/actions";
+import { createOrder } from "../data/ducks/order/actions";
+
 
 class ConfirmContainer extends PureComponent {
     static contextType = AuthContext;
@@ -45,7 +47,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    //loadBigStory
+    createOrder,
     cartList
 };
 
