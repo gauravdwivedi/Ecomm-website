@@ -1,13 +1,11 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import config from "../../config/index";
-import Confirm from "../components/Mobile/Checkout/Confirm";
+import OrderPlaced from '../components/Mobile/Checkout/OrderPlaced';
 import AuthContext from "../helpers/authContext";
-import { cartList } from "../data/ducks/cart/actions";
-import { createOrder, saveOrderDetails } from "../data/ducks/order/actions";
 
 
-class ConfirmContainer extends PureComponent {
+class OrderPlacedContainer extends PureComponent {
     static contextType = AuthContext;
     static fetching(ssr) {
         let storeData = ssr.getState();
@@ -25,7 +23,6 @@ class ConfirmContainer extends PureComponent {
     }
 
     componentDidMount() {
-        this.props.cartList().then(res => console.log('CART RES', res))
     }
 
     render() {
@@ -33,7 +30,7 @@ class ConfirmContainer extends PureComponent {
             <Fragment>
                 {
                     this.props.mobile.isMobile ?
-                        <Confirm {...this.props} loading={this.state.loading} />
+                        <OrderPlaced {...this.props} loading={this.state.loading} />
                         :
                         <HomeDesktop {...this.props} loading={this.state.loading} />
                 }
@@ -43,13 +40,10 @@ class ConfirmContainer extends PureComponent {
 };
 
 const mapStateToProps = (state) => ({
-    cartListItems: state.cart.fetchCartList.result
 });
 
 const mapDispatchToProps = {
-    createOrder,
-    cartList,
-    saveOrderDetails
+
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConfirmContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderPlacedContainer);

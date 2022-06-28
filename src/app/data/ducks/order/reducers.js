@@ -8,6 +8,13 @@ const createOrder = createReducer([])({
     }
 })
 
-export default combineReducers( {
-    createOrder
-} );
+const saveOrderDetails = createReducer([])({
+    [ types.SAVE_ORDER_DETAILS]:(state,action) =>{
+        return action.payload
+    }
+})
+
+export default combineReducers({
+    createOrder,
+    saveOrderDetails
+});
