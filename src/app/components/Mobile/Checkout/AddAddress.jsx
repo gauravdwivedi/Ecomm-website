@@ -269,8 +269,8 @@ function AddAddress(props) {
                             <input type="zip-code" className="form-control" id="floatingzip" name="zipCode" placeholder="zip" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
                             <label htmlFor="floatingPassword">Zip code</label>
                         </div>
-                        {latitude && <div className="mb-3">{latitude}</div>}
-                        {longitude && <div className=" mb-3">{longitude}</div>}
+                        {/* {latitude && <div className="mb-3">{latitude}</div>} */}
+                        {/* {longitude && <div className=" mb-3">{longitude}</div>} */}
                     </section>
 
                     <div className="add-address-btn px-15"><input type="submit" className="btn btn-outline add-btn text-capitalize w-100 mt-3" value="Update Address" /></div>

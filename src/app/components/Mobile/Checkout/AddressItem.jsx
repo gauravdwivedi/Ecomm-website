@@ -15,7 +15,9 @@ function AddressItem(props) {
         <>
             <li>
                 <div className={`check-box ${isCurrent === id ? 'active' : ''}`}>
+
                     <div className="form-check d-flex ps-0">
+
                         <div>
                             <h4 className="name">{first_name}{' '}{last_name}</h4>
                             <div className="addess">
@@ -26,7 +28,8 @@ function AddressItem(props) {
                             </div>
                             <h4>Arrival est: Apr 15 $0 Shipping</h4>
                         </div>
-                        <input style={{ display: 'block' }}
+
+                        <input style={{ display: 'block', height: '0' }}
                             className="radio_animated"
                             type="radio"
                             name="flexRadioDefault"
@@ -34,6 +37,7 @@ function AddressItem(props) {
                             checked={isCurrent === id}
                             onChange={(e) => handleOnClick(e, id)}
                         />
+
                         <label className="form-check-label" htmlFor="flexRadioDefault1">
                         </label>
                     </div>
@@ -57,4 +61,4 @@ function AddressItem(props) {
     )
 }
 
-export default AddressItem
+export default React.memo(AddressItem)

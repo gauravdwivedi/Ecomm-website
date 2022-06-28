@@ -7,36 +7,37 @@ import { useHistory } from 'react-router';
 import Modal from './Modal';
 import Slider from "react-slick";
 import LazyLoadVideo from './LazyLoadVideo';
-import { InputGroup } from 'react-bootstrap';
 const Detail = React.memo(function Detail(props) {
 	const context = useContext(authContext)
 	const history = useHistory();
 
-	const [like, setLike] = useState(false)
-	const [inCart, setInCart] = useState(false)
-	const [addToCart, setAddToCart] = useState(false)
-	const [fav, setFav] = useState(false)
-	const [noOfLikes, setNoOfLikes] = useState(0)
-	const [variantId, setVariantId] = useState(0)
-	const [productId, setProductId] = useState(0)
-	const [quantity, setQuantity] = useState(0)
+	const [like, setLike] = useState(false);
+	const [inCart, setInCart] = useState(false);
+	const [addToCart, setAddToCart] = useState(false);
+	const [fav, setFav] = useState(false);
+	const [noOfLikes, setNoOfLikes] = useState(0);
+	const [variantId, setVariantId] = useState(0);
+	const [productId, setProductId] = useState(0);
+	const [quantity, setQuantity] = useState(0);
 
 	const [modalShow, setModalShow] = useState(false);
 	const [ModalTwo, setModalTwo] = useState(false);
-	const [isFilter, setIsFilter] = useState(false)
-	const [isSort, setIsSort] = useState(false)
+	const [isFilter, setIsFilter] = useState(false);
+	const [isSort, setIsSort] = useState(false);
+
+	//Sort Search Filter
+	const [sortFilter, setSortFilter] = useState('best');
+	const [price, setPrice] = useState(0);
+	const [order, setOrder] = useState('asc');
 
 	const [maxRange, setMaxRange] = useState(100);
-	const [minRange, setMinRange] = useState(0)
-
-
-	const progressBarRef = useRef(null)
+	const [minRange, setMinRange] = useState(0);
+	const [sizeSelect, setSizeSelect] = useState(' ');
+	const progressBarRef = useRef(null);
 	const priceGap = 10;
 
-	const [sizeSelect, setSizeSelect] = useState('M');
-
 	let images = [];
-	let content = ''
+	let content = '';
 	let isContent;
 
 	let settings = {
@@ -44,6 +45,7 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	useEffect(() => {
+		console.log('Props Detail', props)
 		setLike(props.detail.liked)
 		setInCart(props.detail.productInCart)
 		setFav(props.detail.saved);
@@ -53,18 +55,12 @@ const Detail = React.memo(function Detail(props) {
 
 	const hanldeProgressBarChangeMin = (e) => {
 		e.preventDefault();
-
 		setMinRange(e.target.value)
-
 		if (maxRange - minRange < priceGap) {
 			setMinRange(maxRange - priceGap);
-
 		} else {
 			progressBarRef.current.style.left = (minRange / 100) * 100 + "%";
 		}
-
-
-
 	}
 
 	const handleProgressBarChangeMax = (e) => {
@@ -74,9 +70,7 @@ const Detail = React.memo(function Detail(props) {
 
 		if (maxRange - minRange < priceGap) {
 			setMinRange(maxRange - priceGap);
-
 		} else {
-
 			progressBarRef.current.style.right = 100 - (maxRange / 100) * 100 + "%";
 		}
 	}
@@ -85,26 +79,33 @@ const Detail = React.memo(function Detail(props) {
 		e.preventDefault();
 	}
 
-
 	const handleLikeClick = () => {
 
 		if (like) {
 			props.unlikeProduct({ productId: props.detail.id }).then(res => {
+				console.log('Response from DisLike', res)
 
-				setLike(false)
-				setNoOfLikes(noOfLikes - 1)
-				props.fetchProductDetails(props.detail.slug).then(res => {
+				if (res && res[0]) {
+					setLike(false)
+					setNoOfLikes(noOfLikes - 1)
+				}
 
-				})
+				// props.fetchProductDetails(props.detail.slug).then(res => {
+
+				// })
 			})
 		}
 
 		if (!like) {
 			props.likeProduct({ productId: props.detail.id }).then(res => {
-				setLike(true)
-				setNoOfLikes(noOfLikes + 1)
-				props.fetchProductDetails(props.detail.slug).then((res => {
-				}))
+
+				console.log('Response from like', res)
+				if (res && res[0]) {
+					setLike(true)
+					setNoOfLikes(noOfLikes + 1)
+				}
+				// props.fetchProductDetails(props.detail.slug).then((res => {
+				// }))
 			})
 		}
 	}
@@ -113,9 +114,9 @@ const Detail = React.memo(function Detail(props) {
 		// console.log(fav)
 		if (fav) {
 			props.unfavProduct({ productId: props.detail.id }).then(res => {
+				console.log('Favourite/Bookmark Response', res)
 				setFav(false)
 				props.fetchProductDetails(props.detail.slug).then(res => {
-
 				})
 			})
 		}
@@ -163,7 +164,6 @@ const Detail = React.memo(function Detail(props) {
 
 	//Filter click handler 
 	const filterClickHandler = () => {
-
 		if (!isFilter) {
 			setIsSort(false)
 			setModalTwo(false)
@@ -185,9 +185,7 @@ const Detail = React.memo(function Detail(props) {
 		}
 	}
 
-
 	const modalContent = () => {
-
 		if (!ModalTwo) {
 			setIsFilter(false)
 			setIsSort(false)
@@ -200,6 +198,9 @@ const Detail = React.memo(function Detail(props) {
 	const onSizeHandler = (e, value) => {
 		e.preventDefault();
 		e.stopPropagation();
+		let ele = document.getElementById(value);
+		ele.style.background = "#000000";
+		ele.style.color = "#FFFFFF"
 		setSizeSelect(value)
 	}
 
@@ -207,22 +208,25 @@ const Detail = React.memo(function Detail(props) {
 		e.preventDefault();
 		e.stopPropagation();
 
-		props.getallproducts(`min_price=${minRange}&max_price=${maxRange}&size=${sizeSelect}`).then(
+		props.getAllProducts(`min_price=${minRange}&max_price=${maxRange}&size=${sizeSelect}`).then(
 			setIsFilter(false)
 		)
 	}
 
-	const oncheckBoxClickHandler = (e) => {
+	const oncheckBoxClickHandler = (e, filter, order) => {
 		e.stopPropagation();
-		console.log('Cliked')
 
 	}
 
 	const onSaveSortHandler = (e) => {
+		e.preventDefault();
 		e.stopPropagation();
 
-		console.log('PROPS', props)
+		console.log('Sort Filter', sortFilter, 'Order', order)
 
+		props.getAllProducts(`sort_by=${sortFilter}&order=${order}`).then(res => {
+			setIsSort(false)
+		})
 		// props.getallproducts(``)
 	}
 
@@ -322,33 +326,57 @@ const Detail = React.memo(function Detail(props) {
 					<div className='filter-body'>
 						<h2 className='filter-title'>Sort By</h2>
 						<div className='radio-btn-container'>
-							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
+							<div className='radio-btns' onClick={(e) => {
+								e.stopPropagation();
+								setSortFilter('best')
+								setOrder('asc')
+							}}>
 								<input type="radio" id='best-match' name="sort-item" value="best-match" />
 								<label className='lbl' for="best-match">Best Match</label>
 							</div>
 
-							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
+							<div className='radio-btns' onClick={(e) => {
+								e.stopPropagation();
+								setSortFilter('qty')
+								setOrder('asc')
+							}}>
 								<input type="radio" id='time-ending-soon' name="sort-item" value="time-ending-soon" />
 								<label className='lbl' for="time-ending-soon">Time: Ending soonest</label>
 							</div>
 
-							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
+							<div className='radio-btns' onClick={(e) => {
+								e.stopPropagation();
+								setSortFilter('created_at')
+								setOrder('asc')
+							}}>
 								<input type="radio" id='newly-listed' name="sort-item" value="newly-listed" />
 								<label className='lbl' for="newly-listed">Time: Newly listed</label>
 							</div>
 
-							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
+							<div className='radio-btns' onClick={(e) => {
+								e.stopPropagation();
+								setSortFilter('price')
+								setOrder('asc')
+							}}>
 								<input type="radio" id='price-lowest' name="sort-item" value="price-lowest" />
 								<label className='lbl' for="price-lowest">Price + Shopping lowest first</label>
 							</div>
 
-							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
+							<div className='radio-btns' onClick={(e) => {
+								e.stopPropagation();
+								setSortFilter('price')
+								setOrder('desc')
+							}}>
 								<input type="radio" id='price-higest' name="sort-item" value="price-higest" />
 								<label className='lbl' for="price-higest">Price + Shopping Higest first</label>
 							</div>
 
-							<div className='radio-btns' onClick={oncheckBoxClickHandler}>
-								<input type="radio" id='nearest' name="sort-item" value="nearest" onChange={() => console.log('click')} />
+							<div className='radio-btns' onClick={(e) => {
+								e.stopPropagation();
+								setSortFilter('best')
+								setOrder('asc')
+							}}>
+								<input type="radio" id='nearest' name="sort-item" value="nearest" />
 								<label className='lbl' for="nearest">Distance: Nearest first</label>
 							</div>
 						</div>
@@ -447,7 +475,6 @@ const Detail = React.memo(function Detail(props) {
 					</>}</> : <button onClick={handleAddCart} className="btn btn-solid flex-fill" tabIndex="0">Login</button>}
 				</div> */}
 			</div >
-
 		</div >
 	)
 })

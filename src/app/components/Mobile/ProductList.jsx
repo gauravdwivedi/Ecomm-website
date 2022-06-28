@@ -15,9 +15,10 @@ function ProductList(props) {
                     addToCart={props.addToCart}
                     favProduct={props.favProduct}
                     unfavProduct={props.unfavProduct}
-                    getallproducts={props.getAllProducts}
+                    getAllProducts={props.getAllProducts}
                     className="video__player"
                 />
+
             ))}
         </div>
     )
