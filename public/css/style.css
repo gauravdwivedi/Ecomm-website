@@ -1652,22 +1652,22 @@ header.none-bg {
 
 /* -----order-placed-page------- */
 .my-order {
-    background: #131313;
-    border-radius: 10px;
-    padding: 11px 16px;
-    font-weight: 400;
-    font-size: 16px;
-    color: #FFFFFF;
+    background: #131313 !important;
+    border-radius: 10px !important;
+    padding: 11px 16px !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    color: #FFFFFF !important;
 }
 
 .continue-shopp {
-    border: 1.4px solid #131313;
-    box-sizing: border-box;
-    border-radius: 10px;
-    padding: 11px 16px;
-    font-weight: 400;
-    font-size: 16px;
-    color: #131313;
+    border: 1.4px solid #131313 !important;
+    box-sizing: border-box !important;
+    border-radius: 10px !important;
+    padding: 11px 16px !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    color: #131313 !important;
 }
 
 .order-success-section {

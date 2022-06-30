@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import ConfirmItem from "./ConfirmItem";
+import 'regenerator-runtime/runtime'
 
 async function loadScript(src) {
   return new Promise((resolve) => {
@@ -30,26 +31,44 @@ function Confirm(props) {
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
+  const [addressId, setAddressId] = useState('');
+  console.log('Cart List Items', props?.cartListItems)
 
   const history = useHistory();
 
   async function createOrder() {
-		props.createOrder({ productId: 14, variantId: 15, quantity: 1, addressId: 1 }).then(res => {
-			console.log(res);
-			displayRazorpay(res?.[0]?.result?.id || '');
-		})
-	}
+
+    //productId, variantId, quantity, addressId
+    console.log(addressId)
+
+    let OrderItems = [];
+    const list = props?.cartListItems;
+
+    for (let i = 0; i < list.length; i++) {
+      OrderItems.push({ 'productId': list[i].productId, 'variantId': list[i].variantId, 'quantity': 1 })
+    }
+
+    console.log('LISt', OrderItems)
+
+    props.createOrder({ data: OrderItems, addressId }).then(res => {
+      console.log('OrderId', res);
+      displayRazorpay(res?.[0]?.result?.id || '');
+    })
+  }
 
   async function displayRazorpay(order_id) {
+    console.log('Display Razor')
     const loadRazorpay = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
+
     if (!loadRazorpay) {
       alert("Razorpay is offline! Please try again later");
       return;
     }
+
     var options = {
-      key: "rzp_test_bsrijSW5QjnxtU",
+      key: "rzp_test_0C9e0FJUuVdqGn",
       amount: total * 100,
       currency: "INR",
       name: "HoppedIn",
@@ -57,16 +76,29 @@ function Confirm(props) {
       image: "http://localhost:3003/images/logo.svg",
       order_id,
       handler: function (response) {
-				razorpayOrderId = response.razorpay_payment_id
-        razorpayPaymentId = response.razorpay_order_id
-        razorpaySignatureId = response.razorpay_signature
+        // setRazorpayPaymentId(response.razorpay_payment_id)
+        // setRazorpayOrderId(response.razorpay_order_id)
+        // setRazorpaySignatureId(response.razorpay_signature)
+        console.log(response)
+        props.saveOrderDetails({ razorPayPaymentId: response.razorpay_payment_id, razorPaySignature: response.razorpay_signature }).then(res => {
+          console.log('Response Save Order Detail', res)
+          if (res && res[0].result.status == 'captured') {
+            history.push({
+              pathname: '/order-placed',
+              state: { address }
+            })
+          }
+        })
+
       },
       prefill: {
         name: `${firstName} ${lastName}`,
       },
     };
+
     var paymentObject = new window.Razorpay(options);
     paymentObject.open();
+
   }
 
   useEffect(() => {
@@ -75,8 +107,9 @@ function Confirm(props) {
 
   useEffect(() => {
     if (props.history.location.query.selectedAddress) {
-      console.log(props.history.location?.query?.selectedAddress[0].first_name);
+      // console.log(props.history.location?.query?.selectedAddress[0]);
       setIsAddress(true);
+      setAddressId(props.history.location.query.selectedAddress[0].id);
       setFirstName(props.history.location.query.selectedAddress[0].first_name);
       setLastName(props.history.location.query.selectedAddress[0].last_name);
       setAddress(props.history.location.query.selectedAddress[0].address_1);
@@ -110,7 +143,7 @@ function Confirm(props) {
             <div className="progress orange">
               <div
                 className="progress-bar"
-                // style={{ width: "100%", background: "#000000" }}
+              // style={{ width: "100%", background: "#000000" }}
               ></div>
             </div>
           </div>
@@ -118,6 +151,7 @@ function Confirm(props) {
 
         {props?.cartListItems?.map((item, index) => (
           <ConfirmItem item={item} key={index} />
+
         ))}
 
         {/* <AddressItem item={props?.history?.location?.query?.selectedAddress} /> */}

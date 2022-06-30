@@ -70,3 +70,8 @@ export const CategoryListing = loadable(() => import ('../app/containers/Categor
 export const ProductList = loadable(() => import ('../app/containers/ProductList'),{
 	fallback:<div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
 })
+
+
+export const OrderPlaced = loadable(() => import ('../app/containers/OrderPlaced'),{
+	fallback:<div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
+})
