@@ -1109,9 +1109,9 @@ nav ul li i {
 
 .order-section .order-details li h4 {
     font-weight: 500;
-    font-size: 14px;
-    line-height: 21px;
-    color: rgba(19, 19, 19, 0.4);
+    font-size: 14px !important;
+    line-height: 21px !important;
+    color: rgba(19, 19, 19, 0.4) !important;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1131,17 +1131,17 @@ nav ul li i {
 }
 
 .order-section .tracking-title .order-no {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 30px;
-    color: #131313;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 30px !important;
+    color: #131313 !important;
 }
 
 .order-section .tracking-title .order-date {
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 18px;
-    color: #131313;
+    font-weight: normal !important;
+    font-size: 12px !important;
+    line-height: 18px Im !important;
+    color: #131313 !important;
     opacity: 0.4;
 }
 

@@ -1,6 +1,8 @@
 import React from 'react'
 
-function Order() {
+function Order(props) {
+
+    console.log('ORDERS', props?.order?.getOrderList)
     return (
         <div id="main">
             <header>

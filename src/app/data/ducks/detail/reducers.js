@@ -62,6 +62,12 @@ const editList = createReducer([])({
     }
 })
 
+const addressDetailById = createReducer([])({
+    [ types.ADDRESS_DETAIL_BY_ID]:(state,action) =>{
+        return action.payload
+    }
+})
+
 export default combineReducers( {
     productDetails,
     likeProduct,
@@ -72,5 +78,6 @@ export default combineReducers( {
     favProductsList,
     addAddress,
     addressList,
-    editList
+    editList,
+    addressDetailById
 } );

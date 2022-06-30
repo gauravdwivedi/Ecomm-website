@@ -14,7 +14,14 @@ const saveOrderDetails = createReducer([])({
     }
 })
 
+const getOrderList = createReducer([])({
+    [ types.FETCH_ORDERS]:(state,action) =>{
+        return action.payload
+    }
+})
+
 export default combineReducers({
     createOrder,
-    saveOrderDetails
+    saveOrderDetails,
+    getOrderList
 });

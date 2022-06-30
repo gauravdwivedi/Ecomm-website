@@ -85,7 +85,7 @@ const routes = [{
 			component:ProductList,
 			exact:true
 		},{
-			path:"/order-placed",
+			path:"/checkout/order-placed",
 			component:OrderPlaced,
 			exact:true
 		}

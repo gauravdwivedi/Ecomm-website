@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import GoogleMap from './GoogleMap';
 
@@ -8,6 +9,23 @@ function AddressItem(props) {
     // console.log('CUrrent Index ', props.isCurrent)
     const { handleOnClick, isCurrent, isCartItem } = props;
     console.log('IsCatrItem on AddressITEM', isCartItem)
+
+    useEffect(() => {
+
+
+
+    })
+
+    useEffect(() => {
+        if (isCartItem) {
+            localStorage.setItem('isCartItem', isCartItem);
+        }
+    })
+
+
+    function checkIfCartExists() {
+
+    }
 
     // console.log('Address props', props, 'item id', id, 'IsCurrent', isCurrent)
 

@@ -3,14 +3,13 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 
-const OrderPlaced = () => {
+const OrderPlaced = (props) => {
     const [address, setAddress] = useState('');
 
-    const location = useLocation();
 
     useEffect(() => {
-        setAddress(location.state.address)
-    }, [location])
+        console.log(props.a)
+    }, [])
 
     return (
         <>
@@ -25,7 +24,7 @@ const OrderPlaced = () => {
                 <div>
                     <img src="images/order-place.svg" class="img-fluid" alt="" />
                     <h1>Order Successful!</h1>
-                    <h2>{address}</h2>
+                    <h2>3711 Spring Hill Rd undefined nougtrte Tallahassee, Nevada 52874 United States.</h2>
                 </div>
             </section>
 

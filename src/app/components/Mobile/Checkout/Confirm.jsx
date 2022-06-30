@@ -84,8 +84,8 @@ function Confirm(props) {
           console.log('Response Save Order Detail', res)
           if (res && res[0].result.status == 'captured') {
             history.push({
-              pathname: '/order-placed',
-              state: { address }
+              pathname: '/checkout/order-placed',
+              state: { addressId: res[0]?.result?.addressId }
             })
           }
         })

@@ -1,6 +1,8 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import config from "../../config/index";
+
+import { addressDetailById } from '../data/ducks/detail/actions';
 import OrderPlaced from '../components/Mobile/Checkout/OrderPlaced';
 import AuthContext from "../helpers/authContext";
 
@@ -23,6 +25,10 @@ class OrderPlacedContainer extends PureComponent {
     }
 
     componentDidMount() {
+        if (this.props.location?.state?.addressId)
+            this.props.addressDetailById({ addressId: this.props.location.state.addressId }).then(res => {
+                console.log(res)
+            })
     }
 
     render() {
@@ -40,10 +46,11 @@ class OrderPlacedContainer extends PureComponent {
 };
 
 const mapStateToProps = (state) => ({
+    address: state.home.addressDetailById
 });
 
 const mapDispatchToProps = {
-
+    addressDetailById
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderPlacedContainer);
