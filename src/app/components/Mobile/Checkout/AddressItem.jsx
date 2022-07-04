@@ -5,7 +5,7 @@ import GoogleMap from './GoogleMap';
 
 function AddressItem(props) {
     console.log(props)
-    const { id, first_name, last_name, address_1, address_2, city, country, postcode, primary, state, user_id, latitude, longitude } = props.item;
+    const { id, firstName, lastName, address1, city, country, postcode, primary, state, userId, latitude, longitude } = props.item;
     // console.log('CUrrent Index ', props.isCurrent)
     const { handleOnClick, isCurrent, isCartItem } = props;
     console.log('IsCatrItem on AddressITEM', isCartItem)
@@ -37,10 +37,10 @@ function AddressItem(props) {
                     <div className="form-check d-flex ps-0">
 
                         <div>
-                            <h4 className="name">{first_name}{' '}{last_name}</h4>
+                            <h4 className="name">{firstName}{' '}{lastName}</h4>
                             <div className="addess">
-                                <h4>{address_1}, </h4>
-                                {address_2 && <h4>{address_2}</h4>}
+                                <h4>{address1}, </h4>
+
                                 <h4>{city}, {state}</h4>
                                 <h4>Zip Code -{postcode}</h4>
                             </div>

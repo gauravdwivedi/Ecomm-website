@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import config from '../../../../config';
 
 function PopularProductItem({ item, addCart, deleteCart, cartlist, favProduct, unfavProduct }) {
-
+    console.log(item)
     const [inCart, setInCart] = useState(false);
     const [fav, setFav] = useState(false);
 
@@ -84,7 +84,7 @@ function PopularProductItem({ item, addCart, deleteCart, cartlist, favProduct, u
                             <h4>{item.title}</h4>
                         </a>
                         <div className="price">
-                            <h4>${item?.attributes[0]?.discounted_price}</h4>
+                            <h4>${item?.attributes[0]?.discountedPrice}</h4>
                         </div>
                     </div>
                 </div>
