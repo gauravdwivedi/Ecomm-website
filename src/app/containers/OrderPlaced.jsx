@@ -14,6 +14,9 @@ class OrderPlacedContainer extends PureComponent {
         return [
             //ssr.dispatch(loadBigStory()), //SSR rendering here
 
+            ssr.dispatch(addressDetailById({ addressId: this.props.location.state.addressId }))
+
+
         ];
     }
 
@@ -25,10 +28,11 @@ class OrderPlacedContainer extends PureComponent {
     }
 
     componentDidMount() {
-        if (this.props.location?.state?.addressId)
-            this.props.addressDetailById({ addressId: this.props.location.state.addressId }).then(res => {
-                console.log(res)
-            })
+
+        // if (this.props.location?.state?.addressId)
+        //     this.props.addressDetailById({ addressId: this.props.location.state.addressId }).then(res => {
+        //     })
+
     }
 
     render() {
@@ -45,8 +49,8 @@ class OrderPlacedContainer extends PureComponent {
     }
 };
 
-const mapStateToProps = (state) => ({
-    address: state.home.addressDetailById
+const mapStateToProps = (state) => (console.log('STATE', state.detail.addressList), {
+    address: state.detail.addressList
 });
 
 const mapDispatchToProps = {
