@@ -37,7 +37,7 @@ const OrderPlaced = (props) => {
             <section id="order-details" class="px-15 pt-0">
                 <div class="order-details">
                     <Link to="/order" class="btn my-order text-capitalize w-100 mt-3">My Orders</Link>
-                    <a href="#" class="btn continue-shopp text-capitalize w-100 mt-3">Continue Shopping</a>
+                    <Link to="/" class="btn continue-shopp text-capitalize w-100 mt-3">Continue Shopping</Link>
                 </div>
             </section>
         </>

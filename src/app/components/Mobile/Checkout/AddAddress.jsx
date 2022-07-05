@@ -29,7 +29,7 @@ function AddAddress(props) {
     const location = useGeoLocation()
 
     useEffect(() => {
-        console.log('Add Address History props', props.history)
+        // console.log('Add Address History props', props.history)
 
         if (props.history.location.query?.isCartItem) {
             setIsCartItem(true)
@@ -58,8 +58,8 @@ function AddAddress(props) {
     useEffect(() => {
         if (location) {
             console.log('LOCATION', location)
-            setLongitude(location.coordinates.lng);
-            setLatitude(location.coordinates.lat);
+            setLongitude(location?.coordinates?.lng);
+            setLatitude(location?.coordinates?.lat);
             setMapsrc(`https://maps.google.com/maps?q=${latitude},${longitude}&hl=es;z=14&amp;output=embed`)
         }
     })
@@ -75,7 +75,7 @@ function AddAddress(props) {
         let zipCode = form.elements['zipCode'];
 
 
-        console.log('==>', firstName, lastName, city, state, zipCode)
+        // console.log('==>', firstName, lastName, city, state, zipCode)
 
         var elems = document.querySelectorAll('.help-block');
         [].forEach.call(elems, function (el) {
@@ -108,7 +108,7 @@ function AddAddress(props) {
             lastName.parentNode.classList.add('error');
             lastName.parentNode.insertAdjacentHTML(
                 'beforeend',
-                '<div class="help-block alert alert-danger">First Name is required</div>'
+                '<div class="help-block alert alert-danger">Last Name is required</div>'
             );
             return_type = false;
         } else {
@@ -125,7 +125,7 @@ function AddAddress(props) {
 
         if (address.value == '') {
             address.parentNode.classList.add('error');
-            address.parentNodeinsertAdjacentHTML(
+            address.parentNode.insertAdjacentHTML(
                 'beforeend',
                 '<div class="help-block alert alert-danger">Please enter address.</div>'
             );
@@ -134,7 +134,7 @@ function AddAddress(props) {
 
         if (city.value == '') {
             city.parentNode.classList.add('error');
-            city.parentNodeinsertAdjacentHTML(
+            city.parentNode.insertAdjacentHTML(
                 'beforeend',
                 '<div class="help-block alert alert-danger">Please enter city.</div>'
             );
@@ -143,7 +143,7 @@ function AddAddress(props) {
 
         if (state.value == '') {
             state.parentNode.classList.add('error');
-            state.parentNodeinsertAdjacentHTML(
+            state.parentNode.insertAdjacentHTML(
                 'beforeend',
                 '<div class="help-block alert alert-danger">Please enter state.</div>'
             );
@@ -151,12 +151,23 @@ function AddAddress(props) {
         }
 
         if (zipCode.value == '') {
+
             zipCode.parentNode.classList.add('error');
-            zipCode.parentNodeinsertAdjacentHTML(
+            zipCode.parentNode.insertAdjacentHTML(
                 'beforeend',
                 '<div class="help-block alert alert-danger">Please enter zipCode.</div>'
             );
             return_type = false;
+        } else {
+            console.log(zipCode.type)
+            if (!zipCode.type === 'number') {
+                zipCode.parentNode.classList.add('error');
+                zipCode.parentNode.insertAdjacentHTML(
+                    'beforeend',
+                    '<div class="help-block alert alert-danger">Please enter numbers only.</div>'
+                );
+                return_type = false;
+            }
         }
         console.log(return_type)
         return return_type;
@@ -200,7 +211,6 @@ function AddAddress(props) {
     }
 
     const clickOnBack = () => {
-
         history.goBack();
     }
 
@@ -223,23 +233,23 @@ function AddAddress(props) {
                         <label htmlFor="floatingFirstName">First name</label>
                     </div>
                     <div className="form-floating mb-3">
-                        <input type="text" className="form-control" name="lastName" id="floatingPassword" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                        <label htmlFor="floatingPassword">Last name</label>
+                        <input type="text" className="form-control" name="lastName" id="floatingLastName" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                        <label htmlFor="floatingLastName">Last name</label>
                     </div>
                     <div className="form-floating mb-3">
-                        <input type="address" className="form-control" name="address" id="floatingaddress" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
-                        <label htmlFor="floatingaddress">Address</label>
+                        <input type="address" className="form-control" name="address" id="floatingAddress" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
+                        <label htmlFor="floatingAddress">Address</label>
                     </div>
                     <div className="form-floating mb-3">
                         <input type="city" className="form-control" id="floatingcity" name="city" placeholder="city" value={city} onChange={(e) => setCity(e.target.value)} />
-                        <label htmlFor="floatingcity">City</label>
+                        <label htmlFor="floatingCity">City</label>
                     </div>
                     <div className="form-floating mb-3">
                         <input type="state" className="form-control" id="floatingstate" name="state" placeholder="state" value={state} onChange={(e) => setState(e.target.value)} />
-                        <label htmlFor="floatingstate">State</label>
+                        <label htmlFor="floatingState">State</label>
                     </div>
                     <div className="form-floating mb-3">
-                        <input type="zip-code" className="form-control" id="floatingzip" name="zipCode" placeholder="zip" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
+                        <input type="number" className="form-control" id="floatingzip" name="zipCode" placeholder="zip" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
                         <label htmlFor="floatingzip">Zip code</label>
                     </div>
                 </section>
@@ -282,7 +292,7 @@ function AddAddress(props) {
                 </form>
             }
             <Toaster />
-            {location.loaded &&
+            {location && location.loaded && latitude && longitude &&
                 <GoogleMap lat={latitude} lng={longitude} />}
         </div><section className="panel-space"></section></>
 }
