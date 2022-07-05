@@ -30,11 +30,9 @@ function AddAddress(props) {
 
     useEffect(() => {
         // console.log('Add Address History props', props.history)
-
         if (props.history.location.query?.isCartItem) {
             setIsCartItem(true)
         }
-
         if (!context.isAuthenticated) {
             // console.log('Logged In')
             props.history.replace('/login')
@@ -218,7 +216,7 @@ function AddAddress(props) {
         <div>
             <header>
                 <div className="back-links">
-                    <button onClick={clickOnBack}>
+                    <button onClick={clickOnBack} style={{ background: 'none', border: 'none' }}>
                         <img src="images/back.svg" className="img-fluid" alt="" />
                     </button>
                 </div>

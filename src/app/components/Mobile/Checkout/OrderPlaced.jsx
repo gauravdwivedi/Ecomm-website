@@ -8,7 +8,8 @@ const OrderPlaced = (props) => {
 
 
     useEffect(() => {
-
+        localStorage.removeItem('total')
+        localStorage.removeItem('isCartItem')
         console.log('ORDER PROPS', props?.address?.result[0])
         setAddress(props?.address?.result[0])
 
