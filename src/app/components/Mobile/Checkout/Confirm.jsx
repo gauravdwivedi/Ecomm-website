@@ -48,8 +48,6 @@ function Confirm(props) {
       OrderItems.push({ 'productId': list[i].productId, 'variantId': list[i].variantId, 'quantity': 1 })
     }
 
-    console.log('LISt', OrderItems)
-
     props.createOrder({ data: OrderItems, addressId }).then(res => {
       console.log('OrderId', res);
       displayRazorpay(res?.[0]?.result?.id || '');
@@ -110,9 +108,9 @@ function Confirm(props) {
       // console.log(props.history.location?.query?.selectedAddress[0]);
       setIsAddress(true);
       setAddressId(props.history.location.query.selectedAddress[0].id);
-      setFirstName(props.history.location.query.selectedAddress[0].first_name);
-      setLastName(props.history.location.query.selectedAddress[0].last_name);
-      setAddress(props.history.location.query.selectedAddress[0].address_1);
+      setFirstName(props.history.location.query.selectedAddress[0].firstName);
+      setLastName(props.history.location.query.selectedAddress[0].lastName);
+      setAddress(props.history.location.query.selectedAddress[0].address1);
       setCity(props.history.location.query.selectedAddress[0].city);
       setState(props.history.location.query.selectedAddress[0].state);
       setCountry(props.history.location.query.selectedAddress[0].country);
@@ -129,15 +127,24 @@ function Confirm(props) {
     setTotal(sum);
   };
 
+  const clickOnBack = () => {
+    // if (isAddress) {
+    //   history.goBack();
+    // }
+    history.goBack();
+  }
+
   return (
     <>
       <div id="main">
         {/* Header */}
         <header className="none-bg">
           <div className="back-links">
-            <Link to="/cart">
-              <img src="/images/back-black.svg" className="img-fluid" alt="" />
-            </Link>
+            <button onClick={clickOnBack} style={{
+              outline: 'none', border: 'none', background: 'none'
+            }}>
+              < img src="/images/back-black.svg" className="img-fluid" alt="" />
+            </button>
           </div>
           <div className="inner-header confirm-bar">
             <div className="progress orange">
@@ -149,10 +156,12 @@ function Confirm(props) {
           </div>
         </header>
 
-        {props?.cartListItems?.map((item, index) => (
-          <ConfirmItem item={item} key={index} />
+        {
+          props?.cartListItems?.map((item, index) => (
+            <ConfirmItem item={item} key={index} />
 
-        ))}
+          ))
+        }
 
         {/* <AddressItem item={props?.history?.location?.query?.selectedAddress} /> */}
 
@@ -176,26 +185,28 @@ function Confirm(props) {
           Confirm and Pay
         </button>
 
-        {isAddress && (
-          <div className="d-flex">
-            <div style={{ marginLeft: "20px" }}>
-              <h2>Deliver to:</h2>
-              <h4 className="name ">
-                {firstName} {lastName}
-              </h4>
-              <div className="addess">
-                <h4 className="h4-confirm-address">{address}, </h4>
-                <h4 className="h4-confirm-address">
-                  {city}, {state}
+        {
+          isAddress && (
+            <div className="d-flex">
+              <div style={{ marginLeft: "20px" }}>
+                <h2>Deliver to:</h2>
+                <h4 className="name ">
+                  {firstName} {lastName}
                 </h4>
-                <h4 className="h4-confirm-address">Zip Code -{postcode}</h4>
+                <div className="addess">
+                  <h4 className="h4-confirm-address">{address}, </h4>
+                  <h4 className="h4-confirm-address">
+                    {city}, {state}
+                  </h4>
+                  <h4 className="h4-confirm-address">Zip Code -{postcode}</h4>
+                </div>
+                <h4 className="h4-confirm-address">
+                  Arrival est: Apr 15 $0 Shipping
+                </h4>
               </div>
-              <h4 className="h4-confirm-address">
-                Arrival est: Apr 15 $0 Shipping
-              </h4>
             </div>
-          </div>
-        )}
+          )
+        }
 
         <button
           className="change-address"
@@ -205,7 +216,7 @@ function Confirm(props) {
         >
           Change Address
         </button>
-      </div>
+      </div >
       <section className="panel-space" />
     </>
   );

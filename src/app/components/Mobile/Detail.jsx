@@ -198,10 +198,17 @@ const Detail = React.memo(function Detail(props) {
 	const onSizeHandler = (e, value) => {
 		e.preventDefault();
 		e.stopPropagation();
+
 		let ele = document.getElementById(value);
-		ele.style.background = "#000000";
-		ele.style.color = "#FFFFFF"
-		setSizeSelect(value)
+		if (sizeSelect == value) {
+			ele.style.background = "#ebe5e5";
+			ele.style.color = "#000000"
+			setSizeSelect('')
+		} else {
+			ele.style.background = "#000000";
+			ele.style.color = "#FFFFFF"
+			setSizeSelect(value)
+		}
 	}
 
 	const OnClickSaveHandler = (e) => {
@@ -248,12 +255,12 @@ const Detail = React.memo(function Detail(props) {
 			</div>
 
 			{(props.detail.videos) ?
-				// <VedioPlayer url={props.detail?.videos[0]?.url} />
-				<LazyLoadVideo url={config.IMG_END_POINT + props.detail?.videos[0]?.url} />
+				<VedioPlayer url={props.detail?.videos[0]?.url} />
+				// <LazyLoadVideo url={config.IMG_END_POINT + props.detail?.videos[0]?.url} />
 				: ""}
 
 			{ModalTwo && <Modal isVisible={setModalTwo} >
-				< div className=" slick-default theme-dots" >
+				<div className=" slick-default theme-dots" >
 					<Slider {...settings}>
 						{images.map((item) => (
 							<div className="slider-box" style={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -398,7 +405,7 @@ const Detail = React.memo(function Detail(props) {
 							<h2>{props.detail.title}</h2>
 							<div className="price">
 								{(props.detail.attributes && props.detail?.attributes.length > 0) ?
-									<h4>{'$' + props.detail.attributes[0].price + '.00'} <del>{'$' + props.detail.attributes[0].discounted_price + '.00'}</del></h4>
+									<h4>{'$' + props.detail.attributes[0].price + '.00'} <del>{'$' + props.detail.attributes[0].discountedPrice + '.00'}</del></h4>
 									: ""}
 							</div>
 							<ul className="ratings">

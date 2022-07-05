@@ -4,8 +4,10 @@ import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import useGeoLocation from "../../useGeoLocation";
 import GoogleMap from "./GoogleMap";
+import { useHistory } from "react-router-dom";
 
 function AddAddress(props) {
+    const history = useHistory();
 
     const context = useContext(authContext)
 
@@ -42,9 +44,9 @@ function AddAddress(props) {
     useEffect(() => {
         if (props.history.location.query?.data) {
             setIsEdit(true)
-            setFirstName(props?.history?.location?.query?.data.first_name)
-            setLastName(props?.history?.location?.query?.data.last_name);
-            setAddress(props?.history?.location?.query?.data.address_1);
+            setFirstName(props?.history?.location?.query?.data.firstName)
+            setLastName(props?.history?.location?.query?.data.lastName);
+            setAddress(props?.history?.location?.query?.data.address1);
             setCity(props?.history?.location?.query?.data.city);
             setZipCode(props?.history?.location?.query?.data.postcode);
             setState(props?.history?.location?.query?.data.state);
@@ -58,9 +60,7 @@ function AddAddress(props) {
             console.log('LOCATION', location)
             setLongitude(location.coordinates.lng);
             setLatitude(location.coordinates.lat);
-
             setMapsrc(`https://maps.google.com/maps?q=${latitude},${longitude}&hl=es;z=14&amp;output=embed`)
-
         }
     })
 
@@ -199,13 +199,18 @@ function AddAddress(props) {
         }
     }
 
+    const clickOnBack = () => {
+
+        history.goBack();
+    }
+
     return <>
         <div>
             <header>
                 <div className="back-links">
-                    <Link to="/address">
+                    <button onClick={clickOnBack}>
                         <img src="images/back.svg" className="img-fluid" alt="" />
-                    </Link>
+                    </button>
                 </div>
                 <div className="inner-header">
                     {isEdit ? <h3>Edit Address</h3> : <h3>Add Address</h3>}
