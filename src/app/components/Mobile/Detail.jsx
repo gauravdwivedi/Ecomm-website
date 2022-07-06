@@ -36,6 +36,11 @@ const Detail = React.memo(function Detail(props) {
 	const progressBarRef = useRef(null);
 	const priceGap = 10;
 
+
+	//Video state
+	const [playing, setPlaying] = useState(false);
+	const videoRef = useRef(null);
+
 	let images = [];
 	let content = '';
 	let isContent;
@@ -65,9 +70,7 @@ const Detail = React.memo(function Detail(props) {
 
 	const handleProgressBarChangeMax = (e) => {
 		e.preventDefault();
-
 		setMaxRange(e.target.value)
-
 		if (maxRange - minRange < priceGap) {
 			setMinRange(maxRange - priceGap);
 		} else {
@@ -237,6 +240,10 @@ const Detail = React.memo(function Detail(props) {
 		// props.getallproducts(``)
 	}
 
+
+
+
+
 	return (
 		<div id="main">
 			<div className='top-shadow'>
@@ -256,7 +263,7 @@ const Detail = React.memo(function Detail(props) {
 
 			{(props.detail.videos) ?
 				<VedioPlayer url={props.detail?.videos[0]?.url} />
-				// <LazyLoadVideo url={config.IMG_END_POINT + props.detail?.videos[0]?.url} />
+				// <LazyLoadVideo url={config.IMG_END_POINT + props.detail?.videos[0]?.url} ref={videoRef} handleVideoPress={handleVideoPress} />
 				: ""}
 
 			{ModalTwo && <Modal isVisible={setModalTwo} >
@@ -488,15 +495,37 @@ const Detail = React.memo(function Detail(props) {
 
 const VedioPlayer = ({ url }) => {
 	// console.log('Video URL', url)
+
+	const [playing, setPlaying] = useState(false);
+
+	const videoRef = useRef(null);
+
+	const handleVideoPress = () => {
+		console.log('Video Pressed')
+		if (playing) {
+			setPlaying(false);
+			videoRef.current.pause();
+		} else {
+			videoRef.current.play();
+			setPlaying((play) => !play);
+		}
+	}
+
+
 	return (
-		<div id="videoWrapper"  >
-			<video
+		<div id="videoWrapper"
+			onClick={handleVideoPress}
+		>
+			{/* <video
+				ref={videoRef}
 				playsInline
 				autoPlay
-				muted
+				ref={videoRef}
 				loop
 				poster="/images/detail-bg.png"
-				src={config.IMG_END_POINT + url} />
+				src={config.IMG_END_POINT + url} /> */}
+
+			<LazyLoadVideo url={config.IMG_END_POINT + url} videoRef={videoRef} />
 		</div>
 	)
 }
