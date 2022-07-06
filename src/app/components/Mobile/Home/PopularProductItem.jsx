@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import config from '../../../../config';
 
 function PopularProductItem({ item, addCart, deleteCart, cartlist, favProduct, unfavProduct }) {
-
+    console.log(item)
     const [inCart, setInCart] = useState(false);
     const [fav, setFav] = useState(false);
 
@@ -37,24 +37,19 @@ function PopularProductItem({ item, addCart, deleteCart, cartlist, favProduct, u
                 setInCart(true)
             })
         }
-
     }
-
-
 
     const handleFavClick = (id) => {
         // console.log(fav)
         if (fav) {
             unfavProduct({ productId: id }).then(res => {
                 setFav(false)
-
             })
         }
 
         if (!fav) {
             favProduct({ productId: id }).then(res => {
                 setFav(true)
-
             })
         }
     }
@@ -64,7 +59,7 @@ function PopularProductItem({ item, addCart, deleteCart, cartlist, favProduct, u
             <div className="col-md-4 col-6">
                 <div className="product-box ratio_square">
                     <div className="img-part">
-                        <Link to={"/product/" + item.slug} className="bg-size"><img src={config.IMG_END_POINT + item?.images[0]?.url} alt="" className="img-fluid bg-img" /></Link>
+                        <Link to={"/products/list/" + item.category.id} className="bg-size"><img src={config.IMG_END_POINT + item?.images[0]?.url} alt="" className="img-fluid bg-img" /></Link>
                         <div className="hrs-btn-home">
                             <span><img src="/images/hr-icon.svg" alt="" />
                                 <h6>3 Hrs</h6>
@@ -84,7 +79,7 @@ function PopularProductItem({ item, addCart, deleteCart, cartlist, favProduct, u
                             <h4>{item.title}</h4>
                         </a>
                         <div className="price">
-                            <h4>${item?.attributes[0]?.discounted_price}</h4>
+                            <h4>${item?.attributes[0]?.discountedPrice}</h4>
                         </div>
                     </div>
                 </div>

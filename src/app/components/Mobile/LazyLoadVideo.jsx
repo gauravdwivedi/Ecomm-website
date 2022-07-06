@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 
-
-
 const registerObserver = (ref, setShow) => {
     const observer = new IntersectionObserver((enteries, observer) => {
         enteries.forEach(entry => {
@@ -18,7 +16,7 @@ const registerObserver = (ref, setShow) => {
     observer.observe(ref);
 }
 
-export default function LazyLoadVideo({ url }) {
+export default function LazyLoadVideo({ url, videoRef }) {
     const [showVideo, setShowVideo] = useState(false);
     const VideoRef = useRef(null)
 
@@ -27,15 +25,14 @@ export default function LazyLoadVideo({ url }) {
     }, [])
 
     if (showVideo) {
-        return <div id="videoWrapper"  >
-            <video
-                playsInline
-                autoPlay
-                muted
-                loop
-                poster="/images/detail-bg.png"
-                src={url} />
-        </div>
+        return <video
+            playsInline
+            autoPlay
+            loop
+            ref={videoRef}
+            poster="/images/detail-bg.png"
+            src={url} />
+
     }
 
     return <span ref={VideoRef} className="videoWrapper" />

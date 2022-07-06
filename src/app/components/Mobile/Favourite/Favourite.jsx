@@ -17,7 +17,7 @@ const Favourite = React.memo(function Favourite(props) {
 
     function filterFavProduct() {
         let favList = props?.Favlist?.map((item) => {
-            return props.ProductList.filter(product => product.id === item.product_id)
+            return props.ProductList.filter(product => product.id === item.productId)
         })
         return favList
     }

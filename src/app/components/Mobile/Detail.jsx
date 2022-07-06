@@ -36,6 +36,11 @@ const Detail = React.memo(function Detail(props) {
 	const progressBarRef = useRef(null);
 	const priceGap = 10;
 
+
+	//Video state
+	const [playing, setPlaying] = useState(false);
+	const videoRef = useRef(null);
+
 	let images = [];
 	let content = '';
 	let isContent;
@@ -65,9 +70,7 @@ const Detail = React.memo(function Detail(props) {
 
 	const handleProgressBarChangeMax = (e) => {
 		e.preventDefault();
-
 		setMaxRange(e.target.value)
-
 		if (maxRange - minRange < priceGap) {
 			setMinRange(maxRange - priceGap);
 		} else {
@@ -198,10 +201,17 @@ const Detail = React.memo(function Detail(props) {
 	const onSizeHandler = (e, value) => {
 		e.preventDefault();
 		e.stopPropagation();
+
 		let ele = document.getElementById(value);
-		ele.style.background = "#000000";
-		ele.style.color = "#FFFFFF"
-		setSizeSelect(value)
+		if (sizeSelect == value) {
+			ele.style.background = "#ebe5e5";
+			ele.style.color = "#000000"
+			setSizeSelect('')
+		} else {
+			ele.style.background = "#000000";
+			ele.style.color = "#FFFFFF"
+			setSizeSelect(value)
+		}
 	}
 
 	const OnClickSaveHandler = (e) => {
@@ -230,6 +240,10 @@ const Detail = React.memo(function Detail(props) {
 		// props.getallproducts(``)
 	}
 
+
+
+
+
 	return (
 		<div id="main">
 			<div className='top-shadow'>
@@ -248,12 +262,12 @@ const Detail = React.memo(function Detail(props) {
 			</div>
 
 			{(props.detail.videos) ?
-				// <VedioPlayer url={props.detail?.videos[0]?.url} />
-				<LazyLoadVideo url={config.IMG_END_POINT + props.detail?.videos[0]?.url} />
+				<VedioPlayer url={props.detail?.videos[0]?.url} />
+				// <LazyLoadVideo url={config.IMG_END_POINT + props.detail?.videos[0]?.url} ref={videoRef} handleVideoPress={handleVideoPress} />
 				: ""}
 
 			{ModalTwo && <Modal isVisible={setModalTwo} >
-				< div className=" slick-default theme-dots" >
+				<div className=" slick-default theme-dots" >
 					<Slider {...settings}>
 						{images.map((item) => (
 							<div className="slider-box" style={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -398,7 +412,7 @@ const Detail = React.memo(function Detail(props) {
 							<h2>{props.detail.title}</h2>
 							<div className="price">
 								{(props.detail.attributes && props.detail?.attributes.length > 0) ?
-									<h4>{'$' + props.detail.attributes[0].price + '.00'} <del>{'$' + props.detail.attributes[0].discounted_price + '.00'}</del></h4>
+									<h4>{'$' + props.detail.attributes[0].price + '.00'} <del>{'$' + props.detail.attributes[0].discountedPrice + '.00'}</del></h4>
 									: ""}
 							</div>
 							<ul className="ratings">
@@ -481,15 +495,37 @@ const Detail = React.memo(function Detail(props) {
 
 const VedioPlayer = ({ url }) => {
 	// console.log('Video URL', url)
+
+	const [playing, setPlaying] = useState(false);
+
+	const videoRef = useRef(null);
+
+	const handleVideoPress = () => {
+		console.log('Video Pressed')
+		if (playing) {
+			setPlaying(false);
+			videoRef.current.pause();
+		} else {
+			videoRef.current.play();
+			setPlaying((play) => !play);
+		}
+	}
+
+
 	return (
-		<div id="videoWrapper"  >
-			<video
+		<div id="videoWrapper"
+			onClick={handleVideoPress}
+		>
+			{/* <video
+				ref={videoRef}
 				playsInline
 				autoPlay
-				muted
+				ref={videoRef}
 				loop
 				poster="/images/detail-bg.png"
-				src={config.IMG_END_POINT + url} />
+				src={config.IMG_END_POINT + url} /> */}
+
+			<LazyLoadVideo url={config.IMG_END_POINT + url} videoRef={videoRef} />
 		</div>
 	)
 }

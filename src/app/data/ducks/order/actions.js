@@ -17,8 +17,6 @@ export function createOrder(data){
     }
 }
 
-
-
 export function saveOrderDetails(data){
     console.log('DATA',data)
     return {
@@ -36,5 +34,19 @@ export function saveOrderDetails(data){
     }
 }
 
-
+export function getOrders(){
+    return {
+        CALL_API:[
+            {
+                type:types.FETCH_ORDERS,
+                meta:{
+                    path:"/v1/orders/list",
+                    method:"GET",
+                    body:'order list',
+                    isHeader:true
+                }
+            }
+        ]
+    }
+}
 

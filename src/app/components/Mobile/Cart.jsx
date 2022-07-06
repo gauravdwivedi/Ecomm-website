@@ -7,6 +7,7 @@ function Cart(props) {
     const [itemList, setItemList] = useState([])
     const [total, setTotal] = useState(0)
 
+    console.log('Cart PROPS', props)
 
     useEffect(() => {
         setItemList(props.cartListItems)

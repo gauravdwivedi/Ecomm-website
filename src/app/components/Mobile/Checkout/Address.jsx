@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import AddressItem from './AddressItem'
 import { Link } from "react-router-dom"
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import toast, { Toaster } from "react-hot-toast";
+
 
 function Address(props) {
     const [isCurrent, setIsCurrent] = useState(1);
@@ -9,15 +12,34 @@ function Address(props) {
     const [total, setTotal] = useState(0);
     const [selectedAddress, setSelectedAddress] = useState('');
 
+    const history = useHistory();
+
     useEffect(() => {
+
+        if (localStorage.getItem('isCartItem')) {
+            console.log('localstorage')
+            setIsCartItem(true)
+        }
+
+        if (localStorage.getItem('total')) {
+            setTotal(localStorage.getItem('total'))
+        }
+
         if (props.history.location?.state?.isCartItem) {
             setIsCartItem(true)
+            if (isCartItem) {
+                localStorage.setItem('isCartItem', isCartItem);
+
+            }
         }
 
         if (props?.history?.location?.query?.total) {
             setTotal(props?.history?.location?.query?.total)
+            localStorage.setItem('total', props?.history?.location?.query?.total)
             setIsCartItem(true);
         }
+
+
     })
 
     const handleOnClick = (e, id) => {
@@ -28,14 +50,39 @@ function Address(props) {
         setSelectedAddress(add)
     }
 
+    const ClickOnContinue = () => {
+        if (selectedAddress) {
+            history.push({
+                pathname: `/confirm`,
+                query: { total: total, selectedAddress }
+            })
+        }
+        toast.error("Please Select an Address!")
+    }
+
+    const onBackClick = () => {
+        console.log('IsCartItem On Back', isCartItem)
+        // if (isCartItem) {
+        //     history.push({
+        //         pathname: '/cart'
+        //     })
+        // } else {
+        //     history.push('/account')
+        // }
+        history.goBack();
+    }
+
     return (
         <div id="main">
             {/* Header */}
             <header className="none-bg">
                 <div className="back-links">
-                    <Link to={total ? '/cart' : '/account'} >
+                    <button style={{ border: 'none', outline: 'none', background: 'none' }}
+                        // to={total ? '/cart' : '/account'}
+                        onClick={onBackClick}
+                    >
                         <img src="/images/back-black.svg" className="img-fluid" alt="" />
-                    </Link>
+                    </button>
                 </div>
                 {/* Progress Bar */}
                 <div className="inner-header confirm-bar">
@@ -86,26 +133,24 @@ function Address(props) {
             </section> */}
 
             {isCartItem && <section id="order-details" className="px-15 pt-0">
-
                 <div className="order-details">
                     <div className="total-amount">
                         <h4>
                             Subtotal (VAT included) <span>${total}</span>
                         </h4>
                     </div>
-                    <Link
-                        to={{
-                            pathname: `/confirm`,
-                            query: { total: total, selectedAddress }
-                        }}
+                    <button
+                        // to={{
+                        //     pathname: `/confirm`,
+                        //     query: { total: total, selectedAddress }
+                        // }}
+                        onClick={ClickOnContinue}
                         className="btn btn-outline checkout-btn text-capitalize w-100 mt-3">
                         Continue
-                    </Link>
-
+                    </button>
+                    <Toaster />
                 </div>
             </section>}
-
-
         </div>
     )
 }

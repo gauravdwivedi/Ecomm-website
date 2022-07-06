@@ -161,3 +161,18 @@ export function editAddress(data){
 }
 
 
+export function addressDetailById(addressId){
+    return {
+        CALL_API:[
+            {
+                type:types.ADDRESS_DETAIL_BY_ID,
+                meta:{
+                    path:"/v1/users/address-detail",
+                    method:"POST",
+                    body:addressId,
+                    isHeader:true
+                }
+            }
+        ]
+    }
+}
