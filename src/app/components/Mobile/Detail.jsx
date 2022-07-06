@@ -37,9 +37,6 @@ const Detail = React.memo(function Detail(props) {
 	const priceGap = 10;
 
 
-	//Video state
-	const [playing, setPlaying] = useState(false);
-	const videoRef = useRef(null);
 
 	let images = [];
 	let content = '';
@@ -240,10 +237,6 @@ const Detail = React.memo(function Detail(props) {
 		// props.getallproducts(``)
 	}
 
-
-
-
-
 	return (
 		<div id="main">
 			<div className='top-shadow'>
@@ -436,10 +429,10 @@ const Detail = React.memo(function Detail(props) {
 						<div className='right-sec'>
 							<ul>
 								<li>
-									{fav ? <img src="/images/detail-video/icon/notify-red.svg" alt="" onClick={handleFavClick} /> : <img src="/images/detail-video/icon/notify.svg" alt="" onClick={handleFavClick} />}
+									{props.detail?.saved ? <img src="/images/detail-video/icon/notify-red.svg" alt="" onClick={handleFavClick} /> : <img src="/images/detail-video/icon/notify.svg" alt="" onClick={handleFavClick} />}
 								</li>
 								<li className='liked'>
-									{like ? <>
+									{props.detail?.liked ? <>
 										<img src="/images/detail-video/icon/unlike.svg" alt="" onClick={handleLikeClick} />
 										<span className='like-item-1'>{noOfLikes}</span>
 									</> :

@@ -29,7 +29,7 @@ const Navbar = (props) => {
                     })} */}
 
                     {isAuthenticated && <li>
-                        <Link to="#">
+                        <Link to="/order">
                             <img src="/images/icon/sidenav-icon/bag.svg" className="img-fluid" alt="" />
                             <div className="content">
                                 <span>My Orders</span>
