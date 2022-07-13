@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
+
 import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import config from '../../../config'
@@ -6,11 +7,11 @@ import authContext from '../../helpers/authContext';
 import { useHistory } from 'react-router';
 import Modal from './Modal';
 import Slider from "react-slick";
-import LazyLoadVideo from './LazyLoadVideo';
+
+
 const Detail = React.memo(function Detail(props) {
 	const context = useContext(authContext)
 	const history = useHistory();
-
 	const [like, setLike] = useState(false);
 	const [inCart, setInCart] = useState(false);
 	const [addToCart, setAddToCart] = useState(false);
@@ -29,17 +30,13 @@ const Detail = React.memo(function Detail(props) {
 	const [sortFilter, setSortFilter] = useState('best');
 	const [price, setPrice] = useState(0);
 	const [order, setOrder] = useState('asc');
+	const videoRef = useRef(null);
 
-	const [maxRange, setMaxRange] = useState(100);
-	const [minRange, setMinRange] = useState(0);
-	const [sizeSelect, setSizeSelect] = useState(' ');
+	const [maxRange, setMaxRange] = useState(1000);
+	const [minRange, setMinRange] = useState(1);
+	const [sizeSelect, setSizeSelect] = useState([]);
 	const progressBarRef = useRef(null);
 	const priceGap = 10;
-
-
-	//Video state
-	const [playing, setPlaying] = useState(false);
-	const videoRef = useRef(null);
 
 	let images = [];
 	let content = '';
@@ -50,13 +47,19 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	useEffect(() => {
-		console.log('Props Detail', props)
+		console.log('DETAIL PROPS', props)
 		setLike(props.detail.liked)
 		setInCart(props.detail.productInCart)
-		setFav(props.detail.saved);
+		setFav(props.detail.favourite);
 		setNoOfLikes(props.detail.likes)
+		console.log('LIKED', props.detail.liked)
 
+		console.log('Favourite', props.detail.favourite)
 	}, [props.detail])
+
+	const handleScroll = () => {
+		console.log('Scrolling !!')
+	}
 
 	const hanldeProgressBarChangeMin = (e) => {
 		e.preventDefault();
@@ -74,12 +77,8 @@ const Detail = React.memo(function Detail(props) {
 		if (maxRange - minRange < priceGap) {
 			setMinRange(maxRange - priceGap);
 		} else {
-			progressBarRef.current.style.right = 100 - (maxRange / 100) * 100 + "%";
+			progressBarRef.current.style.right = 1000 - (maxRange / 100) * 100 + "%";
 		}
-	}
-
-	const handleSizeSelect = (e) => {
-		e.preventDefault();
 	}
 
 	const handleLikeClick = () => {
@@ -88,7 +87,7 @@ const Detail = React.memo(function Detail(props) {
 			props.unlikeProduct({ productId: props.detail.id }).then(res => {
 				console.log('Response from DisLike', res)
 
-				if (res && res[0]) {
+				if (res[0] && res[0].message) {
 					setLike(false)
 					setNoOfLikes(noOfLikes - 1)
 				}
@@ -103,16 +102,23 @@ const Detail = React.memo(function Detail(props) {
 			props.likeProduct({ productId: props.detail.id }).then(res => {
 
 				console.log('Response from like', res)
-				if (res && res[0]) {
+				if (res && res[0].message) {
+					setLike(false)
+					// setNoOfLikes(noOfLikes + 1)
+				} else {
 					setLike(true)
 					setNoOfLikes(noOfLikes + 1)
 				}
+
 				// props.fetchProductDetails(props.detail.slug).then((res => {
 				// }))
 			})
 		}
 	}
 
+
+
+	//Favourite/Bookmark
 	const handleFavClick = () => {
 		// console.log(fav)
 		if (fav) {
@@ -120,13 +126,19 @@ const Detail = React.memo(function Detail(props) {
 				console.log('Favourite/Bookmark Response', res)
 				setFav(false)
 				props.fetchProductDetails(props.detail.slug).then(res => {
+					console.log(res)
 				})
 			})
 		}
 
 		if (!fav) {
 			props.favProduct({ productId: props.detail.id }).then(res => {
-				setFav(true)
+				console.log('Favourite Response==>', res)
+				if (res && res[0]) {
+					if (res[0].result) {
+						setFav(true)
+					}
+				}
 				props.fetchProductDetails(props.detail.slug).then((res => {
 				}))
 			})
@@ -166,12 +178,15 @@ const Detail = React.memo(function Detail(props) {
 
 
 	//Filter click handler 
-	const filterClickHandler = () => {
+	const filterClickHandler = (e) => {
+		e.stopPropagation();
+
+		console.log('FIlter')
+
 		if (!isFilter) {
 			setIsSort(false)
 			setModalTwo(false)
 			setIsFilter(true)
-
 		} else {
 			setIsFilter(false)
 		}
@@ -182,7 +197,6 @@ const Detail = React.memo(function Detail(props) {
 			setModalTwo(false)
 			setIsFilter(false)
 			setIsSort(true)
-
 		} else {
 			setIsSort(false)
 		}
@@ -198,19 +212,25 @@ const Detail = React.memo(function Detail(props) {
 		}
 	}
 
+
+	//Filter
 	const onSizeHandler = (e, value) => {
 		e.preventDefault();
 		e.stopPropagation();
 
 		let ele = document.getElementById(value);
-		if (sizeSelect == value) {
+
+
+
+		if (sizeSelect.find(val => val === value)) {
+			console.log('value', value);
 			ele.style.background = "#ebe5e5";
-			ele.style.color = "#000000"
-			setSizeSelect('')
+			ele.style.color = "#000000";
+			setSizeSelect(sizeSelect.filter(val => val !== value))
 		} else {
 			ele.style.background = "#000000";
-			ele.style.color = "#FFFFFF"
-			setSizeSelect(value)
+			ele.style.color = "#FFFFFF";
+			setSizeSelect([...sizeSelect, value]);
 		}
 	}
 
@@ -218,6 +238,7 @@ const Detail = React.memo(function Detail(props) {
 		e.preventDefault();
 		e.stopPropagation();
 
+		console.log('SIZE SELECT', sizeSelect)
 		props.getAllProducts(`min_price=${minRange}&max_price=${maxRange}&size=${sizeSelect}`).then(
 			setIsFilter(false)
 		)
@@ -225,7 +246,6 @@ const Detail = React.memo(function Detail(props) {
 
 	const oncheckBoxClickHandler = (e, filter, order) => {
 		e.stopPropagation();
-
 	}
 
 	const onSaveSortHandler = (e) => {
@@ -234,14 +254,10 @@ const Detail = React.memo(function Detail(props) {
 
 		console.log('Sort Filter', sortFilter, 'Order', order)
 
-		props.getAllProducts(`sort_by=${sortFilter}&order=${order}`).then(res => {
+		props.getAllProducts(`sort_by=${sortFilter}&order=${order}&size=["s","m"]`).then(res => {
 			setIsSort(false)
 		})
-		// props.getallproducts(``)
 	}
-
-
-
 
 
 	return (
@@ -260,11 +276,13 @@ const Detail = React.memo(function Detail(props) {
 					</ul>
 				</div>
 			</div>
+			<div >
+				{(props.detail.videos) ?
+					<VedioPlayer url={props.detail?.videos[0]?.url} thumbnail={props.detail?.videos[0]?.thumbnail} />
+					// <LazyLoadVideo url={config.IMG_END_POINT + props.detail?.videos[0]?.url} ref={videoRef} handleVideoPress={handleVideoPress} />
+					: ""}
+			</div>
 
-			{(props.detail.videos) ?
-				<VedioPlayer url={props.detail?.videos[0]?.url} />
-				// <LazyLoadVideo url={config.IMG_END_POINT + props.detail?.videos[0]?.url} ref={videoRef} handleVideoPress={handleVideoPress} />
-				: ""}
 
 			{ModalTwo && <Modal isVisible={setModalTwo} >
 				<div className=" slick-default theme-dots" >
@@ -311,8 +329,8 @@ const Detail = React.memo(function Detail(props) {
 									<div className='slider-progress' ref={progressBarRef}></div>
 								</div>
 								<div className="range-input">
-									<input type="range" className='range-min' min="0" max="100" onChange={(e) => hanldeProgressBarChangeMin(e)} value={minRange} />
-									<input type="range" className='range-max' min="0" max="100" onChange={(e) => handleProgressBarChangeMax(e)} value={maxRange} />
+									<input type="range" className='range-min' min="0" max="1000" onChange={(e) => hanldeProgressBarChangeMin(e)} value={minRange} />
+									<input type="range" className='range-max' min="0" max="1000" onChange={(e) => handleProgressBarChangeMax(e)} value={maxRange} />
 								</div>
 							</div>
 						</div>
@@ -472,9 +490,6 @@ const Detail = React.memo(function Detail(props) {
 				<div className='bottom-shadow'>
 				</div>
 				{/* </div > */}
-
-
-
 				{/* <div className="detail-add flex-fill" style={{ borderRadius: '20px' }}>{context.isAuthenticated ? <>{inCart == true ?
 					<div>
 
@@ -493,15 +508,13 @@ const Detail = React.memo(function Detail(props) {
 	)
 })
 
-const VedioPlayer = ({ url }) => {
-	// console.log('Video URL', url)
+const VedioPlayer = ({ url, thumbnail }) => {
 
 	const [playing, setPlaying] = useState(false);
-
 	const videoRef = useRef(null);
 
-	const handleVideoPress = () => {
-		console.log('Video Pressed')
+	const handleVideoPress = (videoRef) => {
+
 		if (playing) {
 			setPlaying(false);
 			videoRef.current.pause();
@@ -513,20 +526,19 @@ const VedioPlayer = ({ url }) => {
 
 
 	return (
-		<div id="videoWrapper"
-			onClick={handleVideoPress}
-		>
-			{/* <video
-				ref={videoRef}
+
+		<div className="videoWrapper"
+			onClick={() => handleVideoPress(videoRef)} >
+			<video
 				playsInline
 				autoPlay
-				ref={videoRef}
 				loop
-				poster="/images/detail-bg.png"
-				src={config.IMG_END_POINT + url} /> */}
-
-			<LazyLoadVideo url={config.IMG_END_POINT + url} videoRef={videoRef} />
+				ref={videoRef}
+				poster={thumbnail ? config.IMG_END_POINT + thumbnail : '/images/detail-bg.png'}
+				src={config.IMG_END_POINT + url} />
+			{/* <LazyLoadVideo url={config.IMG_END_POINT + url} videoRef={videoRef} /> */}
 		</div>
+
 	)
 }
 

@@ -815,14 +815,14 @@ nav ul li i {
 }
 
 /* -----detail-page------- */
-#videoWrapper {
+.videoWrapper {
     height: 100vh;
     overflow: hidden;
     position: relative;
     scroll-snap-align: start;
 }
 
-#videoWrapper video {
+.videoWrapper video {
     position: absolute;
     min-width: 100%;
     min-height: 100%;
