@@ -64,7 +64,7 @@ function AddAddress(props) {
 
     const addAddressValidation = (form) => {
 
-        var return_type = true;
+        let return_type = true;
         let firstName = form.elements['firstName'];
         let lastName = form.elements['lastName'];
         let address = form.elements['address'];
@@ -156,16 +156,6 @@ function AddAddress(props) {
                 '<div class="help-block alert alert-danger">Please enter zipCode.</div>'
             );
             return_type = false;
-        } else {
-            console.log(zipCode.type)
-            if (!zipCode.type === 'number') {
-                zipCode.parentNode.classList.add('error');
-                zipCode.parentNode.insertAdjacentHTML(
-                    'beforeend',
-                    '<div class="help-block alert alert-danger">Please enter numbers only.</div>'
-                );
-                return_type = false;
-            }
         }
         console.log(return_type)
         return return_type;
