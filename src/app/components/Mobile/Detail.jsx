@@ -85,9 +85,10 @@ const Detail = React.memo(function Detail(props) {
 
 		if (like) {
 			props.unlikeProduct({ productId: props.detail.id }).then(res => {
-				console.log('Response from DisLike', res)
+				console.log('Response from DisLike', res[0])
 
-				if (res[0] && res[0].message) {
+				// if (res[0] && res[0].message) {
+				if (res[0]) {
 					setLike(false)
 					setNoOfLikes(noOfLikes - 1)
 				}

@@ -31,7 +31,7 @@ function AddressItem(props) {
 
     return (
         <>
-            <li>
+            <li onClick={(e) => handleOnClick(e, id)}>
                 <div className={`check-box ${isCurrent === id ? 'active' : ''}`}>
 
                     <div className="form-check d-flex ps-0">
@@ -53,7 +53,7 @@ function AddressItem(props) {
                             name="flexRadioDefault"
                             id="flexRadioDefault1"
                             checked={isCurrent === id}
-                            onChange={(e) => handleOnClick(e, id)}
+                            // onChange={(e) => handleOnClick(e, id)}
                         />
 
                         <label className="form-check-label" htmlFor="flexRadioDefault1">

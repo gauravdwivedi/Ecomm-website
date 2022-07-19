@@ -24,7 +24,8 @@ function AddAddress(props) {
     const [longitude, setLongitude] = useState('');
     const [isCartItem, setIsCartItem] = useState(false);
     const [mapsrc, setMapsrc] = useState('');
-
+    const [colony, setColony] = useState('');
+    const [landmark, setLandmark] = useState('');
 
     const location = useGeoLocation()
 
@@ -49,6 +50,8 @@ function AddAddress(props) {
             setZipCode(props?.history?.location?.query?.data.postcode);
             setState(props?.history?.location?.query?.data.state);
             setId(props?.history?.location?.query?.data.id);
+            setColony(props?.history?.location?.query?.data.colony);
+            setLandmark(props?.history?.location?.query?.data.landmark);
         }
     }, [isEdit])
 
@@ -71,7 +74,8 @@ function AddAddress(props) {
         let city = form.elements['city'];
         let state = form.elements['state'];
         let zipCode = form.elements['zipCode'];
-
+        let colony = form.elements['colony'];
+        let landmark = form.elements['landmark'];
 
         // console.log('==>', firstName, lastName, city, state, zipCode)
 
@@ -130,6 +134,15 @@ function AddAddress(props) {
             return_type = false;
         }
 
+        if (colony.value == '') {
+            colony.parentNode.classList.add('error');
+            colony.parentNode.insertAdjacentHTML(
+                'beforeend',
+                '<div class="help-block alert alert-danger">Please enter colony.</div>'
+            );
+            return_type = false;
+        }
+
         if (city.value == '') {
             city.parentNode.classList.add('error');
             city.parentNode.insertAdjacentHTML(
@@ -168,7 +181,7 @@ function AddAddress(props) {
         let form = document.forms["add-address"];
         if (addAddressValidation(form)) {
             props.addAddress({
-                firstName, lastName, address, city, state, zipcode: zipCode, primary, latitude, longitude
+                firstName, lastName, address, city, state, zipcode: zipCode, primary, latitude, longitude, colony, landmark
             }).then(res => {
                 // console.log('ADD ADDRESS Response', res)
                 toast.success("Address added")
@@ -186,7 +199,7 @@ function AddAddress(props) {
         let form = document.forms['edit-address'];
         if (addAddressValidation(form)) {
             props.editAddress({
-                id, firstName, lastName, address, city, state, zipcode: zipCode, primary, latitude, longitude
+                id, firstName, lastName, address, city, state, zipcode: zipCode, primary, latitude, longitude, colony, landmark
             }).then(res => {
                 // console.log('Edit Address', res);
                 toast.success("Address updated successfuly!");
@@ -229,6 +242,10 @@ function AddAddress(props) {
                         <label htmlFor="floatingAddress">Address</label>
                     </div>
                     <div className="form-floating mb-3">
+                        <input type="colony" className="form-control" name="colony" id="floatingColony" placeholder="Colony" value={colony} onChange={(e) => setColony(e.target.value)} />
+                        <label htmlFor="floatingColony">Colony</label>
+                    </div>
+                    <div className="form-floating mb-3">
                         <input type="city" className="form-control" id="floatingcity" name="city" placeholder="city" value={city} onChange={(e) => setCity(e.target.value)} />
                         <label htmlFor="floatingCity">City</label>
                     </div>
@@ -239,6 +256,10 @@ function AddAddress(props) {
                     <div className="form-floating mb-3">
                         <input type="number" className="form-control" id="floatingzip" name="zipCode" placeholder="zip" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
                         <label htmlFor="floatingzip">Zip code</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input type="landmark" className="form-control" name="landmark" id="floatingLandmark" placeholder="Landmark" value={landmark} onChange={(e) => setLandmark(e.target.value)} />
+                        <label htmlFor="floatingLandmark">Landmark</label>
                     </div>
                 </section>
 
@@ -261,6 +282,10 @@ function AddAddress(props) {
                             <label htmlFor="floatingPassword">Address</label>
                         </div>
                         <div className="form-floating mb-3">
+                            <input type="colony" className="form-control" name="colony" id="floatingColony" placeholder="Colony" value={colony} onChange={(e) => setColony(e.target.value)} />
+                            <label htmlFor="floatingColony">Colony</label>
+                        </div>
+                        <div className="form-floating mb-3">
                             <input type="city" className="form-control" id="floatingcity" name="city" placeholder="city" value={city} onChange={(e) => setCity(e.target.value)} />
                             <label htmlFor="floatingPassword">City</label>
                         </div>
@@ -271,6 +296,10 @@ function AddAddress(props) {
                         <div className="form-floating mb-3">
                             <input type="zip-code" className="form-control" id="floatingzip" name="zipCode" placeholder="zip" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
                             <label htmlFor="floatingPassword">Zip code</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="landmark" className="form-control" id="floatingLandmark"  name="landmark" placeholder="Landmark" value={landmark} onChange={(e) => setLandmark(e.target.value)} />
+                            <label htmlFor="floatingLandmark">Landmark</label>
                         </div>
                         {/* {latitude && <div className="mb-3">{latitude}</div>} */}
                         {/* {longitude && <div className=" mb-3">{longitude}</div>} */}
