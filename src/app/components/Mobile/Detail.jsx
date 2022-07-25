@@ -467,7 +467,7 @@ const Detail = React.memo(function Detail(props) {
 											<span className='like-item'>{noOfLikes}</span>
 										</>}
 								</li>
-								<li><img src="/images/detail-video/icon/message.svg" alt="" /></li>
+								 { props.detail.isProductBought && (<li><img src="/images/detail-video/icon/message.svg" alt="" /></li>)}
 								<li><img src="/images/detail-video/icon/share.svg" alt="" /></li>
 							</ul>
 						</div>
