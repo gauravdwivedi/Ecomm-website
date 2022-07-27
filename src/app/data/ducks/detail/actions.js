@@ -176,3 +176,54 @@ export function addressDetailById(addressId){
         ]
     }
 }
+
+
+
+export function countryList(){
+    return {
+        CALL_API:[
+            {
+                type:types.FETCH_COUNTRY_LIST,
+                meta:{
+                    path:"/v1/users/countries-list",
+                    method:"GET",
+                    body:"country list",
+                    isHeader:true
+                }
+            }
+        ]
+    }
+}
+
+
+export function stateList(id){
+    return {
+        CALL_API:[
+            {
+                type:types.FETCH_STATE_BY_COUNTRY,
+                meta:{
+                    path:"/v1/users/get-states-by-country",
+                    method:"POST",
+                    body:id,
+                    isHeader:true
+                }
+            }
+        ]
+    }
+}
+
+export function cityList(id){
+    return {
+        CALL_API:[
+            {
+                type:types.FETCH_CITIES_BY_STATE,
+                meta:{
+                    path:"/v1/users/get-cities-by-state",
+                    method:"POST",
+                    body:id,
+                    isHeader:true
+                }
+            }
+        ]
+    }
+}

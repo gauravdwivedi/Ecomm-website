@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from 'react-redux';
 import AddAddress from "../components/Mobile/Checkout/AddAddress";
 import AuthContext from "../helpers/authContext";
-import { addAddress, editAddress } from "../data/ducks/detail/actions";
+import { addAddress, editAddress, countryList, stateList, cityList } from "../data/ducks/detail/actions";
 
 class AddAddressContainer extends PureComponent {
 
@@ -12,7 +12,6 @@ class AddAddressContainer extends PureComponent {
         return [];
     }
 
-
     constructor(props) {
         super(props);
         this.state = {
@@ -21,7 +20,8 @@ class AddAddressContainer extends PureComponent {
     }
 
     componentDidMount() {
-
+        console.log('ADD_ADDRESS', this.props)
+        this.props.countryList().then(res => console.log(res))
     }
 
     render() {
@@ -31,11 +31,18 @@ class AddAddressContainer extends PureComponent {
     }
 }
 
-
+const mapStateToProps = (state) => (console.log(state.detail), {
+    countries: state.detail?.fetchCountryList,
+    states: state.detail?.fetchStateList,
+    cities: state.detail?.fetchCityList
+})
 
 const mapDispatchToProps = {
     addAddress,
-    editAddress
+    editAddress,
+    countryList,
+    stateList,
+    cityList
 }
 
-export default connect(null, mapDispatchToProps)(AddAddressContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(AddAddressContainer)

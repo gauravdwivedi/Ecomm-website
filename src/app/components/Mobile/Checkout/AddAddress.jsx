@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import useGeoLocation from "../../useGeoLocation";
 import GoogleMap from "./GoogleMap";
 import { useHistory } from "react-router-dom";
+import CustomSelect from "./CustomSelect";
+import Select from "react-select";
 
 function AddAddress(props) {
     const history = useHistory();
@@ -14,6 +16,7 @@ function AddAddress(props) {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [address, setAddress] = useState('');
+    const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [zipCode, setZipCode] = useState('');
@@ -26,11 +29,20 @@ function AddAddress(props) {
     const [mapsrc, setMapsrc] = useState('');
     const [colony, setColony] = useState('');
     const [landmark, setLandmark] = useState('');
+    const [selectedOption, setSelectedOption] = useState(null);
+    const [states, setStates] = useState(null);
+    const [cities, setCities] = useState(null);
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedState, setSelectedState] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
+
+
+
 
     const location = useGeoLocation()
 
     useEffect(() => {
-        // console.log('Add Address History props', props.history)
+        console.log('Add Address  props', props)
         if (props.history.location.query?.isCartItem) {
             setIsCartItem(true)
         }
@@ -38,6 +50,7 @@ function AddAddress(props) {
             // console.log('Logged In')
             props.history.replace('/login')
         }
+
     })
 
     useEffect(() => {
@@ -46,6 +59,7 @@ function AddAddress(props) {
             setFirstName(props?.history?.location?.query?.data.firstName)
             setLastName(props?.history?.location?.query?.data.lastName);
             setAddress(props?.history?.location?.query?.data.address1);
+            setCountry(props?.history?.location?.query?.data.country);
             setCity(props?.history?.location?.query?.data.city);
             setZipCode(props?.history?.location?.query?.data.postcode);
             setState(props?.history?.location?.query?.data.state);
@@ -65,6 +79,18 @@ function AddAddress(props) {
         }
     })
 
+    useEffect(() => {
+        if (props.states) {
+            setStates(props.states)
+        }
+    }, [props.states])
+
+    useEffect(() => {
+        if (props.cities) {
+            setCities(props.cities)
+        }
+    }, [props.states])
+
     const addAddressValidation = (form) => {
 
         let return_type = true;
@@ -72,6 +98,7 @@ function AddAddress(props) {
         let lastName = form.elements['lastName'];
         let address = form.elements['address'];
         let city = form.elements['city'];
+        let country = form.elements['country'];
         let state = form.elements['state'];
         let zipCode = form.elements['zipCode'];
         let colony = form.elements['colony'];
@@ -93,6 +120,7 @@ function AddAddress(props) {
                 '<div class="help-block alert alert-danger">First Name is required</div>'
             );
             return_type = false;
+            console.log(return_type)
         } else {
             let testName = /^[a-zA-Z]+$/;
             if (!testName.test(firstName.value)) {
@@ -102,6 +130,7 @@ function AddAddress(props) {
                     '<div class="help-block alert alert-danger>Please enter a valid name</div>'
                 );
                 return_type = false;
+                console.log(return_type)
             }
         }
 
@@ -113,6 +142,7 @@ function AddAddress(props) {
                 '<div class="help-block alert alert-danger">Last Name is required</div>'
             );
             return_type = false;
+            console.log(return_type)
         } else {
             let testName = /^[a-zA-Z]+$/;
             if (!testName.test(lastName.value)) {
@@ -122,6 +152,7 @@ function AddAddress(props) {
                     '<div class="help-block alert alert-danger>Please enter a valid name</div>'
                 );
                 return_type = false;
+                console.log(return_type)
             }
         }
 
@@ -132,6 +163,7 @@ function AddAddress(props) {
                 '<div class="help-block alert alert-danger">Please enter address.</div>'
             );
             return_type = false;
+            console.log(return_type)
         }
 
         if (colony.value == '') {
@@ -141,25 +173,34 @@ function AddAddress(props) {
                 '<div class="help-block alert alert-danger">Please enter colony.</div>'
             );
             return_type = false;
+            console.log(return_type)
         }
 
-        if (city.value == '') {
-            city.parentNode.classList.add('error');
-            city.parentNode.insertAdjacentHTML(
-                'beforeend',
-                '<div class="help-block alert alert-danger">Please enter city.</div>'
-            );
-            return_type = false;
-        }
+        // if (country.value == '') {
+        //     country.parentNode.classList.add('error');
+        //     country.parentNode.insertAdjacentHTML(
+        //         'beforeend',
+        //         '<div class="help-block alert alert-danger">Please enter country.</div>'
+        //     )
+        // }
 
-        if (state.value == '') {
-            state.parentNode.classList.add('error');
-            state.parentNode.insertAdjacentHTML(
-                'beforeend',
-                '<div class="help-block alert alert-danger">Please enter state.</div>'
-            );
-            return_type = false;
-        }
+        // if (city.value == '') {
+        //     city.parentNode.classList.add('error');
+        //     city.parentNode.insertAdjacentHTML(
+        //         'beforeend',
+        //         '<div class="help-block alert alert-danger">Please enter city.</div>'
+        //     );
+        //     return_type = false;
+        // }
+
+        // if (state.value == '') {
+        //     state.parentNode.classList.add('error');
+        //     state.parentNode.insertAdjacentHTML(
+        //         'beforeend',
+        //         '<div class="help-block alert alert-danger">Please enter state.</div>'
+        //     );
+        //     return_type = false;
+        // }
 
         if (zipCode.value == '') {
 
@@ -168,7 +209,9 @@ function AddAddress(props) {
                 'beforeend',
                 '<div class="help-block alert alert-danger">Please enter zipCode.</div>'
             );
+
             return_type = false;
+            console.log(return_type)
         }
         console.log(return_type)
         return return_type;
@@ -179,9 +222,12 @@ function AddAddress(props) {
         console.log('Add Address')
 
         let form = document.forms["add-address"];
+        if (selectedCity && selectedState && selectedCountry) {
+
+        }
         if (addAddressValidation(form)) {
             props.addAddress({
-                firstName, lastName, address, city, state, zipcode: zipCode, primary, latitude, longitude, colony, landmark
+                firstName, lastName, address, city: selectedCity, state: selectedState, country: selectedCountry, zipcode: zipCode, primary, latitude, longitude, colony, landmark
             }).then(res => {
                 // console.log('ADD ADDRESS Response', res)
                 toast.success("Address added")
@@ -191,12 +237,14 @@ function AddAddress(props) {
                 })
             })
         }
+
     }
 
     const doEditSubmit = (e) => {
         e.preventDefault();
 
         let form = document.forms['edit-address'];
+
         if (addAddressValidation(form)) {
             props.editAddress({
                 id, firstName, lastName, address, city, state, zipcode: zipCode, primary, latitude, longitude, colony, landmark
@@ -215,6 +263,38 @@ function AddAddress(props) {
         history.goBack();
     }
 
+    const setData = (id, name, dType) => {
+
+        if (dType == 'country') {
+            setSelectedCountry(name)
+            props.stateList({ id });
+        }
+
+        if (dType == 'state') {
+            setSelectedState(name)
+            props.cityList({ id });
+        }
+
+        if (dType == 'city') {
+            setSelectedCountry(name)
+        }
+
+    }
+
+    // const callState = (id, name) => {
+    //     if (id) {
+    //         setSelectedCountry(name)
+    //         props.stateList({ id });
+    //     }
+    // }
+
+    // const callCity = (id, name) => {
+    //     console.log(id)
+    //     if (id) {
+    //         props.cityList({ id });
+    //     }
+    // }
+
     return <>
         <div>
             <header>
@@ -228,7 +308,7 @@ function AddAddress(props) {
                 </div>
             </header>
             {!isEdit && <form name="add-address" onSubmit={(e) => doSubmit(e)}>
-                <section className="add-address pt-4 px-15">
+                <section className="add-address pt-4 px-15 position-relative">
                     <div className="form-floating mb-3">
                         <input type="text" className="form-control" name="firstName" id="floatingFirstName" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                         <label htmlFor="floatingFirstName">First name</label>
@@ -241,18 +321,30 @@ function AddAddress(props) {
                         <input type="address" className="form-control" name="address" id="floatingAddress" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
                         <label htmlFor="floatingAddress">Address</label>
                     </div>
-                    <div className="form-floating mb-3">
+                    <div className="form-floating ">
                         <input type="colony" className="form-control" name="colony" id="floatingColony" placeholder="Colony" value={colony} onChange={(e) => setColony(e.target.value)} />
                         <label htmlFor="floatingColony">Colony</label>
                     </div>
-                    <div className="form-floating mb-3">
-                        <input type="city" className="form-control" id="floatingcity" name="city" placeholder="city" value={city} onChange={(e) => setCity(e.target.value)} />
-                        <label htmlFor="floatingCity">City</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <input type="state" className="form-control" id="floatingstate" name="state" placeholder="state" value={state} onChange={(e) => setState(e.target.value)} />
-                        <label htmlFor="floatingState">State</label>
-                    </div>
+
+                    {/* <select className="form-control">
+                            <option>India</option>
+                            <option>USA</option>
+
+                        </select> */}
+
+                    <CustomSelect className="form-control" data={props.countries} label="Select Country" callingFunction={setData} dType="country" />
+
+                    {states ? <CustomSelect className="form-control" data={states} label="Select State" callingFunction={setData} dType="state" />
+                        : <div className="form-floating mb-3">
+                            <input type="state" className="form-control" id="floatingstate" name="state" placeholder="state" value={state} onChange={(e) => setState(e.target.value)} />
+                            <label htmlFor="floatingState">State</label>
+                        </div>}
+                    {cities ? <CustomSelect className="form-control" data={props.cities} label="Select City" callingFunction={setData} dType="city" />
+                        : <div className="form-floating mb-3">
+                            <input type="city" className="form-control" id="floatingcity" name="city" placeholder="city" value={city} onChange={(e) => setCity(e.target.value)} />
+                            <label htmlFor="floatingCity">City</label>
+                        </div>}
+
                     <div className="form-floating mb-3">
                         <input type="number" className="form-control" id="floatingzip" name="zipCode" placeholder="zip" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
                         <label htmlFor="floatingzip">Zip code</label>
@@ -264,8 +356,8 @@ function AddAddress(props) {
                 </section>
 
                 <div className="add-address-btn px-15"><input type="submit" className="btn btn-outline add-btn text-capitalize w-100 mt-3" value="Add Address" /></div>
-            </form>
-            }
+            </form>}
+
             {isEdit &&
                 <form name="edit-address" onSubmit={doEditSubmit}>
                     <section className="add-address pt-4 px-15">
@@ -298,13 +390,12 @@ function AddAddress(props) {
                             <label htmlFor="floatingPassword">Zip code</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="landmark" className="form-control" id="floatingLandmark"  name="landmark" placeholder="Landmark" value={landmark} onChange={(e) => setLandmark(e.target.value)} />
+                            <input type="landmark" className="form-control" id="floatingLandmark" name="landmark" placeholder="Landmark" value={landmark} onChange={(e) => setLandmark(e.target.value)} />
                             <label htmlFor="floatingLandmark">Landmark</label>
                         </div>
                         {/* {latitude && <div className="mb-3">{latitude}</div>} */}
                         {/* {longitude && <div className=" mb-3">{longitude}</div>} */}
                     </section>
-
                     <div className="add-address-btn px-15"><input type="submit" className="btn btn-outline add-btn text-capitalize w-100 mt-3" value="Update Address" /></div>
                 </form>
             }

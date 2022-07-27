@@ -6,7 +6,7 @@ const productDetails = createReducer( [ ] ) ({
     [ types.FETCH_PRODUCT_DETAILS ]: ( state, action ) => {
         return   action.payload.result
      }
- } )
+ })
 
  const likeProduct = createReducer([ ])({
      [ types.LIKE_PRODUCT ]:(state,action) =>{
@@ -68,6 +68,24 @@ const addressDetailById = createReducer([])({
     }
 })
 
+const fetchCountryList = createReducer([])({
+    [ types.FETCH_COUNTRY_LIST]:(state,action) =>{
+        return action.payload.result
+    }
+})
+
+const fetchStateList = createReducer([])({
+    [ types.FETCH_STATE_BY_COUNTRY]:(state,action) =>{
+        return action.payload.result
+    }
+})
+
+const fetchCityList = createReducer([])({
+    [ types.FETCH_CITIES_BY_STATE]:(state,action) =>{
+        return action.payload.result
+    }
+})
+
 export default combineReducers( {
     productDetails,
     likeProduct,
@@ -79,5 +97,8 @@ export default combineReducers( {
     addAddress,
     addressList,
     editList,
-    addressDetailById
+    addressDetailById,
+    fetchCountryList,
+    fetchStateList,
+    fetchCityList
 } );

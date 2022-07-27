@@ -2574,7 +2574,6 @@ header.none-bg {
 }
 
 input[type="range"]::-webkit-slider-thumb {
-
     width: 18.5px;
     height: 18px;
     pointer-events: auto;
@@ -2600,7 +2599,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .size-box {
-
     width: 42px;
     height: 42px;
     left: 0;
@@ -2676,7 +2674,6 @@ input[type="radio"] {
     background: url("/images/check-circle.svg");
     background-position: center;
     background-size: contain;
-
     border-radius: 50%;
     width: 18.86px;
     height: 18.86px;
@@ -2715,9 +2712,76 @@ input[type="radio"]:checked+.lbl::before {
 
 .change-address {
     width: auto;
-
     margin-left: 20px;
     margin-top: 5px;
     border: 0px;
+}
 
+.select-wrapper {
+    display: flex;
+    justify-content: center;
+    /* padding-top: 20px; */
+    border-bottom: 1px solid #d7d7d7;
+    padding: 1rem 3px;
+
+}
+
+.select-container {
+    width: 100%;
+}
+
+.select-container button {
+    border: 0;
+    border-radius: 4px;
+    background: none;
+    width: 100%;
+    /* padding: 6px 8px; */
+    position: relative;
+    text-align: left;
+    font-size: 14px;
+    font-style: normal;
+    padding: 0px;
+
+}
+
+.select-container button:hover {
+    cursor: pointer;
+}
+
+.select-container button::after {
+    position: absolute;
+    right: 6px;
+    top: 4px;
+    content: "\2191";
+}
+
+.select-container button.expanded::after {
+    content: "\2193"
+}
+
+.select-container ul.options {
+    border: 1px solid none;
+    width: 100%;
+    display: none;
+    list-style: none;
+    padding: 4px 0;
+    /* margin-top: -4px; */
+}
+
+.select-container ul.show {
+    display: block;
+}
+
+.select-container ul.options li {
+    padding: 6px 10px;
+    width: 100%;
+
+}
+
+ul.options li:active,
+ul.options li:focus,
+ul.options li:hover,
+ul.options lli[aria-selected="true"] {
+    background: none;
+    cursor: pointer;
 }
