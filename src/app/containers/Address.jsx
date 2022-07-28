@@ -23,7 +23,7 @@ class AddressContainer extends PureComponent {
     }
 
     componentDidMount() {
-        this.props.fetchAddressList().then(res => console.log('RESPONE BABA', res))
+        this.props.fetchAddressList().then()
     }
 
 

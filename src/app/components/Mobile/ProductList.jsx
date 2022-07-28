@@ -79,7 +79,6 @@ function ProductList(props) {
 
     useEffect(() => {
         const elements = document.querySelectorAll(".videoWrapper");
-        console.log(elements)
 
         elements.forEach((element) => {
             observer.observe(element)
