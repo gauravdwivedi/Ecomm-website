@@ -16,7 +16,6 @@ export function loadBigStory(id, type) {
 
 
 export function getAllProducts(params=''){
-    console.log('PRODUCTLIST',params)
     return {
         CALL_API:[
             {

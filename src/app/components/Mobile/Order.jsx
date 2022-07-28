@@ -3,7 +3,7 @@ import OrderItem from './OrderItem'
 
 function Order(props) {
 
-    console.log('ORDERS', props?.order?.getOrderList.result)
+    // console.log('ORDERS', props?.order?.getOrderList.result)
     return (
         <div id="main">
             <header>

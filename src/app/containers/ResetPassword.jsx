@@ -26,11 +26,11 @@ class ResetPasswordContainer extends PureComponent {
     }
 
     componentDidMount() {
-        console.log("reset password")
+        // console.log("reset password")
     }
 
     render() {
-        console.log('RESET PASSWORDDDDDD')
+        // console.log('RESET PASSWORDDDDDD')
         return (
             <Fragment>
                 {

@@ -7,7 +7,7 @@ function Cart(props) {
     const [itemList, setItemList] = useState([])
     const [total, setTotal] = useState(0)
 
-    console.log('Cart PROPS', props)
+    // console.log('Cart PROPS', props)
 
     useEffect(() => {
         setItemList(props.cartListItems)
@@ -67,7 +67,7 @@ function Cart(props) {
                     </div>
                     {
                         itemList?.length <= 0 ? <Link
-                            to="/"
+                            to="/favourites"
                             className="btn btn-outline checkout-btn text-capitalize w-100 mt-3"
                         >
                             Add items from wishlist

@@ -8,7 +8,7 @@ function AddressItem(props) {
     const { id, firstName, lastName, address1, city, country, postcode, primary, state, userId, latitude, longitude } = props.item;
     // console.log('CUrrent Index ', props.isCurrent)
     const { handleOnClick, isCurrent, isCartItem } = props;
-    console.log('IsCatrItem on AddressITEM', isCartItem)
+    // console.log('IsCatrItem on AddressITEM', isCartItem)
 
     useEffect(() => {
 
@@ -53,7 +53,7 @@ function AddressItem(props) {
                             name="flexRadioDefault"
                             id="flexRadioDefault1"
                             checked={isCurrent === id}
-                            // onChange={(e) => handleOnClick(e, id)}
+                        // onChange={(e) => handleOnClick(e, id)}
                         />
 
                         <label className="form-check-label" htmlFor="flexRadioDefault1">

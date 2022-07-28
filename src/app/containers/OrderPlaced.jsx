@@ -49,7 +49,7 @@ class OrderPlacedContainer extends PureComponent {
     }
 };
 
-const mapStateToProps = (state) => (console.log('STATE', state.detail.addressList), {
+const mapStateToProps = (state) => ({
     address: state.detail.addressList
 });
 

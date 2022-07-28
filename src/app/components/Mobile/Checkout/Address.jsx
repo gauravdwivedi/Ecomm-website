@@ -17,7 +17,7 @@ function Address(props) {
     useEffect(() => {
 
         if (localStorage.getItem('isCartItem')) {
-            console.log('localstorage')
+            // console.log('localstorage')
             setIsCartItem(true)
         }
 
@@ -44,7 +44,7 @@ function Address(props) {
 
     const handleOnClick = (e, id) => {
         e.stopPropagation();
-        console.log('Cliked', id)
+        // console.log('Cliked', id)
         setIsCurrent(id)
         let add = props.list.filter((item) => item.id === id)
         setSelectedAddress(add)
@@ -61,7 +61,7 @@ function Address(props) {
     }
 
     const onBackClick = () => {
-        console.log('IsCartItem On Back', isCartItem)
+        // console.log('IsCartItem On Back', isCartItem)
         // if (isCartItem) {
         //     history.push({
         //         pathname: '/cart'

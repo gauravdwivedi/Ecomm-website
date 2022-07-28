@@ -9,7 +9,7 @@ function useGeoLocation() {
     });
 
     const onSuccess = location => {
-        console.log('Location', location)
+        // console.log('Location', location)
 
         setLocation({
             loaded: true,

@@ -1,7 +1,6 @@
 import types from "./types";
 
 export function createOrder(data){
-    console.log('DATA',data)
     return {
         CALL_API:[
             {
@@ -18,7 +17,7 @@ export function createOrder(data){
 }
 
 export function saveOrderDetails(data){
-    console.log('DATA',data)
+    
     return {
         CALL_API:[
             {

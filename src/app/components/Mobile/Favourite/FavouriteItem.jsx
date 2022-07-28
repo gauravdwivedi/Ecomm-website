@@ -3,7 +3,7 @@ import config from '../../../../config/index'
 import { Link } from "react-router-dom"
 
 function FavouriteItem(props) {
-    console.log(props)
+    // console.log(props)
     return (<>
         <section className="favourite-section px-15 pt-4">
             <div className="product-section">

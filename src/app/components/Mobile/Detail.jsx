@@ -47,18 +47,18 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	useEffect(() => {
-		console.log('DETAIL PROPS', props)
+		// console.log('DETAIL PROPS', props)
 		setLike(props.detail.liked)
 		setInCart(props.detail.productInCart)
 		setFav(props.detail.favourite);
 		setNoOfLikes(props.detail.likes)
-		console.log('LIKED', props.detail.liked)
+		// console.log('LIKED', props.detail.liked)
 
-		console.log('Favourite', props.detail.favourite)
+		// console.log('Favourite', props.detail.favourite)
 	}, [props.detail])
 
 	const handleScroll = () => {
-		console.log('Scrolling !!')
+		// console.log('Scrolling !!')
 	}
 
 	const hanldeProgressBarChangeMin = (e) => {
@@ -85,7 +85,7 @@ const Detail = React.memo(function Detail(props) {
 
 		if (like) {
 			props.unlikeProduct({ productId: props.detail.id }).then(res => {
-				console.log('Response from DisLike', res[0])
+				// console.log('Response from DisLike', res[0])
 
 				// if (res[0] && res[0].message) {
 				if (res[0]) {
@@ -102,7 +102,7 @@ const Detail = React.memo(function Detail(props) {
 		if (!like) {
 			props.likeProduct({ productId: props.detail.id }).then(res => {
 
-				console.log('Response from like', res)
+				// console.log('Response from like', res)
 				if (res && res[0].message) {
 					setLike(false)
 					// setNoOfLikes(noOfLikes + 1)
@@ -124,17 +124,17 @@ const Detail = React.memo(function Detail(props) {
 		// console.log(fav)
 		if (fav) {
 			props.unfavProduct({ productId: props.detail.id }).then(res => {
-				console.log('Favourite/Bookmark Response', res)
+				// console.log('Favourite/Bookmark Response', res)
 				setFav(false)
 				props.fetchProductDetails(props.detail.slug).then(res => {
-					console.log(res)
+					// console.log(res)
 				})
 			})
 		}
 
 		if (!fav) {
 			props.favProduct({ productId: props.detail.id }).then(res => {
-				console.log('Favourite Response==>', res)
+				// console.log('Favourite Response==>', res)
 				if (res && res[0]) {
 					if (res[0].result) {
 						setFav(true)
@@ -182,7 +182,7 @@ const Detail = React.memo(function Detail(props) {
 	const filterClickHandler = (e) => {
 		e.stopPropagation();
 
-		console.log('FIlter')
+		// console.log('FIlter')
 
 		if (!isFilter) {
 			setIsSort(false)
@@ -224,7 +224,7 @@ const Detail = React.memo(function Detail(props) {
 
 
 		if (sizeSelect.find(val => val === value)) {
-			console.log('value', value);
+			// console.log('value', value);
 			ele.style.background = "#ebe5e5";
 			ele.style.color = "#000000";
 			setSizeSelect(sizeSelect.filter(val => val !== value))
@@ -239,7 +239,7 @@ const Detail = React.memo(function Detail(props) {
 		e.preventDefault();
 		e.stopPropagation();
 
-		console.log('SIZE SELECT', sizeSelect)
+		// console.log('SIZE SELECT', sizeSelect)
 		props.getAllProducts(`min_price=${minRange}&max_price=${maxRange}&size=${sizeSelect}`).then(
 			setIsFilter(false)
 		)
@@ -253,7 +253,7 @@ const Detail = React.memo(function Detail(props) {
 		e.preventDefault();
 		e.stopPropagation();
 
-		console.log('Sort Filter', sortFilter, 'Order', order)
+		// console.log('Sort Filter', sortFilter, 'Order', order)
 
 		props.getAllProducts(`sort_by=${sortFilter}&order=${order}&size=["s","m"]`).then(res => {
 			setIsSort(false)
@@ -467,7 +467,7 @@ const Detail = React.memo(function Detail(props) {
 											<span className='like-item'>{noOfLikes}</span>
 										</>}
 								</li>
-								 { props.detail.isProductBought && (<li><img src="/images/detail-video/icon/message.svg" alt="" /></li>)}
+								{props.detail.isProductBought && (<li><img src="/images/detail-video/icon/message.svg" alt="" /></li>)}
 								<li><img src="/images/detail-video/icon/share.svg" alt="" /></li>
 							</ul>
 						</div>
@@ -525,7 +525,6 @@ const VedioPlayer = ({ url, thumbnail }) => {
 		}
 	}
 
-
 	return (
 
 		<div className="videoWrapper"
@@ -539,7 +538,6 @@ const VedioPlayer = ({ url, thumbnail }) => {
 				src={config.IMG_END_POINT + url} />
 			{/* <LazyLoadVideo url={config.IMG_END_POINT + url} videoRef={videoRef} /> */}
 		</div>
-
 	)
 }
 

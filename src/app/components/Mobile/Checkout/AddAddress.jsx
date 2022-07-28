@@ -42,7 +42,7 @@ function AddAddress(props) {
     const location = useGeoLocation()
 
     useEffect(() => {
-        console.log('Add Address  props', props)
+        // console.log('Add Address  props', props)
         if (props.history.location.query?.isCartItem) {
             setIsCartItem(true)
         }
@@ -72,7 +72,7 @@ function AddAddress(props) {
 
     useEffect(() => {
         if (location) {
-            console.log('LOCATION', location)
+            // console.log('LOCATION', location)
             setLongitude(location?.coordinates?.lng);
             setLatitude(location?.coordinates?.lat);
             setMapsrc(`https://maps.google.com/maps?q=${latitude},${longitude}&hl=es;z=14&amp;output=embed`)
@@ -120,7 +120,7 @@ function AddAddress(props) {
                 '<div class="help-block alert alert-danger">First Name is required</div>'
             );
             return_type = false;
-            console.log(return_type)
+            // console.log(return_type)
         } else {
             let testName = /^[a-zA-Z]+$/;
             if (!testName.test(firstName.value)) {
@@ -130,7 +130,7 @@ function AddAddress(props) {
                     '<div class="help-block alert alert-danger>Please enter a valid name</div>'
                 );
                 return_type = false;
-                console.log(return_type)
+                // console.log(return_type)
             }
         }
 
@@ -142,7 +142,7 @@ function AddAddress(props) {
                 '<div class="help-block alert alert-danger">Last Name is required</div>'
             );
             return_type = false;
-            console.log(return_type)
+            // console.log(return_type)
         } else {
             let testName = /^[a-zA-Z]+$/;
             if (!testName.test(lastName.value)) {
@@ -152,7 +152,7 @@ function AddAddress(props) {
                     '<div class="help-block alert alert-danger>Please enter a valid name</div>'
                 );
                 return_type = false;
-                console.log(return_type)
+                // console.log(return_type)
             }
         }
 
@@ -163,7 +163,7 @@ function AddAddress(props) {
                 '<div class="help-block alert alert-danger">Please enter address.</div>'
             );
             return_type = false;
-            console.log(return_type)
+            // console.log(return_type)
         }
 
         if (colony.value == '') {
@@ -173,7 +173,7 @@ function AddAddress(props) {
                 '<div class="help-block alert alert-danger">Please enter colony.</div>'
             );
             return_type = false;
-            console.log(return_type)
+            // console.log(return_type)
         }
 
         // if (country.value == '') {
@@ -211,15 +211,15 @@ function AddAddress(props) {
             );
 
             return_type = false;
-            console.log(return_type)
+            // console.log(return_type)
         }
-        console.log(return_type)
+        // console.log(return_type)
         return return_type;
     }
 
     const doSubmit = (e) => {
         e.preventDefault();
-        console.log('Add Address')
+        // console.log('Add Address')
 
         let form = document.forms["add-address"];
         if (selectedCity && selectedState && selectedCountry) {

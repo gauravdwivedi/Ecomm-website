@@ -2,7 +2,7 @@ import React from 'react';
 
 
 function OrderItem(props) {
-    console.log(props.item)
+    // console.log(props.item)
     return (
         <div className='order-bg mb-3'>
             <div className="order-bg mb-3">

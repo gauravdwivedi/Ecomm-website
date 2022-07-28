@@ -31,7 +31,7 @@ class ProductListContainer extends PureComponent {
 
     componentDidMount() {
         let param = `category_id=${this.props.match.params.params}`
-        console.log(this.props.match.params.params)
+        // console.log(this.props.match.params.params)
         this.props.getAllProducts(param).then()
     }
 

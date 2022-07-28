@@ -7,7 +7,7 @@ const registerObserver = (ref, setShow) => {
                 return;
             }
 
-            console.log('Triggered')
+            // console.log('Triggered')
             setShow(true)
             observer.disconnect();
         })

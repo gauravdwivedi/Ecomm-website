@@ -25,7 +25,7 @@ class ConfirmContainer extends PureComponent {
     }
 
     componentDidMount() {
-        this.props.cartList().then(res => console.log('CART RES', res))
+        this.props.cartList().then();
     }
 
     render() {

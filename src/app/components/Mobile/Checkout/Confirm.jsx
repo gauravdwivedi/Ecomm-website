@@ -32,14 +32,14 @@ function Confirm(props) {
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [addressId, setAddressId] = useState('');
-  console.log('Cart List Items', props?.cartListItems)
+  // console.log('Cart List Items', props?.cartListItems)
 
   const history = useHistory();
 
   async function createOrder() {
 
     //productId, variantId, quantity, addressId
-    console.log(addressId)
+    // console.log(addressId)
 
     let OrderItems = [];
     const list = props?.cartListItems;
@@ -49,13 +49,13 @@ function Confirm(props) {
     }
 
     props.createOrder({ data: OrderItems, addressId }).then(res => {
-      console.log('OrderId', res);
+      // console.log('OrderId', res);
       displayRazorpay(res?.[0]?.result?.id || '');
     })
   }
 
   async function displayRazorpay(order_id) {
-    console.log('Display Razor')
+    // console.log('Display Razor')
     const loadRazorpay = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -77,9 +77,9 @@ function Confirm(props) {
         // setRazorpayPaymentId(response.razorpay_payment_id)
         // setRazorpayOrderId(response.razorpay_order_id)
         // setRazorpaySignatureId(response.razorpay_signature)
-        console.log(response)
+        // console.log(response)
         props.saveOrderDetails({ razorPayPaymentId: response.razorpay_payment_id, razorPaySignature: response.razorpay_signature }).then(res => {
-          console.log('Response Save Order Detail', res)
+          // console.log('Response Save Order Detail', res)
           if (res && res[0].result.status == 'captured') {
             history.push({
               pathname: '/checkout/order-placed',

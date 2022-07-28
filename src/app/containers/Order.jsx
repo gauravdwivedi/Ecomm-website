@@ -24,7 +24,7 @@ class OrderContainer extends PureComponent {
 	}
 
 	componentDidMount() {
-		console.log('Called!')
+		// console.log('Called!')
 		this.props.getOrders().then()
 
 	}

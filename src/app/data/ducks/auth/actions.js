@@ -18,7 +18,6 @@ export function login(data){
 }
 
 export function signup(data){
-console.log(data)
     return{
         CALL_API:[
             {
@@ -38,7 +37,6 @@ console.log(data)
 }
 
 export function forgetpassword(data){
-    console.log('EMAIL',data)
     return {
         CALL_API:[
             {
