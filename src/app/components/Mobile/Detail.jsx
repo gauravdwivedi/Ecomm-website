@@ -47,7 +47,7 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	useEffect(() => {
-		// console.log('DETAIL PROPS', props)
+		console.log('DETAIL PROPS', props)
 		setLike(props.detail.liked)
 		setInCart(props.detail.productInCart)
 		setFav(props.detail.favourite);
@@ -279,7 +279,7 @@ const Detail = React.memo(function Detail(props) {
 			</div>
 			<div >
 				{(props.detail.videos) ?
-					<VedioPlayer url={props.detail?.videos[0]?.url} thumbnail={props.detail?.videos[0]?.thumbnail} />
+					<VedioPlayer url={props.detail?.videos[0]?.url} thumbnail={props.detail?.videos[0]?.thumbnail} slug={props.detail?.slug} />
 					// <LazyLoadVideo url={config.IMG_END_POINT + props.detail?.videos[0]?.url} ref={videoRef} handleVideoPress={handleVideoPress} />
 					: ""}
 			</div>
@@ -509,11 +509,11 @@ const Detail = React.memo(function Detail(props) {
 	)
 })
 
-const VedioPlayer = ({ url, thumbnail }) => {
+const VedioPlayer = ({ url, thumbnail, slug }) => {
 
 	const [playing, setPlaying] = useState(false);
 	const videoRef = useRef(null);
-
+	console.log(slug)
 	const handleVideoPress = (videoRef) => {
 
 		if (playing) {
@@ -536,6 +536,7 @@ const VedioPlayer = ({ url, thumbnail }) => {
 				ref={videoRef}
 				poster={thumbnail ? config.IMG_END_POINT + thumbnail : '/images/detail-bg.png'}
 				src={config.IMG_END_POINT + url} />
+			<div style={{ display: 'none' }}>{slug}</div>
 			{/* <LazyLoadVideo url={config.IMG_END_POINT + url} videoRef={videoRef} /> */}
 		</div>
 	)

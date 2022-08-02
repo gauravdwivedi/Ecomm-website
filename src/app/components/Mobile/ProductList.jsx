@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import { Route, useHistory } from 'react-router';
 import Detail from './Detail';
+// import SwipeableRoutes from 'react-swipeable-routes';
+import SwipeableViews from 'react-swipeable-views';
 
 
 // import InfiniteScroll from "react-infinite-scroll-component";
@@ -12,6 +14,9 @@ import Detail from './Detail';
 // import { useCallback } from 'react';
 
 function ProductList(props) {
+    const [index, setIndex] = useState(0);
+
+    const history = useHistory();
 
     // const { height, width } = useWindowDimensions();
     // console.log('H', height, 'W', width)
@@ -67,9 +72,19 @@ function ProductList(props) {
     const cb = (entries) => {
         entries.forEach((entry) => {
             let ele = entry.target.childNodes[0];
+            let slugEle = entry.target.childNodes[1];
+            let content = slugEle.textContent;
+            let CustomUrl = '/product/' + content;
+            console.log('SLUG ', CustomUrl)
+
+            if (entry.isIntersecting) {
+                window.history.replaceState(null, 'HoppedIn', CustomUrl)
+            }
+
             ele.play().then(() => {
                 if (!ele.paused && !entry.isIntersecting) {
                     ele.pause();
+
                 }
             })
         })
@@ -80,6 +95,8 @@ function ProductList(props) {
     useEffect(() => {
         const elements = document.querySelectorAll(".videoWrapper");
 
+        // const elements = document.querySelectorAll(".main");
+
         elements.forEach((element) => {
             observer.observe(element)
         })
@@ -89,10 +106,15 @@ function ProductList(props) {
         }
     })
 
+
     return (
+
         <div className="videoCard">
+
+
             {
                 props.productList.map((item) => (
+
                     <Detail
                         detail={item}
                         key={item.id}
@@ -103,12 +125,13 @@ function ProductList(props) {
                         favProduct={props.favProduct}
                         unfavProduct={props.unfavProduct}
                         getAllProducts={props.getAllProducts}
-                        className="video__player"
                     />
+
                 ))
             }
 
         </div>
+
     )
 }
 
