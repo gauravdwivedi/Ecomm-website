@@ -61,15 +61,15 @@ function Address(props) {
     }
 
     const onBackClick = () => {
-        // console.log('IsCartItem On Back', isCartItem)
-        // if (isCartItem) {
-        //     history.push({
-        //         pathname: '/cart'
-        //     })
-        // } else {
-        //     history.push('/account')
-        // }
-        history.goBack();
+        console.log('IsCartItem On Back', isCartItem)
+        if (isCartItem) {
+            history.push({
+                pathname: '/cart'
+            })
+        } else {
+            history.push('/account')
+        }
+        // history.goBack();
     }
 
     return (

@@ -23,8 +23,8 @@ function AddAddress(props) {
     const [primary, setPrimary] = useState(0);
     const [isEdit, setIsEdit] = useState(false);
     const [id, setId] = useState('')
-    const [latitude, setLatitude] = useState('');
-    const [longitude, setLongitude] = useState('');
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
     const [isCartItem, setIsCartItem] = useState(false);
     const [mapsrc, setMapsrc] = useState('');
     const [colony, setColony] = useState('');
@@ -260,11 +260,12 @@ function AddAddress(props) {
     }
 
     const clickOnBack = () => {
-        history.goBack();
+        history.push({ pathname: '\address' })
+
     }
 
     const setData = (id, name, dType) => {
-
+        console.log('TYPE', dType)
         if (dType == 'country') {
             setSelectedCountry(name)
             props.stateList({ id });
@@ -276,7 +277,7 @@ function AddAddress(props) {
         }
 
         if (dType == 'city') {
-            setSelectedCountry(name)
+            setSelectedCity(name)
         }
 
     }
@@ -333,17 +334,20 @@ function AddAddress(props) {
                         </select> */}
 
                     <CustomSelect className="form-control" data={props.countries} label="Select Country" callingFunction={setData} dType="country" />
+                    <CustomSelect className="form-control" data={states} label="Select State" callingFunction={setData} dType="state" />
+                    <CustomSelect className="form-control" data={props.cities} label="Select City" callingFunction={setData} dType="city" />
 
-                    {states ? <CustomSelect className="form-control" data={states} label="Select State" callingFunction={setData} dType="state" />
+                    {/* {states ? <CustomSelect className="form-control" data={states} label="Select State" callingFunction={setData} dType="state" />
                         : <div className="form-floating mb-3">
                             <input type="state" className="form-control" id="floatingstate" name="state" placeholder="state" value={state} onChange={(e) => setState(e.target.value)} />
                             <label htmlFor="floatingState">State</label>
-                        </div>}
-                    {cities ? <CustomSelect className="form-control" data={props.cities} label="Select City" callingFunction={setData} dType="city" />
+                        </div>} */}
+                    {/* {cities ? <CustomSelect className="form-control" data={props.cities} label="Select City" callingFunction={setData} dType="city" />
                         : <div className="form-floating mb-3">
                             <input type="city" className="form-control" id="floatingcity" name="city" placeholder="city" value={city} onChange={(e) => setCity(e.target.value)} />
                             <label htmlFor="floatingCity">City</label>
-                        </div>}
+                        </div>} */}
+
 
                     <div className="form-floating mb-3">
                         <input type="number" className="form-control" id="floatingzip" name="zipCode" placeholder="zip" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
