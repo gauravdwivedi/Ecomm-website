@@ -180,8 +180,8 @@ const Detail = React.memo(function Detail(props) {
 
 	//Filter click handler 
 	const filterClickHandler = (e) => {
+		e.preventDefault();
 		e.stopPropagation();
-
 		// console.log('FIlter')
 
 		if (!isFilter) {
@@ -193,7 +193,9 @@ const Detail = React.memo(function Detail(props) {
 		}
 	}
 
-	const isSortHandler = () => {
+	const isSortHandler = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
 		if (!isSort) {
 			setModalTwo(false)
 			setIsFilter(false)
@@ -271,8 +273,8 @@ const Detail = React.memo(function Detail(props) {
 				</Link>
 				<div className="header-option" style={{ marginLeft: "auto" }}>
 					<ul>
-						<li onClick={isSortHandler}><a href="#"><img src="/images/detail-video/icon/sort.svg" alt="" /></a></li>
-						<li onClick={filterClickHandler}><a href="#"><img src="/images/detail-video/icon/setting.svg" alt="" /></a></li>
+						<li onClick={(e) => isSortHandler(e)}><a href="#"><img src="/images/detail-video/icon/sort.svg" alt="" /></a></li>
+						<li onClick={(e) => filterClickHandler(e)}><a href="#"><img src="/images/detail-video/icon/setting.svg" alt="" /></a></li>
 						<li><a href="#"><img src="/images/detail-video/icon/category.svg" alt="" /></a></li>
 					</ul>
 				</div>
