@@ -67,7 +67,7 @@ const Detail = React.memo(function Detail(props) {
 		if (maxRange - minRange < priceGap) {
 			setMinRange(maxRange - priceGap);
 		} else {
-			progressBarRef.current.style.left = (minRange / 100) * 100 + "%";
+			progressBarRef.current.style.left = (minRange / 1000) * 100 + "%";
 		}
 	}
 
@@ -77,7 +77,7 @@ const Detail = React.memo(function Detail(props) {
 		if (maxRange - minRange < priceGap) {
 			setMinRange(maxRange - priceGap);
 		} else {
-			progressBarRef.current.style.right = 1000 - (maxRange / 100) * 100 + "%";
+			progressBarRef.current.style.right = 100 - (maxRange / 1000) * 100 + "%";
 		}
 	}
 
@@ -285,7 +285,6 @@ const Detail = React.memo(function Detail(props) {
 					// <LazyLoadVideo url={config.IMG_END_POINT + props.detail?.videos[0]?.url} ref={videoRef} handleVideoPress={handleVideoPress} />
 					: ""}
 			</div>
-
 
 			{ModalTwo && <Modal isVisible={setModalTwo} >
 				<div className=" slick-default theme-dots" >
