@@ -35,7 +35,6 @@ class DetailContainer extends PureComponent {
 	render() {
 		return (
 			<Detail {...this.props} loading={this.state.loading} />
-
 		)
 	}
 

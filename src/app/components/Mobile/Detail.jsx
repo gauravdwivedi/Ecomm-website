@@ -30,6 +30,9 @@ const Detail = React.memo(function Detail(props) {
 	const [sortFilter, setSortFilter] = useState('best');
 	const [price, setPrice] = useState(0);
 	const [order, setOrder] = useState('asc');
+	// const videoRef = useRef(null);
+
+	const [playing, setPlaying] = useState(true);
 	const videoRef = useRef(null);
 
 	const [maxRange, setMaxRange] = useState(1000);
@@ -47,7 +50,7 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	useEffect(() => {
-		console.log('DETAIL PROPS', props)
+		// console.log('DETAIL PROPS', props)
 		setLike(props.detail.liked)
 		setInCart(props.detail.productInCart)
 		setFav(props.detail.favourite);
@@ -82,7 +85,6 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 	const handleLikeClick = () => {
-
 		if (like) {
 			props.unlikeProduct({ productId: props.detail.id }).then(res => {
 				// console.log('Response from DisLike', res[0])
@@ -223,8 +225,6 @@ const Detail = React.memo(function Detail(props) {
 
 		let ele = document.getElementById(value);
 
-
-
 		if (sizeSelect.find(val => val === value)) {
 			// console.log('value', value);
 			ele.style.background = "#ebe5e5";
@@ -263,8 +263,22 @@ const Detail = React.memo(function Detail(props) {
 	}
 
 
+	const handleVideoPress = (videoRef) => {
+		console.log('VideoRef', videoRef)
+		if (playing) {
+			setPlaying(false);
+			videoRef.current.pause();
+		} else {
+			videoRef.current.play();
+			setPlaying((play) => !play);
+		}
+	}
+
+
+
+
 	return (
-		<div id="main">
+		<div id="main" onClick={() => handleVideoPress(videoRef)} >
 			<div className='top-shadow'>
 			</div>
 			<div className="detail-header">
@@ -279,12 +293,12 @@ const Detail = React.memo(function Detail(props) {
 					</ul>
 				</div>
 			</div>
-			<div >
-				{(props.detail.videos) ?
-					<VedioPlayer url={props.detail?.videos[0]?.url} thumbnail={props.detail?.videos[0]?.thumbnail} slug={props.detail?.slug} />
-					// <LazyLoadVideo url={config.IMG_END_POINT + props.detail?.videos[0]?.url} ref={videoRef} handleVideoPress={handleVideoPress} />
-					: ""}
-			</div>
+
+			{(props.detail.videos) ?
+				<VedioPlayer url={props.detail?.videos[0]?.url} thumbnail={props.detail?.videos[0]?.thumbnail} slug={props.detail?.slug} videoRef={videoRef} />
+				// <LazyLoadVideo url={config.IMG_END_POINT + props.detail?.videos[0]?.url} ref={videoRef} handleVideoPress={handleVideoPress} />
+				: ""}
+
 
 			{ModalTwo && <Modal isVisible={setModalTwo} >
 				<div className=" slick-default theme-dots" >
@@ -510,26 +524,30 @@ const Detail = React.memo(function Detail(props) {
 	)
 })
 
-const VedioPlayer = ({ url, thumbnail, slug }) => {
+const VedioPlayer = ({ url, thumbnail, slug, videoRef }) => {
 
-	const [playing, setPlaying] = useState(false);
-	const videoRef = useRef(null);
+	// const [playing, setPlaying] = useState(false);
+	// const videoRef = useRef(null);
 	console.log(slug)
-	const handleVideoPress = (videoRef) => {
+	// const handleVideoPress = (videoRef) => {
 
-		if (playing) {
-			setPlaying(false);
-			videoRef.current.pause();
-		} else {
-			videoRef.current.play();
-			setPlaying((play) => !play);
-		}
-	}
+	// 	if (playing) {
+	// 		setPlaying(false);
+	// 		videoRef.current.pause();
+	// 	} else {
+	// 		videoRef.current.play();
+	// 		setPlaying((play) => !play);
+	// 	}
+	// }
+
+	useEffect(() => {
+		console.log('Mounted', slug)
+	})
 
 	return (
 
-		<div className="videoWrapper"
-			onClick={() => handleVideoPress(videoRef)} >
+		<div className="videoWrapper" style={{ zIndex: '-1' }}
+		>
 			<video
 				playsInline
 				autoPlay

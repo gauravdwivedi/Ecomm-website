@@ -19,9 +19,9 @@ function Order(props) {
 
             <section className="order-section pt-4 px-15">
 
-                {props?.order?.getOrderList.result && props?.order?.getOrderList.result.map((item) => (
+                {props?.order?.getOrderList.result ? props?.order?.getOrderList.result.map((item) => (
                     < OrderItem key={item.id} item={item} />
-                ))}
+                )) : <h3>Oops!!!...Nothing here!!</h3>}
 
             </section>
         </div>

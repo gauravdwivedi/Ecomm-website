@@ -167,12 +167,12 @@ class App extends Component {
 
 				}}>
 					<Fragment>
-						<div>
-							{header}
-							{renderRoutes(Routes, { mobile: this.state.mobile, serverRequest: this.state.serverRequest, changeServerStatus: this.changeServerStatus.bind(this) })}
-							{global}
-							{footer}
-						</div>
+
+						{header}
+						{renderRoutes(Routes, { mobile: this.state.mobile, serverRequest: this.state.serverRequest, changeServerStatus: this.changeServerStatus.bind(this) })}
+						{global}
+						{footer}
+
 					</Fragment>
 				</AuthContext.Provider>
 			</Fragment>
