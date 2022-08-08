@@ -84,7 +84,8 @@ const Detail = React.memo(function Detail(props) {
 		}
 	}
 
-	const handleLikeClick = () => {
+	const handleLikeClick = (e) => {
+		e.stopPropagation();
 		if (like) {
 			props.unlikeProduct({ productId: props.detail.id }).then(res => {
 				// console.log('Response from DisLike', res[0])
@@ -122,7 +123,10 @@ const Detail = React.memo(function Detail(props) {
 
 
 	//Favourite/Bookmark
-	const handleFavClick = () => {
+	const handleFavClick = (e) => {
+
+
+		e.stopPropagation();
 		// console.log(fav)
 		if (fav) {
 			props.unfavProduct({ productId: props.detail.id }).then(res => {
@@ -148,7 +152,8 @@ const Detail = React.memo(function Detail(props) {
 		}
 	}
 
-	const handleAddCart = () => {
+	const handleAddCart = (e) => {
+		e.stopPropagation();
 		// console.log('Setting Modal True')
 		// setAddToCart(true)
 		if (!context.isAuthenticated) {

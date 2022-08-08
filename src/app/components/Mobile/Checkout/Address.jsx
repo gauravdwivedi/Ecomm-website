@@ -60,16 +60,15 @@ function Address(props) {
         toast.error("Please Select an Address!")
     }
 
-    const onBackClick = () => {
-        console.log('IsCartItem On Back', isCartItem)
-        if (isCartItem) {
-            history.push({
-                pathname: '/cart'
-            })
-        } else {
+    const onBackClick = (e) => {
+
+        console.log(history.location?.state?.fromAccount)
+
+        if (history.location?.state?.fromAccount) {
             history.push('/account')
+        } else {
+            history.push('/cart')
         }
-        // history.goBack();
     }
 
     return (

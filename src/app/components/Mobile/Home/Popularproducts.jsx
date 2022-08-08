@@ -48,8 +48,6 @@ const PopularProducts = (props) => {
                         unfavProduct={props.unfavProduct}
                         deleteCart={props.deleteCartItem}
                         addCart={props.addToCart}
-
-
                     />
                 ))}
             </div>

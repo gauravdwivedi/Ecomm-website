@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import config from '../../../../config';
 
 function PopularProductItem({ item, addCart, deleteCart, cartlist, favProduct, unfavProduct }) {
-    console.log(item)
+    // console.log(item)
     const [inCart, setInCart] = useState(false);
     const [fav, setFav] = useState(false);
 

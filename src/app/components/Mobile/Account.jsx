@@ -37,7 +37,7 @@ function Account(props) {
                     <div className="element-menu">
                         <ul>
                             <Link><li><img src="/images/icon/sidenav-icon/account.svg" className="img-fluid" alt="" />My Account</li></Link>
-                            <Link to="/address" ><li><img src="/images/icon/sidenav-icon/address.svg" className="img-fluid" alt="" />Address</li></Link>
+                            <Link to={{ pathname: "/address", state: { fromAccount: true } }} ><li><img src="/images/icon/sidenav-icon/address.svg" className="img-fluid" alt="" />Address</li></Link>
                             <Link><li><img src="/images/icon/sidenav-icon/payment.svg" className="img-fluid" alt="" />Payments</li></Link>
                             <Link><li onClick={handleLogout}><img src="/images/icon/sidenav-icon/logout.svg" className="img-fluid" alt="" />Log out</li></Link>
                         </ul>
