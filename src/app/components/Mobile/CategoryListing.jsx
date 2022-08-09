@@ -1,16 +1,23 @@
 import React, { useContext, useEffect } from 'react'
 import config from '../../../config'
 import authContext from '../../helpers/authContext'
+import { useHistory } from 'react-router';
 
 function CategoryListing(props) {
 
     const context = useContext(authContext);
-
+    const history = useHistory();
     useEffect(() => {
         context.doActivePage('category')
     }, [context.isActive])
 
     // console.log('PROPS', props)
+
+    const handleCategoryClick = (params) => {
+        // console.log(params)
+        history.push(`/products/list/${params}`);
+    }
+
     return (<>
         <section className="category-section px-15 pt-0">
 
@@ -23,7 +30,7 @@ function CategoryListing(props) {
                 <div className="row gy-3">
 
                     {props.categoryList && props.categoryList.map((item, index) => (
-                        <div className="col-6" key={index} >
+                        <div className="col-6" key={index} onClick={() => handleCategoryClick(item.id)} >
                             <div className="card catagory-card" style={{ height: '100px' }}>
                                 <div className="card-body">
                                     <a href="#">
