@@ -19,7 +19,8 @@ const Detail = React.memo(function Detail(props) {
 	const [noOfLikes, setNoOfLikes] = useState(0);
 	const [variantId, setVariantId] = useState(0);
 	const [productId, setProductId] = useState(0);
-	const [quantity, setQuantity] = useState(0);
+	const [quantity, setQuantity] = useState(1);
+	const [addtocartSize, setAddtocartSize] = useState(null)
 
 	const [modalShow, setModalShow] = useState(false);
 	const [ModalTwo, setModalTwo] = useState(false);
@@ -40,6 +41,7 @@ const Detail = React.memo(function Detail(props) {
 	const [sizeSelect, setSizeSelect] = useState([]);
 	const progressBarRef = useRef(null);
 	const priceGap = 10;
+
 
 	let images = [];
 	let content = '';
@@ -165,7 +167,7 @@ const Detail = React.memo(function Detail(props) {
 	const handleInsertInCart = (id) => {
 		let productId = props.detail.id;
 		let variantId = props.detail.attributes[0].id;
-		let quantity = 1;
+		// let quantity = 1;
 		props.addToCart({ productId, variantId, quantity }).then(res => {
 			toast.success('Added to cart!')
 			setInCart(true)
@@ -242,6 +244,23 @@ const Detail = React.memo(function Detail(props) {
 		}
 	}
 
+
+	//Add to cart Size Hanlder
+	const onClickHandleSize = (e, value) => {
+		e.stopPropagation();
+		let ele = document.getElementById(value);
+
+		if (addtocartSize == value) {
+			ele.style.background = "#ebe5e5";
+			ele.style.color = "#000000";
+			setAddtocartSize('');
+		} else {
+			ele.style.background = "#000000";
+			ele.style.color = "#FFFFFF";
+			setSizeSelect(value);
+		}
+	}
+
 	const OnClickSaveHandler = (e) => {
 		e.preventDefault();
 		e.stopPropagation();
@@ -277,6 +296,25 @@ const Detail = React.memo(function Detail(props) {
 			videoRef.current.play();
 			setPlaying((play) => !play);
 		}
+	}
+
+	//Handle quantity changes
+	const quantityHandleOnClick = (e, operation) => {
+		e.stopPropagation();
+
+		if (operation == 'increase') {
+			setQuantity(quantity + 1);
+
+		}
+
+		if (operation == 'decrease') {
+			if (quantity == 0) {
+				return
+			}
+
+			setQuantity(quantity - 1)
+		}
+
 	}
 
 
@@ -360,9 +398,9 @@ const Detail = React.memo(function Detail(props) {
 							<ul>
 								<li className='size-box' id='S' onClick={(e) => onSizeHandler(e, "S")}>S</li>
 								<li className='size-box' id="M" onClick={(e) => onSizeHandler(e, "M")}>M</li>
-								<li className='size-box' id="L" onClick={(e) => onSizeHandler(e, "L")}>L</li>
-								<li className='size-box' id="XL" onClick={(e) => onSizeHandler(e, "XL")}>XL</li>
-								<li className='size-box' id="2XL" onClick={(e) => onSizeHandler(e, "2XL")}>2XL</li>
+								<li className='size-box' id="L" onClick={(e) => onSizeHandler(e, "L")} >L</li>
+								<li className='size-box' id="XL" onClick={(e) => onSizeHandler(e, "XL")} >XL</li>
+								<li className='size-box' id="2XL" onClick={(e) => onSizeHandler(e, "2XL")} >2XL</li>
 							</ul>
 						</div>
 						<div className='action-btns'>
@@ -501,9 +539,44 @@ const Detail = React.memo(function Detail(props) {
 						<Link to={{ pathname: "/cart", state: { fromProductPage: true } }} className="btn btn-solid flex-fill" >Go to cart</Link>
 					</div>
 					: <>{
-						modalShow ? <> <h4 className='text-white'>Select Size</h4>
-							<div>
-							</div> <button onClick={handleInsertInCart} className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</button></>
+						modalShow ? <><Modal isVisible={setModalShow}>
+							<div className='container-filter'>
+								<div className='filter-body'>
+									<h2 className='filter-title'>Add to cart</h2>
+									<div className="sizes">
+										<h2>Sizes</h2>
+										<ul>
+											{/* <li className='size-box' id='S' onClick={(e) => onSizeHandler(e, "S")}>S</li>
+											<li className='size-box' id="M" onClick={(e) => onSizeHandler(e, "M")}>M</li>
+											<li className='size-box' id="L" onClick={(e) => onSizeHandler(e, "L")}>L</li>
+											<li className='size-box' id="XL" onClick={(e) => onSizeHandler(e, "XL")}>XL</li>
+											<li className='size-box' id="2XL" onClick={(e) => onSizeHandler(e, "2XL")}>2XL</li> */}
+											{props.detail.attributes.map(res => (
+												<li className='size-box' id="M" onClick={(e) => onSizeHandler(e, "M")}>{res.size}</li>
+											))}
+
+										</ul>
+									</div>
+									<div className='addtocart_colors'>
+										<h2>Available Colors</h2>
+										{props.detail.attributes.map(res => (
+											<div>{res.color}</div>
+										))}
+									</div>
+									<div className='addtocart_quantity'>
+										<h2>Quantity</h2>
+										<div className='addtocart_quantity__counter'>
+											<span class="glyphicon" onClick={(e) => quantityHandleOnClick(e, 'decrease')} >&#x2212;</span>
+											<div><span>{quantity}</span></div>
+											<span class="glyphicon" onClick={(e) => quantityHandleOnClick(e, 'increase')} >&#x2b;</span>
+										</div>
+									</div>
+									<div className='action-btns'>
+										<button onClick={handleInsertInCart} className="btn btn-solid flex-fill text-white" style={{ backgroundColor: 'black' }} tabIndex="0">Add To Cart</button>
+									</div>
+								</div>
+							</div>
+						</Modal></>
 							: <button onClick={handleAddCart} className="btn btn-solid flex-fill" tabIndex="0">Add To Cart</button>
 					}
 					</>}</> : <button onClick={handleAddCart} className="btn btn-solid flex-fill" tabIndex="0">Login</button>}
