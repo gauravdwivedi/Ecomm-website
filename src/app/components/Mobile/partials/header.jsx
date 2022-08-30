@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
+import SearchProducts from "../Home/SearchProducts";
 
 
 
 const Header = (props) => {
 
 	const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
+	const [isSearch, setIsSearch] = useState(false);
 
 
 	useEffect(() => {
 		if (sideDrawerOpen) {
 			openNav();
-
 		}
 	})
 
@@ -36,30 +37,35 @@ const Header = (props) => {
 		overlay.classList.add("show");
 	}
 
-	return (<>
-		<div className="top-header"><img src="/images/flash.svg" alt="" />Flash Deal : 30% off in girl dreses</div>
-		<header>
-			<img src="/images/menu-icon.svg" id="mynav-bar" className="nav-bar hamburger" onClick={drawerToggleClickHandler} />
-			<a href="/" className="logo">
-				<img src="/images/logo.svg" className="img-fluid" alt="" />
-			</a>
-			<div className="header-option">
-				<ul>
-					<li>
-						<a href="#"><img src="/images/video-live.svg" alt="" /><span className="live-txt">Live</span></a>
-					</li>
-					<li>
-						<a href="#"><i className="iconly-Search icli" aria-hidden="true" /></a>
-					</li>
-					<li>
-						<a href="#"><i className="iconly-Notification icli" /></a>
-					</li>
-				</ul>
-			</div>
-		</header>
-		<div className="overlay-sidebar" id="overlayId" onClick={closenNav}></div>
-		<Navbar sideDrawerOpen={sideDrawerOpen} />
-	</>)
+
+
+	return (
+		<><div className="top-header"><img src="/images/flash.svg" alt="" />Flash Deal : 30% off in girl dreses</div>
+			{isSearch ? <SearchProducts setIsSearch={setIsSearch} /> : <>
+
+				<header>
+					<img src="/images/menu-icon.svg" id="mynav-bar" className="nav-bar hamburger" onClick={drawerToggleClickHandler} />
+					<a href="/" className="logo">
+						<img src="/images/logo.svg" className="img-fluid" alt="" />
+					</a>
+					<div className="header-option">
+						<ul>
+							<li>
+								<a href="#"><img src="/images/video-live.svg" alt="" /><span className="live-txt">Live</span></a>
+							</li>
+							<li>
+								<a href="#" onClick={() => setIsSearch(true)}><i className="iconly-Search icli" aria-hidden="true" /></a>
+							</li>
+							<li>
+								<a href="#"><i className="iconly-Notification icli" /></a>
+							</li>
+						</ul>
+					</div>
+				</header>
+				<div className="overlay-sidebar" id="overlayId" onClick={closenNav}></div>
+				<Navbar sideDrawerOpen={sideDrawerOpen} />
+			</>}</>
+	)
 }
 
 export default Header;

@@ -2902,3 +2902,14 @@ ul.options lli[aria-selected="true"] {
     background-color: transparent;
     cursor: default;
 }
+
+.search-box {
+    border-radius: 30%;
+}
+
+.search-box input {
+    width: 100%;
+    background-color: #000000;
+    color: #FFFFFF;
+
+}
