@@ -2909,7 +2909,14 @@ ul.options lli[aria-selected="true"] {
 
 .search-box input {
     width: 100%;
-    background-color: #000000;
+    background-color: #131313;
     color: #FFFFFF;
+    outline: none;
+    font-family: 'Poppins';
+    border: 0 solid;
+}
 
+.back-links button {
+    background-color: #131313;
+    border: none;
 }

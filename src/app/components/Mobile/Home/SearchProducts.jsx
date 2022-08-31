@@ -17,11 +17,11 @@ function SearchProducts({ setIsSearch }) {
             <header>
                 <div className="back-links">
                     <button onClick={() => setIsSearch(false)} >
-                        <img src="/images/back-black.svg" className="img-fluid" alt="" />
+                        <img src="/images/back.svg" className="img-fluid" alt="" />
                     </button>
                 </div>
                 <div className="inner-header">
-                    <input onChange={(e) => handleOnChange(e)} />
+                    <input onChange={(e) => handleOnChange(e)} placeholder='Search...' />
                 </div>
             </header>
         </div>
