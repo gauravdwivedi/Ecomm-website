@@ -6,6 +6,8 @@ import SearchProducts from "../Home/SearchProducts";
 
 const Header = (props) => {
 
+	console.log('Header Props', props)
+
 	const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
 	const [isSearch, setIsSearch] = useState(false);
 
@@ -41,7 +43,7 @@ const Header = (props) => {
 
 	return (
 		<><div className="top-header"><img src="/images/flash.svg" alt="" />Flash Deal : 30% off in girl dreses</div>
-			{isSearch ? <SearchProducts setIsSearch={setIsSearch} /> : <>
+			{isSearch ? <SearchProducts setIsSearch={setIsSearch} props={props} /> : <>
 
 				<header>
 					<img src="/images/menu-icon.svg" id="mynav-bar" className="nav-bar hamburger" onClick={drawerToggleClickHandler} />

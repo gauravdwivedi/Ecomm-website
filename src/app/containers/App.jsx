@@ -12,7 +12,8 @@ import GlobalMobile from "../components/mobile/partials/global";
 import Metadata from '../helpers/metadata';
 
 
-import { login, verifytoken, logout, forgetpassword } from "../data/ducks/auth/actions"
+import { login, verifytoken, logout, forgetpassword } from "../data/ducks/auth/actions";
+import { getAllProducts } from '../data/ducks/home/actions';
 import { processResponse } from '../helpers/helpers';
 
 
@@ -180,15 +181,17 @@ class App extends Component {
 	}
 }
 
-const mapStateToProps = (state) => ({
-	auth: state.auth
+const mapStateToProps = (state) => (console.log("State", state), {
+	auth: state.auth,
+	products: state?.home?.productList
 });
 
 const mapDispatchToProps = {
 	login,
 	verifytoken,
 	logout,
-	forgetpassword
+	forgetpassword,
+	getAllProducts
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

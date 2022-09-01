@@ -1,10 +1,10 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useRef } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { Route, useHistory } from 'react-router';
 import Detail from './Detail';
 // import SwipeableRoutes from 'react-swipeable-routes';
-import SwipeableViews from 'react-swipeable-views';
-
-
+// import SwipeableViews from 'react-swipeable-views';
+// import Infinite from 'react-infinite';
 // import InfiniteScroll from "react-infinite-scroll-component";
 // import { useVideoAutoplay } from './useVideoAutoplay';
 // import useWindowDimensions from './useWindowDimensions';
@@ -13,11 +13,16 @@ import SwipeableViews from 'react-swipeable-views';
 // import { FixedSizeList } from 'react-window';
 // import { useCallback } from 'react';
 
+import LazyLoadVideo from './LazyLoadVideo';
+
 function ProductList(props) {
-    const [index, setIndex] = useState(0);
+    const [items, setItems] = useState([]);
+    const [hasMore, setHasMore] = useState(true);
+    const [page, setPage] = useState(2);
 
     const history = useHistory();
 
+    const compRef = useRef(null);
     // const { height, width } = useWindowDimensions();
     // console.log('H', height, 'W', width)
     // console.log('ProductList', props.productList)
@@ -69,6 +74,7 @@ function ProductList(props) {
     //     }
     // }
 
+
     const cb = (entries) => {
         entries.forEach((entry) => {
             let ele = entry.target.childNodes[0];
@@ -79,12 +85,12 @@ function ProductList(props) {
 
             if (entry.isIntersecting) {
                 window.history.replaceState(null, 'HoppedIn', CustomUrl)
+
             }
 
             ele.play().then(() => {
                 if (!ele.paused && !entry.isIntersecting) {
                     ele.pause();
-
                 }
             })
         })
@@ -106,9 +112,60 @@ function ProductList(props) {
         }
     })
 
+    useEffect(() => {
+
+        if (props.productList) {
+            setItems(props.productList);
+        }
+    }, []);
+
+    async function fetchProducts() {
+        console.log('FetchProducts')
+        const data = await props.getAllProducts(`limit=${page}&limit=5`);
+        return data;
+
+    }
+
+    const fetchData = () => {
+        console.log('CAlled FetchData')
+        const productsFromServer = fetchProducts();
+        setItems([...items, ...productsFromServer]);
+        if (productsFromServer.length == 0 || productsFromServer.length < 5) {
+            setHasMore(false);
+        }
+        setPage(page + 1);
+    }
 
     return (
 
+        // <div className="videoCard">
+
+        //     <InfiniteScroll
+        //         dataLength={props.productList.length}
+        //         next={fetchData}
+        //         hasMore={hasMore}
+        //         loader={<div>Loading...</div>}
+        //         endMessage={<div>No more products</div>}
+        //     >
+        //         {
+        //             items.map((item) => (
+
+        //                 <Detail
+        //                     detail={item}
+        //                     key={item.id}
+        //                     fetchProductDetails={props.fetchProductDetails}
+        //                     likeProduct={props.likeProduct}
+        //                     unlikeProduct={props.unlikeProduct}
+        //                     addToCart={props.addToCart}
+        //                     favProduct={props.favProduct}
+        //                     unfavProduct={props.unfavProduct}
+        //                     getAllProducts={props.getAllProducts}
+        //                 />
+
+        //             ))
+        //         }
+        //     </InfiniteScroll>
+        // </div>
         <div className="videoCard">
 
 
@@ -129,9 +186,7 @@ function ProductList(props) {
 
                 ))
             }
-
         </div>
-
     )
 }
 
