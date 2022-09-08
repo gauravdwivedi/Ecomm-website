@@ -75,3 +75,7 @@ export const ProductList = loadable(() => import ('../app/containers/ProductList
 export const OrderPlaced = loadable(() => import ('../app/containers/OrderPlaced'),{
 	fallback:<div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
 })
+
+export const ProductListThumbnail = loadable(()=>import ('../app/containers/ProductListThumbnail'),{
+	fallback:<div className='lazy-loader'><Loader style={{padding:'15% 40%'}}/></div>
+})
