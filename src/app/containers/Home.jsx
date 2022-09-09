@@ -4,7 +4,7 @@ import config from "../../config/index";
 import HomeDesktop from "../components/Desktop/Home"
 import HomeMobile from "../components/Mobile/Home"
 import AuthContext from "../helpers/authContext";
-import { loadBigStory, getAllProducts, getAllCategory } from "../data/ducks/home/actions";
+import { loadBigStory, getAllProducts, getAllCategory, searchProducts } from "../data/ducks/home/actions";
 import { likeProduct, unlikeProduct, addToCart, favProduct, unfavProduct } from "../data/ducks/detail/actions";
 import { cartList, deleteCartItem } from "../data/ducks/cart/actions";
 
@@ -74,6 +74,7 @@ class HomeContainer extends PureComponent {
 };
 
 const mapStateToProps = (state) => ({
+	searchProducts: state.home.searchProducts,
 	productList: state.home.productList,
 	categoryList: state.home.categoryList,
 	cartlist: state.cart.fetchCartList.result
@@ -89,7 +90,8 @@ const mapDispatchToProps = {
 	deleteCartItem,
 	cartList,
 	favProduct,
-	unfavProduct
+	unfavProduct,
+	searchProducts
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

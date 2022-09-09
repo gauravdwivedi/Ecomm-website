@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import { Link } from 'react-router-dom'
 import PopularProductItem from './PopularProductItem'
 const PopularProducts = (props) => {
 
@@ -35,7 +36,7 @@ const PopularProducts = (props) => {
     return <section className="category-section popular-product px-15 pt-4">
         <div className="title-part">
             <h2>Popular</h2>
-            <a href="#">View All</a>
+            <Link to="/all-products">View All</Link>
         </div>
         <div className="product-section">
             <div className="row gy-3 gx-3">

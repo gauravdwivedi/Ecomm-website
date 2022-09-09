@@ -2907,7 +2907,7 @@ ul.options lli[aria-selected="true"] {
     border-radius: 30%;
 }
 
-.search-box input {
+.inner-header input {
     width: 100%;
     background-color: #131313;
     color: #FFFFFF;
@@ -2919,4 +2919,35 @@ ul.options lli[aria-selected="true"] {
 .back-links button {
     background-color: #131313;
     border: none;
+}
+
+.search-container {
+    height: 50px;
+    border: 10px;
+    z-index: 10;
+}
+
+.search-item {
+    width: 100%;
+}
+
+.search-item img {
+    height: 40px;
+    width: 40px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+}
+
+.dropdown-content li {
+    display: block;
+    width: 100%;
+}
+
+.show {
+    display: block;
 }

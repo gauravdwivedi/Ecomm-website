@@ -13,7 +13,7 @@ import Metadata from '../helpers/metadata';
 
 
 import { login, verifytoken, logout, forgetpassword } from "../data/ducks/auth/actions";
-import { getAllProducts } from '../data/ducks/home/actions';
+import { getAllProducts, searchProducts } from '../data/ducks/home/actions';
 import { processResponse } from '../helpers/helpers';
 
 
@@ -191,7 +191,8 @@ const mapDispatchToProps = {
 	verifytoken,
 	logout,
 	forgetpassword,
-	getAllProducts
+	getAllProducts,
+	searchProducts
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

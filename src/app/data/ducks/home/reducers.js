@@ -18,8 +18,16 @@ const categoryList = createReducer( [ ] ) ({
      }
  } )
 
+
+ const searchProducts = createReducer([])({
+    [types.FETCH_PRODUCTS]:(state,action)=>{
+        return action.payload.result.list
+    }
+ })
+
 export default combineReducers( {
     homeBigStory,
     productList,
-    categoryList
+    categoryList,
+    searchProducts
 } );

@@ -46,3 +46,20 @@ export function getAllCategory(){
         ]
     }
 }
+
+
+export function searchProducts(params=''){
+    return {
+        CALL_API:[
+            {
+                type:types.SEARCH_PRODUCT,
+                meta:{
+                    path:`/v1/product/search?${params}`,
+                    method:"GET",
+                    isHeader:true,
+                    body:'search-products'
+                }
+            }
+        ]
+    }
+}
