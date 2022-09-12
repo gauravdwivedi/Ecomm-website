@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import config from '../../../../config';
 
-function PopularProductItem({ item, addCart, deleteCart, cartlist, favProduct, unfavProduct }) {
+function PopularProductItem({ item, addCart, deleteCart, cartlist, favProduct, unfavProduct, listInnerRef = null }) {
     // console.log(item)
     const [inCart, setInCart] = useState(false);
     const [fav, setFav] = useState(false);
@@ -56,7 +56,7 @@ function PopularProductItem({ item, addCart, deleteCart, cartlist, favProduct, u
 
     return (
         <>
-            <div className="col-md-4 col-6">
+            <div className="col-md-4 col-6" ref={listInnerRef}>
                 <div className="product-box ratio_square">
                     <div className="img-part">
                         <Link to={"/products/list/" + item.category.id} className="bg-size"><img src={config.IMG_END_POINT + item?.images[0]?.url} alt="" className="img-fluid bg-img" /></Link>
