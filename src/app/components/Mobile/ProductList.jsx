@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState, useRef } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Route, useHistory } from 'react-router';
 import Detail from './Detail';
+import LazyLoadProduct from './LazyLoadProduct';
 // import SwipeableRoutes from 'react-swipeable-routes';
 // import SwipeableViews from 'react-swipeable-views';
 // import Infinite from 'react-infinite';
@@ -15,13 +16,15 @@ import Detail from './Detail';
 
 import LazyLoadVideo from './LazyLoadVideo';
 
+import LazyLoadDetail from './LazyLoadDetail';
+
 function ProductList(props) {
     const [items, setItems] = useState([]);
     const [hasMore, setHasMore] = useState(true);
     const [page, setPage] = useState(2);
+    const listInnerRef = useRef();
 
     const history = useHistory();
-
     const compRef = useRef(null);
     // const { height, width } = useWindowDimensions();
     // console.log('H', height, 'W', width)
@@ -103,6 +106,10 @@ function ProductList(props) {
 
         // const elements = document.querySelectorAll(".main");
 
+        if(props.productList){
+            setItems(props.productList)
+        }
+
         elements.forEach((element) => {
             observer.observe(element)
         })
@@ -119,21 +126,76 @@ function ProductList(props) {
         }
     }, []);
 
-    async function fetchProducts() {
-        console.log('FetchProducts')
-        const data = await props.getAllProducts(`limit=${page}&limit=5`);
-        return data;
+    // async function fetchProducts() {
+    //     console.log('FetchProducts')
+    //     const data = await props.getAllProducts(`limit=${page}&limit=5`);
+    //     return data;
 
+    // }
+
+    // const fetchData = () => {
+    //     console.log('CAlled FetchData')
+    //     const productsFromServer = fetchProducts();
+    //     setItems([...items, ...productsFromServer]);
+    //     if (productsFromServer.length == 0 || productsFromServer.length < 5) {
+    //         setHasMore(false);
+    //     }
+    //     setPage(page + 1);
+    // }
+
+    const callApi=()=>{
+        props.getAllProducts(`category_id=${props.category_id}&limit=2&page=${page}`).then(res=>{
+            console.log('RESS=>',res)
+            
+            if (res[0]?.result?.list) {
+                console.log('LIST', res[0]?.result?.list)
+                setItems([...items, ...res[0]?.result?.list]);
+                setPage(page + 1);
+            }
+        })
     }
 
-    const fetchData = () => {
-        console.log('CAlled FetchData')
-        const productsFromServer = fetchProducts();
-        setItems([...items, ...productsFromServer]);
-        if (productsFromServer.length == 0 || productsFromServer.length < 5) {
-            setHasMore(false);
+
+    const onScrolling=(ref)=>{
+        if(ref){
+            console.log('Reached Second Item');
+            callApi();
         }
-        setPage(page + 1);
+    }
+
+    const content =(item,i)=>{
+
+        if(items.length===i+1){
+            console.log(items.length,'',i+1)
+
+            console.log('ITEM DATA LOCAL',item)
+            return <LazyLoadDetail
+            detail={item}
+            key={i}
+            fetchProductDetails={props.fetchProductDetails}
+            likeProduct={props.likeProduct}
+            unlikeProduct={props.unlikeProduct}
+            addToCart={props.addToCart}
+            favProduct={props.favProduct}
+            unfavProduct={props.unfavProduct}
+            getAllProducts={props.getAllProducts}
+            listInnerRef={listInnerRef}
+            onScrolling={onScrolling}
+        />
+        }
+
+        return <Detail
+        detail={item}
+        key={item.id}
+        fetchProductDetails={props.fetchProductDetails}
+        likeProduct={props.likeProduct}
+        unlikeProduct={props.unlikeProduct}
+        addToCart={props.addToCart}
+        favProduct={props.favProduct}
+        unfavProduct={props.unfavProduct}
+        getAllProducts={props.getAllProducts}
+    />
+
     }
 
     return (
@@ -167,22 +229,10 @@ function ProductList(props) {
         //     </InfiniteScroll>
         // </div>
         <div className="videoCard">
-
-
             {
-                props.productList.map((item) => (
+                items.map((item,index) => (
 
-                    <Detail
-                        detail={item}
-                        key={item.id}
-                        fetchProductDetails={props.fetchProductDetails}
-                        likeProduct={props.likeProduct}
-                        unlikeProduct={props.unlikeProduct}
-                        addToCart={props.addToCart}
-                        favProduct={props.favProduct}
-                        unfavProduct={props.unfavProduct}
-                        getAllProducts={props.getAllProducts}
-                    />
+                        content(item,index)
 
                 ))
             }

@@ -78,13 +78,16 @@ function Order(props) {
                 )) : <h3>Oops!!!...Nothing here!!</h3>}
 
             </section>
-            <Pagination
-                className="pagination-bar"
-                currentPage={currentPage}
-                totalCount={data && data.length}
-                pageSize={PageSize}
-                onPageChange={page => setCurrentPage(page)}
-            />
+            <div style={{ position: 'fixed', bottom: '0', minHeight: 'calc(100vh-4rem)' }}>
+                <Pagination
+                    className="pagination-bar"
+                    currentPage={currentPage}
+                    totalCount={data && data.length}
+                    pageSize={PageSize}
+                    onPageChange={page => setCurrentPage(page)}
+                />
+            </div>
+
         </div>
     )
 }
