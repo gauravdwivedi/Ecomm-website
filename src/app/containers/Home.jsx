@@ -33,13 +33,11 @@ class HomeContainer extends PureComponent {
 		this.props.cartList().then()
 	}
 
-
-
 	getProductList() {
 		this.setState({
 			loading: true
 		}, () => {
-			this.props.getAllProducts().then((res) => {
+			this.props.getAllProducts('limit=6&page=1').then((res) => {
 				// this.setState({
 				// 	loading: false
 				// })

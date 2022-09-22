@@ -78,6 +78,33 @@ function ProductList(props) {
     // }
 
 
+
+    useEffect(() => {
+        console.log('ProductList at Beginning',props.productList)
+        if (props.productList) {
+            setItems(props.productList);
+        }
+    }, []);
+
+    useEffect(() => {
+        const elements = document.querySelectorAll(".videoWrapper");
+
+        // const elements = document.querySelectorAll(".main");
+
+        // if(props.productList){
+        //     setItems(props.productList)
+        // }
+
+        elements.forEach((element) => {
+            observer.observe(element)
+        })
+
+        return () => {
+            observer.disconnect();
+        }
+    })
+
+
     const cb = (entries) => {
         entries.forEach((entry) => {
             let ele = entry.target.childNodes[0];
@@ -88,7 +115,6 @@ function ProductList(props) {
 
             if (entry.isIntersecting) {
                 window.history.replaceState(null, 'HoppedIn', CustomUrl)
-
             }
 
             ele.play().then(() => {
@@ -100,31 +126,6 @@ function ProductList(props) {
     }
 
     let observer = new IntersectionObserver(cb, { threshold: 0.6 });
-
-    useEffect(() => {
-        const elements = document.querySelectorAll(".videoWrapper");
-
-        // const elements = document.querySelectorAll(".main");
-
-        if(props.productList){
-            setItems(props.productList)
-        }
-
-        elements.forEach((element) => {
-            observer.observe(element)
-        })
-
-        return () => {
-            observer.disconnect();
-        }
-    })
-
-    useEffect(() => {
-
-        if (props.productList) {
-            setItems(props.productList);
-        }
-    }, []);
 
     // async function fetchProducts() {
     //     console.log('FetchProducts')
@@ -155,7 +156,6 @@ function ProductList(props) {
         })
     }
 
-
     const onScrolling=(ref)=>{
         if(ref){
             console.log('Reached Second Item');
@@ -167,7 +167,6 @@ function ProductList(props) {
 
         if(items.length===i+1){
             console.log(items.length,'',i+1)
-
             console.log('ITEM DATA LOCAL',item)
             return <LazyLoadDetail
             detail={item}
@@ -182,6 +181,7 @@ function ProductList(props) {
             listInnerRef={listInnerRef}
             onScrolling={onScrolling}
         />
+
         }
 
         return <Detail
@@ -231,9 +231,7 @@ function ProductList(props) {
         <div className="videoCard">
             {
                 items.map((item,index) => (
-
                         content(item,index)
-
                 ))
             }
         </div>

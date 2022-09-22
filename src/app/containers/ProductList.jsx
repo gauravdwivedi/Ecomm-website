@@ -31,9 +31,31 @@ class ProductListContainer extends PureComponent {
 
     componentDidMount() {
         
+        // let param = `category_id=${this.props.match.params.params}&limit=2&page=1`
+        // console.log(param)
+        // this.props.getAllProducts(param).then((res)=>{
+        //     console.log(res)
+        // })
+
+        this.getProductList();
+
+    }
+
+
+
+    getProductList(){
         let param = `category_id=${this.props.match.params.params}&limit=2&page=1`
-        console.log(param)
-        this.props.getAllProducts(param).then()
+
+        this.setState({
+            loading:true
+        },()=>{
+
+            this.props.getAllProducts(param).then(res=>{
+                this.setState({
+                    loading:false
+                })
+            })
+        })
     }
 
     render() {
