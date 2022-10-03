@@ -158,7 +158,15 @@ function ProductList(props) {
 
     const onScrolling=(ref)=>{
         if(ref){
-            console.log('Reached Second Item');
+            console.log('Reached Second Item',ref);
+            const ele =document.getElementsByClassName('videoCard');
+                console.log(ele[0].childNodes.length)
+            for(let i=0;i<ele[0].childNodes.length-1;i++){
+                console.log('Each Child',ele[0].childNodes[i])
+                console.log('Remove',ele[0].removeChild(ele[0].childNodes[i]))
+
+            }   
+            
             callApi();
         }
     }
