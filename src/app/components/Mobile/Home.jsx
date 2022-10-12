@@ -16,16 +16,17 @@ const Home = React.memo(function Home(props) {
 
 	const context = useContext(authContext)
 
+		console.log(props.bannerList)
+
 	useEffect(() => {
 		context.doActivePage('home');
-
 	}, [context.isActive])
 
 	return (
 		<>
 			{/* <Header /> */}
 			<TopStories />
-			<HomeSlider />
+			<HomeSlider bannerList={props?.bannerList} />
 			<CategorySection items={props.categoryList} {...props} />
 			<PopularProducts items={props.productList}  {...props} />
 			<SpotLight />

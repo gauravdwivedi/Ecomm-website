@@ -63,3 +63,21 @@ export function searchProducts(params=''){
         ]
     }
 }
+
+
+export function getBannerList(){
+    return {
+        CALL_API:[
+            {
+                type:types.LOAD_BANNERS,
+                meta:{
+                    path:`/v1/banners/list`,
+                    method:"GET",
+                    isHeader:true,
+                    body:'Load Banners'
+                    
+                }
+            }
+        ]
+    }
+}

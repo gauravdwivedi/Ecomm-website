@@ -8,6 +8,7 @@ const homeBigStory = createReducer( [ ] )( {
 
 const productList = createReducer( [ ] ) ({
    [ types.FETCH_PRODUCTS ]: ( state, action ) => {
+    console.log('product List Updating')
      return   action.payload.result.list
     }
 } )
@@ -25,9 +26,16 @@ const categoryList = createReducer( [ ] ) ({
     }
  })
 
+ const getBannersList = createReducer([])({
+    [types.LOAD_BANNERS]:(state,action)=>{
+        return action.payload.result
+    }
+ })
+
 export default combineReducers( {
     homeBigStory,
     productList,
     categoryList,
-    searchProducts
+    searchProducts,
+    getBannersList
 } );
