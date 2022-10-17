@@ -16,9 +16,9 @@ function Address(props) {
 
     useEffect(() => {
 
-        if (localStorage.getItem('isCartItem')) {
-            // console.log('localstorage')
-            setIsCartItem(true)
+
+        if(props.history.location?.state?.changeAddress){
+            setIsCartItem(true);
         }
 
         if (localStorage.getItem('total')) {
@@ -29,6 +29,7 @@ function Address(props) {
             setIsCartItem(true)
             if (isCartItem) {
                 localStorage.setItem('isCartItem', isCartItem);
+                setIsCartItem(true);
 
             }
         }
@@ -62,7 +63,7 @@ function Address(props) {
 
     const onBackClick = (e) => {
 
-        console.log(history.location?.state?.fromAccount)
+        // console.log(history.location?.state?.fromAccount)
 
         if (history.location?.state?.fromAccount) {
             history.push('/account')

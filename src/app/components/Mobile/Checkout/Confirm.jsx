@@ -131,7 +131,12 @@ function Confirm(props) {
     // if (isAddress) {
     //   history.goBack();
     // }
-    history.goBack();
+    history.push({
+      pathname:"/address",
+      state:{
+        changeAddress:true,
+      }
+    } )
   }
 
   return (
@@ -211,7 +216,12 @@ function Confirm(props) {
         <button
           className="change-address"
           onClick={() => {
-            history.push("/address");
+            history.push({
+              pathname:"/address",
+              state:{
+                changeAddress:true,
+              }
+            } );
           }}
         >
           Change Address

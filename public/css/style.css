@@ -2829,9 +2829,6 @@ ul.options lli[aria-selected="true"] {
     cursor: pointer;
 }
 
-
-
-
 .pagination-container {
     display: flex;
     list-style-type: none;

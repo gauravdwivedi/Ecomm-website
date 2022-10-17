@@ -1,4 +1,5 @@
 import React from 'react';
+import dateFormat from 'dateformat';
 
 
 function OrderItem(props) {
@@ -7,8 +8,8 @@ function OrderItem(props) {
         <div className='order-bg mb-3'>
             <div className="order-bg mb-3">
                 <div className="tracking-title">
-                    <h5 className="order-no">Order number: #{props.item.id}</h5>
-                    <h6 className="order-date">Order At : 14 Aug 2021</h6>
+                    <h5 className="order-no">Order number:<span style={{fontSize:'10px'}}>#{props.item.id}</span> </h5>
+                    <h6 className="order-date">Order At : {dateFormat(props.item.createdAt,"yyyy,mmmm dS,dddd") }</h6>
                 </div>
                 <div className="order-details">
                     <ul>
